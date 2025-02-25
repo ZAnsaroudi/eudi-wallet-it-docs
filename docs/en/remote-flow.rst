@@ -626,7 +626,7 @@ The following table lists the HTTP Status Codes and related error codes that MUS
       - The nonce value provided is incorrect or otherwise malformed.
     * - ``403 Forbidden``
       - ``invalid_request``
-      - The signature of the Wallet Unit Attestation is not valid or trust cannot be established with its Issuer.
+      - The signature of the Wallet Attestation is not valid or trust cannot be established with its Issuer.
     * - ``403 Forbidden``
       - ``invalid_request``
       - Trust could not be established with the credential Issuer.
