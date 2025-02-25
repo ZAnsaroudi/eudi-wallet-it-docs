@@ -25,7 +25,7 @@ A High-Level description of the remote flow, from the User's perspective, is giv
   5. the Wallet Instance verifies that the ``client_id`` contained in the Request Object issuer (RP) matches with the one obtained at the step number 2 and with the ``sub`` parameter contained in the RP's Entity Configuration within the Trust Chain;
   6. the Wallet Instance evaluates the requested Digital Credentials and checks the elegibility of the Relying Party in asking these by applying the policies related to that specific Relying Party, obtained with the Trust Chain;
   7. the Wallet Instance asks User disclosure and consent by showing the Relying Party's identity and the requested attributes;
-  8. the Wallet Instance presents the requested information to the Relying Party along with the Wallet Unit Attestation. The Relying Party validates the presented Credentials checking the trust with their Issuers, and validates the Wallet Unit Attestation by also checking that the Wallet Provider is trusted;
+  8. the Wallet Instance presents the requested information to the Relying Party along with the Wallet Attestation. The Relying Party validates the presented Credentials checking the trust with their Issuers, and validates the Wallet Attestation by also checking that the Wallet Provider is trusted;
   9. the Wallet Instance informs the User about the successfull authentication with the Relying Party, the User continues the navigation.
 
 Below is a sequence diagram that summarizes the interactions between all the involved parties.
