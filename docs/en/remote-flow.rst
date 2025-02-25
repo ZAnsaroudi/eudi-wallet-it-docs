@@ -1,5 +1,5 @@
 .. include:: ../common/common_definitions.rst
-.. _Wallet Unit Attestation: wallet-attestation.html
+.. _Wallet Attestation: wallet-attestation.html
 .. _Trust Model: trust.html
 
 
