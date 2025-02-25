@@ -518,7 +518,7 @@ Where the following parameters are used:
     - There MUST be at least two signed presentations in this Array:
 
       - The requested Digital Credential (one or more, in format of SD-JWT VC)
-      - The Wallet Unit Attestation
+      - The Wallet Attestation
       
       When `presentation_definition` is used, the ``vp_token`` value is a JSON Array containing the Verifiable Presentation(s) and the `presentation_submission` parameter MUST be also present within the response.
 
