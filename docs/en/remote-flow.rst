@@ -424,53 +424,54 @@ Authorization Error Response
 
 There are cases where the Wallet Instance cannot validate the Request Object or the Request Object results invalid. This error occurs if the Request Object is successfully fetched from the ``request_uri`` but fails validation checks by the Wallet Instance. This could be due to incorrect signatures, malformed claims, or other validation failures, such as the revocation of its issuer (Relying Party).
 
-If the Wallet Instance encounters any error during the evaluation of the Authorization Request, it MUST notify the Relying Party according to [:rfc:`9101`] and `OpenID4VP`_. The response MUST use *application/json* as the content type and MUST include the following parameters:
+If the Wallet Instance encounters any error during the evaluation of the Authorization Request, it MUST notify the Relying Party by sending an Authorization Error Response. 
+The Wallet Instance sends the Authorization Error Response to the Relying Party  ``response_uri`` endpoint using an HTTP POST request. 
+The Authorization Error Response MUST be encoded in the request body using the format defined by the ``application/x-www-form-urlencoded`` content type and the content SHOULD be encrypted according `OpenID4VP`_ Section 7.3, using the Relying Party public key.
 
-  - ``error``. The error code.
-  - ``error_description``. Text in human-readable form providing further details to clarify the nature of the error encountered.
-
-.. warning::
-  The current OpenID4VP specification outlines various error responses that a Wallet Instance may return to the Relying Party (Verifier) in case of faulty requests. For privacy enhancement, Wallet Instances SHOULD NOT notify the Relying Party of faulty requests in certain scenarios. This is to prevent any potential misuse of error responses that could lead to gather informations that could be exploited.
-
-In the following table are listed HTTP Status Codes and related error codes that are supported for the error response:
-
-.. list-table::
-   :widths: 20 20 60
-   :header-rows: 1
-
-   * - **Status Code**
-     - **Error Code**
-     - **Description**
-   * - ``400 Bad Request``
-     - ``invalid_request_object``
-     - The Request Object contains invalid parameters or is otherwise malformed. :rfc:`9101` 
-   * - ``400 Bad Request``
-     - ``invalid_request_uri``
-     - The `request_uri` in the authorization request returns an error, contains invalid data, or is otherwise malformed. :rfc:`9101` 
-   * - ``400 Bad Request``
-     - ``vp_formats_not_supported``
-     - The Wallet Instance does not support any of the vp formats required by the Relying Party. `OpenID4VP`_
-   * - ``400 Bad Request``
-     - ``invalid_request``
-     - The Wallet Instance does not support any of the signing algorithms required by the Relying Party. `OpenID4VP`_
-   * - ``401 Unauthorized``
-     - ``access_denied``
-     - The Wallet did not have the requested credential, the User did not consent, or the Wallet failed to authenticate the User. `OpenID4VP`_
-   * - ``403 Forbidden``
-     - ``invalid_client``
-     - The Relying Party cannot be authorized due to trust validation failures or is not a valid participant of the federation. `OID-FED`_
-     
 Below is a non-normative example of an Authorization Error Response.
 
 .. code-block:: 
 
-  HTTP/1.1 400 Bad Request
-  Content-Type: application/json
+  POST /response_uri HTTP/1.1
+  HOST: relying-party.example.org
+  Content-Type: application/x-www-form-urlencoded
+
+  response=eyJhbGciOiJFUzI1NiIs...9t2LQ
+
+Below is a non-normative example of the decrypted payload of the JWT contained in the ``response``, before base64url encoding.
+
+.. code-block:: 
 
   {
-   "error": "invalid_request",
-   "error_description": "The request_uri is malformed or does not point to a valid Request Object."
+    "state": "3be39b69-6ac1-41aa-921b-3e6c07ddcb03",
+    "error": "invalid_request",
+    "error_description": "The Wallet Instance does not support any of the signing algorithms required by the Relying Party"
   }
+
+.. warning::
+  The current OpenID4VP specification outlines various error responses that a Wallet Instance may return to the Relying Party (Verifier) in case of faulty requests. For privacy enhancement, Wallet Instances SHOULD NOT notify the Relying Party of faulty requests in certain scenarios. This is to prevent any potential misuse of error responses that could lead to gather informations that could be exploited.
+
+In the following table are listed error codes and descriptions that are supported for the Authorization Error Response:
+
+.. list-table::
+   :widths: 20 60
+   :header-rows: 1
+
+   * - **Error Code**
+     - **Description**
+   * - ``invalid_request_object``
+     - The Request Object contains invalid parameters or is otherwise malformed. :rfc:`9101` 
+   * - ``invalid_request_uri``
+     - The `request_uri` in the authorization request returns an error, contains invalid data, or is otherwise malformed. :rfc:`9101` 
+   * - ``vp_formats_not_supported``
+     - The Wallet Instance does not support any of the vp formats required by the Relying Party. `OpenID4VP`_
+   * - ``invalid_request``
+     - The Wallet Instance does not support any of the signing algorithms required by the Relying Party. `OpenID4VP`_
+   * - ``access_denied``
+     - The Wallet did not have the requested credential, the User did not consent, or the Wallet failed to authenticate the User. `OpenID4VP`_
+   * - ``invalid_client``
+     - The Relying Party cannot be authorized due to trust validation failures or is not a valid participant of the federation. `OID-FED`_
+     
 
 Authorization Response Details
 ------------------------------
