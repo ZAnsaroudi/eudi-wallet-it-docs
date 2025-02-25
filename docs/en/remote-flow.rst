@@ -663,7 +663,7 @@ Below there are two examples of HTTP responses using ``application/json`` that i
 Redirect URI
 ------------
 
-As defined in Section 7.2. (Response Mode "direct_post") of the OpenID4VP specification, if the Response URI has successfully processed the Authorization Response or Authorization Error Response, it MUST respond with an HTTP status code of 200 with ``Content-Type`` of ``application/json`` and a JSON object in the response body. If the user has been correctly authenticated, the Relying Party MUST add the ``redirect_uri`` parameter to the JSON object in the response body. 
+As defined in Section 7.2. (Response Mode "direct_post") of the OpenID4VP specification, if the Response URI has successfully processed the Authorization Response or Authorization Error Response, it MUST respond with an HTTP status code of 200 with ``Content-Type`` of ``application/json`` and a JSON object in the response body. If the User has been correctly authenticated, the Relying Party MUST add the ``redirect_uri`` parameter to the JSON object in the response body. 
 
 .. note::
     In the **Cross Device Flow** the Relying Party will pass the ``redirect_uri`` to the user-agent, whereas in the **Same Device Flow** it may also pass the ``redirect_uri`` to the Wallet Instance. When the ``redirect_uri`` is passed throught the user-agent and the response sent to the Wallet Instance does not contain the ``redirect_uri`` parameter, the Wallet Instance is not required to perform any further step.
