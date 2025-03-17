@@ -1,0 +1,102 @@
+{
+    "nameSpaces": {
+        "org.iso.18013.5.1": [
+            24(<<
+            {
+                "digestID": 0,
+                "random": h"8798645B20EA200E19FFABAC92624BEE6AEC63ACEEDECFB1B80077D22BFC20E9",
+                "elementIdentifier": "family_name",
+                "elementValue": "Doe"
+            }
+            >>),
+            24(<<
+            {
+                "digestID": 3,
+                "random": h"B23F627E8999C706DF0C0A4ED98AD74AF988AF619B4BB078B89058553F44615D",
+                "elementIdentifier": "issue_date",
+                "elementValue": 1004("2019-10-20")
+            }
+            >>),
+            24(<<
+            {
+                "digestID": 4,
+                "random": h"C7FFA307E5DE921E67BA5878094787E8807AC8E7B5B3932D2CE80F00F3E9ABAF",
+                "elementIdentifier": "expiry_date",
+                "elementValue": 1004("2024-10-20")
+            }
+            >>),
+            24(<<
+            {
+                "digestID": 7,
+                "random": h"26052A42E5880557A806C1459AF3FB7EB505D3781566329D0B604B845B5F9E68",
+                "elementIdentifier": "document_number",
+                "elementValue": "123456789"
+            }
+            >>),
+            24(<<
+            {
+                "digestID": 8,
+                "random": h"D094DAD764A2EB9DEB5210E9D899643EFBD1D069CC311D3295516CA0B024412D",
+                "elementIdentifier": "portrait",
+                "elementValue": h"FFD8FFE000104A46494600010101009000900000FFDB0043..."
+            }
+            >>),
+            24(<<
+            {
+                "digestID": 9,
+                "random": h"4599F81BEAA2B20BD0FFCC9AA03A6F985BEFAB3F6BEAFFA41E6354CDB2AB2CE4",
+                "elementIdentifier": "driving_privileges",
+                "elementValue": [
+                    {
+                        "vehicle_category_code": "A",
+                        "issue_date": 1004("2018-08-09"),
+                        "expiry_date": 1004("2024-10-20")
+                    },
+                    {
+                        "vehicle_category_code": "B",
+                        "issue_date": 1004("2017-02-23"),
+                        "expiry_date": 1004("2024-10-20")
+                    }
+                ]
+            }
+            >>)
+        ]
+    },
+    "issuerAuth": [
+        << {1: -7} >>,
+        {
+            33: h"308201EF30820195A00302010202143C4416EED784F3B413E48F56F075ABFA6D87EB84..."
+        },
+        24(<<
+        {
+            "version": "1.0",
+            "digestAlgorithm": "SHA-256",
+            "valueDigests": {
+                "org.iso.18013.5.1": {
+                    0: h"75167333B47B6C2BFB86ECCC1F438CF57AF055371AC55E1E359E20F254ADCEBF",
+                    3: h"2E35AD3C4E514BB67B1A9DB51CE74E4CB9B7146E41AC52DAC9CE86B8613DB555",
+                    4: h"EA5C3304BB7C4A8DCB51C4C13B65264F845541341342093CCA786E058FAC2D59",
+                    7: h"F0549A145F1CF75CBEEFFA881D4857DD438D627CF32174B1731C4C38E12CA936",
+                    8: h"B68C8AFCB2AAF7C581411D2877DEF155BE2EB121A42BC9BA5B7312377E068F66",
+                    9: h"0B3587D1DD0C2A07A35BFB120D99A0ABFB5DF56865BB7FA15CC8B56A66DF6E0C"
+                }
+            },
+            "deviceKeyInfo": {
+                "deviceKey": {
+                    1: 2,
+                    -1: 1,
+                    -2: h"96313D6C63E24E3372742BFDB1A33BA2C897DCD68AB8C753E4FBD48DCA6B7F9A",
+                    -3: h"1FB3269EDD418857DE1B39A4E4A44B92FA484CAA722C228288F01D0C03A2C3D6"
+                }
+            },
+            "docType": "org.iso.18013.5.1.mDL",
+            "validityInfo": {
+                "signed": 0("2020-10-01T13:30:02Z"),
+                "validFrom": 0("2020-10-01T13:30:02Z"),
+                "validUntil": 0("2021-10-01T13:30:02Z")
+            }
+        }
+        >>),
+        h"59E64205DF1E2F708DD6DB0847AED79FC7C0201D80FA55BADCAF2E1BCF5902E1..."
+    ]
+}
