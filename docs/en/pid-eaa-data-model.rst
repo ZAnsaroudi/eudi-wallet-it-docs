@@ -772,97 +772,69 @@ For SD-JWT-VC, parameters are marked with `(hdr)` if they are located in the JOS
      - **MDOC-CBOR Parameters**
    * - Digital Credential definition
      - vct (pld)
-     - IssuerAuth.doctype
-   * - 
-     - –
-     - IssuerAuth.version
+     - | IssuerAuth.doctype
+       | IssuerAuth.version
    * - Digital Credential metadata
-     - vctm.name (hdr)
-     - –
-   * - 
-     - vctm.description (hdr)
-     - –
-   * - 
-     - vctm.extends (hdr)
-     - –
-   * - 
-     - vctm.schema (hdr)
-     - –
-   * - 
-     - vctm.schema_uri (hdr)
-     - –
-   * - 
-     - vctm.data_source (hdr)
-     - –
-   * - 
-     - vctm.display (hdr)
-     - –
-   * - 
-     - vctm.claims (hdr)
+     - | vctm.name (hdr)
+       | vctm.description (hdr)
+       | vctm.extends (hdr)
+       | vctm.schema (hdr)
+       | vctm.schema_uri (hdr)
+       | vctm.data_source (hdr)
+       | vctm.display (hdr)
+       | vctm.claims (hdr)
      - namespaces
    * - Issuer
-     - iss (pld)
-     - –
-   * - 
-     - issuing_authority (pld)
-     - namespaces.elementIdentifier.issuing_authority
-   * - 
-     - issuing_country (pld)
-     - namespaces.elementIdentifier.issuing_country
+     - | iss (pld)
+       | issuing_authority (pld)
+       | issuing_country (pld)
+     - | –
+       | namespaces.elementIdentifier.issuing_authority
+       | namespaces.elementIdentifier.issuing_country
    * - Subject
      - sub (pld)
      - sub
    * - Validity period
-     - iat (pld)
-     - IssuerAuth.validityInfo.signed
-   * - 
-     - exp (pld)
-     - IssuerAuth.validityInfo.validUntil
-   * - 
-     - nbf (pld)
-     - IssuerAuth.validityInfo.validFrom
+     - | iat (pld)
+       | exp (pld)
+       | nbf (pld)
+     - | IssuerAuth.validityInfo.signed
+       | IssuerAuth.validityInfo.validUntil
+       | IssuerAuth.validityInfo.validFrom
    * - Status mechanism
-     - status_assertation (pld)
-     - –
-   * - 
-     - –
-     - IssuerAuth.identifier_list
-   * - 
-     - status_list (pld)
-     - IssuerAuth.status_list
+     - | status_assertation (pld)
+       | –
+       | status_list (pld)
+     - | –
+       | IssuerAuth.identifier_list
+       | IssuerAuth.status_list
    * - Signature
-     - alg (hdr)
-     - IssuerAuth.1 (alg)
-   * - 
-     - kid (hdr)
-     - IssuerAuth.4 (kid)
-   * - 
-     - signature
-     - IssuerAuth.signature
+     - | alg (hdr)
+       | kid (hdr)
+       | signature
+     - | IssuerAuth.1 (alg)
+       | IssuerAuth.4 (kid)
+       | IssuerAuth.signature
    * - Trust anchors
-     - trust_chain (OID-FED) (hdr)
-     - –
-   * - 
-     - x5c (hdr)
-     - IssuerAuth.33 (x5chain)
+     - | trust_chain (OID-FED) (hdr)
+       | x5c (hdr)
+     - | –
+       | IssuerAuth.33 (x5chain)
    * - Cryptographic binding
      - cnf.jwk (pld)
      - IssuerAuth.deviceKeyInfo.deviceKey
    * - Selective disclosure
-     - _sd_alg (pld)
-     - IssuerAuth.digestAlgorithm
-   * - 
-     - _sd (pld)
-     - IssuerAuth.valueDigests
+     - | _sd_alg (pld)
+       | _sd (pld)
+     - | IssuerAuth.digestAlgorithm
+       | IssuerAuth.valueDigests
    * - Integrity
-     - vct#integrity (pld)
-     - 
-   * - 
-     - vctm.extends#integrity (hdr)
-     - –
-   * - 
-     - vctm.schema_uri#integrity (hdr)
-     - 
+     - | vct#integrity (pld)
+       | vctm.extends#integrity (hdr)
+       | vctm.schema_uri#integrity (hdr)
+     - | 
+       | –
+       | 
    * - Digital Credential format
      - typ (hdr)
      - –
@@ -870,14 +842,12 @@ For SD-JWT-VC, parameters are marked with `(hdr)` if they are located in the JOS
      - verification (pld)
      - verification
    * - Disclosures
-     - salt
-     - 
-   * - 
-     - claim name
-     - namespace
-   * - 
-     - claim value
-     -
+     - | salt
+       | claim name
+       | claim value
+     - | 
+       | namespace
+       |
 
 .. note::
 
