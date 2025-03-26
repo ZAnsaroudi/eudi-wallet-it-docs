@@ -764,85 +764,120 @@ In particular, it shows how core concepts—such as issuer information, validity
 
 For SD-JWT-VC, parameters are marked with `(hdr)` if they are located in the JOSE header, and `(pld)` if they appear in the payload of the JWT.
 
-.. table:: 
+.. list-table:: 
+   :header-rows: 1
 
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | **Information related to**    | **SD-JWT-VC Parameters**        | **MDOC-CBOR Parameters**                      |
-   +===============================+=================================+===============================================+
-   | Digital Credential definition | vct (pld)                       | IssuerAuth.doctype                            |
-   |                               |                                 |                                               |
-   |                               | –                               | IssuerAuth.version                            |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Digital Credential metadata   | vctm.name (hdr)                 | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.description (hdr)          | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.extends (hdr)              | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.schema (hdr)               | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.schema_uri (hdr)           | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.data_source (hdr)          | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.display (hdr)              | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.claims (hdr)               | namespaces                                    |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Issuer                        | iss (pld)                       | –                                             |
-   |                               |                                 |                                               |
-   |                               | issuing_authority (pld)         | namespaces.elementIdentifier.issuing_authority|
-   |                               |                                 |                                               |
-   |                               | issuing_country (pld)           | namespaces.elementIdentifier.issuing_country  |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Subject                       | sub (pld)                       | sub                                           |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Validity period               | iat (pld)                       | IssuerAuth.validityInfo.signed                |
-   |                               |                                 |                                               |
-   |                               | exp (pld)                       | IssuerAuth.validityInfo.validUntil            |
-   |                               |                                 |                                               |
-   |                               | nbf (pld)                       | IssuerAuth.validityInfo.validFrom             |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Status mechanism              | status_assertation (pld)        | –                                             |
-   |                               |                                 |                                               |
-   |                               | –                               | IssuerAuth.identifier_list                    |
-   |                               |                                 |                                               |
-   |                               | status_list (pld)               | IssuerAuth.status_list                        |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   |  Signature                    | alg (hdr)                       | IssuerAuth.1 (alg)                            |
-   |                               |                                 |                                               |
-   |                               | kid (hdr)                       | IssuerAuth.4 (kid)                            |
-   |                               |                                 |                                               |
-   |                               | signature                       | IssuerAuth.signature                          |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   |   Trust anchors               | trust_chain (OID-FED) (hdr)     | –                                             |
-   |                               |                                 |                                               |
-   |                               | x5c (hdr)                       | IssuerAuth.33 (x5chain)                       |
-   |                               |                                 |                                               |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   |   Cryptographic binding       | cnf.jwk (pld)                   | IssuerAuth.deviceKeyInfo.deviceKey            |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   |   Selective disclosure        | _sd_alg (pld)                   | IssuerAuth.digestAlgorithm                    |
-   |                               |                                 |                                               |
-   |                               | _sd (pld)                       | IssuerAuth.valueDigests                       |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Integrity                     | vct#integrity (pld)             |                                               |
-   |                               |                                 |                                               |
-   |                               | vctm.extends#integrity (hdr)    | –                                             |
-   |                               |                                 |                                               |
-   |                               | vctm.schema_uri#integrity (hdr) |                                               |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Digital Credential format     | typ (hdr)                       | –                                             |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Digital Credential            | verification (pld)              | verification                                  |
-   | auditability                  |                                 |                                               |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
-   | Disclosures                   | salt                            |                                               |
-   |                               |                                 |                                               |
-   |                               | claim name                      |  namespace                                    |
-   |                               |                                 |                                               |
-   |                               | claim value                     |                                               |
-   +-------------------------------+---------------------------------+-----------------------------------------------+
+   * - **Information related to**
+     - **SD-JWT-VC Parameters**
+     - **MDOC-CBOR Parameters**
+   * - Digital Credential definition
+     - vct (pld)
+     - IssuerAuth.doctype
+   * - 
+     - –
+     - IssuerAuth.version
+   * - Digital Credential metadata
+     - vctm.name (hdr)
+     - –
+   * - 
+     - vctm.description (hdr)
+     - –
+   * - 
+     - vctm.extends (hdr)
+     - –
+   * - 
+     - vctm.schema (hdr)
+     - –
+   * - 
+     - vctm.schema_uri (hdr)
+     - –
+   * - 
+     - vctm.data_source (hdr)
+     - –
+   * - 
+     - vctm.display (hdr)
+     - –
+   * - 
+     - vctm.claims (hdr)
+     - namespaces
+   * - Issuer
+     - iss (pld)
+     - –
+   * - 
+     - issuing_authority (pld)
+     - namespaces.elementIdentifier.issuing_authority
+   * - 
+     - issuing_country (pld)
+     - namespaces.elementIdentifier.issuing_country
+   * - Subject
+     - sub (pld)
+     - sub
+   * - Validity period
+     - iat (pld)
+     - IssuerAuth.validityInfo.signed
+   * - 
+     - exp (pld)
+     - IssuerAuth.validityInfo.validUntil
+   * - 
+     - nbf (pld)
+     - IssuerAuth.validityInfo.validFrom
+   * - Status mechanism
+     - status_assertation (pld)
+     - –
+   * - 
+     - –
+     - IssuerAuth.identifier_list
+   * - 
+     - status_list (pld)
+     - IssuerAuth.status_list
+   * - Signature
+     - alg (hdr)
+     - IssuerAuth.1 (alg)
+   * - 
+     - kid (hdr)
+     - IssuerAuth.4 (kid)
+   * - 
+     - signature
+     - IssuerAuth.signature
+   * - Trust anchors
+     - trust_chain (OID-FED) (hdr)
+     - –
+   * - 
+     - x5c (hdr)
+     - IssuerAuth.33 (x5chain)
+   * - Cryptographic binding
+     - cnf.jwk (pld)
+     - IssuerAuth.deviceKeyInfo.deviceKey
+   * - Selective disclosure
+     - _sd_alg (pld)
+     - IssuerAuth.digestAlgorithm
+   * - 
+     - _sd (pld)
+     - IssuerAuth.valueDigests
+   * - Integrity
+     - vct#integrity (pld)
+     - 
+   * - 
+     - vctm.extends#integrity (hdr)
+     - –
+   * - 
+     - vctm.schema_uri#integrity (hdr)
+     - 
+   * - Digital Credential format
+     - typ (hdr)
+     - –
+   * - Digital Credential auditability
+     - verification (pld)
+     - verification
+   * - Disclosures
+     - salt
+     - 
+   * - 
+     - claim name
+     - namespace
+   * - 
+     - claim value
+     -
 
 .. note::
 
