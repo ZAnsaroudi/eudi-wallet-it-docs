@@ -127,7 +127,7 @@ The JWT payload contains the following claims. Some of these claims can be discl
       - [NSD]. REQUIRED. Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the PID/(Q)EAA Issuer.
       - Commission Implementing Regulation `EU_2024/2977`_.
     * - **status**
-      - [NSD]. REQUIRED. JSON object containing the information on how to read the status of the Verifiable Credential. It MUST contain either the JSON member *status_assertion* or *status_list*. 
+      - [NSD]. REQUIRED only if the Digital Credential is short-lived. JSON object containing the information on how to read the status of the Verifiable Credential. It MUST contain either the JSON member *status_assertion* or *status_list*. 
       - Section 3.2.2.2 `SD-JWT-VC`_ and Section 11 `OAUTH-STATUS-ASSERTION`_.
     * - **cnf**
       - [NSD]. REQUIRED. JSON object containing the proof-of-possession key materials. By including a **cnf** (confirmation) claim in a JWT, the Issuer of the JWT declares that the Holder is in control of the private key related to the public one defined in the **cnf** parameter. The recipient MUST cryptographically verify that the Holder is in control of that key.
@@ -152,6 +152,12 @@ The JWT payload contains the following claims. Some of these claims can be discl
                   - ``date_of_issuance``: date of issuance of the attestation.
                   - ``voucher``: It MUST contains ``organization`` claim.
       - `OIDC-IDA`_.
+    * - **_sd**
+      - [NSD]. REQUIRED. Array of strings, where each string represents a digest of a Disclosure.
+      - 4.2.4.1 `SD-JWT`_
+    * - **_sd_alg**
+      - [NSD]. REQUIRED. Hash algorithm used by the Issuer to generate the digests.
+      - 4.1.1 `SD-JWT`_
 
 If the ``status`` parameter is set to ``status_list``, it is a JSON Object containing the following sub-parameters:
 
@@ -733,9 +739,8 @@ The `MobileSecurityObjectBytes` MUST have the following attributes:
           * *keyInfo* (OPTIONAL).
       - [ISO 18013-5#9.1.2.4]
     * - **Status**
-      - Object containing the MSO revocation status (OPTIONAL). If present, MUST contain one of the following sub-value:
+      - REQUIRED only if the Digital Credential is short-lived. Object containing the MSO revocation information. If present, MUST contain the following sub-value:
     
-            * *identifier_list*. A list of unique MSO identifiers that are considered revoked. If the MSO's ID is in this list, it's revoked.
             * *status_list*. A bit array that marks revoked MSOs by position (bit set to 1 = revoked). More compact for large-scale lists.
       - [ISO 18013-5#9.1.2.6]
 
