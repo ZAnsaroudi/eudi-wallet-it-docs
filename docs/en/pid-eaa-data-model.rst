@@ -127,7 +127,7 @@ The JWT payload contains the following claims. Some of these claims can be discl
       - [NSD]. REQUIRED. Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the PID/(Q)EAA Issuer.
       - Commission Implementing Regulation `EU_2024/2977`_.
     * - **status**
-      - [NSD]. REQUIRED. JSON object containing the information on how to read the status of the Verifiable Credential. It MUST contain the JSON member *status_assertion* set to a JSON Object containing the *credential_hash_alg* claim indicating the Algorithm used for hashing the Digital Credential to which the Status Assertion is bound. It is RECOMMENDED to use *sha-256*. 
+      - [NSD]. REQUIRED. JSON object containing the information on how to read the status of the Verifiable Credential. It MUST contain either the JSON member *status_assertion* or *status_list*. 
       - Section 3.2.2.2 `SD-JWT-VC`_ and Section 11 `OAUTH-STATUS-ASSERTION`_.
     * - **cnf**
       - [NSD]. REQUIRED. JSON object containing the proof-of-possession key materials. By including a **cnf** (confirmation) claim in a JWT, the Issuer of the JWT declares that the Holder is in control of the private key related to the public one defined in the **cnf** parameter. The recipient MUST cryptographically verify that the Holder is in control of that key.
@@ -139,7 +139,7 @@ The JWT payload contains the following claims. Some of these claims can be discl
       - [NSD]. REQUIRED. The value MUST be an "integrity metadata" string as defined in Section 3 of [`W3C-SRI`_]. *SHA-256*, *SHA-384* and *SHA-512* MUST be supported as cryptographic hash functions. *MD5* and *SHA-1* MUST NOT be used. This claim MUST be verified according to Section 3.3.5 of [`W3C-SRI`_].
       - Section 6.1 `SD-JWT-VC`_, [`W3C-SRI`_]
     * - **verification**
-      - [SD]. CONDITIONAL. REQUIRED if Credential type is set to `PersonIdentificationData`. Object containing User authentication and User data verification information. If present MUST include the following sub-value:
+      - [SD]. CONDITIONAL. REQUIRED if Credential type is set to `PersonIdentificationData`, otherwise is OPTIONAL. Object containing User authentication and User data verification information. If present MUST include the following sub-value:
 
           * ``trust_framework``: String identifying the trust framework used for User authentication. It MUST be set using one of the values described in the `trust_frameworks_supported` map provided within the Credential Issuer Metadata.
           * ``assurance_level``: String identifying the level of identity assurance guaranteed during the User authentication process.
@@ -153,10 +153,30 @@ The JWT payload contains the following claims. Some of these claims can be discl
                   - ``voucher``: It MUST contains ``organization`` claim.
       - `OIDC-IDA`_.
 
+If the ``status`` parameter is set to ``status_list``, it is a JSON Object containing the following sub-parameters:
+
+ .. list-table:: 
+   :widths: 20 60 20
+   :header-rows: 1
+ 
+   * - **Parameter**
+     - **Description**
+     - **Reference**
+   * - **idx**
+     - REQUIRED. The idx (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Digital Credential. The value of idx MUST be a non-negative number, containing a value of zero or greater.
+     - TOKEN-STATUS-LIST_
+   * -  **uri** 
+     - REQUIRED. The uri (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Digital Credential. The value of uri MUST be a URI conforming to [:rfc:3986].
+     - TOKEN-STATUS-LIST_
+
+
+If the ``status`` parameter is set to ``status_assertation``, it is a JSON Object containing the *credential_hash_alg* claim indicating the Algorithm used for hashing the Digital Credential to which the Status Assertion is bound. It is RECOMMENDED to use *sha-256*. 
+
+
 .. note::
 
     Credential Type Metadata JSON Document MAY be retrieved directly from the URL contained in the claim **vct**, using the HTTP GET method or using the vctm header parameter if provided. Unlike specified in Section 6.3.1 of `SD-JWT-VC`_ the **.well-known** endpoint is not included in the current implementation profile. Implementers may decide to use it for interoperability with other systems.
-
+    
 
 Digital Credential Metadata Type
 --------------------------------
@@ -281,7 +301,7 @@ Depending on the Digital Credential type **vct**, additional claims data MAY be 
       - [SD]. CONDITIONAL. REQUIRED if ``personal_administrative_number`` is not present. National tax identification code of natural person as a String format. It MUST be set according to ETSI EN 319 412-1. For example ``TINIT-<ItalianTaxIdentificationNumber>``
       - 
 
-The PID attribute schema, which encompasses all potential User data, is defined in `ARF v1.4 <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/arf.md#21-identification-and-authentication-to-access-online-services>`_, and furthermore detailed in the `PID Rulebook <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-3/annex-3.01-pid-rulebook.md#23-pid-attributes>`_.
+The PID attribute schema, which encompasses all potential User data, is defined in `ARF`_, and furthermore detailed in the `PID Rulebook`_.
 
 
 PID Non-Normative Examples
@@ -554,13 +574,13 @@ The combined format for the (Q)EAA issuance is represented below:
   lciIsICJYWDAwMDAwWFgiXQ~WyJHMDJOU3JRZmpGWFE3SW8wOXN5YWpBIiwgImNvbnN0
   YW50X2F0dGVuZGFuY2VfYWxsb3dhbmNlIiwgdHJ1ZV0~
 
-MDOC-CBOR
-=========
+MDOC-CBOR Credential Format
+====================================
 
 The MDOC data model is based on the ISO/IEC 18013-5 standard, initially developed for the mobile driving license (mDL) use case. 
 The MDOC data elements MUST be encoded in CBOR as defined in `RFC 8949 - Concise Binary Object Representation (CBOR) <RFC 8949 - Concise Binary Object Representation (CBOR)>`_.
 
-This data model structures Digital Credentials into distinct components: document type (**docType**), namespaces (**nameSpaces**), and cryptographic proof. 
+This data model structures mDOC Digital Credentials into distinct components: document type (**docType**), namespaces (**nameSpaces**), and cryptographic proof. 
 The document type identifies the Credential's nature, while namespaces categorize and structure data elements (or attributes, see `Attribute Namespaces`_). However, the cryptographic proof ensures integrity and authenticity through the Mobile Security Object (MSO).
 
 The MSO securely stores cryptographic digests of attributes within the `nameSpaces`. This allows verifiers to validate disclosed attributes against corresponding **digestID** values without revealing the entire credential.
@@ -606,34 +626,16 @@ The **nameSpaces** object contains one or more *IssuerSignedItemBytes* that are 
       - depends on the value, see the next table.
       - Data element value.
 
-mDL Attributes 
+Attributes 
 --------------------------------
-The following **elementIdentifiers** MUST be included in an mDL encoded in MDOC-CBOR within the respective namespaces: 
+The following **elementIdentifiers**, relevant to the Issuer MUST be included in a Digital Credential encoded in MDOC-CBOR within the respective namespaces: 
 
-.. list-table:: Mandatory mDL Attributes (ISO/IEC 18013-5)
+.. list-table:: 
    :widths: 30 70
    :header-rows: 1
 
    * - **Element Identifier**
      - **Description**
-
-   * - **family_name**
-     - *tstr (text string)*. Last name, surname, or primary identifier of the mDL Holder.  
-       The value shall only use Latin1b characters and shall have a maximum length of 150 characters. 
-
-   * - **given_name**
-     - *tstr (text string)*. First name(s), other name(s), or secondary identifier of the mDL Holder.  
-       The value shall only use Latin1b characters and shall have a maximum length of 150 characters.
-
-   * - **birth_date**
-     - *full-date (CBORTag 1004)*. Day, month, and year on which the mDL Holder was born.  
-       If unknown, an approximate date of birth may be used.
-
-   * - **issue_date**
-     - *full-date (CBORTag 1004) or tdate*. Date when the mDL was issued.
-
-   * - **expiry_date**
-     - *full-date (CBORTag 1004) or tdate*. Date when the mDL expires. 
 
    * - **issuing_country**
      - *tstr (text string)*. Alpha-2 country code as defined in [ISO 3166-1], representing the issuing country or territory. 
@@ -642,23 +644,8 @@ The following **elementIdentifiers** MUST be included in an mDL encoded in MDOC-
      - *tstr (text string)*. Name of the administrative authority that has issued the mDL.  
        The value shall only use Latin1b characters and shall have a maximum length of 150 characters. 
 
-   * - **document_number**
-     - *tstr (text string)*. The number assigned or calculated by the issuing authority.  
-       The value shall only use Latin1b characters and shall have a maximum length of 150 characters. 
-
-   * - **portrait**
-     - *bstr (binary string)*. A reproduction of the mDL Holder’s portrait. See [ISO/IEC 18013-5#7.2.2].
-
-   * - **driving_privileges**
-     - *JSON array of objects*. Categories of vehicles, restrictions, and conditions for the mDL Holder. See [ISO/IEC 18013-5#7.2.4].
-
-   * - **un_distinguishing_sign**
-     - *tstr (text string)*. Distinguishing sign of the issuing country according to [ISO/IEC 18013-1:2018, Annex F].  
-       If no applicable distinguishing sign is available, the Issuing Authority may use an empty identifier or another internationally recognized identifier, ensuring no collision with other Issuing Authorities. [ISO/IEC 18013-5]
-
-
 .. note::
-   Additional optional **elementIdentifiers** such as nationality MAY be added, as listed in ISO/IEC 18013-5.
+      User-specific attributes for mDOC Digital Credentials—such as those used in mDL or PID—are also included by referencing the appropriate `elementIdentifiers` defined in ISO/IEC 18013-5 or the ARF specification for `PID Rulebook`_.
 
 
 Mobile security Object
@@ -682,7 +669,7 @@ The **protected header** MUST contain the following parameter encoded in CBOR fo
       - **Reference**
     * - **1**
       - Algorithm used to verify the cryptographic signature of the mdoc Digital Credential (REQUIRED).
-      - RFC8152
+      - RFC9053
 
 .. note::
     
@@ -739,12 +726,18 @@ The `MobileSecurityObjectBytes` MUST have the following attributes:
       - Mapped digest by unique id, grouped by namespace.
       - [ISO 18013-5#9.1.2.4]
     * - **deviceKeyInfo**
-      - It MUST contain the Wallet Instance's public key containing the following sub-values.
+      - It MUST contain the Wallet Instance's public key containing the following sub-values:
 
           * *deviceKey* (REQUIRED).
           * *keyAuthorizations* (OPTIONAL).
           * *keyInfo* (OPTIONAL).
       - [ISO 18013-5#9.1.2.4]
+    * - **Status**
+      - Object containing the MSO revocation status (OPTIONAL). If present, MUST contain one of the following sub-value:
+    
+            * *identifier_list*. A list of unique MSO identifiers that are considered revoked. If the MSO's ID is in this list, it's revoked.
+            * *status_list*. A bit array that marks revoked MSOs by position (bit set to 1 = revoked). More compact for large-scale lists.
+      - [ISO 18013-5#9.1.2.6]
 
 .. note::
     The private key related to the public key stored in the `deviceKey` object is used to sign the `DeviceSignedItems` object and proves the possession of the Digital Credential during the presentation phase (see the presentation phase with MDOC-CBOR).
@@ -763,9 +756,96 @@ The Diagnostic Notation of the CBOR-encoded mDL is given below.
 .. literalinclude:: ../../examples/mDL-mdoc-cbor-example.txt
   :language: text
 
+Cross-Format Credential Parameters Mapping
+======================================================
+The following table provides a comparative mapping between the credential structures of SD-JWT-VC and MDOC-CBOR.
+It outlines the key data elements and parameters used in each format, highlighting both commonalities and differences.
+In particular, it shows how core concepts—such as issuer information, validity, cryptographic binding, and disclosures—are represented in the two specifications.
+
+.. table:: SD-JWT vs MDOC-CBOR Mapping
+
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | **Information related to**    | **SD-JWT-VC Parameters**        | **MDOC-CBOR Parameters**                      |
+   +===============================+=================================+===============================================+
+   | Digital Credential definition | vct (pld)                       | IssuerAuth.doctype                            |
+   |                               |                                 |                                               |
+   |                               | –                               | IssuerAuth.version                            |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Digital Credential metadata   | vctm.name (hdr)                 | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.description (hdr)          | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.extends (hdr)              | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.schema (hdr)               | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.schema_uri (hdr)           | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.data_source (hdr)          | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.display (hdr)              | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.claims (hdr)               | namespaces                                    |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Issuer                        | iss (pld)                       | –                                             |
+   |                               |                                 |                                               |
+   |                               | issuing_authority (pld)         | namespaces.elementIdentifier.issuing_authority|
+   |                               |                                 |                                               |
+   |                               | issuing_country (pld)           | namespaces.elementIdentifier.issuing_country  |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Subject                       | sub (pld)                       | sub (included using a domestic namespace)     |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Validity period               | iat (pld)                       | IssuerAuth.validityInfo.signed                |
+   |                               |                                 |                                               |
+   |                               | exp (pld)                       | IssuerAuth.validityInfo.validUntil            |
+   |                               |                                 |                                               |
+   |                               | nbf (pld)                       | IssuerAuth.validityInfo.validFrom             |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Status mechanism              | status_assertation (pld)        | –                                             |
+   |                               |                                 |                                               |
+   |                               | –                               | IssuerAuth.identifier_list                    |
+   |                               |                                 |                                               |
+   |                               | status_list (pld)               | IssuerAuth.status_list                        |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Cryptographic data            | alg (hdr)                       | IssuerAuth.1 (alg)                            |
+   |                               |                                 |                                               |
+   |                               | kid (hdr)                       | IssuerAuth.4 (kid)                            |
+   |                               |                                 |                                               |
+   |                               | trust_chain (OID-FED) (hdr)     | –                                             |
+   |                               |                                 |                                               |
+   |                               | x5c (hdr)                       | IssuerAuth.33 (x5chain)                       |
+   |                               |                                 |                                               |
+   |                               | cnf.jwk (pld)                   | IssuerAuth.deviceKeyInfo.deviceKey            |
+   |                               |                                 |                                               |
+   |                               | _sd_alg (pld)                   | IssuerAuth.digestAlgorithm                    |
+   |                               |                                 |                                               |
+   |                               | _sd (pld)                       | IssuerAuth.valueDigests                       |
+   |                               |                                 |                                               |
+   |                               | vct#integrity (pld)             | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.extends#integrity (hdr)    | –                                             |
+   |                               |                                 |                                               |
+   |                               | vctm.schema_uri#integrity (hdr) | –                                             |
+   |                               |                                 |                                               |
+   |                               | Signature                       | IssuerAuth.signature                          |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Digital Credential format     | typ (hdr)                       | –                                             |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Digital Credential            | verification (pld)              | verification (included using a domestic       |
+   | auditability                  |                                 | namespace)                                    |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+   | Disclosures                   | salt                            |                                               |
+   |                               |                                 |                                               |
+   |                               | claim name                      |  namespace                                    |
+   |                               |                                 |                                               |
+   |                               | claim value                     |                                               |
+   +-------------------------------+---------------------------------+-----------------------------------------------+
+
 
 .. _Attribute Namespaces: pid-eaa-data-model.html#attribute-namespaces
 .. _Mobile Security Object: pid-eaa-data-model.html#mobile-security-object
 .. _RFC 9360 CBOR Object Signing and Encryption (COSE) - Header Parameters for Carrying and Referencing X.509 Certificates: https://datatracker.ietf.org/doc/rfc9360/
 .. _Trust Model: trust.html
+.. _ARF: https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/tree/main
+.. _PID Rulebook: https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-3/annex-3.01-pid-rulebook.md
 
