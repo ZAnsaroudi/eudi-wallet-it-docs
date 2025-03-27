@@ -1,194 +1,235 @@
 {
-  "nameSpaces": {
-    "org.iso.18013.5.1": [
-      24(<<
-        {
-          "digestID": 0,
-          "random": h'352DAD268E35F7AE728B0B5AE14537A2F027B730EC25E50D45CFCAC0D519FF73',
-          "elementIdentifier": "portrait",
-          "elementValue": h'FFD8FFE000104A46494600010101009000900000FFDB004300130D0E110E0C...'
+"nameSpaces": {
+  "org.iso.18013.5.1": [
+    24({
+      "0": {
+        "digestID": 0,
+        "random": h'790401ed5d0822d1aced942e4b0c41f754eee67b89c5ee3b8fd2c97491a96406',
+        "elementIdentifier": "family_name",
+        "elementValue": "Rossi"
         }
-      >>),
-      24(<<
-        {
-          "digestID": 1,
-          "random": h'D40EABA09C935A43245F606A55C943A8D47EC2BF20C839B5572AE96434F06804',
-          "elementIdentifier": "document_number",
-          "elementValue": "XX1234567"
+      }),
+    24({
+      "1": {
+        "digestID": 1,
+        "random": h'1442881e24514517333019ec24aecaa70bba927d7f2d38ad7cdc3ce82d8561db',
+        "elementIdentifier": "given_name",
+        "elementValue": "Mario"
         }
-      >>),
-      24(<<
-        {
-          "digestID": 2,
-          "random": h'F7BA829250F8D3FF784FB903E9679515D4CB43EB5D992A5D4A912A15961AB0AF',
-          "elementIdentifier": "expiry_date",
-          "elementValue": 1004("2024-02-22")
+      }),
+    24({
+      "2": {
+        "digestID": 2,
+        "random": h'51b4f3831d910861e81da746b221fd89498507476418cedc3709b5d28a7c41d0',
+        "elementIdentifier": "birth_date",
+        "elementValue": 1004(1980-01-10)
         }
-      >>),
-      24(<<
-        {
-          "digestID": 3,
-          "random": h'7B774F01A76FF6F0FB2CC7A510CD6E73CE18BF790A13EC164A34121732E0FC57',
-          "elementIdentifier": "birth_date",
-          "elementValue": 1004("1956-01-12")
+      }),
+    24({
+      "3": {
+        "digestID": 3,
+        "random": h'0c8f68d1ec3aa445ef68aa10b7a5875fa18ca222a821e23890a227cdc7d25e8f',
+        "elementIdentifier": "issue_date",
+        "elementValue": 1004(2025-03-27)
         }
-      >>),
-      24(<<
-        {
-          "digestID": 4,
-          "random": h'1075BAF23AD198552E56DD18DF68D663B6FE6580A3701190CA6B0D24016FA0DB',
-          "elementIdentifier": "issuing_authority",
-          "elementValue": "Gli amici della Salaria"
+      }),
+    24({
+      "4": {
+        "digestID": 4,
+        "random": h'0a9ed0d4937673152e52fb3fac0722baf4252e0d0c9869919e3339670203178e',
+        "elementIdentifier": "expiry_date",
+        "elementValue": 1004(2030-03-27)
         }
-      >>),
-      24(<<
-        {
-          "digestID": 5,
-          "random": h'B84E7AB48C417A318F3774E1E416F09709CA90EBC173068D40EC00F5149E4A56',
-          "elementIdentifier": "un_distinguishing_sign",
-          "elementValue": "I"
+      }),
+    24({
+      "5": {
+        "digestID": 5,
+        "random": h'4b315ff17cf3a4754a94a6cf1e9ddfdd99f6e86b177b74f173348968ca74e80b',
+        "elementIdentifier": "issuing_country",
+        "elementValue": "IT"
         }
-      >>),
-      24(<<
-        {
-          "digestID": 6,
-          "random": h'C3F81E5EEF9D0FD29904F9F8044FEC5D5E819FA9717252E116797C8FA1A27D85',
-          "elementIdentifier": "issue_date",
-          "elementValue": 1004("2023-11-14")
+      }),
+    24({
+      "6": {
+        "digestID": 6,
+        "random": h'f8c82c4103f603435d0bc7762074ccc7c2c74925314a1fb5a8ab9cf2a960221f',
+        "elementIdentifier": "issuing_authority",
+        "elementValue": "Istituto Poligrafico e Zecca dello Stato"
         }
-      >>),
-      24(<<
-        {
-          "digestID": 7,
-          "random": h'55237AF20B921A1B4AF10E239D394F27AACD9E4C0B8AB49111FD9A494B388F93',
-          "elementIdentifier": "family_name",
-          "elementValue": "Rossi"
+      }),
+    24({
+      "7": {
+        "digestID": 7,
+        "random": h'1f7a77a353da7bfc4da12691185249c31d421afd59ddac34f9e4fb4d92b8ec50',
+        "elementIdentifier": "birth_place",
+        "elementValue": "Roma"
         }
-      >>),
-      24(<<
-        {
-          "digestID": 8,
-          "random": h'732C9E2F547489C5BDA745385740CD95ABD87DDF84C89F0A04368632A60AA83F',
-          "elementIdentifier": "given_name",
-          "elementValue": "Mario"
+      }),
+    24({
+      "8": {
+        "digestID": 8,
+        "random": h'88e94c0365c611b523518d9a1b179ae52e242383576249f4965c40c6c97cf214',
+        "elementIdentifier": "document_number",
+        "elementValue": "XX1234567"
         }
-      >>),
-      24(<<
-        {
-          "digestID": 9,
-          "random": h'ABCB57FA9724D958DF0FDE346E7A14DB9C5AA5C7E9117A4AD60E7A4D33C27445',
-          "elementIdentifier": "driving_privileges",
-          "elementValue": [
-            {
-              "vehicle_category_code": "A",
-              "issue_date": 1004("2020-09-17"),
-              "expiry_date": 1004("2031-06-10")
+      }),
+    24({
+      "9": {
+        "digestID": 9,
+        "random": h'944758b43602b01ad68911b062349845492c04c6a78129bcf8cb5fb1396af2fc',
+        "elementIdentifier": "portrait",
+        "elementValue": h'ffd8ffe000104a46494600010101009000900000ffdb004300130d0e110e0c
+        13110f11151413171d301f1d1a1a1d3a2a2c2330453d4947443d43414c566d5d4c51685241435f82
+        606871757b7c7b4a5c869085778f6d787b76ffdb0043011415151d191d381f1f38764f434f767676
+        76767676767676767676767676767676767676767676767676767676767676767676767676767676
+        76767676767676ffc00011080018006403012200021101031101ffc4001b00000301000301000000
+        000000000000000005060401020307ffc40032100001030303020502030900000000000001020304
+        0005110612211331141551617122410781a1163542527391b2c1f1ffc40015010101000000000000
+        00000000000000000001ffc4001a110101010003010000000000000000000000014111213161ffda
+        000c03010002110311003f00a5bbde22da2329c7d692bc7d0d03f52cfb0ff75e7a7ef3e7709723a1
+        d0dae146ddfbb3c039ce07ad2bd47a7e32dbb8dd1d52d6ef4b284f64a480067dfb51f87ffb95ff00
+        eb9ff14d215de66af089ce44b7dbde9cb6890a2838eddf18078f7add62d411ef4db9b10a65d6b95a
+        147381ea0d495b933275fe6bba75c114104a8ba410413e983dff004f5af5d34b4b4cde632d0bf1fd
+        1592bdd91c6411f3934c2fa6af6b54975d106dcf4a65ae56e856001ebc03c7ce29dd9eef1ef10fc4
+        47dc9da76ad2aee93537a1ba7e4f70dd8eff0057c6dffb5e1a19854a83758e54528750946ec67048
+        50cd037bceb08b6d7d2cc76d3317fc7b5cc04fb6707269c5c6e0c5b60ae549242123b0e493f602a0
+        75559e359970d98db89525456b51c951c8afa13ea8e98e3c596836783d5c63f5a61a99fdb7290875
+        db4be88ab384bbbbbfc7183fdeaa633e8951db7da396dc48524fb1a8bd611a5aa2a2432f30ab420a
+        7a6d3240c718cf031fa9ef4c9ad550205aa02951df4a1d6c8421b015b769db8c9229837ea2be8b1b
+        0d39d0eba9c51484efdb8c0efd8d258daf3c449699f2edbd4584e7af9c64e3f96b9beb28d4ac4093
+        1e6478c8e76a24a825449501d867d2b1dcdebae99b9c752ae4ecd6dde4a179c1c1e460938f9149ef
+        655e515c03919a289cb3dca278fb7bf177f4faa829dd8ce3f2ac9a7ecde490971fafd7dce15eed9b
+        71c018c64fa514514b24e8e4f8c5c9b75c1e82579dc1233dfec08238f6add62d391acc1c5256a79e
+        706d52d431c7a0145140b9fd149eb3a60dc5e88cbbc2da092411e9dc71f39a7766b447b344e847dc
+        ac9dcb5abba8d145061d43a6fcf1e65cf15d0e90231d3dd9cfe62995c6dcc5ca12a2c904a15f71dd
+        27d451453e09d1a21450961cbb3ea8a956433b781f1ce33dfed54f0e2b50a2b71d84ed6db18028a2
+        8175f74fc6bda105c529a791c25c4f3c7a11f71586268f4a66b726e33de9ea6f1b52b181c760724e
+        47b514520a5a28a283ffd9'        
+        }
+      }),
+    24({
+      "10": {
+        "digestID": 10,
+        "random": h'577e4822125f55fe923117aba01fdaefcc67d4aea80018fc22efa8d48e17982f',
+        "elementIdentifier": "driving_privileges",
+        "elementValue": [
+          {
+            "vehicle_category_code": "A",
+            "issue_date": 1004("2020-09-17"),
+            "expiry_date": 1004("2031-06-10")
             }
           ]
         }
-      >>),
-      24(<<
-        {
-          "digestID": 10,
-          "random": h'360C04252E23402EA2C185D95FBF97E366A46F79E3311F7401D620CE8890A4AA',
-          "elementIdentifier": "issuing_country",
-          "elementValue": "IT"
+      }),
+    24({
+      "11": {
+        "digestID": 11,
+        "random": h'fa21d3d890af5f4ea2760d08fd9a6256004cd5aa9d5e697ba5873fb0cddd555e',
+        "elementIdentifier": "un_distinguishing_sign",
+        "elementValue": "I"
         }
-      >>)
+      })
     ],
-    "org.iso.18013.5.1.it": [
-      24(<<
-        {
-          "digestID": 11,
-          "random": h'3DA584B9DB34F95C2775A7FBF38F76DA9132F799924C4517943198F2DFA10FF9',
-          "elementIdentifier": "verification.evidence",
-          "elementValue": {
-            "organization_name": "Motorizzazione Civile",
-            "organization_id": "m_inf",
-            "country_code": "it"
+  "org.iso.18013.5.1.it": [
+    24({
+      "12": {
+        "digestID": 12,
+        "random": h'0c3fe75be952ec3c2257031a71f2f54aeabfe7445705cec147fbb2c0f69ad561',
+        "elementIdentifier": "sub",
+        "elementValue": "3B4hK2m7fA9TdVzqLrGp6W8XyJ1sNtQc"
+        }
+      }),
+    24({
+      "13": {
+        "digestID": 13,
+        "random": h'd22c6db3dd27e066deb2ace6161e47fc6abc7a87c84a10320f14bc66d6e08d49',
+        "elementIdentifier": "verification",
+        "elementValue": {
+          "trust_framework": "it_wallet",
+          "assurance_level": "high",
+          "evidence": [
+            {
+              "type": "vouch",
+              "time": "2025-03-27",
+              "attestation": {
+                "type": "digital_attestation",
+                "reference_number": "6485-1619-3976-6671",
+                "date_of_issuance": "2025-03-27",
+                "voucher": {
+                  "organization": "Motorizzazione Civile"
+                  }
+                }
+              }
+            ]
           }
         }
-      >>),
-      24(<<
-        {
-          "digestID": 12,
-          "random": h'7B5E596C50FDB98FF8EB03C0FA7D182194DB03D142CF09263881C9C85B3CA76F',
-          "elementIdentifier": "verification.assurance_level",
-          "elementValue": "high"
-        }
-      >>),
-      24(<<
-        {
-          "digestID": 13,
-          "random": h'4CB5C9EBED080245206975BF7A4442A43542E6AB6EAE4C448F7CC9E3DCF60BCC',
-          "elementIdentifier": "verification.trust_framework",
-          "elementValue": "eidas"
-        }
-      >>)
+      })
     ]
   },
 "issuerAuth": [
     << {1: -7} >>,                 
     {                         
-        33: h'30820209308201AFA00302010202140F7FAF063DCC89971F88C7FC8F085749FE305B8E300A06082A8648CE3D0403023064
-              310B30090603550406130255533113301106035504080C0A43616C69666F726E69613116301406035504070C0D53616E20
-              4672616E636973636F31133011060355040A0C0A4D7920436F6D70616E793113301106035504030C0A6D79736974652E63
-              6F6D301E170D3235303331393136333932355A170D3235303332393136333932355A3064310B3009060355040613025553
-              31133011060355040A0C0A4D7920436F6D70616E793113301106035504030C0A6D79736974652E636F6D3059301306072A
-              8648CE3D020106082A8648CE3D03010703420004BD341248121B095938B3535100CD681DA6A1DD21AE50EF5FFA86FDC7171
-              A3C50853D47361F62B5F994AECBA076794720BB3C5C6FEEE96924FE0EC15CDBED2C6BA33F303D303B0603551D1104343032
-              863068747470733A2F2F63726564656E7469616C2D6973737565722E6F6964632D66656465726174696F6E2E6F6E6C696E65
-              300A06082A8648CE3D0403020348003045022100C9C03D20B3C7FF91691A1579A770200E91A1C31C8CAEEEAF1FBA5DB57CE4
-              126C02207A831486A317DD12558A6AD0DAA9FBDD3AEE265A8ED85867A21116C1851CACD4'
+        33: h'30820208308201afa00302010202142eb39c647c81836bcf79fa9cd0b201ec0bf52307300a0
+        6082a8648ce3d0403023064310b30090603550406130255533113301106035504080c0a43616c6966
+        6f726e69613116301406035504070c0d53616e204672616e636973636f31133011060355040a0c0a4
+        d7920436f6d70616e793113301106035504030c0a6d79736974652e636f6d301e170d323530333237
+        3135353532305a170d3235303430363135353532305a3064310b30090603550406130255533113301
+        106035504080c0a43616c69666f726e69613116301406035504070c0d53616e204672616e63697363
+        6f31133011060355040a0c0a4d7920436f6d70616e793113301106035504030c0a6d79736974652e6
+        36f6d3059301306072a8648ce3d020106082a8648ce3d03010703420004f33da72d0dd0009b62221b
+        0e839099b12dab5e01021124ebf9060422e648f3c3ec6614a86da1e91e552b2ae35e04d3058ae82b5
+        c65a7f1f26800cb4499652a09a33f303d303b0603551d1104343032863068747470733a2f2f637265
+        64656e7469616c2d6973737565722e6f6964632d66656465726174696f6e2e6f6e6c696e65300a060
+        82a8648ce3d040302034700304402204d1f0819971652b79ebe4825547de3d5554d2f41410225e6b1
+        3dab949cda125e022079ba71b823619e49719dce5daa565bf745d3d97e2b87c7f7d6a626f981e653ed'
     }, 
     << 24(<<    
         {  
             "version": "1.0",
             "digestAlgorithm": "sha256",
             "valueDigests": {
-                "org.iso.18013.5.1": {
-                    "0": h'404412351C233550913D4AFA740B7FE24EB6C8346F9E8D84B6B2D20ED2A1DF44',
-                    "1": h'387B0FCCB667A0E9A303319B874F80BC7FC76A94C397B372F5D260C90FD87DFB',
-                    "2": h'B05D51800E5FE503EEB35918A7DBA5872FA98BED3CCFF1DE9157F46F0231CDA8',
-                    "3": h'A8E79DA85B283FCF15CD60FCC19A938041291F3F23AB5643D420F92567A948D9',
-                    "4": h'366870D42FACD384F364E0AC134063E5FFF619A72AA3FBF727D6EB289D2CBBd3',
-                    "5": h'1D97BE51115C7FFDF701397DFD2D18E237A44EAB15D0368A72F428FCB7FDE7B4',
-                    "6": h'0BAFBBC4F6844633BBEA942036FFF60627B66907010653CDB4B6CE844188D95B',
-                    "7": h'3F5EB799763B416BB37F2EF0A661C64BE5E2058A3A8B9993CBDC9A95D0A9270F',
-                    "8": h'84930BF9058B03DB4588CA55985401665159B1571D99934EB17A8F4080197C42',
-                    "9": h'9A6C112F1191B5BFA274C07574DD0AE588C5895F77C7E0FAB1E88788BCDA6561',
-                    "10": h'A421C1E617C9BD1BE62D08198D33A89578DB590F84C9CA9268200A31F48CAC35'
+              "org.iso.18013.5.1": {
+                "0": h'f46b65d5060ad060ab9be62ff22ea8633437619ebdc7fa81f2d151159e92bffe',
+                "1": h'e506545f6a6fd5d982670b4d62fc2b0688dc8f26754e7b0c574d63f5d72a85ac',
+                "2": h'cfcf96fa12d100eeed5f00183d3b6a0888baa47eae85b5b95037eca7bbc0d07e',
+                "3": h'8b0772252b0e06b611676b6b3402eb33bf866eb145e49f4d5f23215e6a047772',
+                "4": h'14135c96693e2ab08d956876ee491357d906a6dd125557196dfb9811ba54aa8d',
+                "5": h'86dcbd99233fbb84a9a2dce3a864a425e6e809300067a4475e3ea2a4d233dc74',
+                "6": h'2e9512d35ea225e69e7b2180ecc1678dcc3e77a16e36427e64b4f0e2861b4d3a',
+                "7": h'4efe55c36f6249d23c473a125afc5181aa30633936494781554971b72ff13700',
+                "8": h'cc44a4f9983c5b0b1efc0e82e2867c8d5bbdf89c34bff16a1953c923bb4e4b3e',
+                "9": h'775eb2af0aa55f2071d62662b35c99698ae3bc0e2c4af5724ff88476cddd152f',
+                "10": h'915d0ad53dd23dace34968c263d307c04701a9bb9dc9865af91dc409786fd833',
+                "11": h'47d89ff4fb513044e6f2394236755ac0abf3e4f4a46f40454a458a59f8b7a6fb'
                 },
-                "org.iso.18013.5.1.it": {
-                    "11": h'8DE0B6D2B48A543DEC8F8D782F8F39A9D68FF27EE709B62FD791C519BF933C60',
-                    "12": h'BDB221D8591B3879E01781D1082F54D46AF32B32F4CF8EF991803A58E51DF6D0',
-                    "13": h'D2663EE7A94EA6DEB412D5354E9A45621E2DF12417A6356C53093538895799E4'
+              "org.iso.18013.5.1.it": {
+                "12": h'16d2098702e896b4614dff1859bd3b42105cac2e62ce7f87dcacc249a656db32',
+                "13": h'755fd7c0f9272a8589c4a661a8aa80dc916018e500884eba316899d653fcb8d1'
                 }
-            },
+              },
             "deviceKeyInfo": {
-                "deviceKey": {
-                    "1": 2,
-                    "-1": 1,
-                    "-2": h'96313D6C63E24E3372742BFDB1A33BA2C897DCD68AB8C753E4FBD48DCA6B7F9A',
-                    "-3": h'1FB3269EDD418857DE1B39A4E4A44B92FA484CAA722C228288F01D0C03A2C3D6',
-                    "kid": h'64656D6F2D642D6B6964'
+              "deviceKey": {
+                "1": 2,
+                "-1": 1,
+                "-2": h'f96b29873b61f05403e2963a7ecbc799c9aab28d8a6629e5848cfdef85442866',
+                "-3": h'a9fef033a900c63e3894d8deb805a2a1fb55ef0d2b88e3c0d3336408186485ef'
                 }
-            },
-            "docType": "org.iso.18013.5.1",
+              },
+            "docType": "org.iso.18013.5.1.mDL",
             "validityInfo": {
-                "signed": 0("2025-03-19T16:23:23Z"),
-                "validFrom": 0("2025-03-19T16:23:23Z"),
-                "validUntil": 0("2030-03-18T16:23:23Z")
+                "signed": 0("2025-03-27T00:00:00Z"),
+                "validFrom": 0("2025-03-27T00:00:00Z"),
+                "validUntil": 0("2026-03-27T00:00:00Z")
+             },
+           "status": {
+            "status_list": {
+              "idx": 1340,
+              "uri": "https://statusprovider.example.org//statuslists/1"
             }
         }
+        }
     >>) >>,
-    h'30820208308201AFA00302010202140DD5A357DECD7E620A698CBCBA0F8BDA9C89F587300A06082A8648CE3D0403023064
-      310B30090603550406130255533113301106035504080C0A43616C69666F726E69613116301406035504070C0D53616E20
-      4672616E636973636F31133011060355040A0C0A4D7920436F6D70616E793113301106035504030C0A6D79736974652E63
-      6F6D3059301306072A8648CE3D020106082A8648CE3D03010703420004BD341248121B095938B3535100CD681DA6A1DD21
-      AE50EF5FFA86FDC7171A3C50853D47361F62B5F994AECBA076794720BB3C5C6FEEE96924FE0EC15CDBED2C6BA33F303D30
-      3B0603551D1104343032863068747470733A2F2F63726564656E7469616C2D6973737565722E6F6964632D666564657261
-      74696F6E2E6F6E6C696E65300A06082A8648CE3D040302034700304402206B21DC7C1AFBB0A5C160BA90C833203B0CD975
-      3DAEE05E866538F580FBC16262022015627000F9CFC98D3FC02C35E5092E2DAD8CF6ED0F846A7ADD739C2974FF1594'
+    h'd09f9acdf7a6be5e4aeb405bfb3b297b1b8003bcf52558a2f39fc6e5cffed40f18f49d2cc0e72a2a5645
+      8d8aade591dee8d6540e639bca637f94bd9fa56f345c'
 ]
 }
