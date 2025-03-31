@@ -664,7 +664,8 @@ The following **elementIdentifiers** MUST be included in a Digital Credential en
      - 
 
 .. note::
-      User-specific attributes for mDoc Digital Credentials such as those used in mDL or PID are also included by referencing the appropriate `elementIdentifiers` defined in ISO/IEC 18013-5 or the `EIDAS-ARF`_ specification. Other Digital Credential User-specific attributes are defined in the Catalogue of Digital Credentials.
+      Digital Credential User-specific attributes are defined in the Catalogue of Digital Credentials.
+      User-specific attributes for mDoc Digital Credentials such as those used in mDL or PID are also included by referencing the appropriate `elementIdentifiers` defined in ISO/IEC 18013-5 or the `EIDAS-ARF`_ specification.
 
 
 Mobile security Object
