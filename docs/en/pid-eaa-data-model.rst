@@ -764,7 +764,7 @@ The `MobileSecurityObjectBytes` MUST have the following attributes:
       - [ISO 18013-5#9.1.2.6]
 
 .. note::
-    The private key related to the public key stored in the `deviceKey` object is used to sign the `DeviceSignedItems` object and proves the possession of the Digital Credential during the presentation phase (see the presentation phase with mDoc-CBOR).
+    The private key related to the public key stored in the `deviceKey` object is used to sign the `DeviceSignedItems` object and to prove the possession of the Digital Credential during the presentation phase (see the presentation phase with mDoc-CBOR).
 
 
 mDoc-CBOR Examples
