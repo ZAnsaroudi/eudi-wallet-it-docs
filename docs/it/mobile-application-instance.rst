@@ -37,7 +37,7 @@ Il flusso è mostrato in :ref:`fig_MobileApplication_Instance_Initialization_Flo
   * Verifica se le API di Key Attestation sono disponibili.
 
 .. note::
-  **Controllo della Federazione**: L'Istanza dell'Applicazione Mobile deve verificare se il Fornitore dell'Applicazione fa parte della Federazione, ottenendo i suoi Metadati specifici del protocollo. Esempi non normativi di una risposta dall'endpoint :ref:`wallet-provider-endpoint:Endpoint di Federazione` con la **Configurazione dell'Entità** e i **Metadati** del Fornitore dell'Applicazione sono presentati nelle sezioni :ref:`wallet-provider-entity-configuration:Configurazione dell'Entità del Fornitore di Wallet` e :ref:`relying-party-entity-configuration:Configurazione dell'Entità Relying Party`.
+  **Controllo della Federazione**: L'Istanza dell'Applicazione Mobile deve verificare se il Fornitore dell'Applicazione fa parte della Federazione, ottenendo i suoi Metadati specifici del protocollo. Esempi non normativi di una risposta dall'endpoint :ref:`wallet-provider-endpoint:Endpoint di Federazione` con la **Entity Configuration** e i **Metadati** del Fornitore dell'Applicazione sono presentati nelle sezioni :ref:`wallet-provider-entity-configuration:Entity Configuration del Fornitore di Wallet` e :ref:`relying-party-entity-configuration:Entity Configuration Relying Party`.
 
 **Passi 3-5 (Recupero del Nonce)**: L'Istanza dell'Applicazione Mobile richiede un ``nonce`` monouso dall'**Endpoint Nonce** del Backend del Fornitore dell'Applicazione (vedi :ref:`wallet-provider-endpoint:Endpoint Nonce della Soluzione Wallet` o :ref:`relying-party-endpoint:Endpoint Nonce della Relying Party`). Questo ``nonce`` DEVE essere imprevedibile per servire come principale difesa contro gli attacchi di replay.
 
@@ -276,7 +276,7 @@ Associazione Chiave dell'Applicazione Mobile
 
 Il flusso di Associazione Chiave consente all'Istanza dell'Applicazione Mobile di associare una coppia di chiavi appena creata all'Istanza dell'Applicazione Mobile, basandosi su una prova di possesso delle Cryptographic Hardware Keys generate durante la fase di :ref:`mobile-application-instance:Inizializzazione dell'Istanza dell'Applicazione Mobile`. Prima di completare il processo, il Fornitore dell'Applicazione deve anche verificare l'integrità dell'Istanza dell'Applicazione Mobile.
 
-Sebbene il flusso esatto differisca a seconda del contesto (vedi le sezioni :ref:`relying-party-instance:Mobile Relying Party Instance Registration` e :ref:`wallet-attestation-issuance:Emissione della Wallet Attestation`), la Richiesta di Integrità dell'Applicazione Mobile e la Risposta di Errore sono coerenti.
+Sebbene il flusso esatto differisca a seconda del contesto (vedi le sezioni :ref:`relying-party-instance:App di Verifica Mobile` e :ref:`wallet-attestation-issuance:Emissione della Wallet Attestation`), la Richiesta di Integrità dell'Applicazione Mobile e la Risposta di Errore sono coerenti.
 
 
 Richiesta di Associazione Chiave dell'Applicazione Mobile
