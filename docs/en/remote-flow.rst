@@ -442,7 +442,7 @@ The JWT payload parameters are described herein:
   For security reasons and to prevent endpoint mix-up attacks, the value contained in the ``response_uri`` parameter MUST be one of those attested by a trusted third party, such as those provided in the ``openid_credential_verifier`` metadata within the ``response_uris`` parameter, obtained from the Trust Chain about the Relying Party.
 
 .. note::
-  The following parameter, even if defined in [OID4VP], is not mentioned in the previous non-normative example, since its usage is conditional and may change in future release of this documentation.
+  The following parameter, even if defined in [OID4VP], is not mentioned in the previous non-normative example, since its usage is conditional.
 
   - ``client_metadata``: A JSON object containing the Relying Party metadata values. If the ``client_metadata`` parameter is present, the Wallet Instance MUST ignore it and consider the client metadata obtained through the OpenID Federation Trust Chain.
 
