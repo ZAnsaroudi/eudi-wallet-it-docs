@@ -1,16 +1,26 @@
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
-from cryptography.x509.oid import ExtensionOID
+from cryptography.x509.oid import ExtensionOID, NameOID, ObjectIdentifier
 
 from cryptography.hazmat.primitives.asymmetric import rsa, ec
 
 from pyeudiw.tests.x509.test_x509 import gen_chain
 
+NameOID.ORGANIZATION_IDENTIFIER = ObjectIdentifier("2.5.4.97") # it is the organizationIdentifier referenced in ETSI EN 319 412-6 V0.0.2 (2025-06)
+
 import binascii
 import textwrap
 
 def format_name(name):
-    return ", ".join(f"{attr.oid._name}={attr.value}" for attr in name)
+    formatted_attrs = []
+    for attr in name:
+        # Check if the OID has a meaningful name (not "Unknown OID")
+        if hasattr(attr.oid, '_name') and attr.oid._name and attr.oid._name != "Unknown OID":
+            formatted_attrs.append(f"{attr.oid._name}={attr.value}")
+        else:
+            # Use the dotted string representation
+            formatted_attrs.append(f"{attr.oid.dotted_string}={attr.value}")
+    return ", ".join(formatted_attrs)
 
 def format_serial(serial):
     return f"{serial} (0x{serial:x})"
@@ -169,8 +179,8 @@ def format_certificate(cert):
     lines.append(f"    Signature Algorithm: {cert.signature_hash_algorithm.name if cert.signature_hash_algorithm else 'unknown'}")
     lines.append(f"        Issuer: {format_name(cert.issuer)}")
     lines.append(f"        Validity")
-    lines.append(f"            Not Before: {format_time(cert.not_valid_before)}")
-    lines.append(f"            Not After : {format_time(cert.not_valid_after)}")
+    lines.append(f"            Not Before: {format_time(cert.not_valid_before_utc)}")
+    lines.append(f"            Not After : {format_time(cert.not_valid_after_utc)}")
     lines.append(f"        Subject: {format_name(cert.subject)}")
     lines.append(f"        Subject Public Key Info:")
     lines.append(format_pubkey(cert.public_key()))
