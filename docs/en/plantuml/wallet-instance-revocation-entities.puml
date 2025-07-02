@@ -23,4 +23,7 @@ Rel(issuer, wallet_provider, "Wallet Instance Revocation Request")
 
 Rel(authentic_source, issuer, "Notify User's \ndeath")
 Rel(authorized_body, wallet_provider, "Notify Illegal Activities")
+
+Rel_L(wallet_provider, user, "Notify \nRevocation")
+
 @enduml
