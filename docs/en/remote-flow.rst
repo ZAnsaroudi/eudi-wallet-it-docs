@@ -190,7 +190,7 @@ Conversely, in the **Same Device Flow**, the Relying Party uses an HTTP response
             "id": "personal id data",
             "format": "dc+sd-jwt",
             "meta": {
-              "vct_values": [ "https://trust-registry.eid-wallet.example.it/credentials/1.0/personidentificationdata" ]
+              "vct_values": [ "https://trust-registry.eid-wallet.example.it/1.0/personidentificationdata" ]
             },
             "claims": [
               {"path": ["given_name"]},
