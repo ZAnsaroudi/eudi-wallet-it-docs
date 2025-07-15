@@ -197,9 +197,9 @@ Il payload JWS contiene i seguenti parametri:
 Ogni elemento dell'array ``credentials`` contiene almeno le seguenti informazioni:
 
 .. list-table:: Campi di primo livello di ogni voce di Attestato Elettronico
-   :class: longtable
-   :header-rows: 1
-   :widths: 30 70
+  :class: longtable
+  :header-rows: 1
+  :widths: 30 70
 
   * - Nome del Campo
     - Descrizione
