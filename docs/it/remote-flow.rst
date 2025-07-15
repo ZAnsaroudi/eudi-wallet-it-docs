@@ -446,7 +446,7 @@ I parametri del payload JWT sono descritti qui:
 
 .. note:: **Richiesta dell'Attestazione del Wallet**
   
-  La Relying Party che richiede un'Attestazione del Wallet DEVE farlo utilizzando una query DCQL standard, tuttavia NON DEVE includere il parametro ``claims`` nella query poiché l'Attestazione del Wallet non è una Credenziale Digitale ma una prova dell'affidabilità e delle capacità dell'Istanza del Wallet. A seconda del formato dell'Attestazione del Wallet, la Relying Party DEVE richiedere il parametro ``vct_values`` nella query DCQL, il quale DEVE essere impostato al valore definito nella :ref:`Struttura del Catalogo degli Attestati Elettronici`.
+  La Relying Party che richiede un'Attestazione del Wallet DEVE farlo utilizzando una query DCQL standard, tuttavia NON DEVE includere il parametro ``claims`` nella query poiché l'Attestazione del Wallet non è una Credenziale Digitale ma una prova dell'affidabilità e delle capacità dell'Istanza del Wallet. A seconda del formato dell'Attestazione del Wallet, la Relying Party DEVE richiedere il parametro ``vct_values`` nella query DCQL, il quale DEVE essere impostato al valore definito nella :ref:`registry-catalogue:Struttura del Catalogo degli Attestati Elettronici`.
 
 Errori dell'Endpoint URI Request
 --------------------------------

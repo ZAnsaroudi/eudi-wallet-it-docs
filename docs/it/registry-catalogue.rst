@@ -141,7 +141,7 @@ Gli Attestati Elettronici riconosciuti all'interno dell'ecosistema IT-Wallet son
 
 
 Struttura del Catalogo degli Attestati Elettronici
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Il contenuto del Catalogo degli Attestati Elettronici è protetto in un JWS che contiene i seguenti parametri dell'header JOSE:
 

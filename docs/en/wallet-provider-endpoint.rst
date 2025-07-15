@@ -426,7 +426,7 @@ Below is a non-normative example of the SD-JWT Wallet Attestation header and pay
 Wallet Attestation mdoc
 """""""""""""""""""""""
 
-This description extends the MDOC-CBOR Credential Format guidelines, given in :ref:`pid-eaa-data-model:MDOC-CBOR Credential Format`, to support Wallet Attestation data representation. The Wallet Attestation MUST use the domestic namespace  ``it.eid-wallet.trust-registry.WalletAttestation.1.0``.
+This description extends the MDOC-CBOR Credential Format guidelines, given in :ref:`credential-data-model:mdoc-CBOR Credential Format`, to support Wallet Attestation data representation. The Wallet Attestation MUST use the domestic namespace ``it.eid-wallet.trust-registry.WalletAttestation.1.0``.
 
 The ``nameSpaces`` for the domestic nameSpace Json Objects are defined as follows:
 
