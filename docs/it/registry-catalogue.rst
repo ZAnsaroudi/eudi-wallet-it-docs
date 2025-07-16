@@ -95,6 +95,7 @@ Categorie di Attestati Elettronici
 
 Gli Attestati Elettronici riconosciuti all'interno dell'ecosistema IT-Wallet sono classificati gerarchicamente e standardizzati secondo i seguenti domini e categorie principali. Categorie aggiuntive POSSONO essere aggiunte man mano che l'ecosistema IT-Wallet cresce.
 
+.. _it-wallet-dc-domains:
 .. list-table:: Domini e Categorie degli Attestati Elettronici
    :class: longtable
    :header-rows: 1
