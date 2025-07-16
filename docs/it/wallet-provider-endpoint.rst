@@ -364,7 +364,7 @@ Il corpo dell'SD-JWT della Wallet Attestation contiene i seguenti claim:
       - OBBLIGATORIO. Oggetto JSON, contenente la parte pubblica di una coppia di chiavi asimmetriche posseduta dall'Istanza di Wallet.
       - :rfc:`7800`.
     * - **vct**
-      - OBBLIGATORIO. Il valore del tipo di Credenziale DEVE essere una Stringa URL HTTPS e DEVE essere impostato su ```https://trust-registry.eid-wallet.example.it/1.0/WalletAttestation``.
+      - OBBLIGATORIO. Il valore del tipo di Credenziale DEVE essere una Stringa URL HTTPS e DEVE essere impostato su ```https://trust-registry.eid-wallet.example.it/v1.0/WalletAttestation``.
       - Sezione 3.2.2.2 `SD-JWT-VC`_.
     * - **_sd**
       - OBBLIGATORIO. Array JSON contenente un elenco di tutti i digest delle divulgazioni.

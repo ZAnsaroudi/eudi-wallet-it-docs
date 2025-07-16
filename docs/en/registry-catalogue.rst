@@ -270,13 +270,13 @@ Each element of the ``credentials`` array contains at least the following inform
       * **logo_uri**: [OPTIONAL] URI of the Authentic Source organization logo.
       * **source_type**: Type of Authentic Source, such as ``public`` or ``private``.
       * **service_documentation**: [OPTIONAL] URI pointing to the Authentic Source service documentation.
-      * **user_information**: [CONDITIONAL] URI pointing to a web page containing human-readable information about the Digital Credential, whose data is provided by the Authentic Source. This web page MUST display any relevant information to the user before the issuance flow. This information MUST be communicated to the Issuer during the onboarding of the Authentic Source by the Authentic Source itself, if any such information is communicated to the Issuer, the latter MUST publish it in the web page. For example, if the Authentic Source's database only contains the data required for the Digital Credential attributes registered *after* a specific date, this information MUST be provided on the web page.
+      * **user_information**: [OPTIONAL] A string containing human-readable information about the Digital Credential relevant to the User. This string MUST be provided by the Authentic Source to the Trust Anchor during onboarding and MUST be formatted using Markdown. The Markdown formatting can be plain text or a combination of text and links. For example, if the Authentic Source's database only contains the data required for Digital Credential attributes registered *after* a specific date, this information MUST be conveyed to the Trust Anchor in this Markdown string.
   * - **formats**
     - REQUIRED. Array of supported technical formats of Digital Credentials, including:
 
       * **format**: Type of format (e.g., ``dc+sd-jwt``, ``mso_mdoc``)
       * **configuration_id**: Configuration identifier of the credential format. This is formed by concatenating the ``credential_type`` value to the ``format`` (e.g., ``dc_sd_jwt_mDL`` or ``mso_mdoc_mDL``), and is used to uniquely reference the configuration for this credential format.
-      * **vct**: CONDITIONAL. It is only REQUIRED if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{version}/{credential_type}`` (e.g., ``https://trust-registry.eid-wallet.example.it/1.0/mDL``).
+      * **vct**: CONDITIONAL. It is only REQUIRED if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{version}/{credential_type}`` (e.g., ``https://trust-registry.eid-wallet.example.it/v1.0/mDL``).
       * **docType**: CONDITIONAL. It is only REQUIRED if the ``format`` is ``mso_mdoc``. If the credential is:
 
         * defined by an ISO standard, it MUST be a string of the form ``iso.org.{iso-number}.{part}.{version}.{credential_type}`` (e.g., ``iso.org.18013.5.1.mDL``).
@@ -319,7 +319,7 @@ The ``wallet_attestations`` Object contains at least the following information:
 
       * **format**: Type of format (e.g., ``dc+sd-jwt``, ``mso_mdoc`` or ``oauth-client-attestation+jwt``)
       * **configuration_id**: Configuration identifier of the Wallet Attestation. This is formed by concatenating the string ``wa`` to the ``format`` (e.g., ``dc_sd_jwt_wa``, ``mso_mdoc_wa``, or ``jwt_wa``), and is used to uniquely reference the configuration of the Wallet Attestation format.
-      * **vct**: CONDITIONAL. It is only present if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{version}/{credential_type}`` (e.g., ``https://trust-registry.eid-wallet.example.it/1.0/WalletAttestation``).
+      * **vct**: CONDITIONAL. It is only present if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{version}/{credential_type}`` (e.g., ``https://trust-registry.eid-wallet.example.it/v1.0/WalletAttestation``).
       * **docType**: CONDITIONAL. It is only present if the ``format`` is ``mso_mdoc``. It is a string of the form ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.eid-wallet.trust-registry.WalletAttestation.1.0``).
       * **schema_uri**: URI pointing to the format specification document.
       * **schema_uri#integrity**: Cryptographic digest of the format specification document for integrity verification. It MUST be a string of the form ``{digest_method}={digest_value}``, where ``{digest_method}`` is the digest algorithm used (e.g., ``sha-256``) and ``{digest_value}`` is the base64url-encoded digest value.
