@@ -317,7 +317,7 @@ L'Oggetto ``wallet_attestations`` contiene almeno le seguenti informazioni:
    * - Nome Campo
      - Descrizione
    * - **version**
-     - OBBLIGATORIO. Versione della definizione dell'Attestato Elettronicoe.
+     - OBBLIGATORIO. Versione della definizione dell'Attestazione del Wallet.
    * - **credential_type**
      - OBBLIGATORIO. Identificatore unico dell'Attestazione del Wallet. DEVE essere impostato su ``WalletAttestation``.
    * - **name**
