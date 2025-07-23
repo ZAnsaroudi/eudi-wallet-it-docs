@@ -193,7 +193,7 @@ Il payload JWS contiene i seguenti parametri:
   * - **credentials**
     - OBBLIGATORIO. Array contenente le definizioni degli Attestati Elettronici.
   * - **wallet_attestation**
-    - OBBLIGATORIO. Oggetto JSON contenente informazioni sulle Attestazioni del Wallet supportate.
+    - OBBLIGATORIO. Oggetto JSON contenente le definizioni per le Attestazioni del Wallet supportate, inclusi i loro formati supportati, le claims associate e i Livelli di Assurance (LoA). Questo oggetto è utilizzato da altre entità, come gli Issuer e le Relying Parties, per recuperare informazioni sulle Attestazioni di Wallet supportate all'interno dell'ecosistema.
 
 Ogni elemento dell'array ``credentials`` contiene almeno le seguenti informazioni:
 
@@ -243,7 +243,7 @@ Ogni elemento dell'array ``credentials`` contiene almeno le seguenti informazion
       * **status_methods**: Metodi di verifica dello stato supportati (es. ``status_list``).
       * **allowed_states**: Stati consentiti dell'Attestato Elettronico (es. ``valid``, ``revoked``, ``suspended``).
   * - **authentication**
-    - OBBLIGATORIO. Requisiti di autenticazione dell'Attestato Elettronico
+    - OBBLIGATORIO. Requisiti di autenticazione dell'Attestato Elettronico.
 
       * **user_auth_required**: OBBLIGATORIO. Flag che indica se l'autenticazione dell'Utente è richiesta durante l'emissione dell'Attestato Elettronico.
       * **min_loa**: OBBLIGATORIO. Livello minimo di Garanzia richiesto per l'autenticazione dell'Attestato Elettronico. DEVE includere il Livello di Garanzia dell'autenticazione dell'Utente e dell'Istanza del Wallet che richiede l'Attestato Elettronico.
@@ -263,7 +263,7 @@ Ogni elemento dell'array ``credentials`` contiene almeno le seguenti informazion
     - OBBLIGATORIO. Array di informazioni rilevanti sulle Fonti Autentiche autorizzate, inclusi dati amministrativi e tecnici relativi alla fornitura di dati agli Emittenti di Credenziali. A meno di indicazioni contrarie, l'array DEVE includere almeno le seguenti informazioni:
 
       * **id**: Identificatore univoco della Fonte Autentica.
-      * **organization_name**: Nome leggibile dall'utente dell'organizzazione della Fonte Autentica.
+      * **organization_name**: Nome leggibile dall'Utente dell'organizzazione della Fonte Autentica.
       * **organization_code**: Codice amministrativo dell'organizzazione della Fonte Autentica. 
       * **organization_country**: Paese dell'organizzazione della Fonte Autentica, rappresentato come un codice ISO 3166-1 alpha-2 di due lettere.
       * **contacts**: JSON Array di contatti della Fonte Autentica, possono essere inclusi nomi, indirizzi email, numeri di telefono, etc.
@@ -277,20 +277,20 @@ Ogni elemento dell'array ``credentials`` contiene almeno le seguenti informazion
         * **deferred_flow**: OBBLIGATORIO. Booleano che indica se la Fonte Autentica supporta la fornitura differita dei dati.
         * **max_response_time_minutes**: CONDIZIONALE. Tempo massimo in minuti affinché la Fonte Autentica risponda a una richiesta di fornitura differita dei dati. OBBLIGATORIO se ``deferred_flow`` è impostato su ``true``.
         * **notification_methods**: CONDIZIONALE. Array dei metodi di notifica supportati dalla Fonte Autentica per la fornitura differita dei dati, come ``push``, ``poll``.
-      * **user_information**:  [OPZIONALE] Una stringa contenente informazioni leggibili dall'uomo sull'Attributo Elettronico rilevanti per l'Utente. Questa stringa DEVE essere fornita dalla Fonte Autentica al Trust Anchor durante l'onboarding e DEVE essere formattata utilizzando Markdown. La formattazione Markdown può essere testo semplice o una combinazione di testo e link. Ad esempio, se il database della Fonte Autentica contiene solo i dati richiesti per gli attributi dell'Attributo Elettronico registrati dopo una data specifica, questa informazione devono essere trasmesse al Trust Anchor e riportata nella stringa Markdown.
+      * **user_information**:  [OPZIONALE] Una stringa contenente informazioni leggibili dall'uomo sull'Attributo Elettronico rilevanti per l'Utente. Questa stringa DEVE essere fornita dalla Fonte Autentica al Trust Anchor durante l'onboarding e DEVE utilizzare il formato Markdown come definito su :rfc:`7763`. La formattazione Markdown può essere testo semplice o una combinazione di testo e link. Ad esempio, se il database della Fonte Autentica contiene solo i dati richiesti per gli attributi dell'Attributo Elettronico registrati dopo una data specifica, questa informazione devono essere trasmesse al Trust Anchor e riportata nella stringa Markdown.
   * - **formats**
     - OBBLIGATORIO. Array dei formati tecnici supportati per le Credenziali Digitali, che include:
 
         * **format**: Tipo di formato (ad esempio, ``dc+sd-jwt``, ``mso_mdoc``)
         * **configuration_id**: Identificativo di configurazione del formato dell'Attestato Elettronico. Questo è formato concatenando il valore di ``credential_type`` al ``format`` (ad esempio, ``dc_sd_jwt_mDL`` o ``mso_mdoc_mDL``), ed è usato per fare riferimento in modo univoco alla configurazione per questo formato di Attestato Elettronico.
-        * **vct**: CONDIZIONALE. È OBBLIGATORIO solo se il ``format`` è ``dc+sd-jwt``. DEVE essere impostato come una stringa URI nel formato ``https://{dominio Trust Anchor}/{version}/{credential_type}`` (ad esempio, ``https://trust-registry.it-wallet.example.it/v1/mDL``).
+        * **vct**: CONDIZIONALE. È OBBLIGATORIO solo se il ``format`` è ``dc+sd-jwt``. DEVE essere impostato come una stringa URI nel formato ``https://{dominio Trust Anchor}/{version}/{credential_type}`` (ad esempio, ``https://trust-registry.it-wallet.example.it/v1/mDL``). Eventuali confronti con i caratteri di questa stringa DEVONO essere eseguiti in modo `case-insensitive`.
         * **docType**: CONDIZIONALE. È OBBLIGATORIO solo se il ``format`` è ``mso_mdoc``. Se l'Attestato Elettronico è:
 
           * definita da uno standard ISO, DEVE essere una stringa nel formato ``iso.org.{iso-number}.{part}.{version}.{credential_type}`` (ad esempio, ``iso.org.18013.5.1.mDL``).
           * definita a livello europeo, DEVE essere una stringa nel formato ``eu.europa.ec.{credential_type}.{version}`` (ad esempio, ``eu.europa.ec.personidentificationdata.1``).
           * definita da uno standard nazionale, DEVE essere una stringa nel formato ``{dominio inverso Trust Anchor}.{credential_type}.{version}`` (ad esempio, ``it.wallet.trust-registry.personidentificationdata.1``).
         * **schema_uri**: URI che punta al documento di specifica del formato.
-        * **schema_uri#integrity**: Digest crittografico del documento di specifica del formato per la verifica dell'integrità. DEVE essere una stringa nel formato ``{metodo_digest}={valore_digest}``, dove ``{metodo_digest}`` è l'algoritmo di digest utilizzato (ad esempio, ``sha-256``) e ``{valore_digest}`` è il valore di digest codificato in base64url.
+        * **schema_uri#integrity**: Digest crittografico del documento di specifica del formato per la verifica dell'integrità. DEVE essere una stringa nel formato ``{metodo_digest}-{valore_digest}``, dove ``{metodo_digest}`` è l'algoritmo di digest utilizzato (ad esempio, ``sha-256``) e ``{valore_digest}`` è il valore di digest codificato in base64url.
   * - **display_properties**
     - OBBLIGATORIO. Proprietà di presentazione visiva degli Attestati Elettronici, ad es.:
 
@@ -316,30 +316,28 @@ L'Oggetto ``wallet_attestation`` contiene almeno le seguenti informazioni:
 
    * - Nome Campo
      - Descrizione
-   * - **version**
-     - OBBLIGATORIO. Versione della definizione dell'Attestazione del Wallet.
    * - **credential_type**
      - OBBLIGATORIO. Identificatore unico dell'Attestazione del Wallet. DEVE essere impostato su ``WalletAttestation``.
    * - **name**
-     - OBBLIGATORIO. Nome leggibile dall'utente dell'Attestazione del Wallet. DEVE essere impostato su ``Wallet Attestation``.
+     - OBBLIGATORIO. Nome leggibile dall'Utente dell'Attestazione del Wallet. DEVE essere impostato su ``Wallet Attestation``.
    * - **description**
-     - OBBLIGATORIO. Descrizione leggibile dall'utente dell'Attestato Elettronico.
+     - OBBLIGATORIO. Descrizione leggibile dall'Utente dell'Attestato Elettronico.
    * - **aal_values_supported**
-     - OBBLIGATORIO. Array di Stringhe, ognuna delle quali rappresenta un Livello di Assurance (LoA) supportato dall'Attestazione del Wallet. DEVE includere almeno i livelli basso, medio e alto.
+     - OBBLIGATORIO. Array di Stringhe, ognuna delle quali rappresenta un Livello di Assurance (LoA) supportato dall'Attestazione del Wallet. DEVE includere almeno i livelli ``low``, ``medium`` e ``high``.
    * - **formats**
      - OBBLIGATORIO. Array dei formati supportati per l'Attestazione del Wallet, che include:
 
        * **format**: Tipo di formato (ad esempio, ``dc+sd-jwt``, ``mso_mdoc`` o ``oauth-client-attestation+jwt``)
        * **configuration_id**: Identificatore di configurazione dell'Attestazione del Wallet. Questo è formato concatenando la stringa ``wa`` al ``format`` (ad esempio, ``dc_sd_jwt_wa``, ``mso_mdoc_wa``, o ``jwt_wa``), ed è utilizzato per fare riferimento in modo univoco alla configurazione del formato dell'Attestazione del Wallet.
-       * **vct**: CONDIZIONALE. È presente solo se il ``format`` è ``dc+sd-jwt``. DEVE essere impostato come una stringa URI nel formato ``https://{dominio Trust Anchor}/{version}/{credential_type}`` (ad esempio, ``https://trust-registry.it-wallet.example.it/v1/WalletAttestation``).
-       * **docType**: CONDIZIONALE. È presente solo se il ``format`` è ``mso_mdoc``. È una stringa nel formato ``{dominio inverso Trust Anchor}.{credential_type}.{version}`` (ad esempio, ``it.wallet.trust-registry.WalletAttestation.1``).
+       * **vct**: CONDIZIONALE. È presente solo se il ``format`` è ``dc+sd-jwt``. DEVE essere impostato come una stringa URI nel formato ``https://{dominio Trust Anchor}/{credential_type}`` (ad esempio, ``https://trust-registry.it-wallet.example.it/WalletAttestation``). Eventuali confronti con i caratteri di questa stringa DEVONO essere eseguiti in modo `case-insensitive`.
+       * **docType**: CONDIZIONALE. È presente solo se il ``format`` è ``mso_mdoc``. È una stringa nel formato ``{dominio inverso Trust Anchor}.{credential_type}`` (ad esempio, ``it.wallet.trust-registry.WalletAttestation``).
        * **schema_uri**: URI che punta al documento di specifica del formato.
-       * **schema_uri#integrity**: Digest crittografico del documento di specifica del formato per la verifica dell'integrità. DEVE essere una stringa nel formato ``{metodo_digest}={valore_digest}``, dove ``{metodo_digest}`` è l'algoritmo di digest utilizzato (ad esempio, ``sha-256``) e ``{valore_digest}`` è il valore di digest codificato in base64url.
+       * **schema_uri#integrity**: Digest crittografico del documento di specifica del formato per la verifica dell'integrità. DEVE essere una stringa nel formato ``{metodo_digest}-{valore_digest}``, dove ``{metodo_digest}`` è l'algoritmo di digest utilizzato (ad esempio, ``sha-256``) e ``{valore_digest}`` è il valore di digest codificato in base64url.
    * - **claims**
      - OBBLIGATORIO. Array di claim contenuti nell'Attestato Elettronico. DEVE includere almeno i seguenti claim:
 
        * **Name**: Il nome del claim (ad esempio, ``sub``, ``aal``, ``wallet_link``, ``wallet_name``).
-       * **Namespaces**: CONDIZIONALE. Array di namespace a cui appartiene il claim. DEVE essere impostato su ``{dominio inverso Trust Anchor}.{credential_type}.{version}`` (ad esempio, ``it.wallet.trust-registry.WalletAttestation.1``).
+       * **Namespaces**: CONDIZIONALE. Array di namespace a cui appartiene il claim. DEVE essere impostato su ``{dominio inverso Trust Anchor}.{credential_type}`` (ad esempio, ``it.wallet.trust-registry.WalletAttestation``).
 
 L'esempio corrispondente del Catalogo degli Attestati Elettronici decodificato in JSON sia per l'header che per il payload è il seguente:
 

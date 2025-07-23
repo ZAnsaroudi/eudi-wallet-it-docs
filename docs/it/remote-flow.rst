@@ -446,7 +446,7 @@ I parametri del payload JWT sono descritti qui:
 
 .. note:: **Richiesta dell'Attestazione del Wallet**
   
-  La Relying Party che richiede un'Attestazione del Wallet DEVE farlo utilizzando una query DCQL standard, tuttavia NON DEVE includere il parametro ``claims`` nella query poiché l'Attestazione del Wallet non è una Credenziale Digitale ma una prova dell'affidabilità e delle capacità dell'Istanza del Wallet. A seconda del formato dell'Attestazione del Wallet, la Relying Party DEVE richiedere il parametro ``vct_values`` nella query DCQL, il quale DEVE essere impostato al valore definito nella :ref:`registry-catalogue:Struttura del Catalogo degli Attestati Elettronici`.
+  La Relying Party che richiede un'Attestazione del Wallet DEVE farlo utilizzando una query DCQL standard, tuttavia NON DOVREBBE includere il parametro ``claims`` nella query. A seconda del formato dell'Attestazione del Wallet, la Relying Party DEVE richiedere il parametro ``vct_values`` nella query DCQL, il quale DEVE essere impostato al valore definito nella :ref:`registry-catalogue:Struttura del Catalogo degli Attestati Elettronici`.
 
 Errori dell'Endpoint URI Request
 --------------------------------
@@ -500,7 +500,7 @@ Dopo aver ottenuto l'autorizzazione e il consenso dell'Utente per la presentazio
 
 .. note:: **Presentazione dell'Attestazione del Wallet**
   
-    L'Istanza del Wallet DEVE includere l'Attestazione del Wallet se richiesta dalla Relying Party nella query DCQL. L'Istanza del Wallet DEVE includere tutte le divulgazioni selettivedisponibili per l'Attestazione del Wallet durante risposta anche se la Relying Party non le ha richieste nella query DCQL. L'Attestazione del Wallet è infatti una prova dell'affidabilità e delle capacità dell'Istanza del Wallet, ma non è una Credenziale Digitale di per sé. Pertanto, durante la presentazione, l'Istanza del Wallet NON DEVE richiedere il consenso dell'utente alla divulgazione degli attributi dell'Attestazione del Wallet, che sono dati tecnici non trasparenti per l'utente.
+    L'Istanza del Wallet DEVE includere l'Attestazione del Wallet se richiesta dalla Relying Party usando la query DCQL. Durante la presentazione, l'Istanza del Wallet NON DOVREBBE richiedere il consenso dell'utente alla divulgazione degli attributi dell'Attestazione del Wallet, i quali sono dati tecnici non trasparenti per l'utente.
 
 Nella Authorization Response vengono utilizzati i seguenti parametri:
 
@@ -561,7 +561,7 @@ Quando viene presentato un SD-JWT, la firma KB-JWT DEVE essere verificata dalla 
   * - **nonce**
     - OBBLIGATORIO. Garantisce l'unicità della firma. Il valore di questa *claim* DEVE essere una stringa e deve corrispondere a quello fornito nel Request Object.
   * - **sd_hash**
-    - OBBLIGATORIO. Il digest codificato in base64url del JWT firmato dal Fornitore di Attestati Elettronici (SD-JWT) e le *selective disclosures* selezionate dall'utente.
+    - OBBLIGATORIO. Il digest codificato in base64url del JWT firmato dal Fornitore di Attestati Elettronici (SD-JWT) e le *selective disclosures* selezionate dall'Utente.
 
 
 Errori della Authorization Response
@@ -584,7 +584,7 @@ Di seguito è riportato un esempio non normativo di una *Error Response* nella *
   error_description=...
 
 .. warning::
-  L'attuale specifica OpenID4VP delinea varie risposte di errore che un'Istanza del Wallet può restituire alla Relying Party in caso di *Authorization Request* errata. Per migliorare la privacy, le Istanze del Wallet NON DOVREBBERO notificare alla Relying Party le richieste errate qualora un uso improprio delle risposte di errore potrebbe portare a raccogliere informazioni lesive della privacy dell'utente (ad esempio, se l'utente decide di non voler presentare l'Attestato Elettronico richiesto).
+  L'attuale specifica OpenID4VP delinea varie risposte di errore che un'Istanza del Wallet può restituire alla Relying Party in caso di *Authorization Request* errata. Per migliorare la privacy, le Istanze del Wallet NON DOVREBBERO notificare alla Relying Party le richieste errate qualora un uso improprio delle risposte di errore potrebbe portare a raccogliere informazioni lesive della privacy dell'Utente (ad esempio, se l'Utente decide di non voler presentare l'Attestato Elettronico richiesto).
 
 Nella seguente tabella sono elencati gli *Error codes* e le descrizioni che sono supportati per la *Error Response* nella *Autorization Response*:
 
@@ -709,7 +709,7 @@ La Relying Party lega la richiesta dello user-agent, con un cookie di sessione c
 
 * **201 Created**; quando il Request Object firmato è stato emesso dalla Relying Party che attende di essere scaricato dall'Istanza del Wallet all'endpoint ``request_uri``.
 * **202 Accepted**; quando il Request Object firmato è stato ottenuto dall'Istanza del Wallet.
-* **200 OK**; quando l'Istanza del Wallet ha fornito la presentazione all'endpoint ``response_uri`` della Relying Party e l'autenticazione dell'Utente ha avuto successo. La Relying Party aggiorna il cookie di sessione consentendo allo user-agent di accedere alla risorsa protetta. Viene fornito un ``redirect_uri`` che trasporta lo user-agent alla pagina in cui l'utente deve navigare.
+* **200 OK**; quando l'Istanza del Wallet ha fornito la presentazione all'endpoint ``response_uri`` della Relying Party e l'autenticazione dell'Utente ha avuto successo. La Relying Party aggiorna il cookie di sessione consentendo allo user-agent di accedere alla risorsa protetta. Viene fornito un ``redirect_uri`` che trasporta lo user-agent alla pagina in cui l'Utente deve navigare.
 
 Errori dello Status Endpoint
 -----------------------------

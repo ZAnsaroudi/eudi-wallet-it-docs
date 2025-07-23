@@ -201,7 +201,7 @@ Each mdoc Request MUST be compliant with the following structure, and MUST inclu
 .. note::
     **Requesting the Wallet Attestation**
 
-    The Relying Party requesting a Wallet Attestation MUST add an object in the **docRequest** array having the ``docType`` set to ``{Trust Anchor reverse domain}.{WalletAttestation}.{version}`` as described in :ref:`registry-catalogue:Digital Credentials Catalogue Structure`. The Relying Party MUST NOT include the ``nameSpaces`` parameter in the request.
+    The Relying Party requesting a Wallet Attestation MUST add an object in the **docRequest** array having the ``docType`` set to ``{Trust Anchor reverse domain}.{WalletAttestation}`` as described in :ref:`registry-catalogue:Digital Credentials Catalogue Structure`. The Relying Party MUST NOT include the ``nameSpaces`` parameter in the request.
 
 mdoc Response
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -280,7 +280,7 @@ A **deviceSigned** data structure MUST be compliant with the following structure
 .. note::
     **Presenting the Wallet Attestation**
 
-    The Wallet Instance MUST include the Wallet Attestation if requested by the Relying Party in the mdoc request. The Wallet Instance MUST include all available disclosures for the Wallet Attestation in the response even if the Relying Party did not request them in the mdoc request. The rational behind this is that the Wallet Attestation is a proof of the Wallet Instance's trustworthiness and capabilities but is not a Digital Credential per se. Therefore, during presentaion, the Wallet Instance MUST NOT request user's consent to the disclosure of the Wallet Attestation attributes which are technical data not transparent to the user.
+    The Wallet Instance MUST include the Wallet Attestation if requested by the Relying Party in the mdoc request. The Wallet Instance SHOULD include all available disclosures for the Wallet Attestation and MUST include the claim ``aal`` as a disclosure. Moreover, during presentaion, the Wallet Instance MUST NOT request user's consent to the disclosure of the Wallet Attestation attributes which are technical data not transparent to the user.
 
 Session Termination
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -133,7 +133,7 @@ Il payload JWT contiene i seguenti claim. Alcuni di questi claim possono essere 
       - [NSD]. OBBLIGATORIO. Oggetto JSON contenente il materiale crittografico da utilizzare come prova di possesso. L'inclusione del claim **cnf** (confirmation) in un JWT, permette al soggetto che emette il JWT di dichiarare che il Titolare ha il controllo della chiave privata relativa a quella pubblica definita nel parametro **cnf**. Il destinatario DEVE verificare crittograficamente che il Titolare abbia effettivamente il controllo di quella chiave.
       - `[RFC7800, Sezione 3.1] <https://www.iana.org/go/rfc7800>`_ e Sezione 3.2.2.2 `SD-JWT-VC`_.
     * - **vct**
-      - [NSD]. OBBLIGATORIO. Il valore del tipo di Attestato Elettronico DEVE essere una stringa URL HTTPS e DEVE essere valorizzata utilizzando uno dei valori ottenuti dai Metadata del Fornitore di Attestati Elettronici. È l'identificativo del tipo di SD-JWT VC e DEVE essere resistente alle collisioni come definito nella Sezione 2 di :rfc:`7515`. DEVE contenere anche il numero di versione dell'Attestato Elettronico (ad esempio: ``https://trust-registry.it-wallet.example.it/v1/personidentificationdata``).
+      - [NSD]. OBBLIGATORIO. Il valore del tipo di Attestato Elettronico DEVE essere una stringa URL HTTPS e DEVE essere valorizzata utilizzando uno dei valori ottenuti dai Metadata del Fornitore di Attestati Elettronici. Il confronto con i caratteri di questa stringa DEVE essere eseguito in modo `case-insensitive`. È l'identificativo del tipo di SD-JWT VC e DEVE essere resistente alle collisioni come definito nella Sezione 2 di :rfc:`7515`. DEVE contenere anche il numero di versione dell'Attestato Elettronico (ad esempio: ``https://trust-registry.it-wallet.example.it/v1/personidentificationdata``).
       - Sezione 3.2.2.2 `SD-JWT-VC`_.
     * - **vct#integrity**
       - [NSD]. OBBLIGATORIO. Il valore DEVE essere una stringa "integrity metadata" come definito nella Sezione 3 di [`W3C-SRI`_]. *SHA-256*, *SHA-384* e *SHA-512* DEVONO essere supportati come funzioni crittografiche di hash. *MD5* e *SHA-1* NON DEVONO essere utilizzati. Questo claim DEVE essere verificato in base a quanto indicato nella la Sezione 3.3.5 di [`W3C-SRI`_].
@@ -184,7 +184,7 @@ Se il parametro ``status`` è valorizzato con ``status_assertion``, l'oggetto JS
 
 
 .. note::
-  Il documento JSON di *Type Metadata* dell'Attestato Elettronico PUÒ essere recuperato direttamente dall'URL contenuto nel claim **vct**, utilizzando il metodo GET HTTP o utilizzando il parametro di header ``vctm`` se presente. A differenza di quanto specificato nella Sezione 6.3.1 di `SD-JWT-VC`_ l'endpoint **.well-known** non è incluso nell'attuale profilo di implementazione. Gli implementatori possono comunque decidere di utilizzarlo ai fini di interoperabilità con gli altri sistemi.
+  Il documento JSON di *Type Metadata* dell'Attestato Elettronico PUÒ essere recuperato direttamente dall'URL contenuto nel claim ``vct``, utilizzando il metodo GET HTTP o utilizzando il parametro di header ``vctm`` se presente. Qualora *Type Metadata* venga recuperato tramite ``vct``, i confronti con i caratteri di questa stringa DEVONO essere eseguiti in modo `case-insensitive`. A differenza di quanto specificato nella Sezione 6.3.1 di `SD-JWT-VC`_ l'endpoint **.well-known** non è incluso nell'attuale profilo di implementazione. Gli implementatori possono comunque decidere di utilizzarlo ai fini di interoperabilità con gli altri sistemi.
 
 
 Type Metadata dell'Attestato Elettronico

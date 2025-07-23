@@ -161,7 +161,7 @@ I seguenti errori DEVONO essere supportati per le risposte di errore relative al
      - **Descrizione**
    * - ``403 Forbidden``
      - ``forbidden``
-     - L'utente non ha il permesso di recuperare questa Istanza di Wallet.
+     - L'Utente non ha il permesso di recuperare questa Istanza di Wallet.
    * - ``401 Unauthorized``
      - ``unauthorized``
      - La richiesta manca di Credenziali di autenticazione valide.
@@ -178,7 +178,7 @@ I seguenti errori DEVONO essere supportati per le risposte di errore relative al
      - **Descrizione**
    * - ``403 Forbidden``
      - ``invalid_request``
-     - L'utente non ha il permesso di revocare questa Istanza di Wallet.
+     - L'Utente non ha il permesso di revocare questa Istanza di Wallet.
    * - ``401 Unauthorized``
      - ``unauthorized``
      - La richiesta non può essere autenticata o autorizzata.
@@ -373,7 +373,7 @@ Il corpo dell'SD-JWT della Wallet Attestation contiene i seguenti claim:
       - OBBLIGATORIO. Stringa contenente l'algoritmo di hash utilizzato dal Fornitore di Wallet per generare i digest delle divulgazioni.
       - `SD-JWT`_.
     * - **sub**
-      - OPZIONALE. Identificatore dell'Istanza di Wallet che è l'impronta digitale della JWK della Wallet Attestation.
+      - OPZIONALE. Identificatore dell'Istanza di Wallet che puo' essere l'impronta del JWK della Wallet Attestation.
       - :rfc:`9126` e :rfc:`7519`.
     * - **aal**
       - OBBLIGATORIO. Stringa JSON che attesta il livello di autenticazione del Wallet e della chiave come affermato nel claim cnf.

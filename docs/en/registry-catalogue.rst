@@ -193,7 +193,7 @@ The JWS payload contains the following parameters:
    * - **credentials**
      - REQUIRED. Array containing Digital Credential definitions.
    * - **wallet_attestation**
-     - REQUIRED. JSON Object containing information about the Wallet Attestations supported.
+     - REQUIRED. A JSON Object containing definitions for Wallet Attestations, including their supported formats, associated claims, and Levels of Assurance (LoA). This Object is used by other entities, such as Issuers and Relying Parties, to retrieve information about the Wallet Attestation formats supported within the ecosystem.
 
 Each element of the ``credentials`` array contains at least the following information:
 
@@ -277,20 +277,20 @@ Each element of the ``credentials`` array contains at least the following inform
         * **deferred_flow**: REQUIRED. Boolean indicating if the Authentic Source supports deferred data provision.
         * **max_response_time_minutes**: CONDITIONAL. Maximum time in minutes for the Authentic Source to respond to a deferred data provision request. REQUIRED if ``deferred_flow`` is set to ``true``.
         * **notification_methods**: CONDITIONAL. Array of notification methods supported by the Authentic Source for deferred data provision, such as ``push``, ``poll``.
-      * **user_information**: [OPTIONAL] A string containing human-readable information about the Digital Credential relevant to the User. This string MUST be provided by the Authentic Source to the Trust Anchor during onboarding and MUST be formatted using Markdown. The Markdown formatting can be plain text or a combination of text and links. For example, if the Authentic Source's database only contains the data required for Digital Credential attributes registered *after* a specific date, this information MUST be conveyed to the Trust Anchor in this Markdown string.
+      * **user_information**: [OPTIONAL] A string containing human-readable information about the Digital Credential relevant to the User. This string MUST be provided by the Authentic Source to the Trust Anchor during onboarding and MUST be formatted using Markdown format as defined in :rfc:`7763`. The Markdown formatting can be plain text or a combination of text and links. For example, if the Authentic Source's database only contains the data required for Digital Credential attributes registered *after* a specific date, this information MUST be conveyed to the Trust Anchor in this Markdown string.
   * - **formats**
     - REQUIRED. Array of supported technical formats of Digital Credentials, including:
 
       * **format**: Type of format (e.g., ``dc+sd-jwt``, ``mso_mdoc``)
       * **configuration_id**: Configuration identifier of the :term:Credential format. This is formed by concatenating the ``credential_type`` value to the ``format`` (e.g., ``dc_sd_jwt_mDL`` or ``mso_mdoc_mDL``), and is used to uniquely reference the configuration for this :term:Credential format.
-      * **vct**: CONDITIONAL. It is only REQUIRED if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{version}/{credential_type}`` (e.g., ``https://trust-registry.it-wallet.example.it/v1.0/mDL``).
+      * **vct**: CONDITIONAL. It is only REQUIRED if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{version}/{credential_type}`` (e.g., ``https://trust-registry.it-wallet.example.it/v1.0/mDL``). Matching of the literals included in this URI string MUST be performed in a case-insensitive manner.
       * **docType**: CONDITIONAL. It is only REQUIRED if the ``format`` is ``mso_mdoc``. If the :term:Credential is:
 
         * defined by an ISO standard, it MUST be a string of the form ``iso.org.{iso-number}.{part}.{version}.{credential_type}`` (e.g., ``iso.org.18013.5.1.mDL``).
-        * deined at the european level, it MUST be a string of the form ``eu.europa.ec.{credential_type}.{version}`` (e.g., ``eu.europa.ec.loyaltycard.1.0``).
+        * defined at the european level, it MUST be a string of the form ``eu.europa.ec.{credential_type}.{version}`` (e.g., ``eu.europa.ec.loyaltycard.1.0``).
         * defined by a national standard, it MUST be a string of the form ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.wallet.trust-registry.personidentificationdata.1``).
       * **schema_uri**: URI pointing to the format specification document.
-      * **schema_uri#integrity**: Cryptographic digest of the format specification document for integrity verification. It MUST be a string of the form ``{digest_method}={digest_value}``, where ``{digest_method}`` is the digest algorithm used (e.g., ``sha-256``) and ``{digest_value}`` is the base64url-encoded digest value.
+      * **schema_uri#integrity**: Cryptographic digest of the format specification document for integrity verification. It MUST be a string of the form ``{digest_method}-{digest_value}``, where ``{digest_method}`` is the digest algorithm used (e.g., ``sha-256``) and ``{digest_value}`` is the base64url-encoded digest value.
   * - **display_properties**
     - REQUIRED. Visual presentation properties of Digital Credentials, e.g.:
 
@@ -316,8 +316,6 @@ The ``wallet_attestation`` Object contains at least the following information:
 
   * - Field Name
     - Description
-  * - **version**
-    - REQUIRED. Version of the Wallet Attestation definition.
   * - **credential_type**
     - REQUIRED. Unique identifier of the Wallet Attestation. It MUST be set to ``WalletAttestation``.
   * - **name**
@@ -331,15 +329,15 @@ The ``wallet_attestation`` Object contains at least the following information:
 
       * **format**: Type of format (e.g., ``dc+sd-jwt``, ``mso_mdoc`` or ``oauth-client-attestation+jwt``)
       * **configuration_id**: Configuration identifier of the Wallet Attestation. This is formed by concatenating the string ``wa`` to the ``format`` (e.g., ``dc_sd_jwt_wa``, ``mso_mdoc_wa``, or ``jwt_wa``), and is used to uniquely reference the configuration of the Wallet Attestation format.
-      * **vct**: CONDITIONAL. It is only present if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{version}/{credential_type}`` (e.g., ``https://trust-registry.it-wallet.example.it/v1.0/WalletAttestation``).
-      * **docType**: CONDITIONAL. It is only present if the ``format`` is ``mso_mdoc``. It is a string of the form ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.wallet.trust-registry.WalletAttestation.1``).
+      * **vct**: CONDITIONAL. It is only present if the ``format`` is ``dc+sd-jwt``. It MUST be set as a URI String of the form ``https://{Trust Anchor domain}/{credential_type}`` (e.g., ``https://trust-registry.it-wallet.example.it/WalletAttestation``). Matching of the literals included in this URI string MUST be performed in a case-insensitive manner.
+      * **docType**: CONDITIONAL. It is only present if the ``format`` is ``mso_mdoc``. It is a string of the form ``{Trust Anchor reverse domain}.{credential_type}`` (e.g., ``it.wallet.trust-registry.WalletAttestation``).
       * **schema_uri**: URI pointing to the format specification document.
-      * **schema_uri#integrity**: Cryptographic digest of the format specification document for integrity verification. It MUST be a string of the form ``{digest_method}={digest_value}``, where ``{digest_method}`` is the digest algorithm used (e.g., ``sha-256``) and ``{digest_value}`` is the base64url-encoded digest value.
+      * **schema_uri#integrity**: Cryptographic digest of the format specification document for integrity verification. It MUST be a string of the form ``{digest_method}-{digest_value}``, where ``{digest_method}`` is the digest algorithm used (e.g., ``sha-256``) and ``{digest_value}`` is the base64url-encoded digest value.
   * - **claims**
     - REQUIRED. Array of claims contained in the Wallet Attestation. It MUST include at least the following claims:
 
       * **Name**: The name of the claim (e.g., ``sub``, ``aal``, ``wallet_link``, ``wallet_name``).
-      * **Namespaces**: CONDITIONAL. Array of namespaces to which the claim belongs. It MUST be set to ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.wallet.trust-registry.WalletAttestation.1``).
+      * **Namespaces**: CONDITIONAL. Array of namespaces to which the claim belongs. It MUST be set to ``{Trust Anchor reverse domain}.{credential_type}`` (e.g., ``it.wallet.trust-registry.WalletAttestation``).
 
 The corresponding example of Digital Credentials Catalogue as decoded in JSON for both header and payload is the following:
 

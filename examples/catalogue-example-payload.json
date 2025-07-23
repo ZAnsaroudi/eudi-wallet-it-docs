@@ -244,40 +244,40 @@
          {
             "format": "dc+sd-jwt",
             "configuration_id": "dc_sd_jwt_wa",
-            "vct": "https://trust-registry.eid-wallet.example.it/1.0/WalletAttestation",
-            "schema_uri": "https://trust-registry.eid-wallet.example.it/.well-known/schemas/sd-jwt/WalletAttestation",
-            "schema_uri#integrity": "sha256=8cLlJNXN-TsMk-PmKjZ5t0WRL5ca_xGgX3c1VLmXfh-9c"
+            "vct": "https://trust-registry.it-wallet.example.it/WalletAttestation",
+            "schema_uri": "https://trust-registry.it-wallet.example.it/.well-known/schemas/sd-jwt/WalletAttestation",
+            "schema_uri#integrity": "sha256-Lxn6dNpkPdoeoRgO5+n0jNhJZ8MbKfXfP195+dNR0dc="
          },
          {
             "format": "mso_mdoc",
             "configuration_id": "mso_mdoc_wa",
-            "docType": "it.eid-wallet.trust-registry.WalletAttestation.1.0",
-            "schema_uri": "https://trust-registry.eid-wallet.example.it/.well-known/schemas/sd-jwt/WalletAttestation",
-            "schema_uri#integrity": "sha256=34iouwerhiuch4tvh4k5ivhtkj54wn432-4563j4oiuh"
+            "docType": "it.wallet.trust-registry.WalletAttestation",
+            "schema_uri": "https://trust-registry.eid-wallet.example.it/.well-known/schemas/mdoc/WalletAttestation",
+            "schema_uri#integrity": "sha256-GcqnMfzyCw+0UTz9EI6JO0oUTD0WS3p+hQ2E7VfjTLA="
          },
          {
             "format": "oauth-client-attestation+jwt",
             "configuration_id": "jwt_wa",
-            "schema_uri": "https://trust-registry.eid-wallet.example.it/.well-known/schemas/sd-jwt/WalletAttestation",
-            "schema_uri#integrity": "sha256=lewuiorgjk-h4tvh4k5ivhtkj54wn432-qweifhjr4we"
+            "schema_uri": "https://trust-registry.it-wallet.example.it/.well-known/schemas/jwt/WalletAttestation",
+            "schema_uri#integrity": "sha256-2s9AJsZwjuAZ4D4EAl3qDJGvy92sThQkX6W9zDF2Sgg="
          }
       ],
       "claims": [
          {
             "name": "sub",
-            "namespaces": ["it.eid-wallet.trust-registry.WalletAttestation.1.0"]
+            "namespaces": ["it.wallet.trust-registry.WalletAttestation"]
          },
          {
             "name": "aal",
-            "namespaces": ["it.eid-wallet.trust-registry.WalletAttestation.1.0"]
+            "namespaces": ["it.wallet.trust-registry.WalletAttestation"]
          },
          {
             "name": "wallet_link",
-            "namespaces": ["it.eid-wallet.trust-registry.WalletAttestation.1.0"]
+            "namespaces": ["it.wallet.trust-registry.WalletAttestation"]
          },
          {
             "name": "wallet_name",
-            "namespaces": ["it.eid-wallet.trust-registry.WalletAttestation.1.0"]
+            "namespaces": ["it.wallet.trust-registry.WalletAttestation"]
          }
       ]
    }

@@ -26,7 +26,7 @@
     "itemsRequest": 
     24(<<  % Embedded CBOR data item
       {
-        "docType": "it.eid-wallet.trust-registry.WalletAttestation.1.0",
+        "docType": "it.wallet.trust-registry.WalletAttestation",
       }
     >>)
     }
