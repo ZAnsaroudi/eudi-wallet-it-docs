@@ -38,7 +38,7 @@ In aggiunta, i Credential Issuer POSSONO supportare:
 .. note::
     **Standard or Batch Credential Issuance:** 
 
-    L'utente può configurare la Wallet Solution per emettere credenziali digitali in modalità batch o standard e definire la dimensione preferita del batch.
+    L'Utente può configurare la Wallet Solution per emettere Credenziali digitali in modalità batch o standard e definire la dimensione preferita del batch.
 
 L'intero Issuance Flow può essere suddiviso in due sotto-flussi:
 
@@ -341,12 +341,12 @@ Dove un esempio non normativo del contenuto decodificato del parametro ``jwt`` �
 
 **Passo 17 (Generazione di nuove chiavi per le Credenziali Digitali)**: L'Istanza del Wallet genera N nuove coppie di chiavi per le Credenziali, dove il numero di coppie di chiavi (N) è determinato dal valore definito in ``batch_size``.
 
-**Passo 18 (Prove di possesso delle credenziali)**: L'istanza del wallet DEVE generare N *key proofs* utilizzando il ``c_nonce`` fornito nel **Passo 13** e una per ogni credenziale presente nel batch. Il numero di *key proofs* (N) è definito dal valore ``batch_size``.
+**Passo 18 (Prove di possesso delle credenziali)**: L'istanza del Wallet DEVE generare N *key proofs* utilizzando il ``c_nonce`` fornito nel **Passo 13** e una per ogni Credenziale presente nel batch. Il numero di *key proofs* (N) è definito dal valore ``batch_size``.
 
 .. note::
   Il valore ``c_nonce`` in tutte le proof jwt è identico e non è necessario ottenere valori del nonce diversi.
 
-**Passo 19 (Batch Credential Request)**: L'Istanza del Wallet invia una richiesta per il batch di Credenziali Digitali al Credential Endpoint. Questa richiesta DEVE includere l'Access Token, il JWT DPoP Proof, il tipo di credenziale e le proofs (che dimostrano il possesso delle chiavi). Il parametro ``proofs`` DEVE essere impostato utilizzando un oggetto JSON contenente due o più prove di possesso dei materiali crittografici a cui sarà associato il batch di Credenziali Digitali emesso. Per verificare le proofs, il Credential Issuer, oltre ai controlli definiti al **Passo 16**, deve assicurarsi che l'attributo ``jwk`` in ogni proof sia univoco.
+**Passo 19 (Batch Credential Request)**: L'Istanza del Wallet invia una richiesta per il batch di Credenziali Digitali al Credential Endpoint. Questa richiesta DEVE includere l'Access Token, il JWT DPoP Proof, il tipo di Credenziale e le proofs (che dimostrano il possesso delle chiavi). Il parametro ``proofs`` DEVE essere impostato utilizzando un oggetto JSON contenente due o più prove di possesso dei materiali crittografici a cui sarà associato il batch di Credenziali Digitali emesso. Per verificare le proofs, il Credential Issuer, oltre ai controlli definiti al **Passo 16**, deve assicurarsi che l'attributo ``jwk`` in ogni proof sia univoco.
 
 .. code-block:: http
 
@@ -369,7 +369,7 @@ Dove un esempio non normativo del contenuto decodificato del parametro ``jwt`` �
 
 Il contenuto decodificato degli elementi ``jwt`` nell'array ``jwt`` è simile a quanto spiegato nel **Passo 16**.
 
-**Passi 20-24 (Credential Response)**: Il Credential Issuer DEVE convalidare il *JWT DPoP Proof* in base ai passi definiti nella Sezione 4.3 di (:rfc:`9449`) e verificare se l'*Access Token* è valido e idoneo per la Credenziale richiesta. Il Credential Issuer DEVE convalidare tutte le prove fornite nel parametro ``proof`` (**Passo 15**) o ``proofs`` (**Passo 18**) a cui le nuove Credenziali DEVONO essere vincolate, secondo quanto riportato nell'Appendice F1 di `OpenID4VCI`_. Se tutti i controlli hanno esito positivo, il Credential Issuer restituisce la Credenziale emessa all'interno del parametro ``credentials``. Il numero di elementi nell'array Credentials corrisponde al numero di chiavi fornite dall'Istanza del Wallet tramite il parametro ``proof`` (**Passo 16**) o il parametro ``proofs`` (**Passo 19**). L'Istanza del Wallet DEVE eseguire i seguenti controlli prima di procedere con l'archiviazione sicura delle credenziali:
+**Passi 20-24 (Credential Response)**: Il Credential Issuer DEVE convalidare il *JWT DPoP Proof* in base alle istruzioni definite all'interno della Sezione 4.3 di (:rfc:`9449`) e verificare se l'*Access Token* è valido e idoneo per la Credenziale richiesta. Il Credential Issuer DEVE convalidare tutte le prove fornite nel parametro ``proof`` (**Passo 15**) o ``proofs`` (**Passo 18**) a cui le nuove Credenziali DEVONO essere vincolate, secondo quanto riportato nell'Appendice F1 di `OpenID4VCI`_. Se tutti i controlli hanno esito positivo, il Credential Issuer restituisce la Credenziale emessa all'interno del parametro ``credentials``. Il numero di elementi nell'array ``credentials`` corrisponde al numero di chiavi fornite dall'Istanza del Wallet tramite il parametro ``proof`` (**Passo 16**) o il parametro ``proofs`` (**Passo 19**). L'Istanza del Wallet DEVE eseguire i seguenti controlli prima di procedere con l'archiviazione sicura delle Credenziali:
 
     1. DEVE verificare che il PID/(Q)EAA contenuto nella `Credential Response` contenga tutti i parametri obbligatori e i valori siano validati secondo la :ref:`Tabella dei parametri della Credential Response <table_credential_response_claim>`.
     2. DEVE verificare l'integrità dell'Attestato Elettronico verificando la firma utilizzando l'algoritmo specificato nel parametro dell'header ``alg`` di SD-JWT (:ref:`credential-data-model:Modello di Dati degli Attestati Elettronici`) e la chiave pubblica che è identificata utilizzando l'header ``kid`` dell'SD-JWT.
@@ -422,7 +422,7 @@ Di seguito è riportato un esempio non normativo di una risposta di successo con
 .. note::
   Se l'Attestato Elettronico richiesto non può essere emesso immediatamente e richiede più tempo, il Credential Issuer DOVREBBE supportare il Deferred Flow (**passo 27**) come specificato nella Sezione :ref:`credential-issuance-endpoint:Deferred Endpoint`. Inoltre, in caso di emissione in batch, lo stesso ``transaction_id`` si riferisce a tutte le Credenziali richieste nel batch.
 
-**Passo 25 (Notification Request)**: Secondo la Sezione 10.1 di [`OpenID4VCI`_], il Portafoglio invia una richiesta HTTP POST all'Endpoint di notifica utilizzando il tipo di supporto *application/json* come nel seguente esempio non normativo.
+**Passo 25 (Notification Request)**: Secondo la Sezione 10.1 di [`OpenID4VCI`_], il Wallet invia una richiesta HTTP POST all'Endpoint di notifica utilizzando il tipo di supporto *application/json* come nel seguente esempio non normativo.
 
 .. code-block:: http
 
