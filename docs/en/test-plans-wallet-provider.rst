@@ -98,7 +98,6 @@ This section lists the test cases from Sections:
      - Trust, Interoperability
      - Signed JWKS URI
      - If ``signed_jwks_uri`` is present, the value is an HTTPS URL to a JWT whose payload is a JWKS and is signed with a Federation Entity Key.
-       
        The ``signed_jwks_uri`` resource is served with content type ``application/jwk-set+jwt``. A successful ``signed_jwks_uri`` retrieval returns ``HTTP 200``.
    * - WP_005
      - Trust, UX
