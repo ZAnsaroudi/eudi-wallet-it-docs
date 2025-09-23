@@ -33,21 +33,22 @@ The primary operational layer implements the core Digital Credential lifecycle t
 
 External systems provide services that connect the IT-Wallet ecosystem to the national digital infrastructure, enabling interoperability with existing government services and data sources.
 
-The architecture enables the following interaction processes:
+These three architectural layers work together to enable secure digital credential operations. The federated nature of this architecture require systematic onboarding processes to establish trust relationships between participants and standardise credential semantics trough the centralised Claims Registry and Taxonomy components, as detailed in :ref:`registry:Registry Infrastructure`.
 
-  1. **Entity Onboarding and Federation**: Only qualified and compliant Entities are registered in the IT-Wallet Federation. The Trust Registry is updated during registration, allowing participants to monitor federation status. This process includes administrative, technical and security assessments.
+The architecture enables the following core interaction processes:
 
-  2. **Credential Issuance**: Credential Issuers connect to Authentic Sources via standardized APIs (on the National Digital Data Platform if the Authentic Source belongs to the Public sector) to request verified User attributes. Digital Credentials are based on authoritative, current data with proper authorization and audit trails.
+  1. **Entity Onboarding and Federation**: Only qualified entities can participate in the federation through systematic onboarding that ensures compliance and establishes cryptographic trust relationships. The onboarding system includes a **Claims Registry** and **Taxonomy** that standardize semantic definitions for all credentials, enabling interoperability and governance. Entity authorization follows policy-based approach that grants specific operational scopes based on organizational characteristics and regulatory compliance. See Section :ref:`onboarding-high-level:IT-Wallet Onboarding System` and :ref:`registry:Registry Infrastructure`.
 
-  3. **Credential Storage and Management**: IT-Wallet Solutions receive and manage Digital Credentials on User devices, allowing Users to control and use credentials from multiple Issuers.
+  2. **Credential Discovery and Catalog Management**: The ecosystem supports dual credential discovery mechanisms - public discovery through the :ref:`registry:Digital Credentials Catalogue` for general-purpose credentials, and private discovery via direct Credential Offers for specific use cases. The catalog is automatically populated based on supervisory body policies from registered Claims Registry and Taxonomy definitions.
 
-  4. **Credential Presentation and Verification**: Users present Digital Credentials to Relying Parties for verification. Verification systems check claims through cryptographic methods and status checks for both public and private sector use.
+  3. **Credential Issuance**: Credential Issuers coordinate with Authentic Sources via standardised APIs to request verified user attributes, creating Digital Credentials based on authoritative data. Issuance can proceed for both catalog-published credentials and private credential offers.
 
-The Trust Infrastructure manages onboarding and revocation of Entities, provides credential schemas, and lets participants discover and verify authorized entities and their status. It supports automatic trust chain validation, distributed trust anchoring, standardized metadata exchange, and Federation API services for secure, seamless federation operations.
+  4. **Credential Storage and Management**: IT-Wallet Solutions receive and manage Digital Credentials on user devices, enabling secure credential lifecycle management.
+
+  5. **Credential Presentation and Verification**: Users present Digital Credentials to Relying Parties, which verify claims through cryptographic validation and status verification. Relying Parties operate within authorized scopes that define which credential types and purposes they can request, with validation against the :ref:`registry:Claims Registry` for schema verification.
 
 
-
-  
+ 
 
 
 

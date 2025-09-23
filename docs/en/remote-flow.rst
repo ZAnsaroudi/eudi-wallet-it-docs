@@ -190,7 +190,7 @@ Conversely, in the **Same Device Flow**, the Relying Party uses an HTTP response
             "id": "personal id data",
             "format": "dc+sd-jwt",
             "meta": {
-              "vct_values": [ "https://trust-registry.eid-wallet.example.it/v1.0/personidentificationdata" ]
+              "vct_values": [ "https://trust-anchor.eid-wallet.example.it/v1.0/personidentificationdata" ]
             },
             "claims": [
               {"path": ["given_name"]},
@@ -202,7 +202,7 @@ Conversely, in the **Same Device Flow**, the Relying Party uses an HTTP response
             "id": "wallet attestation",
             "format": "dc+sd-jwt",
             "meta": {
-              "vct_values": ["https://trust-registry.it-wallet.example.it/v1.0/WalletAttestation"]
+              "vct_values": ["https://trust-anchor.eid-wallet.example.it/v1.0/WalletAttestation"]
             }
           }
         ]
@@ -445,7 +445,7 @@ The JWT payload parameters are described herein:
 .. note::
     **Requesting the Wallet Attestation**
 
-    The Relying Party which requests a Wallet Attestation MUST do so by using a standard DCQL query, however it SHOULD NOT include the ``claims`` parameter in the query as the Wallet Attestation is not a Digital Credential but a proof of the Wallet Instance's trustworthiness and capabilities. Depending on the format of the Wallet Attestation, the Relying Party MUST request the ``vct_values`` parameter in the DCQL query, which MUST be set to the value set in the :ref:`registry-catalogue:Digital Credentials Catalogue Structure`.
+    The Relying Party which requests a Wallet Attestation MUST do so by using a standard DCQL query, however it SHOULD NOT include the ``claims`` parameter in the query as the Wallet Attestation is not a Digital Credential but a proof of the Wallet Instance's trustworthiness and capabilities. Depending on the format of the Wallet Attestation, the Relying Party MUST request the ``vct_values`` parameter in the DCQL query, which MUST be set to the value set in the :ref:`registry:Digital Credentials Catalogue`.
 
 Request URI Endpoint Errors
 ----------------------------

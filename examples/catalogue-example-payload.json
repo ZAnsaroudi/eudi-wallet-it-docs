@@ -2,8 +2,6 @@
    "catalog_version": "1.0",
    "iss": "https://trust-registry.eid-wallet.example.it",
    "last_modified": "2025-03-15T12:00:00Z",
-   "taxonomy_uri": "https://trust-registry.eid-wallet.example.it/.well-known/credential-taxonomy",
-   "taxonomy_uri#integrity": "sha256-LmXfh-9cLlJNXN-TsMk-PmKjZ5t0WRL5ca_xGgX3c1V",   
    "credentials": [
       {
          "version": "1.0",
@@ -93,27 +91,7 @@
             }
          ],
          "authentic_sources": [
-            {
-               "id": "https://authentic-sources.example.org",
-               "organization_name": "Authentic Source of Example",
-               "organization_code": "as_example_it",
-               "organization_country": "IT",
-               "contacts": [
-                  "mailto:informazioni@example.it",
-                  "mailto:protocollo@pec.example.it"
-               ],
-               "homepage_uri": "https://authsource.example.com/",
-               "logo_uri": "https://authsource.example.com/img/logo.svg",
-               "source_type": "public",
-               "service_documentation": "https://authentic-sources.example.org/.well-known/service-doc",
-               "data_provision": {
-                  "immediate_flow": false,
-                  "deferred_flow": true,
-                  "max_response_time_minutes": 60,
-                  "notification_methods": ["push"]
-               },
-               "user_information": "Any mDL registered before 2010-01-01 has no available data for Digital Credential issuance."
-            }
+            "https://motorizzazione.gov.example"
          ],
          "formats": [
             {

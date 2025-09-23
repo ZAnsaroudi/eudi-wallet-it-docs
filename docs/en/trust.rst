@@ -225,8 +225,8 @@ Below is a non-normative example of a Trust Anchor Entity Configuration, where e
     {
         "exp": 1649375259,
         "iat": 1649373279,
-        "iss": "https://trust-registry.eid-wallet.example.it",
-        "sub": "https://trust-registry.eid-wallet.example.it",
+        "iss": "https://trust-anchor.eid-wallet.example.it",
+        "sub": "https://trust-anchor.eid-wallet.example.it",
         "jwks": {
             "keys": [
                 {
@@ -245,20 +245,20 @@ Below is a non-normative example of a Trust Anchor Entity Configuration, where e
                 "contacts":[
                     "tech@eid.trust-anchor.example.eu"
                 ],
-                "homepage_uri": "https://trust-registry.eid-wallet.example.it",
-                "logo_uri":"https://trust-registry.eid-wallet.example.it/static/svg/logo.svg",
-                "federation_fetch_endpoint": "https://trust-registry.eid-wallet.example.it/fetch",
-                "federation_resolve_endpoint": "https://trust-registry.eid-wallet.example.it/resolve",
-                "federation_list_endpoint": "https://trust-registry.eid-wallet.example.it/list",
-                "federation_trust_mark_status_endpoint": "https://trust-registry.eid-wallet.example.it/trust_mark_status"
+                "homepage_uri": "https://trust-anchor.eid-wallet.example.it",
+                "logo_uri":"https://trust-anchor.eid-wallet.example.it/static/svg/logo.svg",
+                "federation_fetch_endpoint": "https://trust-anchor.eid-wallet.example.it/fetch",
+                "federation_resolve_endpoint": "https://trust-anchor.eid-wallet.example.it/resolve",
+                "federation_list_endpoint": "https://trust-anchor.eid-wallet.example.it/list",
+                "federation_trust_mark_status_endpoint": "https://trust-anchor.eid-wallet.example.it/trust_mark_status"
             }
         },
         "trust_mark_issuers": {
-            "https://trust-registry.eid-wallet.example.it/openid_relying_party/public": [
-                "https://trust-registry.eid-wallet.example.it",
+            "https://trust-anchor.eid-wallet.example.it/openid_relying_party/public": [
+                "https://trust-anchor.eid-wallet.example.it",
                 "https://public.intermediary.other.org"
             ],
-            "https://trust-registry.eid-wallet.example.it/openid_relying_party/private": [
+            "https://trust-anchor.eid-wallet.example.it/openid_relying_party/private": [
                 "https://private.other.intermediary.org"
             ]
         }
@@ -787,10 +787,13 @@ When a participant self-issues an X.509 Certificate, it adheres to the following
 
 1. **Subject Name**: The X.509 Certificate's subject name MUST match the participant's identity. The Intermediaries and Leaves subject name MUST include the following attributes:
 
-  -``Common Name (CN)``: SHOULD contain the Federation Entity unique identifier DNS name, which is included in the sub (subject) value in its federation Entity Configuration, removing ``https://`` and any webpaths.
-  - ``Organization Name (O)``: MUST contain the legal name of the organization.
   - ``Country Name (C)``: MUST contain the two-letter ISO country code.
-  - ``Email Address``: MUST contain the organization's contact email.
+  - ``State or Province Name (ST)``: MUST contain the region or state where the entity is located.
+  - ``Locality Name (L)``: MUST contain the city where the entity is located.
+  - ``Organization Name (O)``: MUST contain the legal name of the organization.
+  - ``Organizational Unit Name (OU)``: MAY contain the department name within the organization (optional).
+  - ``Common Name (CN)``: MUST contain the Federation Entity unique identifier DNS name, which is included in the sub (subject) value in its federation Entity Configuration, removing ``https://`` and any webpaths.
+  - ``Email Address``: MUST contain the organization's contact email address.
   - ``organizationIdentifier``: MUST contain the registration number that uniquely identify the organization within the registration service, using the OID value ``2.5.4.97`` as defined in ``ITU-T X.500``.
   
 2. **Subject Alternative Name (SAN)**: The X.509 Certificate MUST include a ``SAN URI`` that MUST match the **sub** and the **iss** values of its federation Entity Configuration.
