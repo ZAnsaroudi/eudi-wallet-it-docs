@@ -32,6 +32,77 @@ Relying Party and Wallet Instances registered in the IT-Wallet ecosystem MUST su
 - Domestic *Document Type* and *Namespaces* defined in this technical specification in addition to those already defined in the `ISO18013-5`_ for the mDL (see :ref:`credential-data-model:mdoc-CBOR Credential Format` for more details).
 - *Wallet Instance validation* through the Wallet Attestation.
 
+The following table shows the supported Device Engagement technologies, specifying which are mandatory.
+.. list-table::
+   :class: longtable
+   :widths: 20 15 15 25 25
+   :header-rows: 2
+
+   * - **Transmission Technologies**
+     - **Wallet Instance**
+     - **RP Instance**
+     - **Wallet Instance**
+     - **RP Instance**
+
+   * -
+     - **`ISO18013-5`_**
+     - **`ISO18013-5`_**
+     - **IT Wallet**
+     - **IT Wallet**
+
+   * - **QR code**
+     - Ca
+     - M
+     - MUST
+     - C – MUST if the device is equipped with a camera or QR code reader and BLE.
+
+   * - **NFC**
+     - Ca
+     - M
+     - RECOMMENDED
+     - C – MUST if the device is equipped with an NFC reader.
+
+   * - **Key**
+     - C – Conditional
+     - M – Mandatory
+     - a – Support for at least one of these methods is mandatory
+
+The following table shows the supported Device Retrieval technologies, specifying which are mandatory.
+.. list-table::
+   :class: longtable
+   :widths: 20 15 15 25 25
+   :header-rows: 2
+
+   * - **Transmission Technologies**
+     - **Wallet Instance**
+     - **RP Instance**
+     - **Wallet Instance**
+     - **RP Instance**
+
+   * -
+     - **`ISO18013-5`_**
+     - **`ISO18013-5`_**
+     - **IT Wallet**
+     - **IT Wallet**
+
+   * - **BLE**
+     - Ca
+     - M
+     - MUST
+     - C – MUST if the device is equipped with a camera or QR code reader and BLE.
+
+   * - **NFC**
+     - Ca
+     - M
+     - RECOMMENDED
+     - C – MUST if the device is equipped with an NFC reader.
+
+   * - **Key**
+     - C – Conditional
+     - M – Mandatory
+     - a – Support for at least one of these methods is mandatory
+
+
 .. note::
    From the second edition, version 3, `ISO18013-5`_ does not define or support Server Retrieval as a transport option. Only proximity retrieval methods (NFC, BLE, and optionally Wi-Fi Aware) are specified. Therefore, Server Retrieval is not considered in this flow.
 
