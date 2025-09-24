@@ -1,7 +1,7 @@
 .. include:: ../common/common_definitions.rst
 
 
-Onboarding System
+IT-Wallet Onboarding System
 ============================
 
 The IT-Wallet ecosystem operates as a federated trust infrastructure where participating entities must establish cryptographic trust relationships and maintain compliance with common security standards.
