@@ -243,7 +243,7 @@ If early ``SessionEstablishment`` is supported, it also lists the TNEP (Tag NDEF
    Use of Negotiated Handover for device engagement allows negotiation of transfer methods. For BLE, it additionally allows negotiation of keys used by the transmission layer. This provides improved user experience and enhances the security of data transmission [`ISO18013-5`_ #9.2.1].
 
 .. note::
-   Proceed only if ``DeviceEngagement`` Capabilities include ``HandoverSessionEstablishmentSupport = true``. Otherwise, skip early ``SessionEstablishment``. Early ``SessionEstablishment`` is sent via a dedicated TNEP service; the same ``SessionEstablishment`` SHALL also be sent again during data retrieval and must match—if not, the Wallet Instance terminates. If early ``SessionEstablishment`` fails to send, proceed as normal.
+   Proceed only if the ``DeviceEngagement`` Capabilities include ``HandoverSessionEstablishmentSupport`` set to ``true``. Otherwise, skip the early ``SessionEstablishment``. The early ``SessionEstablishment`` is sent via a dedicated TNEP service; the same ``SessionEstablishment`` SHALL also be sent again during data retrieval and MUST match. If it does not match, the Wallet Instance terminates. If the early ``SessionEstablishment`` fails to send, proceed as normal.
 
 **Step 5**: [Optional] Relying Party Instance opens the TNEP service named [urn:placeholder] with the Wallet Instance during the negotiated handover to deliver the early ``SessionEstablishment`` message.
 
