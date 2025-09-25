@@ -327,7 +327,7 @@ Definitions (Acronyms and Commands)
      - Proximity Coupling Device, impletented by Relying Party instances using `APDU` exchanges.
 
    * - **AID**
-     - Application Identifier — unique ID used in SELECT `APDU` command to open the Wallet Instance.
+     - Application Identifier, unique ID used in SELECT `APDU` command to engage the Wallet Instance.
 
    * - **APDU**
      - Application Protocol Data Unit — standard message format for communication between Relying Party Instance (PCD) and Wallet (PICC) consists of Command APDUs (e.g., `SELECT`, `ENVELOPE`, `GET RESPONSE`) from the reader and Response `APDUs` from the wallet, which include data and end with status words (`SW1/SW2`).
