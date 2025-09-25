@@ -231,7 +231,7 @@ If early ``SessionEstablishment`` is supported, it also lists the TNEP (Tag NDEF
 .. note::
    For the NFC device retrieval transmission technology, the contents of the Alternative Carrier Record and Carrier Configuration Record(s) SHALL comply with [`ISO18013-5`_ #9.2.2]. For the BLE device retrieval transmission technology, the contents of the Alternative Carrier Record and Carrier Configuration Record(s) shall comply with [`ISO18013-5`_ #11.1.2].
 
-- Auxiliary Data Record MUST carry the DeviceEngagement structure from the Wallet Instance to the Relying Party Instance as part of the auxiliary NDEF record in the Handover Select message. This record has the type iso.org:18013:deviceengagement , the ID reference “mdoc”, and uses the NFC forum external type format (0x04). For each Alternative Carrier record, the Auxiliary Data Reference SHALL point to the NDEF record containing the ``DeviceEngagement`` Structure. 
+- Auxiliary Data Record MUST carry the DeviceEngagement structure from the Wallet Instance to the Relying Party Instance as part of the auxiliary NDEF record in the Handover Select message. This record has the type ``iso.org:18013:deviceengagement``, the ID reference “mdoc”, and uses the NFC forum external type format (``0x04``). For each Alternative Carrier record, the Auxiliary Data Reference MUST point to the NDEF record containing the ``DeviceEngagement`` Structure. 
 
 **Step 2**: The Relying Party Instance reads the Wallet Instance's Initial NDEF (NFC Data Exchange Format) message - , which contains a service parameter record for ``urn:nfc:sn:handover``, indicating the Wallet supports Negotiated Handover. 
 
