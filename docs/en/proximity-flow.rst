@@ -137,7 +137,7 @@ Below is a non-normative example using the diagnostic notation of a CBOR-encoded
 
 .. admonition:: Box B
 
-   The Relying Party Instance MUST transmit the encrypted and signed ``SessionEstablishment`` message to the Wallet Instance over an NFC or a BLE secure connection that was established based on the device engagement information.
+   The Relying Party Instance MUST transmit the encrypted and signed ``SessionEstablishment`` message to the Wallet Instance over an NFC or a BLE secure connection that was established based on the Device Engagement information.
    Refer to:
 
    - Sec 8.2.2.3 for ``SessionEstablishment`` over BLE, and
@@ -153,7 +153,7 @@ Below is a non-normative example using the diagnostic notation of a CBOR-encoded
 
 .. admonition:: Box C
 
-   After receiving User approval, the Wallet Instance MUST retrieve the requested mdoc Digital Credentials. It then MUST prepare a ``SessionData`` message containing these Digital Credentials, and it MUST sign the required authentication data (as part of the mdoc authentication process, as specified in [`ISO18013-5`_ #12.4]). It MUST encrypt it using the established session keys before transmitting it to the Relying Party Instance over the secure channel. The signing ensures device binding and data integrity. The mdoc response MUST be encoded in CBOR, with its structure outlined in [`ISO18013-5`_ #10.3].
+   After receiving User approval, the Wallet Instance MUST retrieve the requested mdoc Digital Credentials. It then MUST prepare a ``SessionData`` message containing these Digital Credentials, and it MUST sign the required authentication data (as part of the mdoc authentication process, as specified in [`ISO18013-5`_ #12.4]). It MUST encrypt it using the established session keys before transmitting it to the Relying Party Instance over the secure BLE channel. The signing ensures device binding and data integrity. The mdoc response MUST be encoded in CBOR, with its structure outlined in [`ISO18013-5`_ #10.3].
    Refer to:
 
    - Sec 8.2.2.4 for ``SessionData`` over BLE, and
@@ -185,18 +185,18 @@ The following figure illustrates the low-level flow compliant with ISO 18013-5 f
     :alt: The figure illustrates the Device Engagement over QR Code Presentation Flow in proximity.
     :caption: `Device Engagement over QR Code. <https://www.plantuml.com/plantuml/svg/PP0n3i8m34NtdCBAtWimL4Z0m0P5YDaaLcifTQlMIQvFbAK5F5Zoz__Fae-hug9n30QZJXB7Doq6IjKsbnqxdb4Kx0j388Mdi5h05VA_fRl1LGfH75LBCXiBdN92fPghIcxQT837C6NGWU3UmMdo12mkHC_IWxLdIkpe8ZtsD9AejT-iLCVKD6qk98Uo9sstFVqaTa8sHn9VFl01>`_
 
-**Step 1**: The Wallet Instance presents a QR Code to the Relying Party Instance. The QR code SHALL contain a URI with “mdoc:” as scheme and the ``DeviceEngagement`` structure specified in Section 9.1 encoded using base64url-without-padding, according to RFC 4648, as path.
+**Step 1**: The Wallet Instance presents a QR Code to the Relying Party Instance. The QR code SHALL contain a URI with “mdoc:” as scheme and the ``DeviceEngagement`` structure specified in Section 9.1 encoded using base64url-without-padding, according to `RFC 4648`_, as path.
 
 Non-Normative Example with BLE as Data Retrieval
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Below is a non-normative example using the diagnostic notation of a CBOR-encoded ``DeviceEngagement`` that utilizes QR for device engagement and Bluetooth Low Energy (BLE) for data retrieval.
+Below is a non-normative example using the diagnostic notation of a CBOR-encoded ``DeviceEngagement`` that utilizes QR for Device Engagement and Bluetooth Low Energy (BLE) for data retrieval.
 
  .. literalinclude:: ../../examples/iso-device-engagement-BLE.txt
   :language: text
 
 Non-Normative Example with NFC as Data Retrieval
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Below is a non-normative example using the diagnostic notation of a CBOR-encoded ``DeviceEngagement`` that utilizes QR for device engagement and NFC for data retrieval.
+Below is a non-normative example using the diagnostic notation of a CBOR-encoded ``DeviceEngagement`` that utilizes QR for Device Engagement and NFC for data retrieval.
 
  .. literalinclude:: ../../examples/iso-device-engagement-NFC.txt
   :language: text
@@ -240,7 +240,7 @@ If early ``SessionEstablishment`` is supported, it also lists the TNEP (Tag NDEF
 **Step 4**: The Wallet Instance returns Handover Select constructed in response to the received Handover Request message. The contents of the Handover Select message is the same as Step 1.
 
 .. note::
-   Use of Negotiated Handover for device engagement allows negotiation of transfer methods. For BLE, it additionally allows negotiation of keys used by the transmission layer. This provides improved user experience and enhances the security of data transmission [`ISO18013-5`_ #9.2.1].
+   Use of Negotiated Handover for Device Engagement allows negotiation of transfer methods. For BLE, it additionally allows negotiation of keys used by the transmission layer. This provides improved user experience and enhances the security of data transmission [`ISO18013-5`_ #9.2.1].
 
 .. note::
    Proceed only if the ``DeviceEngagement`` Capabilities include ``HandoverSessionEstablishmentSupport`` set to ``true``. Otherwise, skip the early ``SessionEstablishment``. The early ``SessionEstablishment`` is sent via a dedicated TNEP service; the same ``SessionEstablishment`` SHALL also be sent again during data retrieval and MUST match. If it does not match, the Wallet Instance terminates. If the early ``SessionEstablishment`` fails to send, proceed as normal.
@@ -252,7 +252,7 @@ If early ``SessionEstablishment`` is supported, it also lists the TNEP (Tag NDEF
 **Step 7**: Relying Party Instance closes the TNEP service.
 
 .. note::
-   Suppose an optional ``SessionEstablishment`` message is sent during Negotiated Handover (Step 5). In that case, the Wallet Instance MUST verify that it matches the ``SessionEstablishment`` message received during Device Retrieval (using BLE or NFC secure channel). This verification is required to ensure a correct Session Binding.
+  If an optional ``SessionEstablishment`` message is sent during Negotiated Handover (Step 5), the Wallet Instance MUST verify that it matches the ``SessionEstablishment`` message received during Device Retrieval (using BLE or NFC secure channel). This verification is required to ensure a correct Session Binding.
 
 Non-Normative Example
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -297,10 +297,10 @@ The following figure illustrates the low-level flow compliant with `ISO18013-5`_
 ``SessionEstablishment`` over NFC
 ----------------------------------
 .. note::
-   If device engagement is initiated via a QR code, the Relying Party Instance has no standardised way to signal its intent to use NFC for subsequent data transfer. This could lead to a poor user experience, as the User might not be aware that they need to use NFC. This issue is avoided when NFC is used for the device engagement, as it implicitly establishes the data transfer method [`ISO18013-5`_ #8.2.5].
+   If Device Engagement is initiated via a QR code, the Relying Party Instance has no standardised way to signal its intent to use NFC for subsequent data transfer. This could lead to a poor user experience, as the User might not be aware that they need to use NFC. This issue is avoided when NFC is used for the Device Engagement, as it implicitly establishes the data transfer method [`ISO18013-5`_ #8.2.5].
 
 .. note::
-   Due to the limited data transfer rate of NFC, if a large amount of data is required for a transaction, it may be neither practical nor reasonable for a User to keep the device within the RF range of the Relying Party Instance for the duration of the transaction. Furthermore, due to the loss of signal when a device leaves the RF field, any User interactions with the Wallet Instance, causing the Wallet Instance to leave the RF field, require a new transaction to be initiated. This can be avoided by having all User interactions with the Wallet Instance done while the Wallet Instance stays in the field, or if the Wallet Instance does not require any User interactions while it is in the RF field [`ISO18013-5`_ #8.2.5].
+   Due to the limited data transfer rate of NFC, if a large amount of data is required for a transaction, it may be neither practical nor reasonable for a User to keep the device within the RF range of the Relying Party Instance for the duration of the transaction. Furthermore, loss of signal when a device leaves the RF field necessitates re-initiating the transaction. This can only be avoided if all necessary User interactions with the Wallet Instance are performed while the device remains in the field, or if no User interaction is required during the active transmission phase [`ISO18013-5`_ #8.2.5].
 
    The following figure illustrates the low-level flow compliant with `ISO18013-5`_ for ``SessionEstablishment`` over NFC corresponding to Box B in Figure 8.10.
 
@@ -389,7 +389,7 @@ The Device Engagement structure MUST be CBOR encoded and have at least the follo
      - **Description**
 
    * - **Version**
-     - *(tstr)*. Version of the device engagement structure.
+     - *(tstr)*. Version of the Device Engagement structure.
 
    * - **Security**
      - *(array)*. Contains two mandatory values:
@@ -400,9 +400,9 @@ The Device Engagement structure MUST be CBOR encoded and have at least the follo
    * - **DeviceRetrievalMode-BLEOptions**
      - *(map)*. Provides options for the BLE connection, such as Peripheral Server or Central Client mode, and the device UUID. See Table 2 of `ISO18013-5`_ for the detailed mapping.
        
-       If the Wallet Instance indicates during device engagement that it supports both modes, the Relying Party Instance  SHOULD select the mdoc central client mode  [`ISO18013-5`_ #11.1.3.1].
+       If the Wallet Instance indicates during Device Engagement that it supports both modes, the Relying Party Instance  SHOULD select the mdoc central client mode  [`ISO18013-5`_ #11.1.3.1].
        
-       Only present when performing device engagement using the QR code. Absent when using NFC to perform device Engagement.
+       Only present when performing Device Engagement using the QR code. Absent when using NFC to perform Device Engagement.
 
 
    * - **DeviceRetrievalMode-NFCOptions**
@@ -410,7 +410,7 @@ The Device Engagement structure MUST be CBOR encoded and have at least the follo
         
        In case NFC is used for Device Retrieval, the Wallet Instance SHALL support PICC mode and the Relying Party Instance SHALL support PCD mode [`ISO18013-5`_ #11.2].
         
-       Only present when performing device engagement using the QR code. Absent when using NFC to perform device Engagement.
+       Only present when performing Device Engagement using the QR code. Absent when using NFC to perform Device Engagement.
   
    * - **Capabilities**
      - *(map)*. Declares optional capabilities supported by the mdoc, that are:

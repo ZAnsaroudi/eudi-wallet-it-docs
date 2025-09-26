@@ -54,6 +54,7 @@
 .. _OpenID4VP: https://openid.net/specs/openid-4-verifiable-presentations-1_0-23.html
 .. _PDND: https://www.agid.gov.it/sites/agid/files/2024-06/Linee_guida_infrastruttura_interoperabilita_pdnd.pdf
 .. _RFC 2898: http://tools.ietf.org/html/rfc2898.html
+.. _RFC 4648: https://datatracker.ietf.org/doc/html/rfc4648
 .. _RFC 9449: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-dpop
 .. _RFC 5280: https://datatracker.ietf.org/doc/html/rfc5280
 .. _RFC 7763: https://www.rfc-editor.org/rfc/rfc7763.html
