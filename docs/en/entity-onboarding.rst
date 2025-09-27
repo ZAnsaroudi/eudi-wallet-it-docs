@@ -261,7 +261,6 @@ This hierarchical approach enables **distributed onboarding management** while m
   - **Certificate Issuance**: Issue X.509 certificates to their immediate subordinates with appropriate naming constraints as defined in :ref:`trust:X.509 PKI`.
   - **Metadata Policy Application**: Apply federation-specific metadata policies with **cascading effect** (Trust Anchor policies override Intermediate policies).
   - **Trust Mark Issuance**: Issue Federation Trust Marks attesting subordinate compliance with federation requirements.
-  - **Trust Chain Construction**: Manage subordinate statements and trust chain validation through federation endpoints.
 
 Therefore, Federation Entities MAY be onboarded through different paths:
 
