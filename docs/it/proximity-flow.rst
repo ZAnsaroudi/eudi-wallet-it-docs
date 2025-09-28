@@ -27,9 +27,9 @@ Le sotto-fasi sono descritte di seguito:
 
 Le Istanze di Relying Party e Wallet registrate nell'ecosistema IT-Wallet DEVONO supportare almeno:
 
-- *Flusso di Device Retrieval supervisionato* dove un umano supervisiona il processo di verifica di persona, o *flusso non supervisionato* dove la verifica potrebbe avvenire attraverso sistemi automatizzati senza supervisione umana.
+- *Flusso di Recupero del Dispositivo Supervisionato* dove un supervisore umano supervisiona il processo di verifica in persona, in contrasto con il *flusso non supervisionato* dove la verifica potrebbe avvenire attraverso sistemi automatizzati senza supervisione umana.
 - *Autenticazione dell'Istanza di Relying Party* seguendo i meccanismi definiti nella `ISO18013-5`_ per il *reader authentication*.
-- *Document Type* e *Namespaces* domestici definiti in questa specifica tecnica in aggiunta a quelli già definiti nella `ISO18013-5`_ per l'mDL (vedere :ref:`credential-data-model:Attestato Elettronico in formato mdoc-CBOR` per maggiori dettagli).
+- *Tipo di Documento* domestico e *Namespace* definiti in questa specifica tecnica in aggiunta a quelli già definiti nell'`ISO18013-5`_ per l'mDL (vedi :ref:`credential-data-model:Attestato Elettronico in formato mdoc-CBOR` per maggiori dettagli).
 - *Validazione dell'Istanza del Wallet* attraverso l'Attestato del Wallet.
 
 La tabella seguente mostra le tecnologie di *Device Engagement* supportate, specificando quali sono obbligatorie.
@@ -124,11 +124,12 @@ La figura seguente illustra il flusso di basso livello conforme a ISO 18013-5 pe
    - Sez 8.2.2.1 per ``DeviceEngagement`` tramite QR code
    - Sez 8.2.2.2 per ``DeviceEngagement`` tramite NFC
 
-**Passo 6**: L'Istanza di Relying Party genera la sua coppia di chiavi effimera (``EReaderKey.Priv``, ``EReaderKey.Pub``). La chiave privata (``EReaderKey.Priv``) DEVE essere mantenuta segreta, e la chiave pubblica (``EReaderKey.Pub``) DEVE essere utilizzata nel *Session Establishment*.
 
-**Passo 7**: L'Istanza del Wallet e l'Istanza di Relying Party DEVONO derivare indipendentemente le chiavi di sessione utilizzando la loro chiave effimera privata e la chiave effimera pubblica dell'altra parte attraverso un protocollo di *Key Agreement*. Questo garantisce lo scambio di messaggi cifrati nella sessione. In questo particolare passo, l'Istanza di Relying Party DEVE calcolare la sua chiave di sessione.
+**Passo 6**: L'Istanza di Relying Party genera la sua coppia di chiavi effimera (``EReaderKey.Priv``, ``EReaderKey.Pub``). La chiave privata (``EReaderKey.Priv``) DEVE essere mantenuta segreta, e la chiave pubblica (``EReaderKey.Pub``) DEVE essere utilizzata nel *Session Establishment* (:ref:`PPR-002 <test-plans-proximity-presentation:PPR-002>`).
 
-**Passo 8**: L'Istanza di Relying Party DEVE preparare il ``SessionEstablishment``. Questo messaggio DEVE essere firmato dall'Istanza di Relying Party (autenticazione dell'*mdoc reader* come specificato in [`ISO18013-5`_ #12.5]) e cifrato utilizzando la chiave di sessione derivata nel passo precedente. Il messaggio ``SessionEstablishment`` DEVE includere la ``EReaderKey.Pub`` e una richiesta per specifici attributi.
+**Passo 7**: L'Istanza del Wallet e l'Istanza di Relying Party DEVONO derivare indipendentemente le chiavi di sessione utilizzando la loro chiave effimera privata e la chiave effimera pubblica dell'altra parte attraverso un Key Agreement Protocol opportuno. Questo garantisce lo scambio di messaggi cifrati nella sessione. In questo particolare passo, l'Istanza di Relying Party DEVE calcolare la sua chiave di sessione (:ref:`PPR-002 <test-plans-proximity-presentation:PPR-002>`).
+
+**Passo 8**: L'Istanza di Relying Party DEVE preparare il ``SessionEstablishment``. Questo messaggio DEVE essere firmato dall'Istanza di Relying Party (autenticazione dell'*mdoc reader* come specificato in [`ISO18013-5`_ #12.5]) e cifrato utilizzando la chiave di sessione derivata nel passo precedente. Il messaggio ``SessionEstablishment`` DEVE includere la ``EReaderKey.Pub`` e una richiesta per specifici attributi (:ref:`PPR-002 <test-plans-proximity-presentation:PPR-002>`).
 
 Di seguito è riportato un esempio non normativo in *CBOR diagnostinc notation* di un messaggio ``SessionEstablishment`` CBOR che contiene una *mdoc request* per una Wallet Attestation insieme a un Attestato Elettronico mDL.
 
@@ -137,23 +138,23 @@ Di seguito è riportato un esempio non normativo in *CBOR diagnostinc notation* 
 
 .. admonition:: Box B
 
-   L'Istanza di Relying Party DEVE trasmettere il messaggio ``SessionEstablishment`` cifrato e firmato all'Istanza del Wallet tramite una connessione sicura NFC o BLE che è stata stabilita basandosi sulle informazioni di *Device Engagement*.
+   L'Istanza di Relying Party DEVE trasmettere il messaggio ``SessionEstablishment`` cifrato e firmato all'Istanza del Wallet su una connessione NFC o BLE sicura stabilita sulla base delle informazioni contenute nel Device Engagement (:ref:`PPR-003 <test-plans-proximity-presentation:PPR-003>`).
    Fare riferimento a:
 
    - Sez 8.2.2.3 per ``SessionEstablishment`` tramite BLE, e
    - Sez 8.2.2.5 per ``SessionEstablishment`` tramite NFC
 
-**Passo 9**: L'Istanza del Wallet DEVE calcolare la chiave di sessione, come descritto nel Passo 7.
+**Passo 9**: L'Istanza del Wallet DEVE calcolare la chiave di sessione, come descritto nel Passo 7 (:ref:`PPR-002 <test-plans-proximity-presentation:PPR-002>`).
 
-**Passo 10**: Al ricevimento del ``SessionEstablishment``, l'Istanza del Wallet DEVE decifrarlo utilizzando la chiave di sessione calcolata al Passo 9 e DEVE verificare la firma dell'Istanza di Relying Party (autenticazione del lettore mdoc come specificato in [`ISO18013-5`_ #12.5]) per garantire l'autenticità del messaggio.
+**Passo 10**: Al ricevimento del ``SessionEstablishment``, l'Istanza del Wallet DEVE decifrarlo utilizzando la chiave di sessione calcolata al Passo 9 e DEVE verificare la firma dell'Istanza di Relying Party (come specificato in [`ISO18013-5`_ #12.5 *mdoc reader authentication*]) per garantire l'autenticità del messaggio (:ref:`PPR-003 <test-plans-proximity-presentation:PPR-003>`).
 
-**Passo 11**: L'Istanza del Wallet DEVE decifrare la richiesta di attributi e DEVE richiedere il consenso dell'Utente per rilasciare gli attributi richiesti. Essa DEVE anche mostrare all'Utente i contenuti e lo scopo del Certificato di Registrazione della Relying Party per garantire trasparenza.
+**Passo 11**: L'Istanza del Wallet DEVE decifrare la richiesta di attributi e DEVE chiedere all'Utente il consenso per il rilascio degli attributi richiesti. DEVE inoltre visualizzare il contenuto del Certificato di Registrazione della Relying Party per garantire l'autenticità, la trasparenza sui dati richiesti e sul suo scopo registrato (:ref:`PPR-004 <test-plans-proximity-presentation:PPR-004>`, :ref:`PPR-005 <test-plans-proximity-presentation:PPR-005>`).
 
 **Passo 12**: L'Utente esamina la richiesta e le informazioni di registrazione della Relying Party e quindi approva la presentazione degli attributi richiesti.
 
 .. admonition:: Box C
 
-   Dopo aver ricevuto l'approvazione dell'Utente, l'Istanza del Wallet DEVE recuperare gli Attestati Elettronici mdoc richiestoi. Deve quindi preparare un messaggio ``SessionData`` contenente questi Attestati Elettronici Digitali, e DEVE firmare i dati di autenticazione richiesti (come parte del processo di autenticazione mdoc, come specificato in [`ISO18013-5`_ #12.4]). L'Istanza del Wallet DEVE cifrare il ``SessionData`` utilizzando la chiave di sessione stabilita prima di trasmetterlo all'Istanza di Relying Party tramite il canale sicuro. La firma garantisce il binding del dispositivo e l'integrità dei dati. La *mdoc response* DEVE essere codificata in CBOR, con la sua struttura delineata in [`ISO18013-5`_ #10.3].
+   Dopo aver ricevuto l'approvazione dell'Utente, l'Istanza del Wallet DEVE recuperare gli Attestati Elettronici mdoc richiestoi. Deve quindi preparare un messaggio ``SessionData`` contenente questi Attestati Elettronici Digitali, e DEVE firmare i dati di autenticazione richiesti (come parte del processo di autenticazione mdoc, come specificato in [`ISO18013-5`_ #12.4]). L'Istanza del Wallet DEVE cifrare il ``SessionData`` utilizzando la chiave di sessione stabilita prima di trasmetterlo all'Istanza di Relying Party tramite il canale sicuro. La firma garantisce il binding del dispositivo e l'integrità dei dati. La risposta mdoc DEVE essere codificata in CBOR, con la sua struttura delineata in [`ISO18013-5`_ #10.3] (:ref:`PPR-006 <test-plans-proximity-presentation:PPR-006>`, :ref:`PPR-029 <test-plans-proximity-presentation:PPR-029>`, :ref:`PPR-030 <test-plans-proximity-presentation:PPR-030>`).
    Fare riferimento a:
 
    - Sez 8.2.2.4 per ``SessionData`` tramite BLE, e
@@ -164,9 +165,9 @@ Di seguito è riportato un esempio non normativo di ``SessionData`` in *CBOR dia
 .. literalinclude:: ../../examples/iso-session-data.txt
   :language: text
 
-**Passo 13**: L'Istanza di Relying Party riceve il ``SessionData``, DEVE quindi decifrarlo, e DEVE verificare la firma dell'Istanza del Wallet per garantire l'integrità dei dati e la loro provenienza (binding del dispositivo). DEVE anche controllare la validità dell'mdoc, inclusa la firma del suo Fornitore di Attestati Elettronici. Nel caso di Attestati Elettronici Digitali di lunga durata, DOVREBBE anche controllare lo stato di revoca utilizzando il `TOKEN-STATUS-LIST`_.
+**Passo 13**: L'Istanza di Relying Party riceve il ``SessionData``, quindi DEVE decifrarlo e DEVE verificare la firma dell'Istanza del Wallet per garantire l'integrità dei dati e che provengano dal dispositivo previsto (device binding). DEVE anche controllare la validità dell'mdoc, inclusa la firma del suo Fornitore di Attestati Elettronici. In caso di Attestati Elettronici Digitali di lunga durata, DOVREBBE anche controllare lo stato di revoca utilizzando il `TOKEN-STATUS-LIST`_.
 
-**Passo 14**: Una volta completato lo scambio di dati, una delle parti può terminare la sessione. La sessione può essere terminata inviando lo status code per la *Session Termination* in un messaggio ``SessionData``; questo può essere inviato insieme a una *mdoc request* o *mdoc response* [`ISO18013-5`_ #12.2.4]. Se viene utilizzato BLE, questo può comportare l'invio di uno *status code* per la *Session Termination* o il comando "End". In questo scenario, il Client GATT (Istanza di Relying Party) DEVE annullare l'iscrizione dalle caratteristiche e disconnettersi dal server GATT (Istanza del Wallet).
+**Passo 14**: Una volta completato lo scambio di dati, una delle parti può terminare la sessione. La sessione può essere terminata inviando lo status code per la *Session Termination* in un messaggio ``SessionData``; questo può essere inviato insieme a una *mdoc request* o *mdoc response* [`ISO18013-5`_ #12.2.4]. Se viene utilizzato BLE, questo può comportare l'invio di uno *status code* per la *Session Termination* o il comando "End". In questo scenario, il Client GATT (Istanza di Relying Party) DEVE annullare l'iscrizione dalle caratteristiche e disconnettersi dal server GATT (Istanza del Wallet) (:ref:`PPR-007 <test-plans-proximity-presentation:PPR-007>`).
 
 **Considerazione Finale**: Il flusso di presentazione si è concentrato sullo scambio tecnico di dati in contesti di prossimità. È cruciale riconoscere che i flussi di prossimità supervisionati che coinvolgono un verificatore umano svolgono un ruolo vitale in molti casi d'uso (ad esempio, verifica dell'età in un negozio, controllo dell'identità da parte delle forze dell'ordine). L'elemento umano aggiunge un livello di verifica dell'identità attraverso l'ispezione visiva e il confronto, contribuendo agli aspetti di User Binding e garanzia di autenticazione complessiva non completamente catturati in un flusso di presentazione puramente tecnico.
 
@@ -378,7 +379,7 @@ La figura seguente illustra il flusso di basso livello conforme a `ISO18013-5`_ 
 Device Engagement
 ------------------
 
-La struttura *Device Engagement* DEVE essere codificata CBOR e avere almeno i seguenti componenti:
+La struttura del Device Engagement DEVE essere codificata in CBOR e avere almeno le seguenti componenti (:ref:`PPR-001 <test-plans-proximity-presentation:PPR-001>`, :ref:`PPR-021 <test-plans-proximity-presentation:PPR-021>`, :ref:`PPR-022 <test-plans-proximity-presentation:PPR-022>`):
 
 .. list-table::
    :class: longtable
@@ -395,7 +396,7 @@ La struttura *Device Engagement* DEVE essere codificata CBOR e avere almeno i se
      - *(array)*. Contiene due valori obbligatori:
 
        - *(int)*. Identificatore della suite di cifratura. Vedere Tabella 22 di `ISO18013-5`_.
-       - *(bstr)*. Chiave pubblica effimera generata dall'Istanza del Wallet, utilizzata dall'Istanza di Relying Party per derivare la chiave di sessione. La chiave DEVE essere di un tipo consentito dalla suite di cifratura selezionata.
+       - *(bstr)*. Chiave pubblica effimera generata dall'Istanza del Wallet, utilizzata dall'Istanza di Relying Party per derivare la chiave di sessione. La chiave DEVE essere di un tipo consentito dalla suite di cifratura selezionata (:ref:`PPR-022 <test-plans-proximity-presentation:PPR-022>`).
 
    * - **DeviceRetrievalMode-BLEOptions**
      - *(map)*. Fornisce opzioni per la connessione BLE, come modalità Peripheral Server o Central Client, e l'UUID del dispositivo. Vedere Tabella 2 di `ISO18013-5`_ per la mappatura dettagliata.
@@ -403,7 +404,6 @@ La struttura *Device Engagement* DEVE essere codificata CBOR e avere almeno i se
        Se l'Istanza del Wallet indica durante il *Device Engagement* che supporta entrambe le modalità, l'Istanza di Relying Party DOVREBBE selezionare la modalità mdoc central client [`ISO18013-5`_ #11.1.3.1].
        
        Presente solo quando si esegue *Device Engagement* utilizzando il QR code. Assente quando si utilizza NFC per eseguire *Device Engagement*.
-
 
    * - **DeviceRetrievalMode-NFCOptions**
      - *(map)*. Fornisce opzioni per le connessioni NFC, incluso il ruolo supportato (PICC o PCD) e le dimensioni massime di comando/risposta PDU. Vedere Tabella 2 di `ISO18013-5`_ per la mappatura dettagliata.
@@ -415,9 +415,9 @@ La struttura *Device Engagement* DEVE essere codificata CBOR e avere almeno i se
    * - **Capabilities**
      - *(map)*. Dichiara le capacità opzionali supportate dall'mdoc, che sono:
 
-       - **HandoverSessionEstablishmentSupport** *(bool)*. Se presente, DEVE essere impostato su `true`. Indica il supporto per ricevere il messaggio `SessionEstablishment` durante *Negotiated Handover*, come definito in [`ISO18013-5`_ #9.2.3].
+       - **HandoverSessionEstablishmentSupport** *(bool)*. Se presente, DEVE essere impostato su `true`. Indica il supporto per ricevere il messaggio `SessionEstablishment` durante *Negotiated Handover*, come definito in [`ISO18013-5`_ #9.2.3] (:ref:`PPR-024 <test-plans-proximity-presentation:PPR-024>`).
 
-       - **ReaderAuthAllSupport** *(bool)*. Se presente, DEVE essere impostato su `true`. Indica il supporto per ricevere la struttura `ReaderAuthAll` nell'*mdoc request*, come definito in [`ISO18013-5`_ #10.2.6].
+       - **ReaderAuthAllSupport** *(bool)*. Se presente, DEVE essere impostato su `true`. Indica il supporto per ricevere la struttura `ReaderAuthAll` nell'*mdoc request*, come definito in [`ISO18013-5`_ #10.2.6]  (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
 
    * - **OriginInfos**
      - *(array)*. Descrive l'interfaccia utilizzata per ricevere e consegnare la struttura di engagement.
@@ -428,8 +428,8 @@ La struttura *Device Engagement* DEVE essere codificata CBOR e avere almeno i se
 mdoc Request
 ^^^^^^^^^^^^^^
 
-I messaggi nell'*mdoc request* DEVONO essere codificati utilizzando CBOR. La stringa di byte CBOR risultante per l'*mdoc request* DEVE essere cifrata con la chiave di sessione ottenuta dopo la fase di *Device Engagement* e DEVE essere trasmessa utilizzando il protocollo BLE o NFC.
-Ogni *mdoc request* DEVE essere conforme alla seguente struttura, e DEVE includere i seguenti componenti, salvo diversa specifica:
+I messaggi nella Richiesta mdoc DEVONO essere codificati utilizzando CBOR. La stringa di byte CBOR risultante per la Richiesta mdoc DEVE essere cifrata con la Chiave di Sessione ottenuta dopo la fase di Device Engagement e DEVE essere trasmessa utilizzando il protocollo BLE o NFC (:ref:`PPR-026 <test-plans-proximity-presentation:PPR-026>`, :ref:`PPR-027 <test-plans-proximity-presentation:PPR-027>`, :ref:`PPR-028 <test-plans-proximity-presentation:PPR-028>`).
+Ogni Richiesta mdoc DEVE essere conforme alla seguente struttura e DEVE includere i seguenti componenti, a meno che non sia specificato diversamente:
 
 .. list-table::
    :class: longtable
@@ -458,23 +458,28 @@ Ogni *mdoc request* DEVE essere conforme alla seguente struttura, e DEVE include
 
        - **readerAuth** *(COSE_Sign1, CONDIZIONALE)*. Utilizzato per autenticare l'Istanza di Relying Party per ogni `DocRequest`. La firma è calcolata sui dati `ReaderAuthentication`, come definito in [`ISO18013-5`_ #12.5].
 
-         Questo componente DEVE essere presente solo se `readerAuthAll` non viene utilizzato.
+         Questo componente DEVE essere presente solo se ``readerAuthAll`` non viene utilizzato (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
 
    * - **readerAuthAll**
      - *(COSE_Sign1, CONDIZIONALE)*. Utilizzato per autenticare la Relying Party una volta per tutte le `DocRequest`. La firma è calcolata sui dati `ReaderAuthenticationAll`, come definito in [`ISO18013-5`_ #12.5].
 
-       Questo componente DEVE essere presente solo se `ReaderAuthAllSupport` è impostato su `true` nella struttura DeviceEngagement, e i campi `readerAuth` individuali non vengono utilizzati.
+       Questo componente DEVE essere presente solo se ``ReaderAuthAllSupport`` è impostato su ``true`` nel messaggio di DeviceEngagement, e i campi individuali ``readerAuth`` non vengono utilizzati (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
 
 .. note::
-    **Richiesta della Wallet Attestation**
+    **Richiesta dell'Attestazione del Wallet**
 
-    La Relying Party che richiede una Wallet Attestation DEVE aggiungere un oggetto nell'array **docRequest** avendo il ``docType`` impostato su ``{Trust Anchor reverse domain}.{WalletAttestation}`` come descritto in :ref:`registry-catalogue:Struttura del Catalogo degli Attestati Elettronici`. La Relying Party NON DEVE includere il parametro ``nameSpaces`` nella richiesta.
+    La Relying Party che richiede un'Attestazione del Wallet DEVE aggiungere un oggetto nell'array **docRequest** che abbia solo il campo ``docType`` impostato come ``{Trust Anchor reverse domain}.{WalletAttestation}`` (si rimanda a :ref:`registry-catalogue:Struttura del Catalogo degli Attestati Elettronici` per dettagli ulteriori). La Relying Party NON DEVE includere il parametro ``nameSpaces`` nella richiesta (:ref:`PPR-010 <test-plans-proximity-presentation:PPR-010>`).
+
+    Questo componente DEVE essere presente solo se ``ReaderAuthAllSupport`` è impostato su ``true`` nel messaggio di DeviceEngagement, e i campi individuali ``readerAuth`` non vengono utilizzati (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
+
 
 mdoc Response
 ^^^^^^^^^^^^^^
 
-I messaggi nella *mdoc response* DEVONO essere codificati utilizzando CBOR e DEVONO essere cifrati con la chiave di sessione ottenuta dopo la fase di *Device Engagement*.
-Ogni *mdoc response* DEVE essere conforme alla seguente struttura, e DEVE includere i seguenti componenti, salvo diversa specifica:
+
+I messaggi nella Risposta mdoc DEVONO essere codificati utilizzando CBOR e DEVONO essere cifrati con la Chiave di Sessione ottenuta dopo la fase di Device Engagement (:ref:`PPR-029 <test-plans-proximity-presentation:PPR-029>`, :ref:`PPR-030 <test-plans-proximity-presentation:PPR-030>`).
+
+Ogni Risposta mdoc DEVE essere conforme alla seguente struttura e DEVE includere i seguenti componenti, a meno che non sia specificato diversamente:
 
 .. _table-mdoc-attributes:
 .. list-table::
@@ -498,7 +503,7 @@ Ogni *mdoc response* DEVE essere conforme alla seguente struttura, e DEVE includ
      - *(uint)*. Status code che indica l'esito della richiesta. Ad esempio, `"status": 0` significa elaborazione riuscita. Per dettagli, vedere Tabella 3 (ResponseStatus) di [`ISO18013-5`_ #10.3.5].
 
 
-Ogni documento in **documents** DEVE essere conforme alla seguente struttura, e DEVE includere i seguenti componenti, salvo diversa specifica:
+Ogni elemento in **documents** DEVE essere conforme alla seguente struttura e DEVE includere i seguenti componenti, a meno che non sia specificato diversamente (:ref:`PPR-029 <test-plans-proximity-presentation:PPR-029>`):
 
 .. _table-mdoc-documents-attributes:
 .. list-table::
@@ -510,7 +515,7 @@ Ogni documento in **documents** DEVE essere conforme alla seguente struttura, e 
      - **Descrizione**
 
    * - **docType**
-     - *(tstr)*. Identificatore del tipo di documento. Ad esempio, per un mDL, il valore DEVE essere ``org.iso.18013.5.1.mDL``.
+     - *(tstr)*. identificativo del tipo di documento. Ad esempio, per un mDL, il valore DEVE essere ``org.iso.18013.5.1.mDL`` (:ref:`PPR-010 <test-plans-proximity-presentation:PPR-010>`).
 
    * - **issuerSigned**
      - *(bstr)*. Contiene la struttura `IssuerNameSpaces`, che include elementi dati firmati dal Fornitore di Attestati Elettronici, e la struttura `issuerAuth`, che garantisce la loro autenticità e integrità utilizzando il Mobile Security Object (MSO). Vedere :ref:`credential-data-model:Attestato Elettronico in formato mdoc-CBOR`.
@@ -523,7 +528,7 @@ Ogni documento in **documents** DEVE essere conforme alla seguente struttura, e 
 
 
 
-Una struttura dati **deviceSigned** DEVE essere conforme alla seguente struttura, e DEVE includere i seguenti componenti:
+Una struttura di dati **deviceSigned** DEVE essere conforme alla seguente struttura e DEVE includere i seguenti componenti (:ref:`PPR-029 <test-plans-proximity-presentation:PPR-029>`):
 
 .. list-table::
    :class: longtable
@@ -542,23 +547,25 @@ Una struttura dati **deviceSigned** DEVE essere conforme alla seguente struttura
        - **DataItemValue** *(any)*. Il valore dell'elemento dati.
 
    * - **deviceAuth**
-     - *(COSE_Sign1)*. Contiene la struttura `DeviceAuth`, che DEVE includere la **deviceSignature** per l'autenticazione dell'Istanza del Wallet. La firma è calcolata sui dati `DeviceAuthentication`, che lega gli elementi restituiti alla sessione e alla richiesta. Vedere [`ISO18013-5`_ #12.4] per dettagli sulla struttura di autenticazione.
 
-.. note::
-    **Presentazione della Wallet Attestation**
+     - *(COSE_Sign1)*. Contiene la struttura ``DeviceAuth``, che DEVE includere la **deviceSignature** per l'autenticazione dell'Istanza del Wallet. La firma è calcolata sui dati ``DeviceAuthentication``, che lega gli elementi restituiti alla sessione e alla richiesta. Vedi [`ISO18013-5`_ #12.4] per i dettagli sulla struttura di autenticazione (:ref:`PPR-003 <test-plans-proximity-presentation:PPR-003>`).
 
-    L'Istanza del Wallet DEVE includere l'Attestato del Wallet se richiesto dalla Relying Party nell'*mdoc request*. L'Istanza del Wallet DOVREBBE includere tutte le Divulgazioni Selettive disponibili per l'Attestato del Wallet e DEVE includere il claim ``aal`` come divulgazione. Inoltre, durante la presentazione, l'Istanza del Wallet NON DEVE richiedere il consenso dell'utente alla divulgazione degli attributi della Wallet Attestation che sono dati tecnici non trasparenti all'utente.
+
+.. note:: **Presentazione dell'Attestazione del Wallet**
+  
+    L'Istanza del Wallet DEVE includere l'Attestazione del Wallet se richiesta dalla Relying Party nella richiesta mdoc. L'Istanza del Wallet DOVREBBE includere tutte le divulgazioni selettive disponibili per l'Attestazione del Wallet, DEVE tuttavia includere il campo ``aal`` nella risposta. Inoltre, durante la presentazione, l'Istanza del Wallet NON DEVE richiedere il consenso dell'Utente alla divulgazione degli attributi dell'Attestazione del Wallet, i quali sono dati tecnici non trasparenti verso l'Utente (:ref:`PPR-010 <test-plans-proximity-presentation:PPR-010>`).
 
 Session Termination
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-La sessione DEVE essere terminata se si verifica almeno una delle seguenti condizioni:
+La sessione DEVE chiudersi qualora si verifichi almeno una delle seguenti condizioni (:ref:`PPR-007 <test-plans-proximity-presentation:PPR-007>`):
 
 - Dopo un timeout di inattività nel quale non sono scambiati messaggi di *Session Establishment* o *Session Data*. Questo timeout di inattività viene implementato dall'Istanza del Wallet e dall'Istanza di Relying Party e DOVREBBE essere non inferiore a 300 secondi;
 - Quando l'Istanza del Wallet non accetta più richieste;
 - Quando l'Istanza di Relying Party non invia ulteriori richieste.
 
-Se l'Istanza del Wallet e l'Istanza di Relying Party non inviano o ricevono ulteriori richieste, la *Session Termination* DEVE essere avviata come segue:
+Se l'Istanza del Wallet e l'Istanza di Relying Party non inviano o ricevono ulteriori richieste, la terminazione della sessione DEVE essere avviata come segue (:ref:`PPR-007 <test-plans-proximity-presentation:PPR-007>`):
+
 
 - Inviare lo status code per la *Session Termination*, o
 - Inviare il comando "End" come delineato in [`ISO18013-5`_ #11.1.3.3].

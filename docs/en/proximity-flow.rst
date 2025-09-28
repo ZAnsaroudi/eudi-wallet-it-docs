@@ -25,7 +25,8 @@ The sub-phases are described below:
   During the communication subphase, the Relying Party Instance has the option to request information from the Wallet Instance using mdoc requests and responses. The primary mode of communication is the secure channel established during the session setup. The Wallet Instance encrypts the mdoc response using the session key and transmits it to the mobile Relying Party Instance via a session data message.
 
 
-Relying Party and Wallet Instances registered in the IT-Wallet ecosystem MUST support at least:
+Relying Party and Wallet Instances registered in the IT-Wallet ecosystem MUST support at least the following flows:
+
 
 - *Supervised Device Retrieval flow* where a human Relying Party is overseeing the verification process in person, or *unsupervised flow* where verification might happen through automated systems without human oversight.
 - *Relying Party Instance Authentication* following the mechanisms defined in the `ISO18013-5`_ for the *reader authentication*.
@@ -128,7 +129,9 @@ The following figure illustrates the low-level flow compliant with ISO 18013-5 f
 
 **Step 7**: The Wallet Instance and Relying Party Instance independently MUST derive the session keys using their private ephemeral key and the other party's public ephemeral key through a key agreement protocol. This ensures session encryption. In this particular step, the Relying Party Instance MUST compute its session key.
 
-**Step 8**: The Relying Party Instance MUST prepare a ``SessionEstablishment`` message. This message MUST be signed by the Relying Party Instance (mdoc reader authentication as specified in [`ISO18013-5`_ #12.5]) and encrypted using the session keys derived in the previous step. The ``SessionEstablishment`` message MUST include the ``EReaderKey.Pub`` and a request for specific attribute(s).
+**Step 8**: The Relying Party Instance MUST prepare a ``SessionEstablishment`` message. This message MUST be signed by the Relying Party Instance (mdoc reader authentication as specified in [`ISO18013-5`_ #12.5]) and encrypted using the session keys derived in the previous step. The ``SessionEstablishment`` message MUST include the ``EReaderKey.Pub`` and a request for specific attribute(s) (:ref:`PPR-002 <test-plans-proximity-presentation:PPR-002>`).
+
+
 
 Below is a non-normative example using the diagnostic notation of a CBOR-encoded ``SessionEstablishment`` message that contains an mdoc request for a Wallet Attestation along with an mDL Digital Credential.
 
@@ -147,13 +150,14 @@ Below is a non-normative example using the diagnostic notation of a CBOR-encoded
 
 **Step 10**: Upon receiving the ``SessionEstablishment`` message, the Wallet Instance MUST decrypt it using the shared session key and MUST verify the Relying Party Instance's signature (mdoc reader authentication as specified in [`ISO18013-5`_ #12.5]) to ensure its authenticity.
 
-**Step 11**: The Wallet Instance MUST decrypt the attribute request and MUST prompt the User for their consent to release the requested attributes. It MUST also display the contents of the Relying Party's Registration Certificate to ensure transparency about the requested attributes and its registered purpose.
+**Step 11**: The Wallet Instance MUST decrypt the attribute request and MUST prompt the User for their consent to release the requested attributes. It MUST also display the contents of the Relying Party's Registration Certificate to ensure transparency about the requested attributes and its registered purpose (:ref:`PPR-003 <test-plans-proximity-presentation:PPR-003>`).
 
-**Step 12**: The User reviews the request and the Relying Party's registration information and then approves the presentation of the requested attributes.
+**Step 12**: The User reviews the request and the Relying Party's registration information and then approves the presentation of the requested attributes (:ref:`PPR-004 <test-plans-proximity-presentation:PPR-004>`).
+
 
 .. admonition:: Box C
 
-   After receiving User approval, the Wallet Instance MUST retrieve the requested mdoc Digital Credentials. It then MUST prepare a ``SessionData`` message containing these Digital Credentials, and it MUST sign the required authentication data (as part of the mdoc authentication process, as specified in [`ISO18013-5`_ #12.4]). It MUST encrypt it using the established session keys before transmitting it to the Relying Party Instance over the secure BLE channel. The signing ensures device binding and data integrity. The mdoc response MUST be encoded in CBOR, with its structure outlined in [`ISO18013-5`_ #10.3].
+   After receiving User approval, the Wallet Instance MUST retrieve the requested mdoc Digital Credentials. It then MUST prepare a ``SessionData`` message containing these Digital Credentials, and it MUST sign the required authentication data (as part of the mdoc authentication process, as specified in [`ISO18013-5`_ #12.4]). It MUST encrypt it using the established session keys before transmitting it to the Relying Party Instance over the secure BLE channel. The signing ensures device binding and data integrity. The mdoc response MUST be encoded in CBOR, with its structure outlined in [`ISO18013-5`_ #10.3] (:ref:`PPR-006 <test-plans-proximity-presentation:PPR-006>`).
    Refer to:
 
    - Sec 8.2.2.4 for ``SessionData`` over BLE, and
@@ -166,7 +170,7 @@ Below is a non-normative example using the diagnostic notation of a CBOR-encoded
 
 **Step 13**: The Relying Party Instance receives the ``SessionData``, then it MUST decrypt it, and it MUST verify the Wallet Instance's signature to ensure the data's integrity and that it originates from the expected device (device binding). It also MUST check the validity of the mdoc, including its Issuer's signature. In case of long-lived Digital Credentials, it SHOULD also check the revocation status using the `TOKEN-STATUS-LIST`_.
 
-**Step 14**: Once the data exchange is complete, either party can terminate the session. The session can be terminated by sending the status code for session termination in a ``SessionData`` message; this can be sent together with an mdoc request or response [`ISO18013-5`_ #12.2.4].If BLE is used, this can involve sending a status code for session termination or the “End” command. In this scenario, the GATT Client (Relying Party Instance) MUST unsubscribe from characteristics and disconnect from the GATT server (Wallet Instance).
+**Step 14**: Once the data exchange is complete, either party can terminate the session. The session can be terminated by sending the status code for session termination in a ``SessionData`` message; this can be sent together with an mdoc request or response [`ISO18013-5`_ #12.2.4].If BLE is used, this can involve sending a status code for session termination or the “End” command. In this scenario, the GATT Client (Relying Party Instance) MUST unsubscribe from characteristics and disconnect from the GATT server (Wallet Instance) (:ref:`PPR-007 <test-plans-proximity-presentation:PPR-007>`).
 
 **Final Consideration**: The presentation flow focused on the technical data exchange in proximity settings. It is crucial to recognise that supervised proximity flows involving a human verifier play a vital role in many use cases (e.g., age verification at a store, identity check by law enforcement). The human element adds a layer of identity verification through visual inspection and comparison, contributing to User Binding and overall authentication assurance aspects not fully captured in a purely technical presentation flow.
 
@@ -378,7 +382,7 @@ The following figure illustrates the low-level flow compliant with `ISO18013-5`_
 Device Engagement
 ------------------
 
-The Device Engagement structure MUST be CBOR encoded and have at least the following components:
+The Device Engagement structure MUST be CBOR encoded and have at least the following components (:ref:`PPR-001 <test-plans-proximity-presentation:PPR-001>`):
 
 .. list-table::
    :class: longtable
@@ -395,7 +399,8 @@ The Device Engagement structure MUST be CBOR encoded and have at least the follo
      - *(array)*. Contains two mandatory values:
 
        - *(int)*. Cipher suite identifier. See Table 22 of `ISO18013-5`_.
-       - *(bstr)*. Public ephemeral key generated by the Wallet Instance, used by the Relying Party Instance to derive the Session Key. The key MUST be of a type allowed by the selected cipher suite.
+
+       - *(bstr)*. Public ephemeral key generated by the Wallet Instance, used by the Relying Party Instance to derive the Session Key. The key MUST be of a type allowed by the selected cipher suite (:ref:`PPR-022 <test-plans-proximity-presentation:PPR-022>`).
 
    * - **DeviceRetrievalMode-BLEOptions**
      - *(map)*. Provides options for the BLE connection, such as Peripheral Server or Central Client mode, and the device UUID. See Table 2 of `ISO18013-5`_ for the detailed mapping.
@@ -415,9 +420,9 @@ The Device Engagement structure MUST be CBOR encoded and have at least the follo
    * - **Capabilities**
      - *(map)*. Declares optional capabilities supported by the mdoc, that are:
 
-       - **HandoverSessionEstablishmentSupport** *(bool)*. If present, it MUST be set to `true`. Indicates support for receiving the `SessionEstablishment` message during Negotiated Handover, as defined in [`ISO18013-5`_ #9.2.3].
+       - **HandoverSessionEstablishmentSupport** *(bool)*. If present, it MUST be set to `true`. Indicates support for receiving the `SessionEstablishment` message during Negotiated Handover, as defined in [`ISO18013-5`_ #9.2.3] (:ref:`PPR-024 <test-plans-proximity-presentation:PPR-024>`).
 
-       - **ReaderAuthAllSupport** *(bool)*. If present, it MUST be set to `true`. Indicates support for receiving the `ReaderAuthAll` structure in the mdoc request, as defined in [`ISO18013-5`_ #10.2.6].
+       - **ReaderAuthAllSupport** *(bool)*. If present, it MUST be set to `true`. Indicates support for receiving the `ReaderAuthAll` structure in the mdoc request, as defined in [`ISO18013-5`_ #10.2.6] (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
 
    * - **OriginInfos**
      - *(array)*. Describes the interface used to receive and deliver the engagement structure.
@@ -428,7 +433,9 @@ The Device Engagement structure MUST be CBOR encoded and have at least the follo
 mdoc Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The messages in the mdoc Request MUST be encoded using CBOR. The resulting CBOR byte string for the mdoc Request MUST be encrypted with the Session Key obtained after the Device Engagement phase and MUST be transmitted using the BLE or NFC protocol.
+
+The messages in the mdoc Request MUST be encoded using CBOR. The resulting CBOR byte string for the mdoc Request MUST be encrypted with the Session Key obtained after the Device Engagement phase and MUST be transmitted using the BLE or NFC protocol (:ref:`PPR-026 <test-plans-proximity-presentation:PPR-026>`, :ref:`PPR-027 <test-plans-proximity-presentation:PPR-027>`, :ref:`PPR-028 <test-plans-proximity-presentation:PPR-028>`).
+
 Each mdoc Request MUST be compliant with the following structure, and MUST include the following components, unless otherwise specified:
 
 .. list-table::
@@ -458,22 +465,23 @@ Each mdoc Request MUST be compliant with the following structure, and MUST inclu
 
        - **readerAuth** *(COSE_Sign1, CONDITIONAL)*. Used to authenticate the the Relying Party Instance for each `DocRequest`. The signature is computed over `ReaderAuthentication` data, as defined in [`ISO18013-5`_ #12.5].
 
-         This component MUST be present only if `readerAuthAll` is not used.
+         This component MUST be present only if `readerAuthAll` is not used (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
 
    * - **readerAuthAll**
      - *(COSE_Sign1, CONDITIONAL)*. Used to authenticate the Relying Party once for all `DocRequest`s. The signature is computed over `ReaderAuthenticationAll` data, as defined in [`ISO18013-5`_ #12.5].
 
-       This component MUST be present only if `ReaderAuthAllSupport` is set to `true` in the DeviceEngagement structure, and individual `readerAuth` fields are not used.
+       This component MUST be present only if `ReaderAuthAllSupport` is set to `true` in the DeviceEngagement structure, and individual `readerAuth` fields are not used (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
 
 .. note::
     **Requesting the Wallet Attestation**
 
-    The Relying Party requesting a Wallet Attestation MUST add an object in the **docRequest** array having the ``docType`` set to ``{Trust Anchor reverse domain}.{WalletAttestation}`` as described in :ref:`registry-catalogue:Digital Credentials Catalogue Structure`. The Relying Party MUST NOT include the ``nameSpaces`` parameter in the request.
+    The Relying Party requesting a Wallet Attestation MUST add an object in the **docRequest** array having the ``docType`` set to ``{Trust Anchor reverse domain}.{WalletAttestation}`` as described in :ref:`registry-catalogue:Digital Credentials Catalogue Structure`. The Relying Party MUST NOT include the ``nameSpaces`` parameter in the request (:ref:`PPR-010 <test-plans-proximity-presentation:PPR-010>`).
 
 mdoc Response
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The messages in the mdoc Response MUST be encoded using CBOR and MUST be encrypted with the Session Key obtained after the Device Engagement phase.
+The messages in the mdoc Response MUST be encoded using CBOR and MUST be encrypted with the Session Key obtained after the Device Engagement phase (:ref:`PPR-029 <test-plans-proximity-presentation:PPR-029>`, :ref:`PPR-030 <test-plans-proximity-presentation:PPR-030>`).
+
 Each mdoc Response MUST be compliant with the following structure, and MUST include the following components, unless otherwise specified:
 
 .. _table-mdoc-attributes:
@@ -498,7 +506,7 @@ Each mdoc Response MUST be compliant with the following structure, and MUST incl
      - *(uint)*. Status code indicating the outcome of the request. For example, `"status": 0` means successful processing. For details, see Table 3 (ResponseStatus) of [`ISO18013-5`_ #10.3.5].
 
 
-Each document in **documents** MUST be compliant with the following structure, and it MUST include the following components, unless otherwise specified:
+Each document in **documents** MUST be compliant with the following structure, and it MUST include the following components, unless otherwise specified (:ref:`PPR-029 <test-plans-proximity-presentation:PPR-029>`):
 
 .. _table-mdoc-documents-attributes:
 .. list-table::
@@ -558,7 +566,7 @@ The session MUST be terminated if at least one of the following conditions occur
 - When the Wallet Instance does not accept any more requests;
 - When the Relying Party Instance does not send any further requests.
 
-If the Wallet Instance and the Relying Party Instance do not send or receive any further requests, the session termination MUST be initiated as follows:
+If the Wallet Instance and the Relying Party Instance do not send or receive any further requests, the session termination MUST be initiated as follows (:ref:`PPR-007 <test-plans-proximity-presentation:PPR-007>`):
 
 - Send the status code for session termination, or
 - Dispatch the "End" command as outlined in [`ISO18013-5`_ #11.1.3.3].

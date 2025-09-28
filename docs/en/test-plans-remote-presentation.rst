@@ -41,15 +41,15 @@ This section provides the set of test cases designed for technical implementers 
     - QR Code is scanned successfully.
   * - RPR-07
     - Request URI Method
-    - Test `request_uri_method` as `post`.
+    - Test ``request_uri_method`` as ``post``.
     - Wallet Instance sends metadata via POST.
   * - RPR-08
     - Request URI Method
-    - Test `request_uri_method` as `get`.
+    - Test ``request_uri_method`` as ``get``.
     - Wallet Instance fetches Request Object via GET.
   * - RPR-09
     - Request URI Method
-    - Test absence of `request_uri_method`.
+    - Test absence of ``request_uri_method``.
     - Wallet Instance defaults to GET method.
   * - RPR-10
     - Metadata
@@ -319,3 +319,289 @@ This section provides the set of test cases designed for technical implementers 
     - Request URI Method
     - Test handling of unsupported HTTP methods.
     - Error response is returned.
+
+  * - RPR-77
+    - QR Code Generation
+    - Verify that QR Code error correction level is Q (Quartile - up to 25%).
+    - QR Code uses the required Q error correction level.
+
+  * - RPR-78
+    - Request URI Method
+    - Test that HTTP method is set to ``get`` or ``post``.
+    - HTTP method is correctly set to ``get`` or ``post``.
+
+  * - RPR-79
+    - Request URI Method
+    - Verify that GET method is used as default when not specified.
+    - GET method is used as default when ``request_uri_method`` is not provided.
+
+  * - RPR-80
+    - JWT Header
+    - Test that JWT signing algorithm is supported and not ``none``.
+    - JWT signing algorithm is valid and not ``none``.
+
+  * - RPR-81
+    - JWT Header
+    - Verify that JWT media type is ``oauth-authz-req+jwt``.
+    - JWT media type is correctly set to ``oauth-authz-req+jwt``.
+
+  * - RPR-82
+    - JWT Payload
+    - Test that ``response_mode`` is set to ``direct_post.jwt``.
+    - ``response_mode`` is correctly set to ``direct_post.jwt``.
+
+  * - RPR-83
+    - JWT Payload
+    - Verify that ``response_type`` is set to ``vp_token``.
+    - ``response_type`` is correctly set to ``vp_token``.
+
+  * - RPR-84
+    - JWT Payload
+    - Test that nonce has at least 32 digits length.
+    - Nonce has the minimum required length of 32 digits.
+
+  * - RPR-85
+    - JWT Payload
+    - Verify that JWT is not valid after expiration (exp).
+    - JWT is no longer valid after expiration timestamp.
+
+  * - RPR-86
+    - Wallet Attestation Request
+    - Test that Wallet Attestation request uses standard DCQL query.
+    - Wallet Attestation request correctly uses standard DCQL query.
+
+  * - RPR-87
+    - Wallet Attestation Request
+    - Verify that ``claims`` parameter is not included in DCQL query for Wallet Attestation.
+    - ``claims`` parameter is not included in DCQL query for Wallet Attestation.
+
+  * - RPR-88
+    - Wallet Attestation Request
+    - Test that ``vct_values`` parameter is required in DCQL query for Wallet Attestation.
+    - ``vct_values`` parameter is correctly required in DCQL query.
+
+  * - RPR-89
+    - Error Response
+    - Verify that Relying Party returns error response in JSON format for ``request_uri`` errors.
+    - Relying Party correctly returns error response in JSON format.
+
+  * - RPR-90
+    - Security
+    - Test that ``request_uri`` parameter is attested by trusted third party.
+    - ``request_uri`` parameter is correctly attested by trusted third party.
+
+  * - RPR-91
+    - Security
+    - Verify that ``response_uri`` parameter is attested by trusted third party.
+    - ``response_uri`` parameter is correctly attested by trusted third party.
+
+  * - RPR-92
+    - Security
+    - Test that Relying Party correctly handles Wallet Instance metadata without User information.
+    - Wallet Instance does not include User information in technical metadata.
+
+  * - RPR-93
+    - Security
+    - Verify that Wallet Instance ignores ``client_metadata`` parameter if present.
+    - Wallet Instance correctly ignores ``client_metadata`` parameter.
+
+  * - RPR-94
+    - Wallet Nonce
+    - Test that Relying Party checks ``wallet_nonce`` when present.
+    - Relying Party correctly checks ``wallet_nonce`` when present.
+
+  * - RPR-95
+    - Response Types
+    - Verify that ``response_types_supported`` is set to ``vp_token`` when present.
+    - ``response_types_supported`` is correctly set to ``vp_token``.
+
+  * - RPR-96
+    - Redirect URI
+    - Test that Relying Party correctly provides ``redirect_uri`` parameter to Wallet Instance.
+    - Wallet Instance correctly performs redirect to ``redirect_uri``.
+
+  * - RPR-97
+    - Flow Support
+    - Test that Relying Party supports required remote flows.
+    - Relying Party supports both Same Device and Cross Device flows.
+
+  * - RPR-98
+    - HTTP Method Validation
+    - Test that ``request_uri_method`` is set to ``get`` or ``post``.
+    - ``request_uri_method`` parameter is correctly set to ``get`` or ``post``.
+
+  * - RPR-99
+    - Endpoint Security
+    - Test that ``request_uri`` is attested by trusted third party.
+    - ``request_uri`` parameter is properly attested by trusted third party.
+
+  * - RPR-100
+    - Privacy Protection
+    - Test that Relying Party correctly validates Wallet Instance metadata without User information.
+    - Wallet Instance does not include User information in technical capabilities.
+
+  * - RPR-101
+    - Metadata Provision
+    - Test that Relying Party correctly handles Wallet Instance metadata via POST when supported.
+    - Wallet Instance provides metadata via POST when both parties support it.
+
+  * - RPR-102
+    - Response Type Validation
+    - Test that ``response_type`` is set to ``vp_token`` when present.
+    - ``response_type`` parameter is correctly set to ``vp_token`` when present.
+
+  * - RPR-103
+    - JWT Expiration
+    - Test that ``exp`` of the JWT is set correctly.
+    - The ``exp`` parameter of the JWT is set correctly and not expired.
+
+  * - RPR-104
+    - Algorithm Validation
+    - Test that JWT algorithm is supported and not ``none`` or MAC.
+    - JWT algorithm is from supported list and not ``none`` or MAC identifier.
+
+  * - RPR-105
+    - Media Type Validation
+    - Test that JWT typ is set to ``oauth-authz-req+jwt``.
+    - JWT typ parameter is correctly set to ``oauth-authz-req+jwt``.
+
+  * - RPR-106
+    - Response Mode Validation
+    - Test that ``response_mode`` is set to ``direct_post.jwt``.
+    - ``response_mode`` parameter is correctly set to ``direct_post.jwt``.
+
+  * - RPR-107
+    - Response Type Validation
+    - Test that ``response_type`` is set to ``vp_token``.
+    - ``response_type`` parameter is correctly set to ``vp_token``.
+
+  * - RPR-108
+    - Response URI Usage
+    - Test that Relying Party correctly provides ``response_uri`` parameter to Wallet Instance.
+    - Wallet Instance sends Authorization Response to correct ``response_uri`` endpoint.
+
+  * - RPR-109
+    - KB-JWT Validation
+    - Test that Relying Party validates the signature of the KB-JWT.
+    - Relying Party correctly validates the signature of the KB-JWT using the public key.
+
+  * - RPR-110
+    - Nonce Entropy
+    - Test that nonce has sufficient entropy (32+ digits).
+    - nonce parameter has sufficient entropy with at least 32 digits.
+
+  * - RPR-111
+    - JWT Expiration
+    - Test that JWT ``exp`` is set correctly.
+    - JWT ``exp`` parameter is correctly set and not expired.
+
+  * - RPR-112
+    - Response URI Security
+    - Test that ``response_uri`` is attested by trusted third party.
+    - ``response_uri`` parameter is properly attested by trusted third party.
+
+  * - RPR-113
+    - Client Metadata Handling
+    - Test that Relying Party correctly handles Wallet Instance ignoring ``client_metadata``.
+    - Wallet Instance ignores ``client_metadata`` and uses Trust Chain metadata.
+
+  * - RPR-114
+    - Wallet Attestation Request
+    - Test that Relying Party requests Wallet Attestation via DCQL.
+    - Relying Party correctly requests Wallet Attestation using DCQL query.
+
+  * - RPR-115
+    - Error Response Format
+    - Test that error response uses ``application/json`` content type.
+    - Error response correctly uses ``application/json`` content type.
+
+  * - RPR-116
+    - Error Response Parameters
+    - Test that error response includes required parameters.
+    - Error response includes error and ``error_description`` parameters.
+
+  * - RPR-117
+    - Wallet Attestation Presentation
+    - Test that Relying Party correctly requests Wallet Attestation from Wallet Instance.
+    - Wallet Instance includes Wallet Attestation when requested by Relying Party.
+
+  * - RPR-118
+    - Presentation Array
+    - Test that ``vp_token`` contains at least two signed presentations.
+    - ``vp_token`` contains at least two signed presentations as required.
+
+  * - RPR-119
+    - KB-JWT Inclusion
+    - Test that Holder includes KB-JWT in SD-JWT.
+    - Holder correctly includes KB-JWT in SD-JWT presentation.
+
+  * - RPR-120
+    - KB-JWT Validation
+    - Test that Relying Party validates KB-JWT signature.
+    - Relying Party correctly validates KB-JWT signature using public key.
+
+  * - RPR-121
+    - KB-JWT Header
+    - Test that KB-JWT contains required header parameters.
+    - KB-JWT contains required ``typ`` and ``alg`` header parameters.
+
+  * - RPR-122
+    - KB-JWT Payload
+    - Test that KB-JWT contains required payload parameters.
+    - KB-JWT contains required ``iat``, ``aud``, ``nonce``, and ``sd_hash`` parameters.
+
+  * - RPR-123
+    - KB-JWT Type
+    - Test that KB-JWT typ is set to ``kb+jwt``.
+    - KB-JWT typ parameter is correctly set to ``kb+jwt``.
+
+  * - RPR-124
+    - KB-JWT Issuance Time
+    - Test that KB-JWT ``iat`` is set correctly.
+    - KB-JWT ``iat`` parameter is correctly set to issuance time.
+
+  * - RPR-125
+    - KB-JWT Audience
+    - Test that KB-JWT ``aud`` matches Relying Party identifier.
+    - KB-JWT ``aud`` parameter matches Relying Party unique entity identifier.
+
+  * - RPR-126
+    - KB-JWT Nonce
+    - Test that KB-JWT ``nonce`` matches request object ``nonce``.
+    - KB-JWT ``nonce`` parameter matches ``nonce`` from request object.
+
+  * - RPR-127
+    - Authorization Error Response
+    - Test that Relying Party correctly handles Wallet Instance Authorization Error Response on validation failure.
+    - Wallet Instance sends Authorization Error Response when validation fails.
+
+  * - RPR-128
+    - Error Response Encoding
+    - Test that Authorization Error Response is encoded correctly.
+    - Authorization Error Response is encoded in ``application/x-www-form-urlencoded`` format.
+
+  * - RPR-129
+    - Response Processing
+    - Test that Response URI returns HTTP 200 on successful processing.
+    - Response URI returns HTTP 200 with ``application/json`` content type.
+
+  * - RPR-130
+    - Error Code Consistency
+    - Test that error codes are consistent across different endpoints.
+    - Error codes are consistent across all Relying Party endpoints.
+
+  * - RPR-131
+    - Response Code Inclusion
+    - Test that Relying Party includes response code in ``redirect_uri``.
+    - Relying Party includes fresh response code in ``redirect_uri``.
+
+  * - RPR-132
+    - Redirect URI Security
+    - Test that ``redirect_uri`` is attested by trusted third party.
+    - ``redirect_uri`` parameter is properly attested by trusted third party.
+
+  * - RPR-133
+    - Validation Error Response
+    - Test that Response URI returns error response on validation failure.
+    - Response URI returns error response when validation checks fail.
+
