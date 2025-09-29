@@ -21,8 +21,8 @@ Le sotto-fasi sono descritte di seguito:
   2. **Session Establishment**: Durante la fase di *Session Establishment*, l'Istanza di Relying Party configura una connessione sicura. Tutti i dati trasmessi su questa connessione sono cifrati utilizzando una chiave di sessione, che è nota sia all'Istanza del Wallet che all'Istanza di Relying Party.
   La sessione stabilita PUÒ essere successivamente terminata in base alle condizioni dettagliate in [`ISO18013-5`_ #12.2.4].
 
-  3. **Comunicazione - Device Retrieval**: L'Istanza di Relying Party cifra l'*mdoc request* con la chiave di sessione appropriata e la invia all'Istanza del Wallet insieme alla sua chiave pubblica nel messaggio di *Session Establishment*. L'Istanza del Wallet utilizza i dati del messaggio di *Session Establishment* per derivare la chiave di sessione e quindi per decifrare l'*mdoc request*.
-  Durante la sottofase di comunicazione, l'Istanza di Relying Party ha l'opzione di richiedere informazioni dall'Istanza del Wallet utilizzando richieste e risposte mdoc. La modalità principale di comunicazione è il canale sicuro stabilito durante la configurazione della sessione. L'Istanza del Wallet cifra la *mdoc response* utilizzando la chiave di sessione e la trasmette all'Istanza di Relying Party mobile tramite un messaggio di *Session Data*.
+  1. **Comunicazione - Device Retrieval**: L'Istanza di Relying Party cifra la Richiesta mdoc con la chiave di sessione appropriata e la invia all'Istanza del Wallet insieme alla sua chiave pubblica nel messaggio di *Session Establishment*. L'Istanza del Wallet utilizza i dati del messaggio di *Session Establishment* per derivare la chiave di sessione e quindi per decifrare la Richiesta mdoc.
+  Durante la sottofase di comunicazione, l'Istanza di Relying Party ha l'opzione di richiedere informazioni dall'Istanza del Wallet utilizzando richieste e risposte mdoc. La modalità principale di comunicazione è il canale sicuro stabilito durante la configurazione della sessione. L'Istanza del Wallet cifra la Risposta mdoc utilizzando la chiave di sessione e la trasmette all'Istanza di Relying Party mobile tramite un messaggio di *Session Data*.
 
 
 Le Istanze di Relying Party e Wallet registrate nell'ecosistema IT-Wallet DEVONO supportare almeno:
@@ -131,7 +131,7 @@ La figura seguente illustra il flusso di basso livello conforme a ISO 18013-5 pe
 
 **Passo 8**: L'Istanza di Relying Party DEVE preparare il ``SessionEstablishment``. Questo messaggio DEVE essere firmato dall'Istanza di Relying Party (autenticazione dell'*mdoc reader* come specificato in [`ISO18013-5`_ #12.5]) e cifrato utilizzando la chiave di sessione derivata nel passo precedente. Il messaggio ``SessionEstablishment`` DEVE includere la ``EReaderKey.Pub`` e una richiesta per specifici attributi (:ref:`PPR-002 <test-plans-proximity-presentation:PPR-002>`).
 
-Di seguito è riportato un esempio non normativo in *CBOR diagnostinc notation* di un messaggio ``SessionEstablishment`` CBOR che contiene una *mdoc request* per una Wallet Attestation insieme a un Attestato Elettronico mDL.
+Di seguito è riportato un esempio non normativo in *CBOR diagnostinc notation* di un messaggio ``SessionEstablishment`` CBOR che contiene una Richiesta mdoc per una Wallet Attestation insieme a un Attestato Elettronico mDL.
 
 .. literalinclude:: ../../examples/iso-session-establishment.txt
   :language: text
@@ -160,14 +160,14 @@ Di seguito è riportato un esempio non normativo in *CBOR diagnostinc notation* 
    - Sez 8.2.2.4 per ``SessionData`` tramite BLE, e
    - Sez 8.2.2.5 per ``SessionData`` tramite NFC
 
-Di seguito è riportato un esempio non normativo di ``SessionData`` in *CBOR diagnostinc notation* che contiene la *mdoc response* di una Wallet Attestation e un Attestato Elettronico mDL.
+Di seguito è riportato un esempio non normativo di ``SessionData`` in *CBOR diagnostinc notation* che contiene la Risposta mdoc di una Wallet Attestation e un Attestato Elettronico mDL.
 
 .. literalinclude:: ../../examples/iso-session-data.txt
   :language: text
 
 **Passo 13**: L'Istanza di Relying Party riceve il ``SessionData``, quindi DEVE decifrarlo e DEVE verificare la firma dell'Istanza del Wallet per garantire l'integrità dei dati e che provengano dal dispositivo previsto (device binding). DEVE anche controllare la validità dell'mdoc, inclusa la firma del suo Fornitore di Attestati Elettronici. In caso di Attestati Elettronici Digitali di lunga durata, DOVREBBE anche controllare lo stato di revoca utilizzando il `TOKEN-STATUS-LIST`_.
 
-**Passo 14**: Una volta completato lo scambio di dati, una delle parti può terminare la sessione. La sessione può essere terminata inviando lo status code per la *Session Termination* in un messaggio ``SessionData``; questo può essere inviato insieme a una *mdoc request* o *mdoc response* [`ISO18013-5`_ #12.2.4]. Se viene utilizzato BLE, questo può comportare l'invio di uno *status code* per la *Session Termination* o il comando "End". In questo scenario, il Client GATT (Istanza di Relying Party) DEVE annullare l'iscrizione dalle caratteristiche e disconnettersi dal server GATT (Istanza del Wallet) (:ref:`PPR-007 <test-plans-proximity-presentation:PPR-007>`).
+**Passo 14**: Una volta completato lo scambio di dati, una delle parti può terminare la sessione. La sessione può essere terminata inviando lo status code per la *Session Termination* in un messaggio ``SessionData``; questo può essere inviato insieme a una la Richiesta mdoc o Risposta mdoc [`ISO18013-5`_ #12.2.4]. Se viene utilizzato BLE, questo può comportare l'invio di uno *status code* per la *Session Termination* o il comando "End". In questo scenario, il Client GATT (Istanza di Relying Party) DEVE annullare l'iscrizione dalle caratteristiche e disconnettersi dal server GATT (Istanza del Wallet) (:ref:`PPR-007 <test-plans-proximity-presentation:PPR-007>`).
 
 **Considerazione Finale**: Il flusso di presentazione si è concentrato sullo scambio tecnico di dati in contesti di prossimità. È cruciale riconoscere che i flussi di prossimità supervisionati che coinvolgono un verificatore umano svolgono un ruolo vitale in molti casi d'uso (ad esempio, verifica dell'età in un negozio, controllo dell'identità da parte delle forze dell'ordine). L'elemento umano aggiunge un livello di verifica dell'identità attraverso l'ispezione visiva e il confronto, contribuendo agli aspetti di User Binding e garanzia di autenticazione complessiva non completamente catturati in un flusso di presentazione puramente tecnico.
 
@@ -417,7 +417,7 @@ La struttura del Device Engagement DEVE essere codificata in CBOR e avere almeno
 
        - **HandoverSessionEstablishmentSupport** *(bool)*. Se presente, DEVE essere impostato su `true`. Indica il supporto per ricevere il messaggio `SessionEstablishment` durante *Negotiated Handover*, come definito in [`ISO18013-5`_ #9.2.3] (:ref:`PPR-024 <test-plans-proximity-presentation:PPR-024>`).
 
-       - **ReaderAuthAllSupport** *(bool)*. Se presente, DEVE essere impostato su `true`. Indica il supporto per ricevere la struttura `ReaderAuthAll` nell'*mdoc request*, come definito in [`ISO18013-5`_ #10.2.6]  (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
+       - **ReaderAuthAllSupport** *(bool)*. Se presente, DEVE essere impostato su `true`. Indica il supporto per ricevere la struttura `ReaderAuthAll` nella la Richiesta mdoc, come definito in [`ISO18013-5`_ #10.2.6]  (:ref:`PPR-025 <test-plans-proximity-presentation:PPR-025>`).
 
    * - **OriginInfos**
      - *(array)*. Descrive l'interfaccia utilizzata per ricevere e consegnare la struttura di engagement.
@@ -440,7 +440,7 @@ Ogni Richiesta mdoc DEVE essere conforme alla seguente struttura e DEVE includer
      - **Descrizione**
 
    * - **version**
-     - *(tstr)*. Versione della struttura dell'*mdoc request*. Abilita la gestione della compatibilità tra diverse versioni o profili di implementazione.
+     - *(tstr)*. Versione della struttura della Richiesta mdoc. Abilita la gestione della compatibilità tra diverse versioni o profili di implementazione.
 
    * - **docRequests**
      - *(array)*. Ogni voce è una `DocRequest` contenente:
@@ -491,7 +491,7 @@ Ogni Risposta mdoc DEVE essere conforme alla seguente struttura e DEVE includere
      - **Descrizione**
 
    * - **version**
-     - *(tstr)*. Versione della struttura *mdoc response*. Abilita il tracciamento delle modifiche e il mantenimento della compatibilità tra versioni dello standard o profili di implementazione.
+     - *(tstr)*. Versione della struttura Risposta mdoc. Abilita il tracciamento delle modifiche e il mantenimento della compatibilità tra versioni dello standard o profili di implementazione.
 
    * - **documents**
      - *(array of Documents, OPZIONALE)*. Collezione codificata CBOR di documenti restituiti in risposta alla richiesta. Ogni documento include componenti `issuerSigned` e `deviceSigned`, e segue la struttura definita in [`ISO18013-5`_ #10.3.3].
