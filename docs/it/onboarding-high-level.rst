@@ -6,7 +6,7 @@ Sistema di Onboarding
 
 L'ecosistema IT-Wallet opera come un'infrastruttura di trust federata dove le entità partecipanti devono stabilire relazioni di trust crittografiche e mantenere la conformità con standard di sicurezza comuni.
 
-Il sistema di onboarding DEVE abilitare operazioni sicure con Credenziali Elettroniche. Allo stesso tempo, DEVE soddisfare i diversi requisiti operativi che i diversi partecipanti richiedono.
+Il sistema di onboarding DEVE abilitare operazioni sicure con Attestati Elettronici. Allo stesso tempo, DEVE soddisfare i diversi requisiti operativi che i diversi partecipanti richiedono.
 
 I processi amministrativi per le entità organizzative sono comuni a tutti i partecipanti e indipendenti dalle loro funzioni tecniche all'interno dell'ecosistema. Tuttavia, i processi di registrazione tecnica DEVONO tenere conto dei ruoli operativi distinti.
 
@@ -24,7 +24,7 @@ Il framework di onboarding DEVE fornire processi di onboarding specializzati che
     :alt: Panoramica del sistema di onboarding IT-Wallet che mostra i processi di registrazione a doppio Journey e l'infrastruttura di trust
     :caption: `Panoramica del Sistema di Onboarding IT-Wallet. <https://www.plantuml.com/plantuml/svg/trust-infrastructure-overview>`_
 
-Tutti gli Attori Primari DEVONO sottoporsi alla registrazione amministrativa per la conformità legale e normativa, seguita da processi di registrazione tecnica specializzati che DEVONO riflettere i loro ruoli operativi nell'ecosistema delle Credenziali Elettroniche.
+Tutti gli Attori Primari DEVONO sottoporsi alla registrazione amministrativa per la conformità legale e normativa, seguita da processi di registrazione tecnica specializzati che DEVONO riflettere i loro ruoli operativi nell'ecosistema degli Attestati Elettronici.
 
     1. **Registrazione Amministrativa**: Tutte le entità (Fonti Autentiche, Relying Party, Fornitori di Wallet, Credential Issuer) DEVONO completare la registrazione amministrativa iniziale che convalida la loro posizione legale, conformità normativa ed eleggibilità organizzativa per partecipare all'ecosistema IT-Wallet.
 
@@ -51,7 +51,7 @@ Tutti gli Attori Primari DEVONO sottoporsi alla registrazione amministrativa per
 Processo di Registrazione della Fonte Autentica
 ------------------------------------------------
 
-La registrazione della Fonte Autentica consente ai fornitori di dati di stabilire il loro ruolo autorevole nell'ecosistema delle Credenziali Elettroniche attraverso la registrazione delle loro specifiche di fornire dati e meccanismi di accesso standardizzati basati sul Registro degli Attributi dell'Utente e sulle classificazioni della Tassonomia.
+La registrazione della Fonte Autentica consente ai fornitori di dati di stabilire il loro ruolo autorevole nell'ecosistema degli Attestati Elettronici attraverso la registrazione delle loro specifiche di fornire dati e meccanismi di accesso standardizzati basati sul Registro degli Attributi dell'Utente e sulle classificazioni della Tassonomia.
 
 Le Fonti Autentiche DEVONO sottoporsi a procedure di registrazione che convalidano la loro autorità sui dati, dichiarano i loro Attributi dell'Utente disponibili dal Registro degli Attributi dell'Utente standardizzato e stabiliscono meccanismi di integrazione tecnica. Le Fonti Autentiche specificano casi d'uso previsti (formalmente ``purposes``) che determinano l'eleggibilità del catalogo secondo le politiche dell'Organismo di Supervisione.
 
@@ -76,7 +76,7 @@ Le entità operative DEVONO completare l'onboarding che include la verifica dell
 
 Le entità onboardate con successo sono incluse nel Registro di Federazione, che mantiene l'elenco autorevole dei partecipanti della federazione fidati. Questo registro abilita la validazione del trust operativo durante le attività del ciclo di vita delle credenziali.
 
-Le Relying Party DEVONO verificare le Credenziali Elettroniche con garanzia crittografica, i Fornitori di Wallet DEVONO fornire servizi di portafoglio digitale fidati ai cittadini, e i Credential Issuer DEVONO emettere Credenziali Elettroniche utilizzando fonti di dati autorevoli. Tutte le operazioni DEVONO avvenire all'interno di relazioni di trust stabilite che assicurano sicurezza e auditabilità.
+Le Relying Party DEVONO verificare gli Attestati Elettronici con garanzia crittografica, i Fornitori di Wallet DEVONO fornire servizi di portafoglio digitale fidati ai cittadini, e i Credential Issuer DEVONO emettere Attestati Elettronici utilizzando fonti di dati autorevoli. Tutte le operazioni DEVONO avvenire all'interno di relazioni di trust stabilite che assicurano sicurezza e auditabilità.
 
 Gestione del Ciclo di Vita delle Entità
 ----------------------------------------
@@ -187,7 +187,7 @@ Journey dell'Operatore della Fonte Autentica
 
 ..     Processo di registrazione della Fonte Autentica e interazioni con l'Organismo di Supervisione
 
-Dalla prospettiva dell'operatore della Fonte Autentica, il processo di onboarding inizia con la valutazione delle capacità di fornire dati esistenti rispetto al Registro degli Attributi dell'Utente standardizzato e alle classificazioni della Tassonomia, determinando quali Attributi dell'Utente possono essere resi disponibili come Credenziale Elettronica. L'operatore invia una richiesta di registrazione all'Organismo di Supervisione, dichiarando Attributi dell'Utente specifici dal Registro degli Attributi dell'Utente con i domini della Tassonomia e gli scopi previsti.
+Dalla prospettiva dell'operatore della Fonte Autentica, il processo di onboarding inizia con la valutazione delle capacità di fornire dati esistenti rispetto al Registro degli Attributi dell'Utente standardizzato e alle classificazioni della Tassonomia, determinando quali Attributi dell'Utente possono essere resi disponibili come Attestato Elettronico. L'operatore invia una richiesta di registrazione all'Organismo di Supervisione, dichiarando Attributi dell'Utente specifici dal Registro degli Attributi dell'Utente con i domini della Tassonomia e gli scopi previsti.
 
 **Esempio - Fonte Autentica Pubblica (Scenario mDL)**:
 
@@ -260,7 +260,7 @@ Journey dell'Operatore del Fornitore di Wallet
 
 ..     Processo di certificazione del Fornitore di Wallet e validazione della sicurezza
 
-Gli operatori del Fornitore di Wallet seguono un Journey di onboarding indipendente che si concentra sulla certificazione dell'applicazione e sulla validazione della sicurezza. Il processo evidenzia lo sviluppo e la certificazione di applicazioni wallet che possono memorizzare e gestire in modo sicuro le Credenziali Elettroniche per i cittadini.
+Gli operatori del Fornitore di Wallet seguono un Journey di onboarding indipendente che si concentra sulla certificazione dell'applicazione e sulla validazione della sicurezza. Il processo evidenzia lo sviluppo e la certificazione di applicazioni wallet che possono memorizzare e gestire in modo sicuro gli Attestati Elettronici per i cittadini.
 
 Un requisito tecnico chiave coinvolge l'implementazione di meccanismi di controllo dell'integrità e autenticità del wallet. Questi controlli consentono al wallet di ottenere un Attestato del Wallet, che serve come prova dello stato di sicurezza e conformità del wallet durante le operazioni delle credenziali.
 
@@ -303,9 +303,9 @@ Gli operatori della Relying Party iniziano identificando quali tipi di EAA sono 
     - **Ambito di Autorizzazione**: Concesso accesso al dominio ``MEMBERSHIP``, scopo ``ASSOCIATION``.
     - **Discovery delle Credenziali**: Badge disponibile solo tramite Offerta di Credenziale privata (non eleggibile per il Catalogo delle Credenziali).
 
-L'integrazione tecnica si concentra sullo sviluppo di flussi di autenticazione che possono verificare le Credenziali Elettroniche presentate dagli Utenti. Questo include l'implementazione di meccanismi di verifica crittografica e l'istituzione di canali di comunicazione sicuri con l'infrastruttura di federazione.
+L'integrazione tecnica si concentra sullo sviluppo di flussi di autenticazione che possono verificare gli Attestati Elettronici presentati dagli Utenti. Questo include l'implementazione di meccanismi di verifica crittografica e l'istituzione di canali di comunicazione sicuri con l'infrastruttura di federazione.
 
-L'autorizzazione del servizio da parte dell'Organismo di Supervisione DEVE coinvolgere una valutazione basata su politiche che considera il tipo di organizzazione (privata vs pubblica amministrazione), la classificazione del settore aziendale e i requisiti di servizio legittimi. Il processo di autorizzazione concede ambiti operativi specifici che definiscono quali domini di credenziali e scopi la Relying Party può richiedere. Dopo l'approvazione, la Relying Party è registrata nel Registro di Federazione con profili di autorizzazione chiaramente definiti per l'accettazione delle Credenziali Elettroniche e degli Attributi dell'Utente.
+L'autorizzazione del servizio da parte dell'Organismo di Supervisione DEVE coinvolgere una valutazione basata su politiche che considera il tipo di organizzazione (privata vs pubblica amministrazione), la classificazione del settore aziendale e i requisiti di servizio legittimi. Il processo di autorizzazione concede ambiti operativi specifici che definiscono quali domini di credenziali e scopi la Relying Party può richiedere. Dopo l'approvazione, la Relying Party è registrata nel Registro di Federazione con profili di autorizzazione chiaramente definiti per l'accettazione degli Attestati Elettronici e degli Attributi dell'Utente.
 
 Journey dell'Esperienza dell'Utente Finale
 --------------------------------------------
@@ -324,4 +324,4 @@ La discovery delle credenziali avviene attraverso due flussi principali:
     - **Navigazione del Catalogo delle Credenziali**: Gli utenti possono esplorare i tipi di Credenziale disponibili attraverso un Catalogo delle Credenziali.
     - **Offerte di Credenziale**: Offerta di Credenziale diretta dalle Fonti Autentiche o dai Credential Issuer per Credenziali specifiche.
 
-La fase di accesso al servizio dimostra il valore dell'ecosistema completo, dove gli utenti possono presentare le loro Credenziali Elettroniche ai servizi delle Relying Party registrate per l'accesso autenticato. Questa integrazione senza soluzione di continuità dipende dal fatto che tutte le entità rilevanti abbiano completato i rispettivi Journey di onboarding.
+La fase di accesso al servizio dimostra il valore dell'ecosistema completo, dove gli utenti possono presentare i loro Attestati Elettronici ai servizi delle Relying Party registrate per l'accesso autenticato. Questa integrazione senza soluzione di continuità dipende dal fatto che tutte le entità rilevanti abbiano completato i rispettivi Journey di onboarding.

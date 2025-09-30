@@ -4,7 +4,7 @@
 Onboarding delle Entità
 ========================
 
-Questa sezione definisce le Specifiche Tecniche per la gestione del ciclo di vita delle entità nell'ecosistema IT-Wallet basato sull'**Infrastruttura di Registro** definita in :ref:`registry:Infrastruttura del Registro`. Questo include le procedure di onboarding iniziale, le operazioni di gestione continua (aggiornamenti dei dati, modifiche) e i processi di uscita dalla federazione. Il sistema di gestione del ciclo di vita stabilisce e mantiene l'infrastruttura di trust federata e il coordinamento del registro necessari per le operazioni sicure delle Attestati Elettronici.
+Questa sezione definisce le Specifiche Tecniche per la gestione del ciclo di vita delle entità nell'ecosistema IT-Wallet basato sull'**Infrastruttura di Registro** definita in :ref:`registry:Infrastruttura del Registro`. Questo include le procedure di onboarding iniziale, le operazioni di gestione continua (aggiornamenti dei dati, modifiche) e i processi di uscita dalla federazione. Il sistema di gestione del ciclo di vita stabilisce e mantiene l'infrastruttura di trust federata e il coordinamento del registro necessari per le operazioni sicure degli Attestati Elettronici.
 
 Per una panoramica di alto livello del processo di onboarding, vedere :ref:`onboarding-high-level:Sistema di Onboarding`. In particolare, la Sezione :ref:`onboarding-high-level:Onboarding Journey Maps` fornisce una mappa delle Journey di onboarding dal punto di vista degli operatori delle Entità.
 
