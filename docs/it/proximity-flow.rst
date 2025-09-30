@@ -184,7 +184,7 @@ Ogni Richiesta mdoc DEVE essere conforme alla seguente struttura e DEVE includer
 
 .. note:: **Richiesta dell'Attestazione del Wallet**
     
-    La Relying Party che richiede un'Attestazione del Wallet DEVE aggiungere un oggetto nell'array **docRequest** che abbia solo il campo ``docType`` impostato come ``{Trust Anchor reverse domain}.{WalletAttestation}`` (si rimanda a :ref:`registry-catalogue:Struttura del Catalogo degli Attestati Elettronici` per dettagli ulteriori). La Relying Party NON DEVE includere il parametro ``nameSpaces`` nella richiesta.
+    La Relying Party che richiede un'Attestazione del Wallet DEVE aggiungere un oggetto nell'array **docRequest** che abbia solo il campo ``docType`` impostato come ``{Trust Anchor reverse domain}.{WalletAttestation}`` (si rimanda a :ref:`registry:Struttura del Catalogo degli Attestati Elettronici` per dettagli ulteriori). La Relying Party NON DEVE includere il parametro ``nameSpaces`` nella richiesta.
 
 Risposta mdoc
 ^^^^^^^^^^^^^^
