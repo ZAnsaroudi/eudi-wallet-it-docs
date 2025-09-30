@@ -392,7 +392,7 @@ This section lists the test cases from Sections:
      - Wallet Instance verifies that every requested ``credential_configuration_id`` appears in the Credential Issuer’s ``credential_configurations_supported`` metadata; missing IDs cause the offer to fail.
    * - WP_051
      - Issuance, Interoperability
-     - Credential Request using OAuth2 code flow
+     - Credential Request using OAuth 2.0 code flow
      - Wallet Instance successfully requests PID/(Q)EAA from the PID/(Q)EAA Provider using the Authorization Code Flow per `OpenID4VCI`_.
    * - WP_052
      - Issuance, Interoperability
