@@ -219,7 +219,7 @@ Journey dell'Operatore del Credential Issuer
 ..     :alt: Journey di onboarding del Credential Issuer
 ..     :name: ci-onboarding-journey
 
-..     Registrazione del Credential Issuer con alternative del Journey di integrazione
+..     Registrazione del Credential Issuer con alternative del flusso di integrazione
 
 Gli operatori del Credential Issuer iniziano effettuando la discovery delle Fonti Autentiche disponibili attraverso il Registro AS e valutando la fattibilità dell'integrazione basata sugli Attributi dell'Utente richiesti. La richiesta di registrazione specifica quali tipi di credenziali intendono emettere, seleziona entità Fonte Autentica appropriate e dimostra la capacità tecnica di accedere alle fonti di dati richieste.
 
@@ -239,7 +239,7 @@ Gli operatori del Credential Issuer iniziano effettuando la discovery delle Font
     - **Pubblicazione del Catalogo**: Badge escluso dal catalogo pubblico per politica di supervisione.
     - **Accesso Utente**: I dipendenti ricevono badge solo tramite Offerta di Credenziale diretta dai sistemi aziendali.
 
-La fase di configurazione tecnica offre due Journey di integrazione distinti a seconda del tipo di Fonte Autentica:
+La fase di configurazione tecnica offre due flussi di integrazione distinti a seconda del tipo di Fonte Autentica:
 
     - **Integrazione AS Pubblica**: Utilizza la piattaforma PDND per accedere ai dati governativi attraverso API standardizzate.
     - **Integrazione AS Privata**: Stabilisce connessioni API dirette con endpoint personalizzati forniti da organizzazioni private.
@@ -305,7 +305,7 @@ Gli operatori della Relying Party iniziano identificando quali tipi di EAA sono 
 
 L'integrazione tecnica si concentra sullo sviluppo di flussi di autenticazione che possono verificare le Credenziali Elettroniche presentate dagli Utenti. Questo include l'implementazione di meccanismi di verifica crittografica e l'istituzione di canali di comunicazione sicuri con l'infrastruttura di federazione.
 
-L'autorizzazione del servizio da parte dell'Organismo di Supervisione DEVE coinvolgere una valutazione basata su politiche che considera il tipo di organizzazione (privata vs pubblica amministrazione), la classificazione del settore aziendale e i requisiti di servizio legittimi. Il processo di autorizzazione concede ambiti operativi specifici che definiscono quali domini di credenziali e scopi la Relying Party può richiedere. Dopo l'approvazione, la Relying Party è registrata nel Registro di Federazione con confini di autorizzazione chiaramente definiti per l'accettazione delle Credenziali Elettroniche e degli Attributi dell'Utente.
+L'autorizzazione del servizio da parte dell'Organismo di Supervisione DEVE coinvolgere una valutazione basata su politiche che considera il tipo di organizzazione (privata vs pubblica amministrazione), la classificazione del settore aziendale e i requisiti di servizio legittimi. Il processo di autorizzazione concede ambiti operativi specifici che definiscono quali domini di credenziali e scopi la Relying Party può richiedere. Dopo l'approvazione, la Relying Party è registrata nel Registro di Federazione con profili di autorizzazione chiaramente definiti per l'accettazione delle Credenziali Elettroniche e degli Attributi dell'Utente.
 
 Journey dell'Esperienza dell'Utente Finale
 --------------------------------------------
@@ -319,7 +319,7 @@ Journey dell'Esperienza dell'Utente Finale
 
 Quando tutti i processi di onboarding delle entità sono completati con successo, gli Utenti possono scoprire e installare Istanze del Wallet certificate e la nuova Credenziale disponibile.
 
-La discovery delle credenziali avviene attraverso due Journey principali:
+La discovery delle credenziali avviene attraverso due flussi principali:
 
     - **Navigazione del Catalogo delle Credenziali**: Gli utenti possono esplorare i tipi di Credenziale disponibili attraverso un Catalogo delle Credenziali.
     - **Offerte di Credenziale**: Offerta di Credenziale diretta dalle Fonti Autentiche o dai Credential Issuer per Credenziali specifiche.
