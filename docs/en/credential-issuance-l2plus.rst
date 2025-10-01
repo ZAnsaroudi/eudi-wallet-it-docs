@@ -3,7 +3,7 @@
 eID Substantial Authentication with MRTD Verification for PID Issuance
 =======================================================================
 
-This Section defines an eID Substantial Authentication with MRTD Verification protocol that integrates within the PID issuance flow as defined in the Section :ref:`credential-issuance-low-level:Credential Issuance Low-Level Flows` extending OAuth2 flows to include:
+This Section defines an eID Substantial Authentication with MRTD Verification protocol that integrates within the PID issuance flow as defined in the Section :ref:`credential-issuance-low-level:Credential Issuance Low-Level Flows` extending OAuth 2.0 flows to include:
 
 	- Electronic identification with Level of Assurance "Substantial" (LoA3) as the primary authentication step.
 	- Electronic document verification as an additional identity verification layer.
@@ -13,14 +13,14 @@ This Section defines an eID Substantial Authentication with MRTD Verification pr
 While CIEid with LoA High authentication remains the primary method for Wallet activation and PID issuance, the eID Substantial Authentication with MRTD Verification mechanism defined in this Section provides an alternative approach to enhance service accessibility and usability, without compromising the overall security of the IT-Wallet ecosystem.
 
 .. note::
-  This Section currently only supports the CIE id card for the MRTD verification protocol, but the protocol described in this Section may be extended to support other MRTD Documents such as Electronic Passports.
+  This Section currently only supports the CIE id card for the MRTD verification protocol, the protocol described in this Section MAY be extended to support other MRTD Documents such as Electronic Passports.
 
 Design Principles
 -----------------
 
 The protocol adheres to the following design principles:
 
-	- **Standard Compatibility**: Extends existing authorization frameworks without breaking changes to the standard OAuth Authorization Framework.
+	- **Standard Compatibility**: Extends existing authorization frameworks without breaking changes to the standard OAuth 2.0 Authorization Framework.
 	- **Multi-Step Authentication**: Implement progressive enforcement of authentication with MRTD verification.
 	- **Session Integrity**: Maintains secure session correlation across authentication steps.
 	- **Unified Flow**: Integrates multiple authentication factors in a single authorization session.
@@ -31,13 +31,13 @@ System Architecture
 The system architecture comprises the following main components:
 
 	- **Wallet Instance:** It handles the PID request according to IT-Wallet Specification, supporting additional cryptographic capabilities for MRTD/IAS Electronic Document reading according to `ICAO 9303`_ and `BSI-03110`_ specifications.
-	- **eID Substantial Authentication with MRTD Verification System:** Orchestrates the authentication flow, integrating LoA3 Identity Providers, Electronic Document Verification Service, and performing all the identity correlation checks to guarantee that the User requesting a PID is the same authenticated User.
+	- **eID Substantial Authentication with MRTD Verification System:** Orchestrates the authentication flow, integrating LoA3 Identity Providers, Electronic Document Verification Service, and performing all the identity correlation checks to guarantee that the User requesting a PID mathes with the authenticated one.
 
 		- **PID Authorization Server:** Handles the authorization flow for PID Issuance, coordinating the User authentication and the remote identity proofing.
 		- **MRTD PoP Service:** Handles electronic document proof of possession with cryptographic document validation.
 
 	- **LoA3 Identity Provider:** Provides Electronic Identification Schemes with eIDAS LoA3 compliance (CIEid and SPID).
-	- **CIE National Registry:** Provides privacy-preserved evidence of the binding between NIS and User's Tax payer's identification number required for the MRTD verification and, optionally, the MRZ data (document number, date of birth,expiry date, citizenship and gender) to improve the user experience. It also provides information related to the validity status of the document. It acts as the authoritative source for the CIE.
+	- **CIE National Registry:** Provides privacy-preserved evidence of the binding between NIS and User's Tax payer's identification number required for the MRTD verification and, optionally, the MRZ data (document number, date of birth, expiry date, citizenship and gender) to improve the User experience. It also provides information related to the validity status of the document. It acts as the authoritative source for the CIE.
 
 .. _fig_eID_MRTD_System_Architecture:
 .. plantuml:: plantuml/l2plus-system-architecture.puml
@@ -50,7 +50,7 @@ High-Level Flow
 
 The protocol consists of the following sequential phases:
 
-1. **OAuth Authorization Request**: PAR and authorization request with eID Substantial Authentication with MRTD Verification requirements.
+1. **OAuth Authorization Request**: PAR and authorization request with eID Substantial Authentication with MRTD Verification.
 2. **Primary Authentication**: LoA3 electronic identification (SPID/CIEid L2).
 3. **MRTD Proof of Possession (PoP) Validation**: Electronic document reading and cryptographic verification (Proof of Possession, integrity, and authenticity checks).
 4. **OAuth Authorization Response**: Final authorization code issuance.
@@ -70,7 +70,7 @@ The Authorization Server MUST maintain a unified session across all authenticati
 	- **State Correlation**: Authentication results from each step are correlated.
 	- **Security Binding**: Binding between authentication steps.
 
-This specification assumes that the PID Authorization Server and the MRTD PoP Service operate within the PID Provider boundary architecture. This architectural assumption is RECOMMENDED to ensure that the OAuth session and the relevant nonces used within the protocol flow are properly handled by both components without introducing additional complexity in session state synchronization.
+Since the PID Authorization Server and the MRTD PoP Service operate within the PID Provider boundary implementation, it is RECOMMENDED that the OAuth 2.0 session and the nonces used within the protocol flow are properly handled by both components seamlessly.
 
 When both services operate within the same trust boundary, the following mechanisms are available for session correlation:
 
@@ -79,12 +79,12 @@ When both services operate within the same trust boundary, the following mechani
 	- Synchronized nonce validation without external communication overhead.
 	- Unified audit logging and security event correlation.
 
-When the PID Authorization Server or MRTD PoP Service is deployed outside the PID Provider boundary architecture, implementers MUST refer to the :ref:`credential-issuance-l2plus:Security Considerations` for additional security measures that MUST be taken to ensure proper management of User authentication sessions. These measures include but are not limited to secure session token exchange, distributed session validation, and enhanced audit trail mechanisms.
+When the PID Authorization Server or MRTD PoP Service is deployed outside the PID Provider boundary implementation, the :ref:`credential-issuance-l2plus:Security Considerations` MUST be taken into account to harden the User authentication sessions management. These measures include but are not limited to secure session token handling, distributed session validation, and enhanced audit trail mechanisms.
 
 Low-Level Flow
 --------------
 
-This section provides technical details on how to request PID Issuance through the combination of Level of Assurance Substantial electronic identification and remote identity proofing through verification of the electronic document. The MRTD Verification service handles secure document reading and validation as part of an eID Substantial Authentication with MRTD Verification process initiated by the PID Authorization Server.
+This section provides technical details about the PID Issuance using Level of Assurance Substantial and remote identity proofing through verification of the electronic document using a MRTD Verification service.
 
 .. _fig_eID_MRTD_Detailed_Flow:
 .. plantuml:: plantuml/l2plus-detailed-flow.puml
@@ -95,7 +95,7 @@ This section provides technical details on how to request PID Issuance through t
 Phase 1: OAuth Authorization Request
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wallet Instance initiates the eID Substantial Authentication with MRTD Verification flow by submitting a Pushed Authorization Request (PAR) containing a JWT-secured Authorization Request (JAR) with authentication requirements specified via Rich Authorization Requests (RAR).
+The Wallet Instance initiates the eID Substantial Authentication with MRTD Verification flow by submitting a Pushed Authorization Request (PAR), using a JWT-secured Authorization Request (JAR) and Rich Authorization Requests (RAR) as specified below.
 
 Authorization Details
 """""""""""""""""""""
@@ -305,7 +305,7 @@ Below a non-normative example of an MRTD PoP Response:
 	- Store new ``mrtd_pop_nonce`` value securely for subsequent validation requests.
 	- Validate optional MRZ information if present in the response.
 	- Handle errors, providing relative user feedback.
-	- Store challenge data temporarily in secure memory (not persistent storage).
+	- Store challenge data temporarily.
 	- Prepare NFC reading session.
 
 The Wallet Instance performs NFC-based electronic document reading and validation, then submits the evidence to the PID Provider for final verification and identity correlation with the LoA3 authentication result.
@@ -529,7 +529,7 @@ The Wallet Instance MUST validate that the ``mrtd_val_pop_nonce`` matches the va
 Phase 4: OAuth Authorization Response
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Upon successful completion of all authentication steps and identity correlation, the Authorization Server MUST issue the final OAuth Authorization Response. If all validation checks have been passed, the Authorization Server MUST redirect the User Agent again to the Wallet Instance with an OAuth Authorization Response including the authorization code as defined in steps 6-7 of :ref:`credential-issuance-low-level:Low-Level Issuance Flow`, and in Section :ref:`credential-issuance-endpoint:Authorization Response`. The Authorization Server MUST use the ``redirect_uri`` included in the initial Request Object by the Wallet Instance.
+Upon successful completion of all authentication steps and identity matching, the Authorization Server MUST issue the final OAuth Authorization Response. If all validation checks have been passed, the Authorization Server MUST redirect the User Agent to the Wallet Instance with an OAuth Authorization Response including the authorization code as defined in steps 6-7 of :ref:`credential-issuance-low-level:Low-Level Issuance Flow`, and in Section :ref:`credential-issuance-endpoint:Authorization Response`. The Authorization Server MUST use the ``redirect_uri`` included in the initial Request Object by the Wallet Instance.
 
 Error Management
 ----------------
@@ -588,7 +588,6 @@ Secure Session Management
 
 The ``mrtd_auth_session `` parameter serves as the primary correlation mechanism between authentication steps. Implementations MUST ensure this identifier has sufficient entropy (minimum 128 bits) and is cryptographically secure. The session identifier MUST be validated at each step to prevent session fixation attacks.
 
-Each authentication step MUST be cryptographically bound to the OAuth session through signed JWT validation to prevent session fixation, session confusion, and identity substitution attacks. The Authorization Server MUST maintain the correlation between the LoA3 identity and the document proof within a single session context.
 
 .. _fig_eID_MRTD_Security_Controls:
 .. plantuml:: plantuml/l2plus-security-controls.puml
@@ -620,13 +619,13 @@ The following security controls MUST be implemented in the protocol:
      - **Description**
      - **Phase**
    * - **SC1**
-     - The network communication channels are protected by using TLS v1.2+ with secure ciphers.
+     - The network communication channels are protected by using TLS with secure ciphers (at the time of this release, it is at least TLS v1.2).
      - All
    * - **SC2**
      - The Wallet Instance ensures the authenticity of the PID Provider and the eID Identity Provider by pinning the leaf certificate of each server.
      - All
    * - **SC3**
-     - The PID Authorization Server verifies that the eID Identity Provider used within the *eID LoA3* phase is accredited.
+     - The PID Authorization Server verifies that the eID Identity Provider used within the *eID LoA3* phase is trustworthy.
      - Phase 2
    * - **SC4**
      - The PID Authorization Server verifies the authenticity and integrity of the data extracted from the *eID LoA3* assertion, by checking the digital signature.
@@ -638,7 +637,7 @@ The following security controls MUST be implemented in the protocol:
      - The PID Provider verifies all the nonce values to detect replay attacks.
      - Phase 3
    * - **SC7**
-     - The Wallet Instance verifies that ``challenge_info`` is properly signed by the PID Authorization Server. Moreover, it checks that ``challenge_info`` contains: an ``iss`` value corresponding to the value of the PID Authorization Server; an aud value equal to the ``client_id`` of the Wallet Instance; and a ``state`` value equal to the one in the PAR request, to be sure that the response is bound to the initial request that is made by the Wallet Instance in Step 2. Therefore the information provided as part of ``challenge_info``, in particular the ``htu`` that corresponds to the redirect url to follow for the *MRTD PoP*, is not tampered with.
+     - The Wallet Instance verifies that ``challenge_info`` is properly signed by the PID Authorization Server. Moreover, it checks that ``challenge_info`` contains: an ``iss`` value corresponding to the value of the PID Authorization Server; an ``aud`` value equal to the ``client_id`` of the Wallet Instance; and a ``state`` value equal to the one in the PAR request, to be sure that the response is bound to the initial request that is made by the Wallet Instance in Step 2. Therefore the information provided as part of ``challenge_info``, in particular the ``htu`` that corresponds to the redirect url to follow for the *MRTD PoP*, is not tampered with.
      - Phase 3
    * - **SC8**
      - The PID Provider checks that the ``mrtd_auth_session `` is associated with the same Wallet Instance in all the requests within the *MRTD PoP* phase. Therefore the PID Provider can be sure that the Wallet Instance performing the *MRTD PoP* phase: is trusted; is always the same across the protocol; and has previously started the PID issuance (PAR request). This can be implemented by requesting the Wallet Instance to perform a proof of possession of its private key (e.g., within OAuth-Client-Attestation or by signing a nonce value).
