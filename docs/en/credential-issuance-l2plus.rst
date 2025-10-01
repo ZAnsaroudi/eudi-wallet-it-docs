@@ -5,7 +5,7 @@ eID Substantial Authentication with MRTD Verification for PID Issuance
 
 This Section defines an eID Substantial Authentication with MRTD Verification protocol that integrates within the PID issuance flow as defined in the Section :ref:`credential-issuance-low-level:Credential Issuance Low-Level Flows` extending OAuth 2.0 flows to include:
 
-	- Electronic identification with Level of Assurance "Substantial" (LoA3) as the primary authentication step.
+	- Electronic identification with Level of Assurance "Substantial" (LoA3).
 	- Electronic document verification as an additional identity verification layer.
 	- Session correlation and security binding between authentication steps.
 	- Integration with Credential issuance flows.

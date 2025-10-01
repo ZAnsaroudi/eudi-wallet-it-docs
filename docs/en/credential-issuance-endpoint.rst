@@ -158,7 +158,7 @@ The ``request`` JWT payload contained in the HTTP POST message is given with the
             - **type**: REQUIRED. MUST be ``it_l2+document_proof``,
             - **idphinting**: REQUIRED. URL of the Identity Provider to be used as a hint,
             - **challenge_method**: REQUIRED. Specifies the MRTD verification method. The value MUST be ``mrtd+ias``. Additional verification methods MAY be defined in future releases of this Specification,
-            - **challenge_redirect_uri**: REQUIRED. Redirect URI for the challenge process. The value MUST be the Universal Link registered by the Wallet Instance.
+            - **challenge_redirect_uri**: REQUIRED. Redirect URI, recognized by Wallet Instance, for handling the challenge response.
       - See [RAR :rfc:`9396`], [`OpenID4VCI`_] and :ref:`credential-issuance-l2plus:eID Substantial Authentication with MRTD Verification for PID Issuance`.
     * - **redirect_uri**
       - Redirection URI to which the response is intended to be sent. It MUST be an universal or app link registered with the local operating system, so this latter will provide the response to the Wallet Instance.
