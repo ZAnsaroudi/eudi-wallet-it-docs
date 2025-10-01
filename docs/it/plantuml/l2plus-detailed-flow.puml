@@ -66,7 +66,7 @@ DPOPS --> A: **Risposta Validazione MRTD PoP**\nHTTP/1.1 202 Accepted\ncon redir
 
 A -> A: firma mrtd_val_pop_nonce
 
-A -> AS: **Conferma Finale Basata su Browser**\nGET https://pid-provider.example.org/cb?nonce=mrtd_val_pop_nonce_signed&oauth_session=...\n(tramite browser)
+A -> AS: **Conferma Finale Basata su Browser**\nGET https://pid-provider.example.org/cb?mrtd_val_pop_nonce_signed&oauth_session=...\n(tramite browser)
 
 === Fase 4: Risposta Autorizzazione OAuth ==
 AS -> A: **Risposta Autorizzazione PID con Codice Auth**\nHTTP/1.1 302 Found\n Location: https://start.wallet.example.org?\n code=...\n &state=...\n &iss=https%3A%2F%2Fpid-provider.example.org
