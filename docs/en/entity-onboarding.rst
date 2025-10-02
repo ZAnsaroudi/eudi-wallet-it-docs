@@ -19,7 +19,7 @@ The IT-Wallet ecosystem is based on a federated trust infrastructure where parti
 The onboarding framework MUST allow technical registration procedures that are tailored to the participant's role in the IT-Wallet ecosystem:
 
   1. For Authentic Sources requiring data-focused registration procedures.
-  2. For operational Entities (Credential Issuers, Relying Parties, Wallet Providers) requiring cryptographic trust establishment through federation protocols.
+  2. For operational Entities (Credential Issuers, Relying Parties, Wallet Providers) requiring trust establishment.
 
 
 Entity Types and Onboarding Pathways
@@ -37,7 +37,7 @@ The following table summarizes entity types, their roles, and corresponding onbo
      - **Onboarding Pathway**
      - **Key Requiring**
    * - Authentic Sources
-     - Authoritative data providers for credential attributes
+     - Authoritative data providers for Credential attributes
      - :ref:`entity-onboarding:Authentic Sources Registration Process`
      - Data authority validation, API integration (PDND/Custom).
    * - Credential Issuers
@@ -73,8 +73,8 @@ The onboarding process follows a structured multi-phase approach:
 
     - **Claims Registry Integration**: Authentic Sources select standardized claim definitions from Claims Registry during capability declaration.
     - **Taxonomy Integration**: All entities use Taxonomy hierarchical classification (domains, purposes) for organizational structure to categorize Credentials.
-    - **AS Registry Integration**: Authentic Sources registered with their declared claims and capabilities, enabling CI discovery and coordination.
-    - **Federation Registry Integration**: Operational entities included for trust validation during credential operations.
+    - **AS Registry Integration**: Authentic Sources registered with their declared claims and capabilities, enabling Credential Issuers discovery and coordination.
+    - **Federation Registry Integration**: Operational entities included for trust validation during Credential operations.
     - **Catalog Integration**: Credential types published in :ref:`registry:Digital Credentials Catalog Structure` based on supervisory body policies for public discovery eligibility.
 
 All registry components and their interactions are detailed in :ref:`registry:Registry Infrastructure`.
@@ -102,12 +102,12 @@ Authentic Sources MUST comply with the following technical requirements to ensur
   - **Response Format Standardization**:
 
     - **Standard Claims Format**: The Entities MUST use Claims Registry identifiers and formats in all data responses.
-    - **State Mapping**: The Entities MUST handle clear mapping between their internal states and standard credential states (valid, suspended, revoked).
+    - **State Mapping**: The Entities MUST handle clear mapping between their internal states and standard Credential states (valid, suspended, revoked).
 
   - **Security and Quality Assurance**:
 
-    - **Security Standards**: The Entities MUST implement TLS 1.3 minimum with proper authentication and security mechanisms.
-    - **User Authentication Evidence**: The Entities MAY request user authentication evidence from Credential Issuer before granting access to e-services for obtaining user attributes.
+    - **Security Standards**: The Entities MUST implement TLS 1.3 or higher with robust authentication mechanisms, forward secrecy, and cryptographic algorithms that meet current and emerging security standards, end-to-end confidentiality and integrity of all communications, maintaining compliance with evolving regulatory requirements and industry best practices.
+    - **User Authentication Evidence**: The Entities MAY request User authentication evidence from Credential Issuer before granting access to e-services for obtaining User attributes.
     - **Data Quality**: The Entities MUST specify update frequency and provide data freshness guarantees.
     - **Audit Trail**: The Entities MUST implement logging capabilities for all data access and provisioning activities.
 
@@ -147,11 +147,11 @@ During registration, Authentic Sources MUST provide the following information:
 
        **Example**: "Driving license data is available for licenses issued after January 1, 2020. For older licenses, contact the local motorization office.".
    * - **Display Properties**
-     - **OPTIONAL**. Visual branding suggestions for credentials using AS data:
+     - **OPTIONAL**. Visual branding suggestions for Credentials using AS data:
 
        - Background color for Credentials in hexadecimal format (e.g., ``"#003d82"``).
        - Text color for Credentials in hexadecimal format (e.g., ``"#ffffff"``).
-       - Logo URI with cryptographic integrity verification for credential branding.
+       - Logo URI with cryptographic integrity verification for Credential branding.
        - Visual template URI with integrity verification for Credential presentation.
 
 AS Registration Procedure
@@ -244,21 +244,21 @@ Technical integration encompasses:
 Federation Entities Onboarding Process
 ---------------------------------------
 
-Federation Entities (Credential Issuers, Relying Parties, and Wallet Providers) MUST undergo onboarding procedures to establish cryptographic trust relationships within the IT-Wallet ecosystem. The federation onboarding process establishes the distributed trust infrastructure through certificate issuance, trust chain configuration, and compliance attestation as detailed in :ref:`trust:The Infrastructure of Trust`.
+Federation Entities (Credential Issuers, Relying Parties, and Wallet Providers) MUST undergo onboarding procedures to establish trust relationships within the IT-Wallet ecosystem. The federation onboarding process establishes the distributed trust infrastructure through certificate issuance, trust chain validations, and compliance attestation as detailed in :ref:`trust:The Infrastructure of Trust`.
 
 Hierarchical Federation Authority Model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The IT-Wallet federation implements a **hierarchical onboarding model** where Federation Entities MAY be onboarded by either:
+The IT-Wallet federation implements a **hierarchical onboarding model** where Federation Entities MUST be onboarded by one of the following actors:
 
   1. **Trust Anchor**: The root authority that has the capability to directly onboard any Federation Entity.
   2. **Intermediates**: Delegated authorities that onboard Leaf Entities on behalf of Trust Anchor.
 
 This hierarchical approach enables **distributed onboarding management** while maintaining a unified trust establishment. Both Trust Anchors and Intermediates act as **Federation Authorities** with the following onboarding capabilities:
 
-  - **Certificate Issuance**: Issue X.509 certificates to their immediate subordinates with appropriate naming constraints as defined in :ref:`trust:X.509 PKI`.
+  - **Certificate Issuance**: Issue X.509 Certificates to their Immediate Subordinates with appropriate naming constraints as defined in :ref:`trust:X.509 PKI`.
   - **Metadata Policy Application**: Apply federation-specific metadata policies with **cascading effect** (Trust Anchor policies override Intermediate policies).
-  - **Trust Mark Issuance**: Issue Federation Trust Marks attesting subordinate compliance with federation requirements.
+  - **Trust Mark Issuance**: Issue Federation Trust Marks attesting Subordinate compliance with federation requirements.
 
 Therefore, Federation Entities MAY be onboarded through different paths:
 
@@ -276,9 +276,9 @@ Federation Entities MUST comply with the following technical requirements before
   - **Key Generation**: The entities MUST generate at least two key pairs using elliptic curve cryptography as specified in :ref:`algorithms:Cryptographic Algorithms`:
 
     - **Federation Key Pair**: Used for signing Entity Configurations and attesting Protocol Keys.
-    - **Protocol Key Pair(s)**: Used for entity-specific protocol operations (credential issuance, presentation verification, etc.).
+    - **Protocol Key Pair(s)**: Used for entity-specific protocol operations, such as Credential issuance, presentation verification, others.
 
-  - **Protocol Key Attestation**: The entities MUST create self-signed X.509 certificates for their Protocol Keys using the Federation Private Key. These certificates establish the authority relationship between Federation and Protocol keys.
+  - **Protocol Key Attestation**: The entities MUST create self-signed X.509 Certificates for their Protocol Keys using the Federation Private Key. These Certificates establish the authority relationship between Federation and Protocol keys.
 
   - **Entity Configuration Preparation**: The entities MUST publish an Entity Configuration (EC) signed with their Federation Private Key at the ``/.well-known/openid-federation`` endpoint as defined in :ref:`trust:The Infrastructure of Trust`. The EC MUST include:
 
@@ -288,11 +288,11 @@ Federation Entities MUST comply with the following technical requirements before
     - ``iat`` and ``exp`` claims defining a valid time interval.
     - A ``metadata`` claim containing entity-specific metadata organized by Metadata Types (see :ref:`credential-issuer-entity-configuration:Credential Issuer Entity Configuration`, :ref:`relying-party-entity-configuration:Relying Party Entity Configuration`, or :ref:`wallet-provider-entity-configuration:Wallet Provider Entity Configuration`) with Protocol Keys included in the metadata ``jwks`` fields and self-signed certificates in the corresponding ``x5c`` claims.
 
-  - **Certificate Signing Request (CSR)**: The entities MUST prepare a CSR in PKCS #10 format containing **only the Federation Entity Public Key** for X.509 certificate issuance by the Federation Authority as defined in :ref:`trust:Trust Infrastructure Requirements`.
+  - **Certificate Signing Request (CSR)**: The entities MUST prepare a CSR in PKCS #10 format containing **only the Federation Entity Public Key** for X.509 Certificate issuance by the Federation Authority as defined in :ref:`trust:Trust Infrastructure Requirements`.
 
 Federation Onboarding Procedure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The federation onboarding follows a structured 4-step procedure that enables secure interactions among federation participants, **regardless of whether onboarding is performed by the Trust Anchor or an Intermediate**.
+The federation onboarding follows a structured 4-step procedure, it can be performed by the Trust Anchor or an Intermediate**.
 
 .. note::
    The following procedure applies to Wallet Providers, Credential Issuers and Relying Parties that wish to perform onboarding in the IT-Wallet federation. The **Federation Authority** is referred to Trust Anchor or Intermediate according to organizational characteristics and federation governance policies.
@@ -321,7 +321,7 @@ The federation onboarding follows a structured 4-step procedure that enables sec
    * - **Federation Entity Public Key (JWK)**
      - **REQUIRED**. Elliptic public key in JSON Web Key format used for signing Entity Configurations and attesting Protocol Keys, using cryptographic algorithms specified in :ref:`algorithms:Cryptographic Algorithms`.
    * - **Certificate Signing Request (CSR)**
-     - **REQUIRED**. CSR in PKCS #10 format for X.509 certificate issuance by the Federation Authority. The CSR MUST:
+     - **REQUIRED**. CSR in PKCS #10 format for X.509 Certificate issuance by the Federation Authority. The CSR MUST:
 
        - Contain **only the Federation Entity Public Key** to be certified.
        - Be signed with the corresponding Federation Private Key.
