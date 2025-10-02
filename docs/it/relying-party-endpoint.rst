@@ -14,13 +14,13 @@ La Relying Party DEVE esporre un Endpoint per verificare il trust conforme alla 
 Endpoint di Federazione della Relying Party
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-La Relying Party DEVE fornire la propria Entity Configuration attraverso l'Endpoint ``/.well-known/openid-federation``, secondo la Sezione :ref:`trust:Entity Configuration`. I dettagli tecnici sono forniti nella Sezione :ref:`relying-party-entity-configuration:Entity Configuration Relying Party` (:ref:`test-plans-remote-presentation:RPR-01`, :ref:`test-plans-remote-presentation:RPR-02`, :ref:`test-plans-remote-presentation:RPR-03`, :ref:`test-plans-remote-presentation:RPR-04`, :ref:`test-plans-remote-presentation:RPR-05`, :ref:`test-plans-remote-presentation:RPR-06`).
+La Relying Party DEVE fornire la propria Entity Configuration attraverso l'Endpoint ``/.well-known/openid-federation``, secondo la Sezione :ref:`trust:Entity Configuration`. I dettagli tecnici sono forniti nella Sezione :ref:`relying-party-entity-configuration:Entity Configuration Relying Party`.
 
 
 Endpoint Nonce della Relying Party
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Il Nonce Endpoint della Relying Party consente all'App di Verifica di richiedere un ``nonce`` crittografico dal Backend della Relying Party. Il ``nonce``, un codice monouso e casuale, serve per garantire l'unicità e prevenire replay attacks (:ref:`test-plans-remote-presentation:RPR-30`, :ref:`test-plans-remote-presentation:RPR-31`, :ref:`test-plans-remote-presentation:RPR-42`, :ref:`test-plans-remote-presentation:RPR-43`, :ref:`test-plans-remote-presentation:RPR-56`, :ref:`test-plans-remote-presentation:RPR-69`, :ref:`test-plans-remote-presentation:RPR-70`).
+Il Nonce Endpoint della Relying Party consente all'App di Verifica di richiedere un ``nonce`` crittografico dal Backend della Relying Party. Il ``nonce``, un codice monouso e casuale, serve per garantire l'unicità e prevenire replay attacks.
 
 Ulteriori dettagli sulla Richiesta e Risposta Nonce sono forniti rispettivamente nelle Sezioni :ref:`mobile-application-instance:Richiesta di Nonce dell'Applicazione Mobile` e :ref:`mobile-application-instance:Richiesta di Nonce dell'Applicazione Mobile`.
 
@@ -34,7 +34,7 @@ Ulteriori dettagli sulla Richiesta e Risposta di Inizializzazione dell'App di Ve
 Endpoint di Associazione Chiavi della Relying Party
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Il Key Binding Endpoint della Relying Party consente alle App di Verifica di associare la coppia di chiavi appena creata, che sarà associata a un Certificato di Accesso, all'App di Verifica, basandosi su una dimostrazione di possesso delle Cryptographic Hardware Keys generate durante la fase di :ref:`mobile-application-instance:Inizializzazione dell'Istanza dell'Applicazione Mobile`. Prima di completare il processo, il Backend della Relying Party deve anche verificare l'integrità dell'App di Verifica (:ref:`test-plans-proximity-presentation:PPR-003`, :ref:`test-plans-proximity-presentation:PPR-009`, :ref:`test-plans-proximity-presentation:PPR-011`, :ref:`test-plans-proximity-presentation:PPR-016`, :ref:`test-plans-proximity-presentation:PPR-018`).
+Il Key Binding Endpoint della Relying Party consente alle App di Verifica di associare la coppia di chiavi appena creata, che sarà associata a un Certificato di Accesso, all'App di Verifica, basandosi su una dimostrazione di possesso delle Cryptographic Hardware Keys generate durante la fase di :ref:`mobile-application-instance:Inizializzazione dell'Istanza dell'Applicazione Mobile`. Prima di completare il processo, il Backend della Relying Party deve anche verificare l'integrità dell'App di Verifica.
 
 Richiesta di Associazione Chiavi della Relying Party
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -56,13 +56,13 @@ Di seguito è riportato un esempio non normativo di una Risposta alla Richiesta 
 
     HTTP/1.1 204 No content
 
-Se si verificano errori durante il processo, viene restituita una Error Response. Ulteriori dettagli sulla Error Response sono forniti nella sezione :ref:`mobile-application-instance:Risposta di Errore di Associazione Chiave dell'Applicazione Mobile` (:ref:`test-plans-proximity-presentation:PPR-008`, :ref:`test-plans-proximity-presentation:PPR-013`).
+Se si verificano errori durante il processo, viene restituita una Error Response. Ulteriori dettagli sulla Error Response sono forniti nella sezione :ref:`mobile-application-instance:Risposta di Errore di Associazione Chiave dell'Applicazione Mobile`.
 
 
 Endpoint del Certificato di Accesso della Relying Party
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-L'Endpoint del Certificato di Accesso della Relying Party consente alle App di Verifica di ottenere un Certificato di Accesso (:ref:`test-plans-proximity-presentation:PPR-004`, :ref:`test-plans-proximity-presentation:PPR-005`, :ref:`test-plans-proximity-presentation:PPR-012`).
+L'Endpoint del Certificato di Accesso della Relying Party consente alle App di Verifica di ottenere un Certificato di Accesso.
 
 
 Richiesta del Certificato di Accesso della Relying Party
@@ -166,7 +166,7 @@ La seguente tabella elenca gli HTTP Status Code e i relativi codici di errore ch
 Endpoint di Cancellazione della Relying Party
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-L'Endpoint di Cancellazione, che è descritto in :ref:`relying-party-metadata:Metadati della Relying Party`, consente alle Istanze di Wallet di richiedere la cancellazione degli attributi presentati alla Relying Party. La Relying Party DEVE richiedere l'autenticazione dell'Utente prima di procedere con la cancellazione degli attributi (:ref:`test-plans-proximity-presentation:PPR-006`, :ref:`test-plans-proximity-presentation:PPR-010`).
+L'Endpoint di Cancellazione, che è descritto in :ref:`relying-party-metadata:Metadati della Relying Party`, consente alle Istanze di Wallet di richiedere la cancellazione degli attributi presentati alla Relying Party. La Relying Party DEVE richiedere l'autenticazione dell'Utente prima di procedere con la cancellazione degli attributi.
 
 Richiesta di Cancellazione
 """"""""""""""""""""""""""

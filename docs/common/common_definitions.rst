@@ -10,7 +10,7 @@
 .. _ETSI TS 119 612: https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.03.01_60/ts_119612v020301p.pdf
 .. _EU_2024/2977: https://eur-lex.europa.eu/eli/reg_impl/2024/2977/
 .. _Federation endpoint: wallet-solution.html#federation-endpoint
-.. _ISO18013-5: https://www.iso.org/standard/69084.html
+.. _ISO18013-5: https://github.com/ISOWG10/ISO-18013/blob/main/Working%20Documents/Working%20Draft%20ISO_IEC_18013-5_second-edition_CD_ballot_resolution_v3.pdf
 .. _JARM: https://openid.net/specs/oauth-v2-jarm-final.html
 .. _JWA: https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-algorithms
 .. _JWE: https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-encryption
@@ -52,14 +52,20 @@
 .. _OpenID4VC-SecTrust: https://openid.github.io/OpenID4VC_SecTrust/draft-oid4vc-security-and-trust.html
 .. _OpenID4VCI: https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-15.html
 .. _OpenID4VP: https://openid.net/specs/openid-4-verifiable-presentations-1_0-23.html
-.. _PDND: https://www.agid.gov.it/sites/agid/files/2024-06/Linee_guida_infrastruttura_interoperabilita_pdnd.pdf
+.. _PDND: https://www.agid.gov.it/sites/agid/files/2025-06/Linee_guida_Infrastruttura_Interoperabilit%C3%A0_PDND_v2_maggio_2025.pdf
 .. _RFC 2898: http://tools.ietf.org/html/rfc2898.html
+.. _RFC 4648: https://datatracker.ietf.org/doc/html/rfc4648
 .. _RFC 9449: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-dpop
 .. _RFC 5280: https://datatracker.ietf.org/doc/html/rfc5280
 .. _RFC 7763: https://www.rfc-editor.org/rfc/rfc7763.html
 .. _SD-JWT-VC: https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/06/
 .. _SD-JWT: https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-14
 .. _Secure Enclave: https://support.apple.com/en-gb/guide/security/sec59b0b31ff/web
+.. _Signal Hub Guide: https://developer.pagopa.it/pdnd-interoperabilita/guides/manuale-operativo-signal-hub
+.. _Signal Hub pull: https://developer.pagopa.it/pdnd-interoperabilita/guides/manuale-operativo-signal-hub/1.0/tutorial/come-recuperare-i-segnali
+.. _Signal Hub pull-yaml: https://raw.githubusercontent.com/pagopa/interop-signalhub-core/refs/tags/1.0.1/docs/openAPI/pull-signals.yaml
+.. _Signal Hub push: https://developer.pagopa.it/pdnd-interoperabilita/guides/manuale-operativo-signal-hub/1.0/tutorial/come-depositare-un-segnale
+.. _Signal Hub push-yaml: https://raw.githubusercontent.com/pagopa/interop-signalhub-core/refs/tags/1.0.1/docs/openAPI/push-signals.yaml
 .. _SIOPv2: https://openid.net/specs/openid-connect-self-issued-v2-1_0.html
 .. _SPID/CIE-OpenID-Connect-Specifications: https://italia.github.io/spid-cie-oidc-docs/en
 .. _TOKEN-STATUS-LIST: https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/07/
