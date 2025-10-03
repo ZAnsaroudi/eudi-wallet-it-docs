@@ -1042,7 +1042,7 @@ Supervisory Body Removal - Technical Implementation
   1. **Emergency Certificate Revocation**: The Federation Authority MUST immediately revoke certificates with appropriate reason code (e.g., "Key Compromise", "Cessation of Operation").
   2. **CRL Emergency Update**: The Trust Anchor MUST publish updated CRL within emergency timeframe.
   3. **Subordinate Statement Removal**: The Federation Authority MUST immediately and completely remove the Entity's Subordinate Statement from all federation endpoints.
-  4. **Entity Configuration Invalidation**: The Entity's Configuration at ``/.well-known/openid-federation`` becomes invalid due to certificate revocation (signature verification fails).
+  4. **Entity Configuration Invalidation**: The Entity's Configuration at ``/.well-known/openid-federation`` becomes invalid due to X.509 Certificate revocation (signature verification fails).
   5. **Trust Chain Invalidation**: Trust Chain resolution MUST return error status for affected entity.
   6. **Service Endpoint Isolation**: Federation infrastructure MUST block access to federation service endpoints.
 
@@ -1067,7 +1067,9 @@ Specific technical components MAY be modified while maintaining federation membe
    {
      "iss": "https://ci.example.it",
      "sub": "https://ci.example.it",
-     "jwks": { },
+     "jwks": { 
+       // jwks content
+     },
      "metadata": {
        "openid_credential_issuer": {
          "credential_endpoint": "https://ci.example.it/credential",
@@ -1089,7 +1091,7 @@ The Entity MUST follow these steps for component modifications:
 Entities that exit the federation MUST maintain the following for regulatory compliance:
 
 1. **Historical Entity Configuration**: The Entity MUST maintain ``/.well-known/openid-federation`` endpoint accessibility for audit purposes (minimum 7 years).
-2. **Certificate Chain Archive**: The Entity MUST keep certificate chains accessible for existing credential verification (minimum 7 years).
+2. **Certificate Chain Archive**: The Entity MUST keep X.509 Certificate chains accessible for existing Credential verification (minimum 7 years).
 3. **Audit Log Preservation**: The Entity MUST archive federation protocol logs per regulatory requirements.
 
 
