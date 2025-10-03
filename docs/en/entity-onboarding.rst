@@ -684,14 +684,14 @@ Trust Mark Validation
 
 Federation participants validate Trust Mark status through two mechanisms:
 
-1. **Static Validation**: Cryptographic verification using the issuing Federation Authority's public key from the trust chain.
+1. **Static Validation**: Cryptographic verification using the issuing Federation Authority's public key from the Trust Chain.
 2. **Dynamic Validation**: Real-time status verification via the issuing Federation Authority's ``/trust_mark_status`` endpoint as defined in :ref:`trust:Federation API endpoints`.
 
 
 Certificate Management Operations
 ----------------------------------
 
-This section defines the operational procedures for X.509 certificate management within the IT-Wallet federation, covering certificate chain analysis, validation procedures, and revocation verification. These procedures complement the federation onboarding processes and support ongoing certificate lifecycle management for all federation participants.
+This section defines the operational procedures for X.509 Certificate management within the IT-Wallet federation, covering certificate chain analysis, validation procedures, and revocation verification. These procedures complement the federation onboarding processes and support ongoing X.509 Certificate lifecycle management for all the participants.
 
 Federation PKI Architecture
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -704,23 +704,22 @@ The IT-Wallet federation operates a hierarchical Public Key Infrastructure where
 
 Each federation entity MUST expose its Federation Entity certificate on a publicly accessible endpoint. The Federation Entity private key serves dual purposes:
 
-	1. Self-issuing Protocol certificates for internal cryptographic operations (limited sub-CA capability).
+	1. Self-issuing Protocol X.509 Certificates for internal cryptographic operations (limited sub-CA capability).
 	2. Acting as the Federation Entity Key for signing Entity Statements.
 
 .. note:: 
-  Federation entities (Leafs) can ONLY issue certificates for themselves (Protocol certificates), NOT for other federation entities. Only Federation Authorities (Trust Anchor and Intermediates) can issue certificates for other entities.
+  Federation entities (Leaves) can ONLY issue X.509 Certificates for themselves (Protocol certificates), NOT for other federation entities. Only Federation Authorities (Trust Anchor and Intermediates) can issue X.509 Certificates for other entities.
 
-For Protocol certificates with validity periods exceeding 24 hours, the issuing entity MUST publish and regularly update a Certificate Revocation List (CRL) on a publicly accessible endpoint.
+For protocol specific X.509 Certificates, with validity periods exceeding 24 hours, the issuing entity MUST publish and regularly update a Certificate Revocation List (CRL) on a publicly accessible endpoint.
 
 Certificate Chain Structure and Analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Federation entities receive certificate chains during the onboarding process. Understanding and validating these chains is essential for proper federation operations and trust verification.
+Federation entities receive X.509 Certificate chains during the onboarding process. Federation entities MUST validate these chains about themselves.
 
 Certificate Chain Visualization
 """"""""""""""""""""""""""""""""
 
-Federation entities SHOULD analyze received certificate chains using standard cryptographic tools to verify proper structure and validate trust relationships.
 
 The following script enables federation entities to:
 
@@ -798,7 +797,7 @@ Federation entities SHOULD verify:
 Certificate Revocation Management
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Federation entities MUST implement certificate revocation verification to ensure ongoing trust validation and compliance with federation security requirements.
+Federation entities MUST implement X.509 Certificate revocation verification to ensure ongoing trust validation and compliance with federation security requirements.
 
 CRL Distribution and Access
 """"""""""""""""""""""""""""
@@ -892,23 +891,23 @@ Certificate Management Best Practices
 Certificate Validation Integration
 """""""""""""""""""""""""""""""""""
 
-Federation entities SHOULD integrate certificate validation procedures into their standard federation operations:
+Federation entities SHOULD integrate X.509 Certificate validation procedures into their standard federation operations:
 
-	1. **Entity Configuration Updates**: Verify certificate chains when processing authority hints and certificate updates.
-	2. **Trust Chain Construction**: Validate all certificates during trust chain building procedures.
-	3. **Federation API Operations**: Perform certificate revocation checks during ``/resolve`` and ``/fetch`` operations.
-	4. **Protocol Certificate Management**: Validate self-issued Protocol certificates for internal services.
-	5. **Periodic Validation**: Implement regular certificate and CRL validation schedules.
+	1. **Entity Configuration Updates**: Verify X.509 Certificate chains when processing authority hints and certificate updates.
+	2. **Trust Chain Construction**: Validate all X.509 Certificates during trust chain building procedures.
+	3. **Federation API Operations**: Perform X.509 Certificate revocation checks during ``/resolve`` and ``/fetch`` operations.
+	4. **Protocol Certificate Management**: Validate self-issued protocol specific X.509 Certificate for internal services.
+	5. **Periodic Validation**: Implement regular X.509 Certificate and CRL validation schedules.
 
 Diagnostic and Troubleshooting
 """""""""""""""""""""""""""""""
 
-Federation entities MAY implement diagnostic procedures to identify and resolve certificate-related issues:
+Federation entities MUST implement diagnostic procedures to identify and resolve X.509 Certificate-related issues:
 
   - **Certificate Validation**, including:
 
     - **Authority Key Identifier Mismatches**: CRL Authority Key Identifier does not match Trust Anchor Subject Key Identifier.
-    - **Trust Anchor Certificate Rotation**: Outdated Trust Anchor certificates causing validation failures.
+    - **Trust Anchor Certificate Rotation**: Outdated Trust Anchor X.509 Certificate causing validation failures.
     - **Serial Number Format Issues**: Serial number normalization problems in revocation checking.
 
   - **CRL Validation Failure**: When CRL validation fails, federation entities SHOULD:
@@ -952,7 +951,7 @@ Federation entities MUST coordinate certificate management with federation lifec
 - **Certificate Renewal**: Align certificate renewals with Entity Configuration updates and Trust Mark refresh cycles, according to the federation limits defined in :ref:`entity-onboarding:Federation PKI Architecture`.
 - **Key Rotation**: Coordinate Federation Entity Key rotation with certificate renewal procedures.
 - **CRL Management**: For Protocol certificates with validity > 24 hours, maintain current CRL publication.
-- **Federation Exit**: Ensure proper certificate revocation during voluntary or supervisory body-initiated federation exit.
+- **Federation Exit**: Ensure proper X.509 Certificate revocation during voluntary or supervisory body-initiated federation exit.
 
 
 Entity Lifecycle Management
