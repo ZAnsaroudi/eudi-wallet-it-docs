@@ -339,11 +339,15 @@ A non-normative example of the technical information structure that Federation E
     "entity_id": "https://credential-issuer.example.gov",
     "entity_type": "credential_issuer",
     "jwks": {
-      "kid": "NsXymfIILEPR5Y0t",
-      "kty": "EC",
-      "x": "gXY4FApFJCj91Gpb1K9GEIouTq2X3L0K64Iq0ob4l_g",
-      "y": "l-6dcrIrFVdrzoY9cRJv9zNuFOR3MsDz6TSDhB0xEo4",
-      "crv": "P-256"
+      "keys": [
+        {
+          "kid": "NsXymfIILEPR5Y0t",
+          "kty": "EC",
+          "x": "gXY4FApFJCj91Gpb1K9GEIouTq2X3L0K64Iq0ob4l_g",
+          "y": "l-6dcrIrFVdrzoY9cRJv9zNuFOR3MsDz6TSDhB0xEo4",
+          "crv": "P-256"
+        }
+      ]
     },
     "certificate_signing_request": "-----BEGIN CERTIFICATE REQUEST-----\nMIIBTTCB9QIBADCBkjELMAkGA1UEBhMCSVQxDjAMBgNVBAgMBUxhemlvMQ0wCwYD\nVQQHDARSb21hMRYwFAYDVQQKDA1QYWdvUEEgUy5wLkEuMSQwIgYDVQQDDBtmb28x\nMS5ibG9iLmNvcmUud2luZG93cy5uZXQxJjAkBgkqhkiG9w0BCQEWF3BhZ29wYXNw\nYUBwZWMucGFnb3BhLml0MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgXY4FApF\nJCj91Gpb1K9GEIouTq2X3L0K64Iq0ob4l_g\n-----END CERTIFICATE REQUEST-----",
     "submission_timestamp": "2025-09-25T14:30:00Z"
@@ -638,7 +642,9 @@ Federation Entities MUST integrate Trust Marks in their Entity Configuration usi
    {
      "iss": "https://credentials.example.gov",
      "sub": "https://credentials.example.gov",
-     "jwks": { },
+     "jwks": { 
+      // jwks content
+     },
      "authority_hints": ["https://trust-anchor.eid-wallet.example.it"],
      "trust_marks": [
        {
@@ -646,7 +652,9 @@ Federation Entities MUST integrate Trust Marks in their Entity Configuration usi
          "trust_mark": "eyJhbGciOiJFUzI1NiIsImtpZCI6IlRydXN0QW5jaG9yS2V5SWQiLCJ0eXAiOiJKV1QifQ..."
        }
      ],
-     "metadata": { }
+     "metadata": { 
+      // Metadata content
+     }
    }
 
 
@@ -655,7 +663,9 @@ Federation Entities MUST integrate Trust Marks in their Entity Configuration usi
    {
      "iss": "https://healthcare-ci.example.gov",
      "sub": "https://healthcare-ci.example.gov",
-     "jwks": { },
+     "jwks": { 
+      // jwks content
+     },
      "authority_hints": ["https://healthcare.intermediate.eid-wallet.example.it"],
      "trust_marks": [
        {
@@ -663,7 +673,9 @@ Federation Entities MUST integrate Trust Marks in their Entity Configuration usi
          "trust_mark": "eyJhbGciOiJFUzI1NiIsImtpZCI6IkhlYWx0aGNhcmVJbnRlcm1lZGlhdGVLZXlJZCIsInR5cCI6IkpXVCJ9..."
        }
      ],
-     "metadata": { }
+     "metadata": { 
+      // Metadata content  
+    }
    }
 
 
