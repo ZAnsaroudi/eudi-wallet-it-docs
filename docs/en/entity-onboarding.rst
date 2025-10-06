@@ -273,10 +273,10 @@ Federation Entities MUST comply with the following technical requirements before
 
   - **Key Generation**: The entities MUST generate at least two key pairs using elliptic curve cryptography as specified in :ref:`algorithms:Cryptographic Algorithms`:
 
-    - **Federation Key Pair**: Used for signing Entity Configurations and attesting Protocol Keys.
-    - **Protocol Key Pair(s)**: Used for entity-specific protocol operations, such as Credential issuance and Credential presentation.
+    - **Federation Key Pair**: Used for signing Entity Configurations and attesting application specific keys.
+    - **application specific key Pair(s)**: Used for entity-specific protocol operations, such as Credential issuance and Credential presentation.
 
-  - **Protocol Key Attestation**: The entities MUST create self-signed X.509 Certificates for their Protocol Keys using the Federation Private Key. These Certificates establish the authority relationship between Federation and application specific keys.
+  - **application specific key Attestation**: The entities MUST create self-signed X.509 Certificates for their application specific keys using the Federation Private Key. These Certificates establish the authority relationship between Federation and application specific keys.
 
   - **Entity Configuration Preparation**: The entities MUST publish an Entity Configuration (EC) signed with their Federation Private Key at the ``/.well-known/openid-federation`` endpoint as defined in :ref:`trust:The Infrastructure of Trust`. The EC MUST include:
 
@@ -284,7 +284,7 @@ Federation Entities MUST comply with the following technical requirements before
     - An ``iss`` claim with the Federation Entity Identifier as defined in :ref:`trust:Federation Roles`.
     - A ``sub`` claim equal to the ``iss`` claim.
     - ``iat`` and ``exp`` claims defining a valid time interval.
-    - A ``metadata`` claim containing entity-specific metadata organized by Metadata Types (see :ref:`credential-issuer-entity-configuration:Credential Issuer Entity Configuration`, :ref:`relying-party-entity-configuration:Relying Party Entity Configuration`, or :ref:`wallet-provider-entity-configuration:Wallet Provider Entity Configuration`) with Protocol Keys included in the metadata ``jwks`` fields and self-signed certificates in the corresponding ``x5c`` claims.
+    - A ``metadata`` claim containing entity-specific metadata organized by Metadata Types (see :ref:`credential-issuer-entity-configuration:Credential Issuer Entity Configuration`, :ref:`relying-party-entity-configuration:Relying Party Entity Configuration`, or :ref:`wallet-provider-entity-configuration:Wallet Provider Entity Configuration`) with application specific keys included in the metadata ``jwks`` fields and self-signed certificates in the corresponding ``x5c`` claims.
 
   - **Certificate Signing Request (CSR)**: The entities MUST prepare a CSR in PKCS #10 format containing **only the Federation Entity Public Key** for X.509 Certificate issuance by the Federation Authority as defined in :ref:`trust:Trust Infrastructure Requirements`.
 
@@ -317,7 +317,7 @@ The federation onboarding follows a structured 4-step procedure, it can be perfo
    * - **Federation Entity Identifier**
      - **REQUIRED**. A unique URL that identifies the Federation Entity as defined in :ref:`trust:Federation Roles`.
    * - **Federation Entity Public Key (JWK)**
-     - **REQUIRED**. Elliptic public key in JSON Web Key format used for signing Entity Configurations and attesting Protocol Keys, using cryptographic algorithms specified in :ref:`algorithms:Cryptographic Algorithms`.
+     - **REQUIRED**. Elliptic public key in JSON Web Key format used for signing Entity Configurations and attesting application specific keys, using cryptographic algorithms specified in :ref:`algorithms:Cryptographic Algorithms`.
    * - **Certificate Signing Request (CSR)**
      - **REQUIRED**. CSR in PKCS #10 format for X.509 Certificate issuance by the Federation Authority. The CSR MUST:
 
@@ -326,7 +326,7 @@ The federation onboarding follows a structured 4-step procedure, it can be perfo
        - Define the certificate Subject with required attributes as specified in :ref:`trust:X.509 Certificates Issuance` for Federation Entities.
 
 .. warning::
-   Before submitting the technical onboarding request, Federation Entities MUST ensure that their ``/.well-known/openid-federation`` endpoint publishes a valid Entity Configuration (as defined in :ref:`trust:Entity Configuration`) signed with their Federation Private Key corresponding to the Federation Entity Public Key provided in the request. The Entity Configuration MUST already include Protocol Keys in the metadata with self-signed X.509 certificates in the ``x5c`` claims.
+   Before submitting the technical onboarding request, Federation Entities MUST ensure that their ``/.well-known/openid-federation`` endpoint publishes a valid Entity Configuration (as defined in :ref:`trust:Entity Configuration`) signed with their Federation Private Key corresponding to the Federation Entity Public Key provided in the request. The Entity Configuration MUST already include application specific keys in the metadata with self-signed X.509 certificates in the ``x5c`` claims.
 
 
 A non-normative example of the technical information structure that Federation Entities submit during Step 1 onboarding request:
@@ -370,7 +370,7 @@ The following shows the decoded content of the CSR example above for reference:
    The CSR Subject attributes MUST comply with the requirements specified in :ref:`trust:X.509 Certificates Issuance` for Federation Entities.
 
 .. note::
-   The Federation Entity Public Key in the ``jwks`` field and the public key contained in the ``certificate_signing_request`` MUST be the same key. The key is provided in two formats: JWK format for OpenID Federation operations and PKCS #10 CSR format for X.509 certificate issuance by the Federation Authority. Protocol Keys are included only in the Entity Configuration metadata, and they MUST NOT be included in the onboarding request.
+   The Federation Entity Public Key in the ``jwks`` field and the public key contained in the ``certificate_signing_request`` MUST be the same key. The key is provided in two formats: JWK format for OpenID Federation operations and PKCS #10 CSR format for X.509 certificate issuance by the Federation Authority. application specific keys are included only in the Entity Configuration metadata, and they MUST NOT be included in the onboarding request.
 
 .. note::
    The Entity Configuration Endpoint is constructed automatically by appending ``/.well-known/openid-federation`` to the Federation Entity Identifier (``entity_id``). Federation Entities do not need to specify this endpoint separately in the registration request.
@@ -407,7 +407,7 @@ Example X.509 Certificate chain response:
 
     - Add an ``authority_hints`` claim with a JSON Array containing the **immediate Federation Authority's** Federation Entity Identifier (Trust Anchor for direct onboarding, or Intermediate for mediated onboarding) as defined in :ref:`trust:Federation Roles`.
     - Update the Federation Entity Public Key in the ``jwks`` claim by adding an ``x5c`` claim with the complete X.509 Certificate chain received from the Federation Authority.
-    - Update the Protocol Keys in the metadata ``jwks`` claims by extending their existing ``x5c`` claims to include the X.509 Certificate chain, creating a complete Trust Chain from Protocol Keys to the Root Authority.
+    - Update the application specific keys in the metadata ``jwks`` claims by extending their existing ``x5c`` claims to include the X.509 Certificate chain, creating a complete Trust Chain from application specific keys to the Root Authority.
 
     Example authority_hints addition:
 
