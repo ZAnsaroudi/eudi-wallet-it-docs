@@ -43,15 +43,15 @@ The following table summarizes entity types, their roles, and corresponding onbo
    * - Credential Issuers
      - Generate and issue Digital Credentials using Authentic Source data
      - :ref:`entity-onboarding:Federation Entities Onboarding Process`
-     - IT-Wallet Trust Infrastructure compliance; see :ref:`trust:The Infrastructure of Trust`
+     - IT-Wallet Trust Infrastructure compliance; see :ref:`trust-infrastructure:The Infrastructure of Trust`
    * - Relying Parties
      - Verify Digital Credentials for service access
      - :ref:`entity-onboarding:Federation Entities Onboarding Process`
-     - IT-Wallet Trust Infrastructure compliance; see :ref:`trust:The Infrastructure of Trust`
+     - IT-Wallet Trust Infrastructure compliance; see :ref:`trust-infrastructure:The Infrastructure of Trust`
    * - Wallet Providers
      - Provide wallet solutions to citizens
      - :ref:`entity-onboarding:Federation Entities Onboarding Process`
-     - IT-Wallet Trust Infrastructure compliance (see :ref:`trust:The Infrastructure of Trust`); Wallet Attestation capabilities (see :ref:`wallet-instance-registration:Wallet Instance Initialization and Registration`)
+     - IT-Wallet Trust Infrastructure compliance (see :ref:`trust-infrastructure:The Infrastructure of Trust`); Wallet Attestation capabilities (see :ref:`wallet-instance-registration:Wallet Instance Initialization and Registration`)
    * - Wallet Instances
      - User-level digital wallet applications
      - Indirect registration via Wallet Provider, see :ref:`wallet-instance-registration:Wallet Instance Initialization and Registration`
@@ -67,7 +67,7 @@ The onboarding process follows a structured multi-phase approach:
   2. **Technical Registration**: Following administrative approval, entities make technical registration through specialised pathways:
     
     - **Authentic Source Registration**: Data-focused registration procedures with API integration validation.
-    - **Federation Registration**: Cryptographic trust establishment as defined in Section :ref:`trust:The Infrastructure of Trust`.
+    - **Federation Registration**: Cryptographic trust establishment as defined in Section :ref:`trust-infrastructure:The Infrastructure of Trust`.
 
   3. **IT-Wallet Registry Integration**:
 
@@ -211,7 +211,7 @@ Technical integration encompasses:
 Federation Entities Onboarding Process
 ---------------------------------------
 
-Federation Entities, including Credential Issuers, Relying Parties, and Wallet Providers, must complete onboarding procedures to become eligible participants in the IT-Wallet ecosystem. This process establishes distributed trust by issuing X.509 Certificates, validating Trust Chains, and confirming compliance, as described in :ref:`trust:The Infrastructure of Trust`.
+Federation Entities, including Credential Issuers, Relying Parties, and Wallet Providers, must complete onboarding procedures to become eligible participants in the IT-Wallet ecosystem. This process establishes distributed trust by issuing X.509 Certificates, validating Trust Chains, and confirming compliance, as described in :ref:`trust-infrastructure:The Infrastructure of Trust`.
 
 Hierarchical Federation Authority Model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -223,7 +223,7 @@ The IT-Wallet federation implements a **hierarchical onboarding model** where Fe
 
 Both Trust Anchors and Intermediates act as **Federation Authorities** with the following onboarding capabilities:
 
-  - **Certificate Issuance**: Issue X.509 Certificates to their Immediate Subordinates with appropriate naming constraints as defined in :ref:`trust:X.509 PKI`.
+  - **X.509 Certificate Issuance**: Issue X.509 Certificates to their Immediate Subordinates with appropriate naming constraints as defined in :ref:`trust-infrastructure:X.509 PKI`.
   - **Metadata Policy Application**: Apply federation-specific metadata policies with **cascading effect** (Trust Anchor policies override Intermediate policies).
   - **Trust Mark Issuance**: Issue Federation Trust Marks attesting Subordinate capabilities and grants, according to the trust framework.
 
@@ -243,17 +243,17 @@ Federation Entities MUST comply with the following technical requirements before
     - **Federation Key Pair**: Used for signing Entity Configurations and attesting application specific keys.
     - *Application Specific Key Pair(s)**: Used for entity-specific protocol operations, such as Credential issuance and Credential presentation.
 
-  - **Application Specific Key Attestation**: The entities MUST create self-signed X.509 Certificates for their application specific keys using the Federation Private Key.
+  - **Application Specific Key Attestation**: The entities MUST create self-signed X.509 Certificates for their application specific keys using the Federation Entity Private Key.
 
-  - **Entity Configuration Preparation**: The entities MUST publish an Entity Configuration (EC) signed with their Federation Private Key at the ``/.well-known/openid-federation`` endpoint as defined in :ref:`trust:The Infrastructure of Trust`. The EC MUST include:
+  - **Entity Configuration Preparation**: The entities MUST publish an Entity Configuration (EC) signed with their Federation Entity Private Key at the ``/.well-known/openid-federation`` endpoint as defined in :ref:`trust-infrastructure:The Infrastructure of Trust`. The EC MUST include:
 
-    - A ``jwks`` claim containing the Federation Entity Public Key in JSON Web Key (JWK) format.
-    - An ``iss`` claim with the Federation Entity Identifier as defined in :ref:`trust:Federation Roles`.
+    - A ``jwks`` claim containing the Federation Entity Key in JSON Web Key (JWK) format.
+    - An ``iss`` claim with the Federation Entity Identifier as defined in :ref:`trust-infrastructure:Federation Roles`.
     - A ``sub`` claim equal to the ``iss`` claim.
     - ``iat`` and ``exp`` claims defining a valid time interval.
     - A ``metadata`` claim containing entity-specific metadata organized by Metadata Types (see :ref:`credential-issuer-entity-configuration:Credential Issuer Entity Configuration`, :ref:`relying-party-entity-configuration:Relying Party Entity Configuration`, or :ref:`wallet-provider-entity-configuration:Wallet Provider Entity Configuration`) with application specific keys included in the metadata ``jwks`` fields and self-signed X.509 Certificates in the corresponding ``x5c`` claims.
 
-  - **Certificate Signing Request (CSR)**: The entities MUST prepare a Certificate Signing Request (CSR) in PKCS #10 format containing **the Federation Entity Public Key** for X.509 Certificate issuance by the Federation Authority, as defined in :ref:`trust:Trust Infrastructure Requirements`.
+  - **X.509 Certificate Signing Request (CSR)**: The entities MUST prepare a X.509 Certificate Signing Request (CSR) in PKCS #10 format containing **the Federation Entity Key** for X.509 Certificate issuance by the Federation Authority, as defined in :ref:`trust-infrastructure:Trust Infrastructure Requirements`.
 
 Federation Onboarding Procedure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -282,18 +282,18 @@ The federation onboarding follows a structured 4-step procedure, it can be perfo
    * - **Technical Information Category**
      - **Requirements and Description**
    * - **Federation Entity Identifier**
-     - **REQUIRED**. A unique URL that identifies the Federation Entity as defined in :ref:`trust:Federation Roles`.
-   * - **Federation Entity Public Key (JWK)**
+     - **REQUIRED**. A unique URL that identifies the Federation Entity as defined in :ref:`trust-infrastructure:Federation Roles`.
+   * - **Federation Entity Key (JWK)**
      - **REQUIRED**. Elliptic public key in JSON Web Key format used for signing Entity Configurations and attesting application specific keys, using cryptographic algorithms specified in :ref:`algorithms:Cryptographic Algorithms`.
-   * - **Certificate Signing Request (CSR)**
+   * - **X.509 Certificate Signing Request (CSR)**
      - **REQUIRED**. CSR in PKCS #10 format for X.509 Certificate issuance by the Federation Authority. The CSR MUST:
 
-       - Contain **only the Federation Entity Public Keys**.
-       - Be signed with the corresponding Federation Private Key.
-       - Define the X.509 Certificate Subject with required attributes as specified in :ref:`trust:X.509 Certificates Issuance` for Federation Entities.
+       - Contain **only the Federation Entity Keys**.
+       - Be signed with the corresponding Federation Entity Private Key.
+       - Define the X.509 Certificate Subject with required attributes as specified in :ref:`trust-infrastructure:X.509 Certificates Issuance` for Federation Entities.
 
 .. warning::
-   Before submitting the technical onboarding request, Federation Entities MUST ensure that their ``/.well-known/openid-federation`` endpoint publishes a valid Entity Configuration (as defined in :ref:`trust:Entity Configuration`) signed with their Federation Private Key corresponding to the Federation Entity Public Key provided in the request. The Entity Configuration MUST already include application specific keys in the metadata with self-signed X.509 Certificates in the ``x5c`` claims.
+   Before submitting the technical onboarding request, Federation Entities MUST ensure that their ``/.well-known/openid-federation`` endpoint publishes a valid Entity Configuration (as defined in :ref:`trust-infrastructure:Entity Configuration`) signed with their Federation Entity Private Key corresponding to the Federation Entity Key provided in the request. The Entity Configuration MUST already include application specific keys in the metadata with self-signed X.509 Certificates in the ``x5c`` claims.
 
 
 A non-normative example of the technical information structure that Federation Entities submit during Step 1 onboarding request:
@@ -321,29 +321,29 @@ The example below shows the decoded content of the CSR:
    :caption: CSR decoded content example
 
 .. note::
-   The CSR Subject attributes MUST comply with the requirements specified in :ref:`trust:X.509 Certificates Issuance` for Federation Entities.
+   The CSR Subject attributes MUST comply with the requirements specified in :ref:`trust-infrastructure:X.509 Certificates Issuance` for Federation Entities.
 
 .. note::
-   The Federation Entity Public Keys contained in the ``jwks`` object and the public keys contained in the ``certificate_signing_requests`` object MUST match. The keys are provided in two formats: JWK format and PKCS #10 CSR format for X.509 Certificate issuance. Application specific keys are included only in the Entity Configuration metadata, and they MUST NOT be included in the onboarding request.
+   The Federation Entity Keys contained in the ``jwks`` object and the public keys contained in the ``certificate_signing_requests`` object MUST match. The keys are provided in two formats: JWK format and PKCS #10 CSR format for X.509 Certificate issuance. Application specific keys are included only in the Entity Configuration metadata, and they MUST NOT be included in the onboarding request.
 
 .. note::
    The Entity Configuration Endpoint is constructed automatically by appending ``/.well-known/openid-federation`` to the Federation Entity Identifier (``entity_id``). Federation Entities do not need to specify this endpoint separately in the registration request.
 
-**Step 2 - Federation Authority Validation and Certificate Issuance**: Following the onboarding request submission, the **Federation Authority** MUST perform:
+**Step 2 - Federation Authority Validation and X.509 Certificate Issuance**: Following the onboarding request submission, the **Federation Authority** MUST perform:
 
   - Verification of information provided in the registration request.
-  - Validation of the Entity Configuration, and the metadata contained in it, published at the entity's ``/.well-known/openid-federation`` endpoint (as defined in :ref:`trust:The Infrastructure of Trust`).
-  - **Metadata Policy Application**: Application of federation-specific metadata policies to the entity's metadata based on organizational characteristics and authorization scope as defined in :ref:`trust:Subordinate Statements`. When onboarded through an Intermediate, both Intermediate and Trust Anchor policies apply, with Trust Anchor policies taking precedence in case of conflicts.
-  - **Certificate Issuance**: Certification of the Federation Entity Public Key with X.509 Certificate issuance using the trust infrastructure detailed in :ref:`trust:Trust Infrastructure Requirements`. Intermediates MUST issue X.509 Certificates using appropriate **naming constraints** limiting the use of DNS names and URIs to their subordinates only.
+  - Validation of the Entity Configuration, and the metadata contained in it, published at the entity's ``/.well-known/openid-federation`` endpoint (as defined in :ref:`trust-infrastructure:The Infrastructure of Trust`).
+  - **Metadata Policy Application**: Application of federation-specific metadata policies to the entity's metadata based on organizational characteristics and authorization scope as defined in :ref:`trust-infrastructure:Subordinate Statements`. When onboarded through an Intermediate, both Intermediate and Trust Anchor policies apply, with Trust Anchor policies taking precedence in case of conflicts.
+  - **X.509 Certificate Issuance**: Certification of the Federation Entity Key with X.509 Certificate issuance using the trust infrastructure detailed in :ref:`trust-infrastructure:Trust Infrastructure Requirements`. Intermediates MUST issue X.509 Certificates using appropriate **naming constraints** limiting the use of DNS names and URIs to their subordinates only.
 
 Upon successful validation, the entity receives a response containing an X.509 Certificate Chain where:
 
-  - The first element is the X.509 Certificate containing the Federation Entity Public Key (issued by the Federation Authority).
+  - The first element is the X.509 Certificate containing the Federation Entity Key (issued by the Federation Authority).
   - **For Trust Anchor onboarding**: The second element is the Trust Anchor's self-signed X.509 Certificate for validating the first X.509 Certificate.
-  - **For Intermediate onboarding**: Additional elements include the Intermediate's X.509 Certificate and the Trust Anchor's self-signed Certificate, forming a complete X.509 Certificate chain.
+  - **For Intermediate onboarding**: Additional elements include the Intermediate's X.509 Certificate and the Trust Anchor's self-signed Certificate, forming a complete X.509 X.509 Certificate chain.
   - All X.509 Certificates are expressed in DER format and encoded in Base64.
 
-Example X.509 Certificate chain response:
+Example X.509 X.509 Certificate chain response:
 
 .. code-block:: json
 
@@ -358,7 +358,7 @@ Example X.509 Certificate chain response:
 .. note::
    Each entity can collect its X.509 Certificate Chain by obtaining the Trust Anchor's self-signed X.509 Certificate, which is included within the Entity Configuration's ``jwks`` object, and by aggregating all the ``x5c`` values published by its superior entities, from the Trust Anchor down to its immediate superior. This enables the entity to reconstruct the full certificate chain required for validation and trust establishment within the federation.
 
-**Step 3 - Fetch Subordinate Statement**: as confirmation of success of the onboarding process, the entity MUST fetch the Subordinate Statement about itself from the immediate Federation Authority using the ``/fetch`` endpoint as defined in :ref:`trust:Federation API endpoints`.
+**Step 3 - Fetch Subordinate Statement**: as confirmation of success of the onboarding process, the entity MUST fetch the Subordinate Statement about itself from the immediate Federation Authority using the ``/fetch`` endpoint as defined in :ref:`trust-infrastructure:Federation API endpoints`.
 
 Example fetch request:
 
@@ -400,9 +400,9 @@ The Federation Entity MUST complete the onboarding process by:
 
     The content of ``/.well-known/openid-federation`` endpoint must be updated to include the following claims:
 
-     - Add an ``authority_hints`` claim with a JSON Array containing the **immediate Federation Authority's** Federation Entity Identifier (Trust Anchor for direct onboarding, or Intermediate for mediated onboarding) as defined in :ref:`trust:Federation Roles`.
+     - Add an ``authority_hints`` claim with a JSON Array containing the **immediate Federation Authority's** Federation Entity Identifier (Trust Anchor for direct onboarding, or Intermediate for mediated onboarding) as defined in :ref:`trust-infrastructure:Federation Roles`.
 
-     - **Integrate Trust Marks**: Include the Trust Marks from the Subordinate Statement in the Entity Configuration using the ``trust_marks`` claim as specified in :ref:`trust:Entity Configuration Leaves and Intermediates`.
+     - **Integrate Trust Marks**: Include the Trust Marks from the Subordinate Statement in the Entity Configuration using the ``trust_marks`` claim as specified in :ref:`trust-infrastructure:Entity Configuration Leaves and Intermediates`.
 
      Example authority_hints addition:
 
@@ -430,13 +430,13 @@ The Federation Entity MUST complete the onboarding process by:
          ]
 
 .. note::
-   To update Trust Marks after onboarding, the entity can use the fetch endpoint of its immediate superior to obtain all the updated Trust Marks about itself. When the Trust Mark issuer is different from the superior entity that has onboarded the entity, Federation Entities can obtain fresh Trust Marks anytime needed by using the Federation Trust Mark endpoint as defined in :ref:`trust:Federation API endpoints`.
+   To update Trust Marks after onboarding, the entity can use the fetch endpoint of its immediate superior to obtain all the updated Trust Marks about itself. When the Trust Mark issuer is different from the superior entity that has onboarded the entity, Federation Entities can obtain fresh Trust Marks anytime needed by using the Federation Trust Mark endpoint as defined in :ref:`trust-infrastructure:Federation API endpoints`.
 
 Upon successful completion of Step 4, the **entity onboarding is successfully completed**. The entity is now operational within the IT-Wallet federation and ready for operational activities.
    
 
 .. note::
-   **Federation Registry Integration**: Upon successful onboarding completion, the entity's Federation Entity Identifier becomes discoverable through the Trust Anchor's entity listing mechanisms (as defined in :ref:`trust:The Infrastructure of Trust`), indicating active federation participation. The entity becomes part of the federation infrastructure detailed in :ref:`registry:Registry Infrastructure`.
+   **Federation Registry Integration**: Upon successful onboarding completion, the entity's Federation Entity Identifier becomes discoverable through the Trust Anchor's entity listing mechanisms (as defined in :ref:`trust-infrastructure:The Infrastructure of Trust`), indicating active federation participation. The entity becomes part of the federation infrastructure detailed in :ref:`registry:Registry Infrastructure`.
 
 IT-Wallet Federation Trust Marks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -572,7 +572,7 @@ The following non-normative examples illustrate different Trust Mark JWT content
 
 
 
-Federation Entities MUST integrate Trust Marks in their Entity Configuration using the ``trust_marks`` claim as specified in :ref:`trust:Entity Configuration Leaves and Intermediates`. Entities MAY receive multiple Trust Marks for different authorization scopes.
+Federation Entities MUST integrate Trust Marks in their Entity Configuration using the ``trust_marks`` claim as specified in :ref:`trust-infrastructure:Entity Configuration Leaves and Intermediates`. Entities MAY receive multiple Trust Marks for different authorization scopes.
 
 
 .. code-block:: json
@@ -623,7 +623,9 @@ Trust Mark Validation
 Federation participants validate Trust Mark status through two mechanisms:
 
 1. **Static Validation**: Cryptographic verification using the issuing Federation Authority's public key from the Trust Chain.
-2. **Dynamic Validation**: Real-time status verification, against any revocations, using the Federation Authority's ``/trust_mark_status`` endpoint as defined in :ref:`trust:Federation API endpoints`.
+2. **Dynamic Validation**: Real-time status verification, against any revocations, using the Federation Authority's ``/trust_mark_status`` endpoint as defined in :ref:`trust-infrastructure:Federation API endpoints`.
+
+For comprehensive X.509 Certificate management procedures, including chain validation, revocation verification, and lifecycle management, see :ref:`x5c-evaluation:X.509 Certificate Management Operations`.
 
 
 

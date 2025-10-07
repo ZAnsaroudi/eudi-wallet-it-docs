@@ -34,7 +34,7 @@ The Trust Anchor MUST publish registry discovery metadata at the ``.well-known/i
 Moreover, the IT-Wallet registry system MUST use two distinct access patterns:
 
   - **Data Registry APIs**: MUST support pagination and filtering capabilities.
-  - **Federation Trust Infrastructure**: as defined in :ref:`trust:The Infrastructure of Trust`.
+  - **Federation Trust Infrastructure**: as defined in :ref:`trust-infrastructure:The Infrastructure of Trust`.
 
 Below a non-normative example is given.
 
@@ -354,7 +354,7 @@ Following AS registration, the AS Registry enables Credential Issuers to discove
 Federation Registry
 -------------------
 
-The **Federation Registry** provides the cryptographic trust infrastructure for all IT-Wallet ecosystem participants. The Federation Registry maintains the authoritative list of trusted entities and their operational status using federation-specific endpoints as defined in :ref:`trust:Federation API endpoints`.
+The **Federation Registry** provides the cryptographic trust infrastructure for all IT-Wallet ecosystem participants. The Federation Registry maintains the authoritative list of trusted entities and their operational status using federation-specific endpoints as defined in :ref:`trust-infrastructure:Federation API endpoints`.
 
 Registry Integration Role
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -368,12 +368,12 @@ Within the IT-Wallet registry architecture, the Federation Registry serves as th
 Federation Registry Access
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Federation Registry operations are accessed through the Trust Anchor's federation endpoints as detailed in :ref:`trust:Federation API endpoints`. The registry discovery architecture provides federation endpoint information via the registry discovery endpoint described in `Registry Discovery Endpoint`_.
+Federation Registry operations are accessed through the Trust Anchor's federation endpoints as detailed in :ref:`trust-infrastructure:Federation API endpoints`. The registry discovery architecture provides federation endpoint information via the registry discovery endpoint described in `Registry Discovery Endpoint`_.
 
 .. note::
    Federation endpoints are available through both the registry discovery mechanism (for unified registry access) and the Trust Anchor's Entity Configuration at ``.well-known/openid-federation`` (for federation-specific operations). Both sources provide the same endpoint URLs but serve different discovery patterns: registry discovery for initial ecosystem orientation, Entity Configuration for standard OpenID Federation 1.0 compliance.
 
-For complete technical specifications of federation protocols, entity configurations, trust evaluation mechanisms, and trust chain validation, see :ref:`trust:The Infrastructure of Trust`.
+For complete technical specifications of federation protocols, entity configurations, trust evaluation mechanisms, and trust chain validation, see :ref:`trust-infrastructure:The Infrastructure of Trust`.
 
 Digital Credentials Catalog
 -----------------------------

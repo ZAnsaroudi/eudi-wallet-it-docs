@@ -3,6 +3,8 @@ X.509 Certificate Management Operations
 
 This section defines the operational procedures for X.509 Certificate management within the IT-Wallet federation, covering X.509 Certificate chain analysis, validation procedures, and revocation verification. These procedures complement the federation onboarding processes and support ongoing X.509 Certificate lifecycle management for all the participants.
 
+For the foundational X.509 PKI infrastructure and certificate issuance procedures, see :ref:`trust-infrastructure:X.509 PKI`.
+
 Federation PKI Architecture
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -147,7 +149,7 @@ X.509 Certificate Lifecycle Coordination
 
 Federation entities MUST coordinate X.509 Certificate management with federation lifecycle procedures following the established validity periods:
 
-- **X.509 Certificate Renewal**: Align X.509 certificate renewals with Entity Configuration updates and Trust Mark refresh cycles, according to the federation limits defined in :ref:`trust-evaluation:Federation PKI Architecture`.
+- **X.509 Certificate Renewal**: Align X.509 certificate renewals with Entity Configuration updates and Trust Mark refresh cycles, according to the federation limits defined in :ref:`x5c-evaluation:Federation PKI Architecture`.
 - **Key Rotation**: Coordinate Federation Entity Key rotation with X.509 certificate renewal procedures.
 - **CRL Management**: For Protocol X.509 certificates with validity > 24 hours, maintain current CRL publication.
 - **Federation Exit**: Ensure proper X.509 Certificate revocation during voluntary or supervisory body-initiated federation exit.

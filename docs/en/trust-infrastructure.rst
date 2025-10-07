@@ -331,7 +331,9 @@ The Entity Configurations of all the participants in the federation MUST have in
    * - **exp**
      - UNIX Timestamp with the expiry time of the JWT, coded as NumericDate as indicated at :rfc:`7519`.
    * - **jwks**
-     - A JSON Web Key Set (JWKS) :rfc:`7517` that represents the public part of the signing keys of the Entity at issue. Each JWK in the JWK set MUST have a key ID (claim kid) and MAY have a `x5c` parameter, as defined in :rfc:`7517`. It contains the Federation Entity Keys required for the operations of Trust Evaluation. `x5c` included in Entity Configuration's `jwks` parameter MUST only contain the self-issued X.509 Certificate about the corresponding `jwk`.
+     - A JSON Web Key Set (JWKS) :rfc:`7517` that represents the public part of the signing keys of the Entity at issue. Each JWK in the JWK set MUST have a key ID (claim kid) and MAY have a `x5c` parameter, as defined in :rfc:`7517`. It contains the Federation Entity Keys required for the operations of Trust Evaluation.
+
+       **x5c Parameter**: The `x5c` parameter, when present, contains an array of X.509 certificates that form a certificate chain. The first certificate in the array MUST be the X.509 certificate corresponding to the public key represented by the JWK. Subsequent certificates in the array MUST form a valid certificate chain leading to a trusted root certificate. This parameter enables X.509 certificate-based verification alongside JWK-based verification, providing interoperability with legacy systems and enhanced trust validation. The `x5c` parameter included in Entity Configuration's `jwks` parameter MUST only contain the self-issued X.509 Certificate about the corresponding `jwk`.
    * - **metadata**
      - JSON Object. Each key of the JSON Object represents a metadata type identifier
        containing JSON Object representing the metadata, according to the metadata
