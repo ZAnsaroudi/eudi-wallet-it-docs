@@ -270,7 +270,7 @@ Se la Richiesta HTTP è elaborata con successo, il Servizio MRTD PoP DEVE inviar
      - OBBLIGATORIO. Algoritmo di firma.
    * - **typ**
      - string
-     - OBBLIGATORIO. DEVE essere ``mrtd+ias+pop``.
+     - OBBLIGATORIO. DEVE essere ``mrtd-ias-pop+jwt``.
    * - **kid**
      - string
      - OBBLIGATORIO. Identificatore della chiave del Provider PID che DEVE essere utilizzata per verificare la firma di questo JWT.
@@ -319,7 +319,7 @@ Di seguito un esempio non normativo di una Risposta MRTD PoP:
     Content-Type: application/jwt; charset=utf-8
     {
       "alg":"ES256",
-      "typ":"mrtd+ias+pop",
+      "typ":"mrtd-ias-pop+jwt",
       "kid":"b3f1a6c2e9d54a8f9c3e7d1a2f4b6c78"
     }
     .

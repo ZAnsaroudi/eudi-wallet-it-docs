@@ -269,7 +269,7 @@ If the HTTP Request is successfully processed, the MRTD PoP Service MUST send a 
      - REQUIRED. Signature algorithm.
    * - **typ**
      - string
-     - REQUIRED. It MUST be ``mrtd+ias+pop``.
+     - REQUIRED. It MUST be ``mrtd-ias-pop+jwt``.
    * - **kid**
      - string
      - REQUIRED. Identifier of the PID Provider's key that MUST be used to verify the signature of this JWT.
@@ -318,7 +318,7 @@ Below a non-normative example of an MRTD PoP Response:
     Content-Type: application/jwt; charset=utf-8
     {
       "alg":"ES256",
-      "typ":"mrtd+ias+pop",
+      "typ":"mrtd-ias-pop+jwt",
       "kid":"b3f1a6c2e9d54a8f9c3e7d1a2f4b6c78"
     }
     .
