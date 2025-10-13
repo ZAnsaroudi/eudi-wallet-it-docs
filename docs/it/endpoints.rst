@@ -12,8 +12,6 @@ Endpoints
   wallet-provider-endpoint.rst
   credential-issuer-endpoint.rst
   relying-party-endpoints.rst
-  relying-party-remote-flow-endpoints.rst
-  relying-party-provider-backend-endpoint.rst
   authentic-source-endpoint.rst
   signal-hub-endpoint.rst
   
