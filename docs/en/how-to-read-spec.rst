@@ -126,7 +126,7 @@ Readers interested in implementing or operating a **Relying Party** Solution to 
 * **Section** :ref:`relying-party-solution:Relying Party Solution`: Complete verifier implementation requirements and Entity Configuration.
 * **Section** :ref:`digital-credential-management:Digital Credential Management`: Understanding Digital Credential formats and validity verification.
 * **Section** :ref:`credential-presentation:Digital Credential Presentation`: Presentation flow implementation for both remote and proximity scenarios.
-* **Section** :ref:`relying-party-endpoint:Relying Party Endpoints`: Federation and verification related API specifications.
+* **Section** :ref:`relying-party-provider-backend-endpoint:Verifier App Remote Backend Endpoints`: Verifier App lifecycle management API specifications.
 * **Section** :ref:`algorithms:Cryptographic Algorithms`: Cryptographic suite requirements.
 
 **Secondary sections:**

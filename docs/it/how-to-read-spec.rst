@@ -128,7 +128,7 @@ I lettori interessati all'implementazione o alla gestione di una Soluzione di **
 * **Sezione** :ref:`relying-party-solution:Soluzione di Relying Party`: Requisiti completi di implementazione del Verificatore di Credenziali.
 * **Sezione** :ref:`digital-credential-management:Gestione degli Attestati Elettronici`: Comprensione dei formati delle Credenziali Elettroniche e verifica della validità.
 * **Sezione** :ref:`credential-presentation:Presentazione dell'Attestato Elettronico`: Implementazione del flusso di presentazione sia per scenari remoti che di prossimità.
-* **Sezione** :ref:`relying-party-endpoint:Endpoint della Relying Party`: Specifiche API relative alla federazione e alla verifica.
+* **Sezione** :ref:`relying-party-provider-backend-endpoint:Endpoint del Backend Remoto per le App di Verifica`: Specifiche API per la gestione del ciclo di vita delle App di Verifica.
 * **Sezione** :ref:`algorithms:Algoritmi Crittografici`: Requisiti della suite crittografica.
 
 **Sezioni secondarie:**
