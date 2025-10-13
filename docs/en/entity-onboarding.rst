@@ -55,7 +55,7 @@ The following table summarizes entity types, their roles, and corresponding onbo
    * - Wallet Instances
      - User-level digital wallet applications
      - Indirect registration via Wallet Provider, see :ref:`wallet-instance-registration:Wallet Instance Initialization and Registration`
-     - Wallet Attestation from certified Wallet Provider
+     - Wallet Attestation from trustworthy Wallet Provider
 
 Administrative and Technical Registration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -259,7 +259,7 @@ Federation Entities MUST comply with the following technical requirements before
 Key Management Security Requirements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-All federation entities MUST maintain at least two signing keys certified by the Trust Anchor:
+All federation entities MUST maintain at least two signing keys attested by the Trust Anchor:
 
 - **Active Key**: Used for current signing operations
 - **Backup Key**: Available for immediate activation during incidents or planned key rotation
@@ -271,7 +271,7 @@ This dual-key approach enables:
 - Prevention of validation issues during key transitions
 
 The backup key MUST be:
-- Pre-certified by the Trust Anchor before deployment
+- Registered by the Trust Anchor before deployment
 - Published in the entity's JWKS alongside the active key
 - Ready for immediate activation without additional certification steps
 - Maintained with the same security standards as the active key
