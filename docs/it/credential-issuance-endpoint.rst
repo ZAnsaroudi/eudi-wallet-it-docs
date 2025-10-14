@@ -81,6 +81,11 @@ la richiesta all'authorization endpoint del Credential Issuer DEVE utilizzare i 
       - `OAUTH-ATTESTATION-CLIENT-AUTH`_.
 
 
+.. note::
+  I client DOVREBBERO selezionare gli algoritmi da utilizzare per la Wallet Attestation e la relativa prova di possesso sulla base dei campi di metadata dell'Authorization Server
+  ``client_attestation_signing_alg_values_supported`` e ``client_attestation_pop_signing_alg_values_supported`` documentati in :ref:`credential-issuer-metadata:Metadata per oauth_authorization_server`.
+
+
 Il JWT *Request Object* ha i seguenti parametri di header JOSE:
 
 .. _table_request_object_claim:

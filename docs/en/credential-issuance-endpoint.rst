@@ -80,6 +80,10 @@ the request to the Credential Issuer authorization endpoint MUST use the followi
       - It MUST be set to a value containing the Wallet Attestation JWT Proof of Possession.
       - `OAUTH-ATTESTATION-CLIENT-AUTH`_.
 
+.. note::
+  Clients SHOULD select the algorithms for the Wallet Attestation and its proof of possession according to the Authorization Server metadata fields
+  ``client_attestation_signing_alg_values_supported`` and ``client_attestation_pop_signing_alg_values_supported`` documented in :ref:`credential-issuer-metadata:Metadata for oauth_authorization_server`.
+
 
 The JWT *Request Object* has the following JOSE header parameters:
 
