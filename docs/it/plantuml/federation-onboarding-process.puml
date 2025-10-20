@@ -1,4 +1,4 @@
-@startuml
+@startuml Federation Entity Onboarding Process
 autonumber
 
 participant "Federation Entity" as fe
@@ -13,7 +13,7 @@ fe -> ta: Submit onboarding request\n(Entity ID, Public Key JWKs, CSRs)
 ta -> ta: Verify registration information
 ta -> ta: Validate Entity Configuration at\n/.well-known/openid-federation endpoint
 ta -> ta: Apply metadata policies with cascading effect
-ta -> ta: Issue X.509 Certificates about\nFederation Entity Public Keys in CSRs
+ta -> ta: Issue X.509 Certificates for\nFederation Entity Public Keys in CSRs
 
 alt Validation successful
     ta -> fe: X.509 Certificate chain response\n(Entity certificate + authority certificates)
