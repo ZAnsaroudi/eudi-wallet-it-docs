@@ -529,11 +529,11 @@ Questa sezione elenca i casi di test dalle Sezioni:
    * - WP_065
      - Issuance, Sicurezza
      - Gestire defererd Issuance
-     - Istanza del Wallet valuta la Credential Response; se contiene sia ``transaction_id`` che ``lead_time``, Istanza del Wallet riconosce il flusso come defererd Issuance.
+     - Istanza del Wallet valuta la Credential Response; se contiene sia ``transaction_id`` che ``interval``, Istanza del Wallet riconosce il flusso come defererd Issuance.
    * - WP_066
      - Issuance, Interoperabilità
-     - Richiesta defererd Issuance dopo lead_time
-     - Istanza del Wallet invia una Deferred Credential Response solo dopo che il ``lead_time`` richiesto è passato.
+     - Richiesta defererd Issuance dopo interval
+     - Istanza del Wallet invia una Deferred Credential Response solo dopo che il ``interval`` richiesto è passato.
    * - WP_066a
      - Issuance, Interoperabilità
      - Richiesta defererd Issuance con transaction_id
@@ -541,7 +541,7 @@ Questa sezione elenca i casi di test dalle Sezioni:
    * - WP_066b
      - Issuance, Interoperabilità
      - Richiesta defererd con Access Token ancora valido
-     - Istanza del Wallet include l'Access Token esistente nella richiesta differita se il valore parametro ``lead_time`` è inferiore al tempo di scadenza impostato per l'Access Token.
+     - Istanza del Wallet include l'Access Token esistente nella richiesta differita se il valore parametro ``interval`` è inferiore al tempo di scadenza impostato per l'Access Token.
    * - WP_066c
      - Issuance, Interoperabilità
      - Nuovo Access Token DPoP-bound tramite Refresh

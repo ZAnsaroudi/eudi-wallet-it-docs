@@ -33,7 +33,7 @@ I metadata *openid_credential_verifier* DEVONO contenere i seguenti parametri (:
   * - **vp_formats**
     - JSON Object che definisce i formati e i tipi di prova delle Presentazioni Verificabili e delle Credenziali Verificabili supportate dalla RP. Consiste in un elenco di coppie nome/valore, dove ogni nome identifica in modo univoco un tipo supportato. La RP DEVE supportare almeno ``dc+sd-jwt``. Il valore associato a ciascuna coppia nome/valore DEVE essere un oggetto JSON ``sd-jwt_alg_values`` che DEVE contenere un array JSON contenente identificatori di algoritmi crittografici che la RP supporta per la protezione di un SD-JWT. L'intestazione JOSE ``alg`` (come definito in :rfc:`7515`) dell'SD-JWT presentato DEVE corrispondere a uno dei valori dell'array. Vedi anche `OpenID4VP`_ Draft 20 Sezione 9.1 (:ref:`test-plans-remote-presentation`).
   * - **jwks**
-    - Documento JSON Web Key Set, passato per valore, contenente le chiavi specifiche del protocollo per la Relying Party. Vedi `JARM`_ Sezione 3, `OID-FED`_ Draft 41 Sezione 5.2.1 e `JWK`_.
+    - Documento JSON Web Key Set, passato per valore, contenente le chiavi specifiche del protocollo per la Relying Party. Vedi `OID-FED`_ Draft 41 Sezione 5.2.1 e `JWK`_.
   * - **erasure_endpoint**
     - [CONDIZIONALE] Stringa JSON che rappresenta l'URI a cui l'Istanza del Wallet può richiedere la cancellazione degli attributi degli Utenti. Questo URL DEVE utilizzare lo schema ``https``. Questo endpoint DEVE essere presente ogni volta che le Relying Party richiedono attributi che possono identificare in modo univoco gli Utenti, come il claim tax_id_code del PID.
 
