@@ -44,6 +44,7 @@ A High-Level description of the remote flow, from the User's perspective, is giv
        * If ``client_id`` uses the ``x509_hash`` prefix, the Wallet Instance MUST verify that the hash of the Relying Party’s X.509 certificate (in the ``x5c`` request header) matches the hash contained in ``client_id`` from step 2 (as defined in `OpenID4VP`_, Section 5.9.3).
 
     c. evaluates the requested Digital Credentials and checks the eligibility of the Relying Party in asking for these by applying the policies related to that specific Relying Party, obtained with the Trust Chain (:ref:`WP_087 <wallet-credential-presentation-testcases>`).
+
   5. *POST Authorization Response*: the Wallet Instance presents the requested information to the Relying Party, along with the Wallet Attestation if requested.
   6. *RP Checks*: The Relying Party validates the presented Credentials by verifying the trust with their Issuers and checks the Wallet Attestation to ensure the Wallet Provider is trusted.
   7. *Relying Party Response*: the Wallet Instance informs the User about the successful authentication with the Relying Party, and the User continues the navigation.

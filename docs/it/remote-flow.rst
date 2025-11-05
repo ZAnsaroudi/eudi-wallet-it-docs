@@ -45,6 +45,7 @@ Una descrizione ad alto livello del flusso remoto, dal punto di vista dell'Utent
        * Se ``client_id`` utilizza il prefisso ``x509_hash``, l'Istanza del Wallet DEVE verificare che l'hash del certificato X.509 della Relying Party (nell'intestazione ``x5c`` della richiesta) corrisponda all'hash contenuto in ``client_id`` dal passaggio 2 (come definito in `OpenID4VP`_, Sezione 5.9.3).
 
     c. valuta gli Attestati Elettronici richiesti e verifica l'idoneità della Relying Party nel richiedere questi ultimi. Ad esempio, applicando le politiche relative a quella specifica Relying Party ottenute con la Trust Chain (:ref:`WP_087 <wallet-credential-presentation-testcases>`).
+
   5. *Risposta di Autorizzazione POST*: l'Istanza del Wallet presenta le informazioni richieste alla Relying Party, insieme alla Wallet Attestation se richiesto.
   6. *Controlli RP*: La Relying Party convalida le Credenziali presentate verificando la fiducia con i loro Fornitori di Attestati Elettronici e controlla la Wallet Attestation per garantire che il Fornitore di Wallet sia affidabile.
   7. *Risposta della Relying Party*: l'Istanza del Wallet informa l'Utente dell'autenticazione riuscita con la Relying Party, e l'Utente continua la navigazione.
