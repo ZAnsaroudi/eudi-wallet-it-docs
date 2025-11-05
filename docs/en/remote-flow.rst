@@ -404,7 +404,7 @@ The JWT header parameters are described below:
   * - **kid**
     - Key ID of the public key needed to verify the JWT signature, as defined in [:rfc:`7517`]. REQUIRED when ``trust_chain`` is used.
   * - **trust_chain**
-    - Sequence of Entity Statements that composes the Trust Chain related to the Relying Party, as defined in `OID-FED`_ Section 4.3 *Trust Chain Header Parameter*.
+    - CONDITIONAL. REQUIRED when the ``client_id`` prefix used in the request is set with ``openid-federation``. It is a sequence of Entity Statements that composes the Trust Chain related to the Relying Party, as defined in `OID-FED`_ Section 4.3 *Trust Chain Header Parameter*.
   * - **x5c**
     - CONDITIONAL. REQUIRED when ``client_id`` uses the ``x509_hash`` prefix; otherwise ``kid`` with ``jwks`` is used. Contains the Relying Party’s leaf X.509 certificate (and optionally intermediate certificates), used to verify the JWT signature with the public key in the Relying Party’s certificate as defined in :rfc:`7515`. The Relying Party’s certificate in ``x5c`` MUST assert Relying Party identity information sufficient to bind the network endpoints referenced by the presentation flow. In particular, the endpoints used in the Authorization Request and Authorization Response (e.g., ``response_uri``, ``redirect_uri``) MUST correspond to identity information contained in the Relying Party’s certificate (for example, a URI-type SAN for full-URI matching or a DNSName SAN for host-name matching).
 
