@@ -427,8 +427,6 @@ The JWT payload parameters are described herein:
         - **vp_formats_supported**. Used by the Wallet Instance to determine the supported Verifiable Presentation formats.
         - **encrypted_response_enc_values_supported**. JSON array listing the supported JWE ``enc`` algorithms for encrypted Authorization Responses in ``direct_post.jwt``.
         - **jwks**. JSON Web Key Set used by the Wallet Instance for encrypting the Authorization Response or for key agreement. Keys contained in this set are request-specific and identified by their ``kid`` value.
-        - **request_uris**. JSON Array of pre-registered request_uri endpoints where the Wallet Instance may obtain a new Request Object. URLs MUST use the ``https`` scheme.
-        - **response_uris**. JSON Array of endpoints to which the Wallet Instance sends the Authorization Response using ``direct_post.jwt``. URLs MUST use the ``https`` scheme.
         - **client_name** and **logo_uri**. OPTIONAL. Used for user consent display and to show the Relying Party identity in the Wallet Instance interface.
   * - **response_mode**
     - It MUST be set to ``direct_post.jwt`` (:ref:`RPR-106 <test-plans-remote-presentation>`).
