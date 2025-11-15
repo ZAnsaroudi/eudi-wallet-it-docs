@@ -111,7 +111,7 @@ Il payload JWT contiene i seguenti claim. Alcuni di questi claim possono essere 
       - [NSD]. OPZIONALE. L'identificativo del soggetto dell'Attestato Elettronico, l'Utente, DEVE essere un valore opaco e NON DEVE corrispondere a nessun dato anagrafico o essere derivato dai dati anagrafici dell'Utente tramite pseudonimizzazione. Inoltre, due diverse istanze di Attestati Elettronici emessi NON DEVONO utilizzare lo stesso valore di ``sub``.
       - `[RFC7519, Sezione 4.1.2] <https://www.iana.org/go/rfc7519>`_.
     * - **iat**
-      - [SD]. OBBLIGATORIO. Timestamp UNIX con l'orario di emissione del JWT, codificato come NumericDate come indicato in :rfc:`7519`.
+      - [NSD]. OPZIONALE. Timestamp UNIX con l'orario di emissione del JWT, codificato come NumericDate come indicato in :rfc:`7519`.
       - `[RFC7519, Sezione 4.1.6] <https://www.iana.org/go/rfc7519>`_.
     * - **exp**
       - [NSD]. OBBLIGATORIO. Timestamp UNIX con l'orario di scadenza del JWT, codificato come NumericDate come indicato in :rfc:`7519`.
@@ -124,6 +124,9 @@ Il payload JWT contiene i seguenti claim. Alcuni di questi claim possono essere 
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
     * - **issuing_country**
       - [NSD]. OBBLIGATORIO. Codice paese Alpha-2, come specificato in ISO 3166-1, del paese o territorio del Fornitore di Attestati Elettronici.
+      - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
+    * - **date_of_expiry**
+      - [SD]. CONDIZIONALE. OBBLIGATORIO se il tipo di Attestato Elettronico è `pid`, altrimenti è OPZIONALE. Data (e se possibile ora) di scadenza dei dati di identificazione personale. Formato ISO 8601-1 YYYY-MM-DD. Questo attributo si riferisce al periodo di validità amministrativa del PID, che è tipicamente diverso dal periodo di validità tecnica espresso dal claim JWT ``exp``.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
     * - **status**
       - [NSD]. OBBLIGATORIO solo se l'Attestato Elettronico ha una durata superiore alle 24 ore (long-lived). Oggetto JSON contenente le informazioni su come leggere lo stato dell'Attestato Elettronico. DEVE contenere l'oggetto JSON *status_assertion* o *status_list*.
@@ -160,6 +163,20 @@ Il payload JWT contiene i seguenti claim. Alcuni di questi claim possono essere 
     * - **_sd_alg**
       - [NSD]. OBBLIGATORIO. Algoritmo di hash utilizzato dal Fornitore di Attestati Elettronici per generare i digest.
       - 4.1.1 `SD-JWT`_
+
+.. note::
+  I claim JWT standard ``nbf`` e ``exp`` sono utilizzati per esprimere il periodo di validità tecnica di un PID conforme a SD-JWT VC.
+
+.. note::
+   Il claim ``verification`` è un'**estensione domestica** definita dalla specifica italiana IT-Wallet. NON fa parte dell'ARF PID Rulebook (EUDI Wallet Architecture Reference Framework, Annex 3.01, PID Rulebook v1.3), ma è **permessa ai sensi del requisito ARF PID_06**, che consente agli Stati Membri di definire attributi domestici aggiuntivi oltre a quelli specificati nel Regolamento di Esecuzione della Commissione (CIR) 2024/2977.
+
+   Questo claim è OBBLIGATORIO per i PID italiani per garantire:
+
+   - Tracciabilità del metodo di autenticazione dell'Utente (SPID/CIE/IT-Wallet/EUDI-Wallet)
+   - Conformità al livello di garanzia (LoA High/Substantial per Regolamento eIDAS)
+   - Verificabilità dei processi di verifica dell'identità
+
+   Per la codifica mdoc-CBOR, questo claim è incluso nel **namespace domestico** come ``nameSpaces.elementIdentifier.verification`` (vedi tabella di mappatura cross-format).
 
 Se il parametro ``status`` è valorizzato con ``status_list``, l'oggetto JSON contiene i seguenti sub parametri:
 
@@ -224,7 +241,7 @@ Il documento di *Type Metadata* DEVE essere un oggetto JSON che contiene i segue
     * - **display**
       - OBBLIGATORIO. Array di oggetti, uno per ogni lingua supportata, contenente informazioni di visualizzazione per il tipo di Attestato Elettronico. Contiene per ogni oggetto le seguenti proprietà:
 
-          * ``locale``: tag di lingua come definito in :rfc:`5646` Sezione 2, il nome di questo parametro è allineato con quanto definito in SD-JWT-VC Draft 12. [OBBLIGATORIO].
+          * ``lang``: tag di lingua come definito in :rfc:`5646` Sezione 2. [OBBLIGATORIO].
           * ``name``: nome *human-readable* del tipo di Attestato Elettronico. [OBBLIGATORIO].
           * ``description``: descrizione *human-readable* per il tipo di Attestato Elettronico. [OBBLIGATORIO].
           * ``rendering``: oggetto contenente i metodi di rendering supportati dal tipo di Attestato Elettronico. [OBBLIGATORIO]. Il metodo di rendering `svg_template` DEVE essere supportato.
@@ -260,7 +277,7 @@ Il documento di *Type Metadata* DEVE essere un oggetto JSON che contiene i segue
 
           * ``path``: array che indica i/il claim a cui ci si riferisce. [OBBLIGATORIO].
           * ``display``: array contenente informazioni di visualizzazione sul claim indicato nel ``path``. L'array contiene un oggetto per ogni lingua supportata dal tipo di Attestato Elettronico. Questa proprietà è OBBLIGATORIA. Contiene i seguenti parametri:
-             * ``locale``: tag di lingua come definito in :rfc:`5646` Sezione 2, il nome di questo parametro è allineato con quanto definito in SD-JWT-VC Draft 12. [OBBLIGATORIO].
+             * ``lang``: tag di lingua come definito in :rfc:`5646` Sezione 2. [OBBLIGATORIO].
              * ``label``: etichetta *human-readable* per il claim. [OBBLIGATORIO].
              * ``description``: descrizione *human-readable* per il claim. [OBBLIGATORIO].
           * ``sd``: stringa che indica se il claim è divulgabile selettivamente. DEVE essere impostato su `always` se il claim è divulgabile selettivamente o `never` se non lo è. [OBBLIGATORIO].
@@ -330,11 +347,11 @@ A seconda del tipo di Attestato Elettronico **vct**, possono essere aggiunti dei
     * - **family_name**
       - [SD]. OBBLIGATORIO. Cognome. (*Stringa*)
       - Sezione 5.1 di `OIDC`_ e Regolamento di esecuzione della Commissione `EU_2024/2977`_
-    * - **birth_date**
+    * - **birthdate**
       - [SD]. OBBLIGATORIO. Data di Nascita. (*Stringa, formato [ISO8601‑1] YYYY-MM-DD*)
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_
-    * - **birth_place**
-      - [SD]. OBBLIGATORIO. Luogo di Nascita. (*Stringa*)
+    * - **place_of_birth**
+      - [SD]. OBBLIGATORIO. Luogo di Nascita. (*Struttura JSON; almeno uno tra country, region, locality DEVE essere presente*)
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_
     * - **nationalities**
       - [SD]. OBBLIGATORIO. Uno o più codici paese alpha-2 come specificato in ISO 3166-1. (*Array di stringhe*)
@@ -345,6 +362,9 @@ A seconda del tipo di Attestato Elettronico **vct**, possono essere aggiunti dei
     * - **tax_id_code**
       - [SD]. CONDIZIONALE. OBBLIGATORIO se ``personal_administrative_number`` non è presente. Codice di identificazione fiscale nazionale della persona fisica. DEVE essere conforme a ETSI EN 319 412-1. Ad esempio ``TINIT-<ItalianTaxIdentificationNumber>``. (*Stringa*)
       -
+
+.. note::
+   Il claim ``tax_id_code`` è un'**estensione domestica** specifica dei PID italiani. NON è definito nell'ARF PID Rulebook (EUDI Wallet Architecture Reference Framework, Annex 3.01, PID Rulebook v1.3), ma è permesso ai sensi del requisito ARF PID_06, che consente agli Stati Membri di definire attributi domestici aggiuntivi oltre a quelli specificati nel Regolamento di Esecuzione della Commissione (CIR) 2024/2977.
 
 
 Esempi Non Normativi di PID
@@ -408,21 +428,21 @@ L'elenco delle disclosure è presentato di seguito.
    ``c3NpIl0``
 - Contenuto: ``["eI8ZWm9QnKPpNPeNenHdhQ", "family_name", "Rossi"]``
 
-**Claim** ``birth_date``:
+**Claim** ``birthdate``:
 
 - Hash SHA-256: ``s1XK5f2pM3-aFTauXhmvd9pyQTJ6FMUhc-JXfHrxhLk``
 - Disclosure:
-   ``WyJRZ19PNjR6cUF4ZTQxMmExMDhpcm9BIiwgImJpcnRoX2RhdGUiLCAiMTk4``
-   ``MC0wMS0xMCJd``
-- Contenuto: ``["Qg_O64zqAxe412a108iroA", "birth_date", "1980-01-10"]``
+   ``WyJRZ19PNjR6cUF4ZTQxMmExMDhpcm9BIiwgImJpcnRoZGF0ZSIsICIxOTg``
+   ``wLTAxLTEwIl0``
+- Contenuto: ``["Qg_O64zqAxe412a108iroA", "birthdate", "1980-01-10"]``
 
-**Claim** ``birth_place``:
+**Claim** ``place_of_birth``:
 
 - Hash SHA-256: ``tSL-e1nLdWOU9sFMTCUu5P1tCzxA-TW-VWbHGzYtU7E``
 - Disclosure:
-  ``WyJBSngtMDk1VlBycFR0TjRRTU9xUk9BIiwgImJpcnRoX3BsYWNlIiwgIlJv``
-  ``bWEiXQ``
-- Contenuto: ``["AJx-095VPrpTtN4QMOqROA", "birth_place", "Roma"]``
+  ``WyJBSngtMDk1VlBycFR0TjRRTU9xUk9BIiwgInBsYWNlX29mX2JpcnRoIiwg``
+  ``eyJsb2NhbGl0eSI6ICJSb21hIn1d``
+- Contenuto: ``["AJx-095VPrpTtN4QMOqROA", "place_of_birth", {"locality": "Roma"}]``
 
 **Claim** ``personal_administrative_number``:
 
@@ -546,21 +566,21 @@ Di seguito è riportato l'elenco delle disclosure:
    ``c3NpIl0``
 - Contenuto: ``["eI8ZWm9QnKPpNPeNenHdhQ", "family_name", "Rossi"]``
 
-**Claim** ``birth_date``:
+**Claim** ``birthdate``:
 
 - Hash SHA-256: ``s1XK5f2pM3-aFTauXhmvd9pyQTJ6FMUhc-JXfHrxhLk``
 - Disclosure:
-   ``WyJRZ19PNjR6cUF4ZTQxMmExMDhpcm9BIiwgImJpcnRoX2RhdGUiLCAiMTk4``
-   ``MC0wMS0xMCJd``
-- Contenuto: ``["Qg_O64zqAxe412a108iroA", "birth_date", "1980-01-10"]``
+   ``WyJRZ19PNjR6cUF4ZTQxMmExMDhpcm9BIiwgImJpcnRoZGF0ZSIsICIxOTg``
+   ``wLTAxLTEwIl0``
+- Contenuto: ``["Qg_O64zqAxe412a108iroA", "birthdate", "1980-01-10"]``
 
-**Claim** ``expiry_date``:
+**Claim** ``date_of_expiry``:
 
 - Hash SHA-256: ``aBVdfcnxT0Z5RrwdxZSUhuUxz3gM2vcEZLeYIj61Kas``
 - Disclosure:
-   ``WyJBSngtMDk1VlBycFR0TjRRTU9xUk9BIiwgImV4cGlyeV9kYXRlIiwgIjIw``
-   ``MjQtMDEtMDEiXQ``
-- Contenuto: ``["AJx-095VPrpTtN4QMOqROA", "expiry_date", "2024-01-01"]``
+   ``WyJBSngtMDk1VlBycFR0TjRRTU9xUk9BIiwgImRhdGVfb2ZfZXhwaXJ5Iiwg``
+   ``IjIwMjQtMDEtMDEiXQ``
+- Contenuto: ``["AJx-095VPrpTtN4QMOqROA", "date_of_expiry", "2024-01-01"]``
 
 **Claim** ``personal_administrative_number``:
 
