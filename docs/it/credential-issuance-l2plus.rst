@@ -336,7 +336,7 @@ Se la Richiesta HTTP è elaborata con successo, il Servizio MRTD PoP DEVE inviar
 
 Di seguito un esempio non normativo di una Risposta MRTD PoP:
 
-.. code-block:: http
+.. code-block:: text
 
     HTTP/1.1 202 Accepted
     Content-Type: application/jwt; charset=utf-8
