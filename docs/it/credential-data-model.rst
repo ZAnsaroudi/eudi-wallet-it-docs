@@ -126,7 +126,7 @@ Il payload JWT contiene i seguenti claim. Alcuni di questi claim possono essere 
       - [NSD]. OBBLIGATORIO. Codice paese Alpha-2, come specificato in ISO 3166-1, del paese o territorio del Fornitore di Attestati Elettronici.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
     * - **date_of_expiry**
-      - [SD]. CONDIZIONALE. OBBLIGATORIO se il tipo di Attestato Elettronico è `pid`, altrimenti è OPZIONALE. Data (e se possibile ora) di scadenza dei dati di identificazione personale. Formato ISO 8601-1 YYYY-MM-DD. Questo attributo si riferisce al periodo di validità amministrativa del PID, che è tipicamente diverso dal periodo di validità tecnica espresso dal claim JWT ``exp``.
+      - [NSD]. CONDIZIONALE. OBBLIGATORIO se il tipo di Attestato Elettronico è `pid`, altrimenti è OPZIONALE. Data (e se possibile ora) di scadenza dei dati di identificazione personale. Formato ISO 8601-1 YYYY-MM-DD. Questo attributo si riferisce al periodo di validità amministrativa del PID, che è tipicamente diverso dal periodo di validità tecnica espresso dal claim JWT ``exp``.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
     * - **status**
       - [NSD]. OBBLIGATORIO solo se l'Attestato Elettronico ha una durata superiore alle 24 ore (long-lived). Oggetto JSON contenente le informazioni su come leggere lo stato dell'Attestato Elettronico. DEVE contenere l'oggetto JSON *status_assertion* o *status_list*.

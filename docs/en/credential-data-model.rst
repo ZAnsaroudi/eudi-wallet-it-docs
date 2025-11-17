@@ -127,7 +127,7 @@ The JWT payload contains the following claims. Some of these claims can be discl
       - [NSD]. REQUIRED. Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the Credential Issuer.
       - Commission Implementing Regulation `EU_2024/2977`_.
     * - **date_of_expiry**
-      - [SD]. CONDITIONAL. REQUIRED if Credential type is set to `pid`, otherwise is OPTIONAL. Date (and if possible time) when the person identification data will expire. ISO 8601-1 YYYY-MM-DD format. This attribute pertains to the administrative validity period of the PID, which is typically different from the technical validity period expressed by the JWT ``exp`` claim.
+      - [NSD]. CONDITIONAL. REQUIRED if Credential type is set to `pid`, otherwise is OPTIONAL. Date (and if possible time) when the person identification data will expire. ISO 8601-1 YYYY-MM-DD format. This attribute pertains to the administrative validity period of the PID, which is typically different from the technical validity period expressed by the JWT ``exp`` claim.
       - Commission Implementing Regulation `EU_2024/2977`_.
     * - **status**
       - [NSD]. REQUIRED only if the Digital Credential is long-lived. JSON object containing the information on how to read the status of the Verifiable Credential. It MUST contain either the JSON member *status_assertion* or *status_list*.
