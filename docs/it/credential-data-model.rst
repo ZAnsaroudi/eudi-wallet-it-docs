@@ -4,82 +4,96 @@
 Modello di Dati degli Attestati Elettronici
 ==============================================
 
-Il Modello di Dati degli Attestati Elettronici struttura gli Attestati ELettronici per un uso sicuro e interoperabile. Gli elementi chiave includono:
+Un modello di dati dell'Attestato Elettronico ha la seguente struttura:
 
-    - Soggetto dell'Attestato Elettronico: L'individuo o l'entità che riceve l'Attestato Elettronico.
-    - Fornitore di Attestato Elettronico: il soggetto che emette e firma l'Attestato Elettronico.
-    - Metadata: Dettagli sull'Attestato Elettronico, come tipologia e validità.
-    - Attributi dell'Utente: Informazioni sul soggetto, come identità o titoli/qualifiche.
-    - Elementi crittografici: Verifica crittografica dell'autenticità e della legittimità di possesso.
+- **Attributi di metadati**:
+  - **Format-Agnostic**: Sono attributi di metadati di alto livello che descrivono l'Attestato Elettronico indipendentemente dal suo formato di codifica. Rappresentano le informazioni semantiche sulla credenziale (ad esempio, credential_type, issuing_authority, expiry_date) e rimangono concettualmente coerenti tra i diversi formati. Quando una credenziale viene codificata, questi attributi di metadati comuni vengono mappati a parametri tecnici specifici del formato secondo le regole di codifica di ciascun formato (SD-JWT-VC o mdoc-CBOR).
+  - **Format-Specific**: Sono parametri di metadati intrinseci al formato di codifica specifico e servono a scopi tecnici relativi al modello di sicurezza e ai requisiti di protocollo del formato.
+- **Attributi dell'Utente**: Informazioni sull'Utente, come identità o qualifiche.
 
 L'Attestato Elettronico di Dati di Identificazione Personale (PID) è rilasciato dal Fornitore di Attestati Elettronici di Dati di Identificazione Personale secondo le leggi nazionali e DEVE essere fornito in formato SD-JWT-VC e mdoc-CBOR. Lo scopo principale del PID è consentire alle persone fisiche di essere autenticate per accedere a un servizio o a una risorsa protetta.
 Il PID DEVE essere fornito secondo i requisiti del modello dati definiti in `EU_2024/2977`_ e **Sezione 2 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], gli attributi dell'Utente forniti all'interno del PID italiano sono quelli elencati di seguito:
 
-    - Cognome
-    - Nome
-    - Data di Nascita
-    - Luogo di Nascita
-    - Nazionalità
-    - Codice fiscale (identificatore dati: `tax_id_code`)
+- Cognome attuale
+- Nome attuale
+- Data di Nascita
+- Luogo di Nascita
+- Nazionalità
+- Codice di identificazione fiscale
 
-In aggiunta agli attributi dell'Utente elencati sopra, il PID include anche i seguenti attributi di metadati (`EU_2024/2977`_ e **Sezione 2 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_]):
+In aggiunta agli attributi dell'Utente elencati sopra, il PID include anche le seguenti informazioni (`EU_2024/2977`_ e **Sezione 2 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_]):
 
-  - Data di scadenza
-  - Autorità emittente
-  - Paese emittente
-  - Informazioni di verifica dell'identità (identificatore dati: `verification`)
+- Autorità emittente
+- Paese emittente
+- Data di scadenza
+- Informazioni sullo stato di validità
+- Informazioni di verifica dell'identità e dei dati
 
-Il *codice fiscale* e le *informazioni di verifica dell'identità* sono forniti come **estensioni domestiche** definite dalla specifica IT-Wallet italiana. NON fanno parte dell'ARF PID Rulebook (Annex 3.01, PID Rulebook v1.3), ma sono **permessi dal requisito ARF PID_06**, che consente agli Stati Membri di definire attributi domestici aggiuntivi oltre a quelli specificati nel Regolamento di Esecuzione della Commissione (CIR) 2024/2977 (`EU_2024/2977`_). In particolare, le informazioni di verifica dell'identità sono OBBLIGATORIE per i PID italiani per garantire:
+Alcuni attributi di dati, come il *codice di identificazione fiscale* e le *informazioni di verifica dell'identità e dei dati*, sono forniti come **estensioni domestiche** definite dalla specifica IT-Wallet italiana. NON fanno parte dell'ARF PID Rulebook (Annex 3.01, PID Rulebook v1.3), ma sono **permessi dal requisito ARF PID_06**, che consente agli Stati Membri di definire attributi domestici aggiuntivi oltre a quelli specificati nel Regolamento di Esecuzione della Commissione (CIR) 2024/2977 (`EU_2024/2977`_). In particolare, le informazioni di verifica dell'identità sono OBBLIGATORIE per i PID italiani per garantire:
 
 - Tracciabilità del metodo di autenticazione dell'Utente.
-- Conformità al livello di garanzia (LoA High/Substantial secondo il Regolamento eIDAS).
-- Verificabilità dei processi di verifica dell'identità.
+- Conformità al livello di garanzia dell'identity proofing durante il processo di enrollment (LoA come definito dal Regolamento eIDAS).
+- Verificabilità dei processi di verifica dell'identità e degli attributi dell'Utente.
 
-Entrambi i claim sono inclusi nei **namespace domestici** che sono definiti nella Sezione :ref:`credential-data-model:Modello Dati PID in formato SD-JWT-VC` e Sezione :ref:`credential-data-model:Modello Dati PID in formato mdoc-CBOR` per i PID SD-JWT-VC e mdoc-CBOR rispettivamente.
+Gli attributi che sono **estensioni domestiche** DEVONO essere inclusi nei **namespace domestici** che sono definiti nella Sezione :ref:`credential-data-model:Modello Dati PID in formato SD-JWT-VC` e Sezione :ref:`credential-data-model:Modello Dati PID in formato mdoc-CBOR` per i PID SD-JWT-VC e mdoc-CBOR rispettivamente.
 
-Gli Attestati Elettronici di Attributi (Qualificati) ((Q)EAA) sono rilasciati dai Fornitori di Attestati Elettronici di Attributi (Qualificati) ((Q)EAA) a un'Istanza del Wallet e DEVONO essere forniti in formato SD-JWT-VC o mdoc-CBOR.
+Gli Attestati Elettronici di Attributi (Qualificati) ((Q)EAA) sono rilasciati dai Fornitori di (Q)EAA a un'Istanza del Wallet e DEVONO essere forniti in formato SD-JWT-VC o mdoc-CBOR.
 Mentre il modello dati (Q)EAA è guidato dal caso d'uso e può includere diversi attributi dell'Utente, gli attributi di metadati specifici per ciascun formato dati sono forniti nelle sezioni seguenti.
 
-Attestato Elettronico in formato SD-JWT-VC
-------------------------------------------
+Attributi di Metadati Format-Agnostic dell'Attestato Elettronico
+-----------------------------------------------------------------
 
-Il PID/(Q)EAA è rilasciato sotto forma di Attestato Elettronico. Il formato dell'Attestato Elettronico in `SD-JWT`_ segue le specifiche di `SD-JWT-VC`_ utilizzando la *Compact Serialization*.
+La seguente tabella definisce gli attributi di metadati comuni che sono applicabili agli Attestati Elettronici indipendentemente dal loro formato di codifica. Questi attributi rappresentano le informazioni semantiche sulla credenziale.
 
-SD-JWT DEVE essere firmato utilizzando la chiave privata del Fornitore di Attestati Elettronici. SD-JWT DEVE essere fornito insieme a un *Type Metadata* relativo all'Attestato Elettronico rilasciato secondo quanto indicato nelle Sezioni 6 e 6.3 di [`SD-JWT-VC`_]. Il payload DEVE contenere il claim **_sd_alg** descritto nella Sezione 4.1.1 `SD-JWT`_ e gli altri claim specificati in questa sezione.
+.. _table_format_agnostic_attributes:
+.. list-table::
+  :class: longtable
+  :widths: 20 60
+  :header-rows: 1
 
-Il claim **_sd_alg** indica l'algoritmo di hash utilizzato dal Fornitore di Attestati Elettronici per generare i digest come descritto nella Sezione 4.1.1 di `SD-JWT`_. **_sd_alg** DEVE essere valorizzato con uno degli algoritmi specificati nella Sezione :ref:`Cryptographic Algorithms <algorithms:Algoritmi Crittografici>`.
+  * - **Identificatore Dati**
+    - **Descrizione**
+  * - **credential_type_identifier**
+    - OBBLIGATORIO. Identificatore unico e resistente alle collisioni che specifica il tipo e lo schema dell'Attestato Elettronico. Definisce l'insieme di claim/attributi che l'Attestato Elettronico contiene e la loro struttura.
+  * - **issuing_authority**
+    - OBBLIGATORIO. Nome dell'autorità amministrativa che ha emesso l'Attestato Elettronico.
+  * - **issuing_country**
+    - OBBLIGATORIO. Codice paese Alpha-2, come specificato in ISO 3166-1, del paese o territorio del Fornitore di Attestati Elettronici.
+  * - **issuance_date**
+    - OPZIONALE. Data (e se possibile ora) in cui l'Attestato Elettronico è stato emesso e/o in cui è iniziato il periodo di validità amministrativa dell'Attestato Elettronico.
+  * - **expiry_date**
+    - OPZIONALE. Data (e se possibile ora) di scadenza dell'Attestato Elettronico.
+  * - **location_status**
+    - OPZIONALE. La posizione delle informazioni sullo stato di validità dell'Attestato Elettronico dove il Fornitore di Attestati Elettronici revoca l'Attestato Elettronico.
+  * - **cryptographic_binding**
+    - OPZIONALE. Oggetto contenente il materiale crittografico per la prova di possesso.
+  * - **verification**
+    - OPZIONALE. Oggetto contenente informazioni di Identity proofing e verifica dei dati dell'Utente.
 
-I claim che non sono divulgabili selettivamente DEVONO essere inclusi nel SD-JWT così come sono. I digest delle disclosure, insieme a eventuali decoy digest se presenti, DEVONO essere contenuti nell'array **_sd**, come specificato nella Sezione 4.2.4.1 di `SD-JWT`_.
+Le sezioni seguenti forniscono gli attributi specifici del formato e una mappatura degli attributi di metadati sopra indicati ai parametri tecnici specifici del formato quando la credenziale è codificata in formato SD-JWT-VC o mdoc-CBOR.
 
-Ogni valore di digest, calcolato applicando una funzione di hash sulle disclosure, verifica l'integrità e corrisponde a una specifica disclosure. Ogni disclosure include:
+Formato Attestato Elettronico SD-JWT-VC
+----------------------------------------
 
-  - un *salt* casuale,
-  - il nome del claim (solo quando il claim è un object element),
-  - il valore del claim.
+Quando gli Attestati Elettronici sono emessi in formato SD-JWT-VC, DEVONO essere conformi alle specifiche `SD-JWT`_ e `SD-JWT-VC`_.
 
-In caso di oggetti annidati (nested object) nel payload SD-JWT, ogni claim di ogni livello del JSON dovrebbe essere individualmente contrassegnato come divulgabile selettivamente o meno. Pertanto il claim **_sd** contenente i digest PUÒ apparire più volte nei diversi livelli del SD-JWT.
+SD-JWT DEVE essere firmato utilizzando la chiave privata del Fornitore di Attestati Elettronici. SD-JWT DEVE essere fornito insieme a un Type Metadata relativo all'Attestato Elettronico emesso secondo le Sezioni 6 e 6.3 di [`SD-JWT-VC`_]. Il payload DEVE contenere il claim **_sd_alg** descritto nella Sezione 4.1.1 `SD-JWT`_ e gli altri claim specificati in questa sezione.
 
-Per ogni claim che è un elemento di un array, i digest delle rispettive disclosure e i decoy digest vengono aggiunti all'array nella stessa posizione dei valori del claim originali come specificato nella Sezione 4.2.4.2 di `SD-JWT`_.
+Il claim **_sd_alg** indica l'algoritmo di hash utilizzato dal Fornitore di Attestati Elettronici per generare i digest come descritto nella Sezione 4.1.1 di `SD-JWT`_. **_sd_alg** DEVE essere impostato su uno degli algoritmi specificati nella Sezione :ref:`Cryptographic Algorithms <algorithms:Algoritmi Crittografici>`.
 
-In caso di elementi di un array, i valori di digest vengono calcolati applicando una funzione di hash sulle disclosure, contenenti:
+I claim che non sono divulgabili selettivamente DEVONO essere inclusi nell'SD-JWT così come sono. I digest delle disclosure, insieme a eventuali decoy se presenti, DEVONO essere contenuti nell'array **_sd**, come specificato nella Sezione 4.2.4.1 di `SD-JWT`_.
 
-  - un *salt* casuale,
-  - l'elemento dell'array.
-
-In presenza di più elementi in un array, il Fornitore di Attestati Elettronici può nascondere il valore dell'intero array oppure di qualsiasi elemento contenuta all'interno dell'array, il Titolare può divulgare sia l'intero array che qualsiasi singola voce all'interno dell'array, come definito nella Sezione 4.2.6 di `SD-JWT`_.
-
-Le disclosure vengono fornite al Titolare insieme al SD-JWT nel *Combined Format for Issuance* che è una serie ordinata di valori codificati in base64url, ciascuno separato dal successivo da un singolo carattere tilde ('~') come segue:
+Le Disclosure vengono fornite al Titolare insieme all'SD-JWT nel *Combined Format for Issuance* che è una serie ordinata di valori codificati in base64url, ciascuno separato dal successivo da un singolo carattere tilde ('~') come segue:
 
 .. code-block:: text
 
   <Issuer-Signed-JWT>~<Disclosure 1>~<Disclosure 2>~...~<Disclosure N>
 
-
 Vedere `SD-JWT-VC`_ e `SD-JWT`_ per ulteriori dettagli.
 
 
-Parametri e attributi di metadati SD-JWT dell'Attestato Elettronico
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Parametri SD-JWT dell'Attestato Elettronico
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Il JOSE Header contiene i seguenti parametri obbligatori:
 
@@ -121,10 +135,10 @@ Il payload JWT contiene i seguenti claim. Salvo diversamente specificato, i segu
       - **Descrizione**
       - **Riferimento**
     * - **iss**
-      - OBBLIGATORIO. Stringa URL che rappresenta l'identificativo univoco del Fornitore di Attestati Elettronici.
+      - OBBLIGATORIO. *Stringa*. Stringa URL che rappresenta l'identificativo univoco del Fornitore di Attestati Elettronici.
       - `[RFC7519, Sezione 4.1.1] <https://www.iana.org/go/rfc7519>`_.
     * - **sub**
-      - OPZIONALE. L'identificativo del soggetto dell'Attestato Elettronico, l'Utente, DEVE essere un valore opaco e NON DEVE corrispondere a nessun dato anagrafico o essere derivato dai dati anagrafici dell'Utente tramite pseudonimizzazione. Inoltre, due diverse istanze di Attestati Elettronici emessi NON DEVONO utilizzare lo stesso valore di ``sub``.
+      - OPZIONALE. *Stringa*. L'identificativo del soggetto dell'Attestato Elettronico, l'Utente, DEVE essere un valore opaco e NON DEVE corrispondere a nessun dato anagrafico o essere derivato dai dati anagrafici dell'Utente tramite pseudonimizzazione. Inoltre, è richiesto che due diverse Credenziali emesse NON DEVONO utilizzare lo stesso valore di ``sub``.
       - `[RFC7519, Sezione 4.1.2] <https://www.iana.org/go/rfc7519>`_.
     * - **iat**
       - OPZIONALE. Timestamp UNIX con l'orario di emissione del JWT, codificato come NumericDate come indicato in :rfc:`7519`.
@@ -136,48 +150,49 @@ Il payload JWT contiene i seguenti claim. Salvo diversamente specificato, i segu
       - OPZIONALE. Timestamp UNIX con l'orario di inizio validità del JWT, codificato come NumericDate come indicato in :rfc:`7519`.
       - `[RFC7519, Sezione 4.1.4] <https://www.iana.org/go/rfc7519>`_.
     * - **issuing_authority**
-      - OBBLIGATORIO. Nome dell'autorità amministrativa che ha emesso l'Attestato Elettronico.
+      - OBBLIGATORIO. *Stringa*. Identificatore dati `issuing_authority` codificato nel formato come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
     * - **issuing_country**
-      - OBBLIGATORIO. Codice paese Alpha-2, come specificato in ISO 3166-1, del paese o territorio del Fornitore di Attestati Elettronici.
+      - OBBLIGATORIO. *Stringa*. Identificatore dati `issuing_country` codificato nel formato come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
     * - **date_of_expiry**
-      - OPZIONALE. Data (e se possibile ora) di scadenza dell'Attestato Elettronico. DEVE essere conforme al formato ISO 8601-1 YYYY-MM-DD. Questo attributo si riferisce al periodo di validità amministrativa dell'Attestato Elettronico, che è tipicamente diverso dal periodo di validità tecnica espresso dal claim JWT ``exp``.
+      - OPZIONALE. *Stringa*. Identificatore dati `expiry_date` codificato nel formato come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. Questo attributo si riferisce al periodo di validità amministrativa dell'Attestato Elettronico, che è tipicamente diverso dal periodo di validità tecnica espresso dal claim JWT ``exp``.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_.
     * - **status**
-      - OBBLIGATORIO solo se l'Attestato Elettronico ha una durata superiore alle 24 ore (long-lived). Oggetto JSON contenente le informazioni su come leggere lo stato dell'Attestato Elettronico. DEVE contenere l'oggetto JSON *status_assertion* o *status_list*.
+      - OBBLIGATORIO solo se l'Attestato Elettronico è long-lived. *Oggetto JSON*. Identificatore dati `location_status` codificato nel formato come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. DEVE contenere il membro JSON `status_assertion` o `status_list`.
       - Sezione 3.2.2.2 `SD-JWT-VC`_ e Sezione 11 `OAUTH-STATUS-ASSERTION`_.
     * - **cnf**
-      - OBBLIGATORIO. Oggetto JSON contenente il materiale crittografico da utilizzare come prova di possesso. L'inclusione del claim **cnf** (confirmation) in un JWT, permette al soggetto che emette il JWT di dichiarare che il Titolare ha il controllo della chiave privata relativa a quella pubblica definita nel parametro **cnf**. Il destinatario DEVE verificare crittograficamente che il Titolare abbia effettivamente il controllo di quella chiave.
+      - OBBLIGATORIO. *Oggetto JSON*. Identificatore dati `cryptographic_binding` codificato nel formato come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`, contenente il materiale crittografico per la prova di possesso. Includendo un claim **cnf** (confirmation) in un JWT, il Fornitore del JWT dichiara che il Titolare ha il controllo della chiave privata relativa a quella pubblica definita nel parametro **cnf**. Il destinatario DEVE verificare crittograficamente che il Titolare abbia effettivamente il controllo di quella chiave.
       - `[RFC7800, Sezione 3.1] <https://www.iana.org/go/rfc7800>`_ e Sezione 3.2.2.2 `SD-JWT-VC`_.
     * - **vct**
-      - OBBLIGATORIO. Il valore del tipo di Attestato Elettronico DEVE essere una URN e DEVE essere valorizzata utilizzando uno dei valori ottenuti dai Metadata del Fornitore di Attestati Elettronici, il confronto dei caratteri letterali inclusi in questa URN DEVE essere eseguito in modo `case-sensitive`. È l'identificativo del tipo di SD-JWT VC e DEVE essere resistente alle collisioni come definito nella Sezione 2 di :rfc:`7515`. DEVE contenere anche il numero di versione del tipo di Attestato Elettronico. A meno che non sia diversamente specificato da `EIDAS-ARF`_ e dagli EUDI Rulebook, il ``vct`` DOVREBBE seguire una struttura come ``urn:it-wallet:{credential_type}:{credential_type_version}``.
+      - OBBLIGATORIO. *Stringa*. Identificatore dati `credential_type_identifier` codificato nel formato come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. Il valore del tipo di Attestato Elettronico DEVE essere una URN e DEVE essere impostato utilizzando uno dei valori ottenuti dai metadata del Fornitore di Attestati Elettronici, il confronto dei caratteri letterali inclusi in questa URN DEVE essere eseguito in modo case-sensitive. È l'identificativo del tipo di SD-JWT VC e DEVE essere impostato con un valore resistente alle collisioni come definito nella Sezione 2 di :rfc:`7515`. DEVE contenere anche il numero di versione del tipo di Attestato Elettronico. A meno che non sia diversamente specificato da `EIDAS-ARF`_ e dagli EUDI Rulebook, il ``vct`` DOVREBBE seguire una struttura come ``urn:it-wallet:{credential_type}:{credential_type_version}``.
       - Sezione 3.2.2.2 `SD-JWT-VC`_.
     * - **vct#integrity**
-      - OBBLIGATORIO. Il valore DEVE essere una stringa "integrity metadata" come definito nella Sezione 3 di [`W3C-SRI`_]. *SHA-256*, *SHA-384* e *SHA-512* DEVONO essere supportati come funzioni crittografiche di hash. *MD5* e *SHA-1* NON DEVONO essere utilizzati. Questo claim DEVE essere verificato in base a quanto indicato nella la Sezione 3.3.5 di [`W3C-SRI`_].
+      - OBBLIGATORIO. *Stringa*. Il valore DEVE essere una stringa "integrity metadata" come definito nella Sezione 3 di [`W3C-SRI`_]. *SHA-256*, *SHA-384* e *SHA-512* DEVONO essere supportati come funzioni crittografiche di hash. *MD5* e *SHA-1* NON DEVONO essere utilizzati. Questo claim DEVE essere verificato in base a quanto indicato nella Sezione 3.3.5 di [`W3C-SRI`_].
       - Sezione 6.1 `SD-JWT-VC`_, [`W3C-SRI`_]
     * - **verification**
-      - OPZIONALE. Oggetto contenente informazioni sull'autenticazione dell'Utente e sulla verifica dei dati dell'Utente. Include i seguenti sotto-valori:
+      - OPZIONALE. *Oggetto JSON*. Identificatore dati `verification` codificato nel formato come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`.
+        Include i seguenti sotto-valori:
 
-          * ``trust_framework``: OBBLIGATORIO. Stringa che identifica il trust framework utilizzato per l'autenticazione dell'Utente. DEVE essere valorizzato utilizzando uno dei valori descritti nella mappa `trust_frameworks_supported` fornita nei Metadata del Fornitore di Attestati Elettronici.
-          * ``assurance_level``: OBBLIGATORIO. Stringa che identifica il livello di garanzia dell'identità garantito durante il processo di autenticazione dell'Utente.
+          * ``trust_framework``: OBBLIGATORIO. *Stringa* che identifica il trust framework utilizzato per l'autenticazione dell'Utente. DEVE essere impostato utilizzando uno dei valori descritti nella mappa `trust_frameworks_supported` fornita nei Metadata del Fornitore di Attestati Elettronici.
+          * ``assurance_level``: OBBLIGATORIO. *Stringa* che identifica il livello di garanzia dell'identità garantito durante il processo di autenticazione dell'Utente.
           * ``evidence``: OPZIONALE. Ogni voce dell'array DEVE contenere i seguenti membri:
 
-            - ``type``: OPZIONALE. Rappresenta il tipo di evidenza. DEVE essere valorizzato con ``vouch``.
-            - ``time``: OPZIONALE. Timestamp UNIX con l'orario dell'autenticazione o della verifica.
+            - ``type``: OPZIONALE. *Stringa*. Rappresenta il tipo di evidenza. DEVE essere impostato a ``vouch``.
+            - ``time``: OPZIONALE. *Timestamp UNIX* con l'orario dell'autenticazione o della verifica.
             - ``attestation``: OPZIONALE. Contiene i seguenti membri:
 
-                - ``type``: OPZIONALE. DEVE essere valorizzato con ``digital_attestation``.
-                - ``reference_number``: OPZIONALE. identificativo della risposta di autenticazione o verifica.
-                - ``date_of_issuance``: OPZIONALE. data di emissione dell'attestazione.
-                - ``voucher``: OPZIONALE. DEVE contenere il claim ``organization``.
+                - ``type``: OPZIONALE. *Stringa* DEVE essere impostato a ``digital_attestation``.
+                - ``reference_number``: OPZIONALE. *Stringa.* identificativo della risposta di autenticazione o verifica.
+                - ``date_of_issuance``: OPZIONALE. *Stringa*. data di emissione dell'attestazione.
+                - ``voucher``: OPZIONALE. *Oggetto JSON*. DEVE contenere il claim ``organization`` in formato Stringa leggibile.
 
       - Estensione domestica.
     * - **_sd**
-      - OBBLIGATORIO. Array di stringhe, dove ogni stringa rappresenta un digest di una Disclosure.
+      - OBBLIGATORIO. *Array di stringhe*, dove ogni stringa rappresenta un digest di una Disclosure.
       - 4.2.4.1 `SD-JWT`_
     * - **_sd_alg**
-      - OBBLIGATORIO. Algoritmo di hash utilizzato dal Fornitore di Attestati Elettronici per generare i digest.
+      - OBBLIGATORIO. *Stringa*. Algoritmo di hash utilizzato dal Fornitore di Attestati Elettronici per generare i digest.
       - 4.1.1 `SD-JWT`_
 
 .. note::
@@ -207,8 +222,9 @@ Se il parametro ``status`` è valorizzato con ``status_assertion``, è un Oggett
 Modello Dati PID in formato SD-JWT-VC
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Poiché il PID italiano è fornito come attributi di estensione domestica, il valore del claim `vct` DEVE estendere il tipo base definito nell'ARF PID Rulebook v1.3, utilizzando il tipo nel namespace `urn:eudi:pid:`, come consentito dal requisito `EIDAS-ARF`_ *PID_14* e specificato nella Sezione 4.2 dell'ARF PID Rulebook v1.3.
-Per il PID SD-JWT-VC definito in questa specifica, il valore `vct` DEVE essere `urn:eudi:pid:it:1`.
+Per il PID SD-JWT-VC definito in questa specifica, il valore `vct` DEVE essere `urn:it-wallet:pid:1`.
+
+Una volta raggiunta la piena operatività dell'ecosistema EUDIW, il valore `vct` DEVE transitare a `urn:eudi:pid:it:1` in conformità ai requisiti dell'ARF PID Rulebook v1.3 per le estensioni domestiche PID (requisito *PID_14*, Sezione 4.2, estendendo il tipo base `urn:eudi:pid:`).
 
 In base a `EU_2024/2977`_ e alla **Sezione 4 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato SD-JWT-VC DEVE supportare i seguenti Attributi Utente:
 
@@ -222,25 +238,25 @@ In base a `EU_2024/2977`_ e alla **Sezione 4 dell'ARF PID Rulebook v1.3** [`EIDA
       - **Descrizione**
       - **Riferimento**
     * - **given_name**
-      - OBBLIGATORIO. Nome attuale. (*Stringa*)
+      - OBBLIGATORIO. *Stringa*. Nome attuale.
       - Sezione 5.1 di `OIDC`_ e Regolamento di esecuzione della Commissione `EU_2024/2977`_
     * - **family_name**
-      - OBBLIGATORIO. Cognome attuale. (*Stringa*)
+      - OBBLIGATORIO. *Stringa*. Cognome attuale.
       - Sezione 5.1 di `OIDC`_ e Regolamento di esecuzione della Commissione `EU_2024/2977`_
     * - **birthdate**
-      - OBBLIGATORIO. Data di Nascita. (*Stringa, formato [ISO8601‑1] YYYY-MM-DD*)
+      - OBBLIGATORIO. *Stringa*. Data di Nascita. DEVE essere impostata secondo ISO8601-1 (formato YYYY-MM-DD).
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_
     * - **place_of_birth**
-      - OBBLIGATORIO. Luogo di Nascita. (*Struttura JSON; almeno uno tra country, region, locality DEVE essere presente*)
+      - OBBLIGATORIO. *Oggetto JSON*. Luogo di Nascita. Almeno uno tra `country`, `region`, `locality` DEVE essere presente.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_
     * - **nationalities**
-      - OBBLIGATORIO. Uno o più codici paese alpha-2 come specificato in ISO 3166-1. (*Array di stringhe*)
+      - OBBLIGATORIO. *Array di stringhe*. Uno o più codici paese alpha-2 come specificato in ISO 3166-1.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_
     * - **personal_administrative_number**
-      - OBBLIGATORIO se ``tax_id_code`` non è presente, altrimenti OPZIONALE. Identificativo univoco nazionale di una persona fisica generato da ANPR in formato stringa. (*Stringa*)
+      - OBBLIGATORIO se ``tax_id_code`` non è presente, altrimenti OPZIONALE. *Stringa*. Identificativo univoco nazionale di una persona fisica generato da ANPR in formato stringa.
       - Regolamento di esecuzione della Commissione `EU_2024/2977`_
     * - **tax_id_code**
-      - OBBLIGATORIO se ``personal_administrative_number`` non è presente, altrimenti OPZIONALE. Codice di identificazione fiscale nazionale della persona fisica in formato Stringa. DEVE essere impostato secondo ETSI EN 319 412-1. Ad esempio ``TINIT-<ItalianTaxIdentificationNumber>``. (*Stringa*)
+      - OBBLIGATORIO se ``personal_administrative_number`` non è presente, altrimenti OPZIONALE. *Stringa*. Codice di identificazione fiscale nazionale della persona fisica in formato Stringa. DEVE essere impostato secondo ETSI EN 319 412-1. Ad esempio ``TINIT-<ItalianTaxIdentificationNumber>``.
       - Estensione domestica
 
 Tutti gli attributi Utente elencati sopra DEVONO essere divulgabili selettivamente.
@@ -432,9 +448,9 @@ Il formato combinato per l'emissione del (Q)EAA è rappresentato di seguito:
   :language: text
 
 Type Metadata dell'Attestato Elettronico
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Il documento di *Type Metadata* DEVE essere un oggetto JSON che contiene i seguenti parametri.
+Il documento di *Type Metadata* DEVE essere un *JSON object* e contiene i seguenti parametri.
 
 .. _table_metadata_type_json_obj:
 .. list-table::
@@ -559,10 +575,10 @@ Di seguito è riportato un esempio non normativo.
     }
 
 
-Attestato Elettronico in formato mdoc-CBOR
+Formato Attestato Elettronico mdoc-CBOR
 ------------------------------------------
 
-Il modello dati mdoc si basa sullo standard ISO/IEC 18013-5.
+Il modello dati dell'Attestato Elettronico in formato mdoc-CBOR si basa sullo standard ISO/IEC 18013-5.
 I dati in mdoc DEVONO essere codificati in CBOR come definito in :rfc:`8949`.
 
 Questo modello dati struttura gli Attestati Elettronici in componenti distinti: namespaces (**nameSpaces**) e prova crittografica (**issuerAuth**).
@@ -654,7 +670,11 @@ Il `MobileSecurityObject` DEVE avere i seguenti attributi, se non diversamente s
       - **Descrizione**
       - **Riferimento**
     * - **docType**
-      - *(tstr)*. Definisce il tipo di Attestato Elettronico in formato mdoc. Ad esempio, per un mDL, il valore DEVE essere ``org.iso.18013.5.1.mDL``. Specifici `docType` POSSONO essere definiti per Attestati Elettronici diversi da mDL.
+      - *(tstr)*. Codifica formato dell'identificatore dati `credential_type_identifier` come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. Definisce il tipo di Attestato Elettronico in formato mdoc. DEVE essere una stringa nella forma:
+
+          - definito a livello europeo, DEVE essere una stringa della forma ``eu.europa.ec.{credential_type}.{version}`` (ad es., ``eu.europa.ec.eudi.pid.1``).
+          - definito a livello nazionale, DEVE essere una stringa della forma ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (ad es., ``it-wallet.trust-registry.pid.1``).
+
       - [ISO 18013-5#9.1.2.4]
     * - **version**
       - *(tstr)*. Versione del `MobileSecurityObject`.

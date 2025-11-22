@@ -5,69 +5,84 @@
 Digital Credential Data Model
 ==============================
 
-The Digital Credential Data Model structures Digital Credentials for secure, interoperable use. Key elements include:
+A Digital Credential data model has the following structure:
 
-    - Credential Subject: The individual or entity receiving the Credential.
-    - Issuer: The Credential Issuer issuing and signing the Credential.
-    - Metadata: Details about the Credential, like type and validity.
-    - Claims: Information about the subject, such as identity or qualifications.
-    - Proof: Cryptographic verification of authenticity and legitimate ownership.
+- **Metadata attributes**:
+  - **Format-Agnostic**: These are high-level metadata attributes that describe the Digital Credential independently of its encoding format. They represent the semantic information about the credential (e.g., credential_type, issuing_authority, expiry_date) and remain conceptually consistent across different formats. When a credential is encoded, these common metadata attributes are mapped to format-specific technical parameters according to the encoding rules of each format (SD-JWT-VC or mdoc-CBOR).
+  - **Format-Specific**: These are metadata parameters that are intrinsic to the specific encoding format and serve technical purposes related to the format's security model and protocol requirements.
+- **User attributes**: Information about the User, such as identity or qualifications.
 
 The Person Identification Data (PID) is issued by the PID Provider according to national laws and it MUST be provided in SD-JWT-VC and mdoc-CBOR data format. The main scope of the PID is allowing natural persons to be authenticated for access to a service or to a protected resource.
 The PID MUST be provided according to data model requirements defined in  `EU_2024/2977`_ and **Section 2 of the ARF PID Rulebook v1.3** [`EIDAS-ARF`_], the User attributes provided within the Italian PID are the ones listed below:
 
-    - Current Family Name
-    - Current First Name
-    - Date of Birth
-    - Place of Birth
-    - Nationality
-    - Taxpayer identification number (data identifier: `tax_id_code`)
+- Current Family Name
+- Current First Name
+- Date of Birth
+- Place of Birth
+- Nationality
+- Taxpayer identification number
 
-In addition to the User attributes listed above, the PID includes also the following metadata attributes (`EU_2024/2977`_ and **Section 2 of the ARF PID Rulebook v1.3** [`EIDAS-ARF`_]):
+In addition to the User attributes listed above, the PID includes also the following information (`EU_2024/2977`_ and **Section 2 of the ARF PID Rulebook v1.3** [`EIDAS-ARF`_]):
 
-  - Expiry Date
-  - Issuing authority
-  - Issuing country
-  - Identity proofing information (data identifier: `verification`)
+- Issuing authority
+- Issuing country
+- Expiry Date
+- Validity status information
+- Identity and data proofing information 
 
-The *taxpayer identification number* and the *identity proofing information* are provided as **domestic extensions** defined by the Italian IT-Wallet specification. It is NOT part of the ARF PID Rulebook (Annex 3.01, PID Rulebook v1.3), but is **permitted under ARF requirement PID_06**, which allows Member States to define additional domestic attributes beyond those specified in Commission Implementing Regulation (CIR) 2024/2977 (`EU_2024/2977`_). In particular, the identity proofing information is REQUIRED for Italian PIDs to ensure:
+Some data attributes, such as the *taxpayer identification number* and the *identity and data proofing information*, are provided as **domestic extensions** defined by the Italian IT-Wallet specification. It is NOT part of the ARF PID Rulebook (Annex 3.01, PID Rulebook v1.3), but is **permitted under ARF requirement PID_06**, which allows Member States to define additional domestic attributes beyond those specified in Commission Implementing Regulation (CIR) 2024/2977 (`EU_2024/2977`_). In particular, the identity proofing information is REQUIRED for Italian PIDs to ensure:
 
 - Traceability of User authentication method.
-- Level of assurance compliance (LoA High/Substantial per eIDAS Regulation).
-- Auditability of identity verification processes.
+- Level of Assurance compliance of identity proofing during the enrollment process (LoA as defined by eIDAS Regulation).
+- Auditability of identity and User attributes verification processes.
 
-Both claims are included in the **domestic namespaces** that are defined in Section :ref:`credential-data-model:PID Data Model in SD-JWT-VC Format` and Section :ref:`credential-data-model:PID Data Model in mdoc-CBOR Format` for SD-JWT-VC and mdoc-CBOR PIDs respectively.
+Attributes that are **domestic extensions** MUST be included in the **domestic namespaces** that are defined in Section :ref:`credential-data-model:PID Data Model in SD-JWT-VC Format` and Section :ref:`credential-data-model:PID Data Model in mdoc-CBOR Format` for SD-JWT-VC and mdoc-CBOR PIDs respectively.
 
 The (Q)EAAs are issued by (Q)EAA Issuers to a Wallet Instance and MUST be provided in SD-JWT-VC or mdoc-CBOR data format.
 While the (Q)EAA data model is use-case driven and may include different User attributes, the metadata attributes specific for each data format are provided in the following sections.  
 
+Format-Agnostic Credential Metadata Attributes
+-----------------------------------------------
+
+The following table defines the common metadata attributes that are applicable to Digital Credentials regardless of their encoding format. These attributes represent the semantic information about the credential.  
+
+.. _table_format_agnostic_attributes:
+.. list-table::
+  :class: longtable
+  :widths: 20 60
+  :header-rows: 1
+
+  * - **Data Identifier**
+    - **Description**
+  * - **credential_type_identifier**
+    - REQUIRED. A unique and collision-resistant identifier that specifies the type and schema of the Digital Credential. It defines the set of claims/attributes that the Digital Credential contains and their structure.
+  * - **issuing_authority**
+    - REQUIRED. Name of the administrative authority that issued the Digital Credential.
+  * - **issuing_country**
+    - REQUIRED. Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the Credential Issuer.
+  * - **issuance_date**
+    - OPTIONAL. Date (and if possible time) when the Digital Credential was issued and/or the administrative validity period of the Digital Credential began.
+  * - **expiry_date**
+    - OPTIONAL. Date (and if possible time) when the Digital Credential will expire.
+  * - **location_status**
+    - OPTIONAL. The location of validity status information on the Digital Credential where the Credential Issuer revoke Digital Credential.
+  * - **cryptographic_binding**
+    - OPTIONAL. Object containing the proof-of-possession key materials.
+  * - **verification**
+    - OPTIONAL. Object containing Identity proofing and User data verification information.
+
+The following sections provide format-specific attributes and a mapping of the above metadata attributes to format-specific technical parameters when the credential is encoded in SD-JWT-VC or mdoc-CBOR format.
+
 SD-JWT-VC Credential Format
 ---------------------------
 
-The PID/(Q)EAA is issued in the form of a Digital Credential. The Digital Credential format is `SD-JWT`_ as specified in `SD-JWT-VC`_.
+When Digital Credentials are issued in the SD-JWT-VC format, they MUST be compliant to `SD-JWT`_ and `SD-JWT-VC`_ specifications.
 
 SD-JWT MUST be signed using the Issuer's private key. SD-JWT MUST be provided along with a Type Metadata related to the issued Digital Credential according to Sections 6 and 6.3 of [`SD-JWT-VC`_]. The payload MUST contain the **_sd_alg** claim described in Section 4.1.1 `SD-JWT`_ and other claims specified in this section.
 
 The claim **_sd_alg** indicates the hash algorithm used by the Issuer to generate the digests as described in Section 4.1.1 of `SD-JWT`_. **_sd_alg** MUST be set to one of the specified algorithms in Section :ref:`Cryptographic Algorithms <algorithms:Cryptographic Algorithms>`.
 
 Claims that are not selectively disclosable MUST be included in the SD-JWT as they are. The digests of the disclosures, along with any decoy if present, MUST be contained in the **_sd** array, as specified in Section 4.2.4.1 of `SD-JWT`_.
-
-Each digest value, calculated using a hash function over the disclosures, verifies the integrity and corresponds to a specific Disclosure. Each disclosure includes:
-
-  - a random salt,
-  - the claim name (only when the claim is an object element),
-  - the claim value.
-
-In case of nested objects in a SD-JWT payload, each claim at every level of the JSON, should be individually marked as selectively disclosable or not. Therefore **_sd** claim containing digests MAY appear multiple times at different levels in the SD-JWT.
-
-For each claim that is an array element the digests of the respective disclosures and decoy digests are added to the array in the same position of the original claim values as specified in Section 4.2.4.2 of `SD-JWT`_.
-
-In case of array elements, digest values are calculated using a hash function over the disclosures, containing:
-
-  - a random salt,
-  - the array element.
-
-In case of multiple array elements, the Issuer may hide the value of the entire array or any of the entry contained within the array, the Holder can disclose both the entire array and any single entry within the array, as defined in Section 4.2.6 of `SD-JWT`_.
 
 The Disclosures are provided to the Holder together with the SD-JWT in the *Combined Format for Issuance* that is an ordered series of base64url-encoded values, each separated from the next by a single tilde ('~') character as follows:
 
@@ -78,7 +93,7 @@ The Disclosures are provided to the Holder together with the SD-JWT in the *Comb
 See `SD-JWT-VC`_ and `SD-JWT`_ for additional details.
 
 
-Digital Credential SD-JWT parameters and metadata attributes
+Digital Credential SD-JWT parameters 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The JOSE header contains the following mandatory parameters:
@@ -120,10 +135,10 @@ The JWT payload contains the following claims. Unless otherwise specifed, the fo
       - **Description**
       - **Reference**
     * - **iss**
-      - REQUIRED. URL string representing the Credential Issuer unique identifier.
+      - REQUIRED. *String*. URL string representing the Credential Issuer unique identifier.
       - `[RFC7519, Section 4.1.1] <https://www.iana.org/go/rfc7519>`_.
     * - **sub**
-      - OPTIONAL. The identifier of the subject of the Digital Credential, the User, MUST be opaque and MUST NOT correspond to any anagraphic data or be derived from the User's anagraphic data via pseudonymization. Additionally, it is required that two different Credentials issued MUST NOT use the same ``sub`` value.
+      - OPTIONAL. *String*. The identifier of the subject of the Digital Credential, the User, MUST be opaque and MUST NOT correspond to any anagraphic data or be derived from the User's anagraphic data via pseudonymization. Additionally, it is required that two different Credentials issued MUST NOT use the same ``sub`` value.
       - `[RFC7519, Section 4.1.2] <https://www.iana.org/go/rfc7519>`_.
     * - **iat**
       - OPTIONAL. UNIX Timestamp with the time of JWT issuance, coded as NumericDate as indicated in :rfc:`7519`.
@@ -135,55 +150,56 @@ The JWT payload contains the following claims. Unless otherwise specifed, the fo
       - OPTIONAL. UNIX Timestamp with the start time of validity of the JWT, coded as NumericDate as indicated in :rfc:`7519`.
       - `[RFC7519, Section 4.1.4] <https://www.iana.org/go/rfc7519>`_.
     * - **issuing_authority**
-      - REQUIRED. Name of the administrative authority that has issued the Credential.
+      - REQUIRED. *String*. Format-encoded data identifier `issuing_authority` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. 
       - Commission Implementing Regulation `EU_2024/2977`_.
     * - **issuing_country**
-      - REQUIRED. Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the Credential Issuer.
+      - REQUIRED. *String*. Format-encoded data identifier `issuing_country` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. 
       - Commission Implementing Regulation `EU_2024/2977`_.
     * - **date_of_expiry**
-      - OPTIONAL. Date (and if possible time) when the Digital Credential will expire. It MUST be according to ISO 8601-1 YYYY-MM-DD format. This attribute pertains to the administrative validity period of the Digital Credential, which is typically different from the technical validity period expressed by the JWT ``exp`` claim.
+      - OPTIONAL. *String*. Format-encoded data identifier `expiry_date` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`.  This attribute pertains to the administrative validity period of the Digital Credential, which is typically different from the technical validity period expressed by the JWT ``exp`` claim.
       - Commission Implementing Regulation `EU_2024/2977`_.
     * - **status**
-      - REQUIRED only if the Digital Credential is long-lived. JSON object containing the information on how to read the status of the Verifiable Credential. It MUST contain either the JSON member *status_assertion* or *status_list*.
+      - REQUIRED only if the Digital Credential is long-lived. *JSON object*. Format-encoded data identifier `location_status` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. It MUST contain either the JSON member `status_assertion` or `status_list`.
       - Section 3.2.2.2 `SD-JWT-VC`_ and Section 11 `OAUTH-STATUS-ASSERTION`_.
     * - **cnf**
-      - REQUIRED. JSON object containing the proof-of-possession key materials. By including a **cnf** (confirmation) claim in a JWT, the Issuer of the JWT declares that the Holder is in control of the private key related to the public one defined in the **cnf** parameter. The recipient MUST cryptographically verify that the Holder is in control of that key.
+      - REQUIRED. *JSON object*. Format-encoded data identifier `cryptographic_binding` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`, containing the proof-of-possession key materials. By including a **cnf** (confirmation) claim in a JWT, the Issuer of the JWT declares that the Holder is in control of the private key related to the public one defined in the **cnf** parameter. The recipient MUST cryptographically verify that the Holder is in control of that key.
       - `[RFC7800, Section 3.1] <https://www.iana.org/go/rfc7800>`_ and Section 3.2.2.2 `SD-JWT-VC`_.
     * - **vct**
-      - REQUIRED. Credential type value MUST be a URN and it MUST be set using one of the values obtained from the Credential Issuer metadata, matching of the literals included in this URN MUST be performed in a case-sensitive manner. It is the identifier of the SD-JWT VC type and it MUST be set with a collision-resistant value as defined in Section 2 of :rfc:`7515`. It MUST contain also the number of version of the Credential type. Unless otherwhise specified by `EIDAS-ARF`_ and EUDI Rulebooks, the `vct` SHOULD follow a structure like `urn:it-wallet:{credential_type}:{credential_type_version}`. 
+      - REQUIRED. *String*. Format-encoded data identifier `credential_type_identifier` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. Credential type value MUST be a URN and it MUST be set using one of the values obtained from the Credential Issuer metadata, matching of the literals included in this URN MUST be performed in a case-sensitive manner. It is the identifier of the SD-JWT VC type and it MUST be set with a collision-resistant value as defined in Section 2 of :rfc:`7515`. It MUST contain also the number of version of the Credential type. Unless otherwhise specified by `EIDAS-ARF`_ and EUDI Rulebooks, the `vct` SHOULD follow a structure like `urn:it-wallet:{credential_type}:{credential_type_version}`. 
       - Section 3.2.2.2 `SD-JWT-VC`_.
     * - **vct#integrity**
-      - REQUIRED. The value MUST be an "integrity metadata" string as defined in Section 3 of [`W3C-SRI`_]. *SHA-256*, *SHA-384* and *SHA-512* MUST be supported as cryptographic hash functions. *MD5* and *SHA-1* MUST NOT be used. This claim MUST be verified according to Section 3.3.5 of [`W3C-SRI`_].
+      - REQUIRED. *String*. The value MUST be an "integrity metadata" string as defined in Section 3 of [`W3C-SRI`_]. *SHA-256*, *SHA-384* and *SHA-512* MUST be supported as cryptographic hash functions. *MD5* and *SHA-1* MUST NOT be used. This claim MUST be verified according to Section 3.3.5 of [`W3C-SRI`_].
       - Section 6.1 `SD-JWT-VC`_, [`W3C-SRI`_]
     * - **verification**
-      - OPTIONAL. Object containing User authentication and User data verification information. It includes the following sub-value:
+      - OPTIONAL. *JSON object*. Format-encoded data identifier `verification` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. 
+      It includes the following sub-value:
 
-          * ``trust_framework``: REQUIRED. String identifying the trust framework used for User authentication. It MUST be set using one of the values described in the `trust_frameworks_supported` map provided within the Credential Issuer Metadata.
-          * ``assurance_level``: REQUIRED. String identifying the level of identity assurance guaranteed during the User authentication process.
+          * ``trust_framework``: REQUIRED. *String* identifying the trust framework used for User authentication. It MUST be set using one of the values described in the `trust_frameworks_supported` map provided within the Credential Issuer Metadata.
+          * ``assurance_level``: REQUIRED. *String* identifying the level of identity assurance guaranteed during the User authentication process.
           * ``evidence``: OPTIONAL. Each entry of the array MUST contain the following members:
 
-            - ``type``: OPTIONAL. It represents evidence type. It MUST be set to ``vouch``.
-            - ``time``: OPTIONAL. UNIX Timestamps with the time of the authentication or verification.
+            - ``type``: OPTIONAL. *String*. It represents evidence type. It MUST be set to ``vouch``.
+            - ``time``: OPTIONAL. *UNIX Timestamps* with the time of the authentication or verification.
             - ``attestation``: OPTIONAL. It contains the following members:
 
-                - ``type``: OPTIONAL. It MUST be set to ``digital_attestation``.
-                - ``reference_number``: OPTIONAL. identifier of the authentication or verification response.
-                - ``date_of_issuance``: OPTIONAL. date of issuance of the attestation.
-                - ``voucher``: OPTIONAL. It MUST contains ``organization`` claim.
+                - ``type``: OPTIONAL. *String* It MUST be set to ``digital_attestation``.
+                - ``reference_number``: OPTIONAL. *String.* identifier of the authentication or verification response.
+                - ``date_of_issuance``: OPTIONAL. *String*. date of issuance of the attestation.
+                - ``voucher``: OPTIONAL. *JSON Object*. It MUST contains ``organization`` claim as a human-readable String format.
 
       - Domestic extension.
     * - **_sd**
-      - REQUIRED. Array of strings, where each string represents a digest of a Disclosure.
+      - REQUIRED. *Array of strings*, where each string represents a digest of a Disclosure.
       - 4.2.4.1 `SD-JWT`_
     * - **_sd_alg**
-      - REQUIRED. Hash algorithm used by the Issuer to generate the digests.
+      - REQUIRED. *String*. Hash algorithm used by the Issuer to generate the digests.
       - 4.1.1 `SD-JWT`_
 
 
 .. note::
   The standard JWT claims ``nbf`` and ``exp`` are used to express the technical validity period of a SD-JWT VC-compliant Digital Credential.
 
-If the ``status`` parameter is set to ``status_list``, it is a JSON Object containing the following sub-parameters:
+If the ``status`` parameter is set to ``status_list``, it is a *JSON object* containing the following sub-parameters:
 
 .. list-table::
    :class: longtable
@@ -201,14 +217,15 @@ If the ``status`` parameter is set to ``status_list``, it is a JSON Object conta
      - TOKEN-STATUS-LIST_
 
 
-If the ``status`` parameter is set to ``status_assertion``, it is a JSON Object containing the *credential_hash_alg* claim indicating the Algorithm used for hashing the Digital Credential to which the Status Assertion is bound. It is RECOMMENDED to use *sha-256*.
+If the ``status`` parameter is set to ``status_assertion``, it is a *JSON object* containing the *credential_hash_alg* claim indicating the Algorithm used for hashing the Digital Credential to which the Status Assertion is bound. It is RECOMMENDED to use *sha-256*.
 
 
 PID Data Model in SD-JWT-VC Format
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As the Italian PID is provided as a domestic extension attributes, the `vct` claim value MUST extend the base type defined in the ARF PID Rulebook v1.3, using type in the namespace `urn:eudi:pid:`, as allowed by `EIDAS-ARF`_ requirement *PID_14* and specified in Section 4.2 of ARF PID Rulebook v1.3. 
-For the SD-JWT-VC PID defined in this specification, the `vct` value MUST be `urn:eudi:pid:it:1`.
+For the SD-JWT-VC PID defined in this specification, the `vct` value MUST be `urn:it-wallet:pid:1`.
+
+Upon full operability of the EUDIW ecosystem, the `vct` value MUST transition to `urn:eudi:pid:it:1` in compliance with ARF PID Rulebook v1.3 requirements for domestic PID extensions (requirement *PID_14*, Section 4.2, extending the base type `urn:eudi:pid:`). 
 
 According to `EU_2024/2977`_ and **Section 4 of the ARF PID Rulebook v1.3** [`EIDAS-ARF`_], the PID in SD-JWT-VC format MUST supports the following User Attributes: 
 
@@ -222,25 +239,25 @@ According to `EU_2024/2977`_ and **Section 4 of the ARF PID Rulebook v1.3** [`EI
       - **Description**
       - **Reference**
     * - **given_name**
-      - REQUIRED. Current First Name. (*String*)
+      - REQUIRED. *String*. Current First Name. 
       - Section 5.1 of `OIDC`_ and Commission Implementing Regulation `EU_2024/2977`_
     * - **family_name**
-      - REQUIRED. Current Family Name. (*String*)
+      - REQUIRED. *String*. Current Family Name. 
       - Section 5.1 of `OIDC`_ and Commission Implementing Regulation `EU_2024/2977`_
     * - **birthdate**
-      - REQUIRED. Date of Birth. (*String, [ISO8601‑1] YYYY-MM-DD format*)
+      - REQUIRED. *String*. Date of Birth. It MUST be set according to ISO8601-1 (YYYY-MM-DD format).
       - Commission Implementing Regulation `EU_2024/2977`_
     * - **place_of_birth**
-      - REQUIRED. Place of Birth. (*JSON structure; at least one of country, region, locality MUST be present*)
+      - REQUIRED. *JSON Object*. Place of Birth. At least one of `country`, `region`, `locality` MUST be present.
       - Commission Implementing Regulation `EU_2024/2977`_
     * - **nationalities**
-      - REQUIRED. One or more alpha-2 country codes as specified in ISO 3166-1. (*Array of strings*)
+      - REQUIRED. *Array of strings*. One or more alpha-2 country codes as specified in ISO 3166-1.
       - Commission Implementing Regulation `EU_2024/2977`_
     * - **personal_administrative_number**
-      - REQUIRED if ``tax_id_code`` is not present, OPTIONAL otherwise. National unique identifier of a natural person generated by ANPR in string format. (*String*)
+      - REQUIRED if ``tax_id_code`` is not present, OPTIONAL otherwise. *String*.  National unique identifier of a natural person generated by ANPR in string format.
       - Commission Implementing Regulation `EU_2024/2977`_
     * - **tax_id_code**
-      - REQUIRED if ``personal_administrative_number`` is not present, OPTIONAL otherwise. National tax identification code of natural person as a String format. It MUST be set according to ETSI EN 319 412-1. For example ``TINIT-<ItalianTaxIdentificationNumber>``. (*String*)
+      - REQUIRED if ``personal_administrative_number`` is not present, OPTIONAL otherwise. *String*. National tax identification code of natural person as a String format. It MUST be set according to ETSI EN 319 412-1. For example ``TINIT-<ItalianTaxIdentificationNumber>``. 
       - Domestic extension 
 
 All the User attributed listed above MUST be selectively disclosable.
@@ -433,7 +450,7 @@ The combined format for the (Q)EAA issuance is represented below:
 Digital Credential Metadata Type
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Metadata type document MUST be a JSON object and contains the following parameters.
+The Metadata type document MUST be a *JSON object* and contains the following parameters.
 
 .. _table_metadata_type_json_obj:
 .. list-table::
@@ -559,7 +576,7 @@ Below a non-normative example is given.
 mdoc-CBOR Credential Format
 ---------------------------
 
-The mdoc data model is based on the ISO/IEC 18013-5 standard.
+The Digital Credential data model in mdoc-CBOR format is based on the ISO/IEC 18013-5 standard.
 The mdoc data elements MUST be encoded in CBOR as defined in :rfc:`8949`.
 
 This data model structures mdoc Digital Credentials into distinct components: namespaces (**nameSpaces**), and cryptographic proof (**issuerAuth**).
@@ -657,7 +674,7 @@ The `MobileSecurityObject` MUST have the following attributes, unless otherwise 
 
         - defined at the european level, it MUST be a string of the form ``eu.europa.ec.{credential_type}.{version}`` (e.g., ``eu.europa.ec.loyaltycard.1.0``).
 
-        - defined by a national standard, it MUST be a string of the form ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.wallet.trust-registry.pid.1``).
+        - defined at national level, it MUST be a string of the form ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.wallet.trust-registry.pid.1``).
 
       - [ISO 18013-5#9.1.2.4]
     * - **version**
