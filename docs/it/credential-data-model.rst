@@ -231,7 +231,7 @@ Per il PID SD-JWT-VC definito in questa specifica, il valore ``vct`` DEVE essere
 
    Durante la fase transitoria prima della piena operatività EUDIW, le implementazioni nazionali POSSONO utilizzare il valore ``vct`` ``urn:it-wallet:pid:1``. Una volta raggiunta la piena interoperabilità EUDIW, tutte le implementazioni DEVONO transitare all'identificatore conforme EUDI ``urn:eudi:pid:it:1`` specificato sopra.
 
-In base a `EU_2024/2977`_ e alla **Sezione 4 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato SD-JWT-VC DEVE supportare i seguenti Attributi Utente:
+In base a `EU_2024/2977`_ e alla **Sezione 4 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato SD-JWT-VC include i seguenti Attributi Utente:
 
 .. _table_sd-jwt-vc_pid_parameters:
 .. list-table::
@@ -268,9 +268,9 @@ Tutti gli attributi Utente elencati sopra DEVONO essere divulgabili selettivamen
 Oltre agli attributi di metadati obbligatori definiti nella :ref:`Tabella Parametri SD-JWT <table_sd-jwt-vc_jose_header>` e nella :ref:`Tabella Parametri SD-JWT <table_sd-jwt-vc_parameters>`, i seguenti attributi di metadati sono OBBLIGATORI per un PID:
 
   - **date_of_expiry**
-  - **sub**
+  - **sub** (estensione domestica)
   - **iat**
-  - **verification**
+  - **verification** (estensione domestica)
 
 
 Esempi Non Normativi di PID
@@ -818,7 +818,7 @@ Gli attributi PID DEVONO essere codificati come specificato nella **Sezione 3 de
 .. note::
    **Fase Transitoria:**
 
-   Durante la fase transitoria prima della piena operatività EUDIW, le implementazioni nazionali POSSONO utilizzare il **docType** ``it.wallet.trust-registry.pid.1`` con un unico namespace nazionale ``it.wallet.trust-registry.pid.1`` per tutti gli attributi. Una volta raggiunta la piena interoperabilità EUDIW, tutte le implementazioni DEVONO transitare al **docType** e alla struttura di namespace conformi EUDI specificati sopra.
+   Durante la fase transitoria prima della piena operatività EUDIW, le implementazioni nazionali POSSONO utilizzare il **docType** ``{Trust Anchor reverse domain}.pid.1`` con un unico namespace nazionale ``{Trust Anchor reverse domain}.pid.1`` per tutti gli attributi. Una volta raggiunta la piena operatività EUDIW, tutte le implementazioni DEVONO transitare al **docType** e alla struttura di namespace conformi EUDI specificati sopra.
 
 La Sezione 3 dell'ARF PID Rulebook v1.3 definisce:
 
@@ -837,7 +837,7 @@ La Sezione 3 dell'ARF PID Rulebook v1.3 definisce:
 
    Vedere Sezione 3.1.1 (codifica mdoc) e Sezione 4.1.1 (codifica SD-JWT) dell'ARF PID Rulebook v1.3 per la mappatura completa.
 
-In base a `EU_2024/2977`_ e alla **Sezione 3 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato mdoc-CBOR DEVE supportare i seguenti Attributi Utente nel namespace ``eu.europa.ec.eudi.pid.1``:
+In base a `EU_2024/2977`_ e alla **Sezione 3 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato mdoc-CBOR include i seguenti Attributi Utente:
 
 .. _table_mdoc-cbor_pid_attributes:
 .. list-table::
@@ -847,58 +847,58 @@ In base a `EU_2024/2977`_ e alla **Sezione 3 dell'ARF PID Rulebook v1.3** [`EIDA
 
     * - **elementIdentifier**
       - **Descrizione**
-      - **Riferimento**
+      - **Namespace**
     * - **given_name**
       - OBBLIGATORIO. *(tstr)*. Nome attuale.
-      - Sezione 3.1.1 dell'ARF PID Rulebook v1.3 [`EIDAS-ARF`_] e Regolamento di esecuzione della Commissione `EU_2024/2977`_
+      - ``eu.europa.ec.eudi.pid.1``
     * - **family_name**
       - OBBLIGATORIO. *(tstr)*. Cognome attuale.
-      - Sezione 3.1.1 dell'ARF PID Rulebook v1.3 [`EIDAS-ARF`_] e Regolamento di esecuzione della Commissione `EU_2024/2977`_
+      - ``eu.europa.ec.eudi.pid.1``
     * - **birth_date**
       - OBBLIGATORIO. *(full-date)*. Data di Nascita. DEVE essere codificata come stringa full-date secondo :rfc:`8949`.
-      - Sezione 3.1.4 dell'ARF PID Rulebook v1.3 [`EIDAS-ARF`_] e Regolamento di esecuzione della Commissione `EU_2024/2977`_
+      - ``eu.europa.ec.eudi.pid.1``
     * - **place_of_birth**
       - OBBLIGATORIO. *(map)*. Luogo di Nascita. Almeno uno tra ``country``, ``region``, ``locality`` DEVE essere presente.
-      - Sezione 3.1.5 dell'ARF PID Rulebook v1.3 [`EIDAS-ARF`_] e Regolamento di esecuzione della Commissione `EU_2024/2977`_
+      - ``eu.europa.ec.eudi.pid.1``
     * - **nationality**
       - OBBLIGATORIO. *(array di tstr)*. Uno o più codici paese alpha-2 come specificato in ISO 3166-1. Codificato come tipo CDDL ``nationalities`` (array di codici paese).
-      - Sezione 3.1.2 dell'ARF PID Rulebook v1.3 [`EIDAS-ARF`_] e Regolamento di esecuzione della Commissione `EU_2024/2977`_
+      - ``eu.europa.ec.eudi.pid.1``
     * - **personal_administrative_number**
       - OBBLIGATORIO se ``tax_id_code`` non è presente, altrimenti OPZIONALE. *(tstr)*. Identificativo univoco nazionale di una persona fisica generato da ANPR.
-      - Sezione 2.2 dell'ARF PID Rulebook v1.3 [`EIDAS-ARF`_] e Regolamento di esecuzione della Commissione `EU_2024/2977`_
-
-**Requisiti per i PID italiani:**
-
-Per i PID italiani si applicano i seguenti requisiti:
-
-- L'attributo ``verification`` (definito in :ref:`Attributes <table_element_identifiers_mdoc>`) è OBBLIGATORIO (mentre è OPZIONALE per altri tipi di credenziali).
-- Almeno uno dei seguenti identificatori DEVE essere presente:
-
-  - ``personal_administrative_number`` (attributo ARF standard, namespace ``eu.europa.ec.eudi.pid.1``)
-  - ``tax_id_code`` (estensione domestica italiana, namespace ``eu.europa.ec.eudi.pid.it.1``)
+      - ``eu.europa.ec.eudi.pid.1``
+    * - **tax_id_code**
+      - OBBLIGATORIO se ``personal_administrative_number`` non è presente, altrimenti OPZIONALE. *(tstr)*. Codice Fiscale italiano. Formato: ETSI EN 319 412-1 (es., ``TINIT-RSSMRA80A10H501U``). Lunghezza massima: 150 caratteri.
+      - ``eu.europa.ec.eudi.pid.it.1``
 
 Oltre agli attributi di metadati obbligatori definiti nella :ref:`Tabella MobileSecurityObject <table_MobileSecurityObject_attributes>` e nella :ref:`Tabella Attributi Metadata mdoc-CBOR <table_element_identifiers_mdoc>`, i seguenti attributi di metadati sono OBBLIGATORI per un PID:
 
-  - **expiry_date**
-  - **sub**
-  - **validityInfo.signed**
-  - **verification**
-
-**Estensioni Domestiche (requisito ARF PID_06):**
-
-Il seguente attributo domestico è definito per i PID italiani e DEVE essere inserito nel namespace domestico ``eu.europa.ec.eudi.pid.it.1``:
-
 .. list-table::
-   :class: longtable
-   :widths: 20 20 60
-   :header-rows: 1
+    :class: longtable
+    :widths: 50 50
+    :header-rows: 1
 
-   * - **elementIdentifier**
-     - **Codifica**
-     - **Descrizione**
-   * - **tax_id_code**
-     - ``tstr``
-     - Codice Fiscale italiano. Formato: ETSI EN 319 412-1 (es., ``TINIT-RSSMRA80A10H501U``). Lunghezza massima: 150 caratteri.
+    * - **elementIdentifier**
+      - **Namespace**
+    * - **expiry_date**
+      - ``eu.europa.ec.eudi.pid.1``
+    * - **sub**
+      - ``eu.europa.ec.eudi.pid.it.1``
+    * - **validityInfo.signed**
+      - ``eu.europa.ec.eudi.pid.1``
+    * - **verification**
+      - ``eu.europa.ec.eudi.pid.it.1``
+
+.. note::
+   **Differenze chiave rispetto alla codifica SD-JWT:**
+
+   L'ARF PID Rulebook v1.3 utilizza nomi di claim diversi tra i formati SD-JWT e mdoc-CBOR:
+
+   - mdoc usa ``birth_date`` (non ``birthdate`` come in SD-JWT)
+   - mdoc usa ``expiry_date`` (non ``date_of_expiry`` come in SD-JWT)
+   - mdoc usa ``nationality`` (non ``nationalities`` come in SD-JWT). Nota: entrambi i formati codificano il valore come array di codici paese.
+
+   Vedere la Sezione 3.1.1 (codifica mdoc) e la Sezione 4.1.1 (codifica SD-JWT) dell'ARF PID Rulebook v1.3 per la mappatura completa.
+
 
 **Esempio non normativo:**
 
