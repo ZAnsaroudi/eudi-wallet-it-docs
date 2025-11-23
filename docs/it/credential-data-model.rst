@@ -833,7 +833,7 @@ La Sezione 3 dell'ARF PID Rulebook v1.3 definisce:
 
    - mdoc usa ``birth_date`` (non ``birthdate`` come in SD-JWT)
    - mdoc usa ``expiry_date`` (non ``date_of_expiry`` come in SD-JWT)
-   - Entrambi i formati usano ``place_of_birth`` con la stessa struttura CBOR map
+   - mdoc usa ``nationality`` (non ``nationalities`` come in SD-JWT). Nota: entrambi i formati codificano il valore come array di codici paese.
 
    Vedere Sezione 3.1.1 (codifica mdoc) e Sezione 4.1.1 (codifica SD-JWT) dell'ARF PID Rulebook v1.3 per la mappatura completa.
 
