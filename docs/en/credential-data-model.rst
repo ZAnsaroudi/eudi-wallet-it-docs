@@ -704,7 +704,7 @@ The following **elementIdentifiers** representing format-encoded metadata attrib
 PID Data Model in mdoc-CBOR Format
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The PID in mdoc-CBOR format MUST use the **docType** ``eu.europa.ec.eudi.pid.it.1`` in compliance with ARF requirement **PID_06** for domestic PID extensions (extending the base type ``eu.europa.ec.eudi.pid.1`` defined in **PID_04**).
+The PID in mdoc-CBOR format MUST use the **docType** ``eu.europa.ec.eudi.pid.1`` in compliance with ARF requirement **PID_04**.
 
 The PID attributes MUST be encoded as specified in **Section 3 of the ARF PID Rulebook v1.3** [`EIDAS-ARF`_] and organized in the following namespaces:
 
