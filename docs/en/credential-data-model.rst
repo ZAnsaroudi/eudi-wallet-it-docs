@@ -577,13 +577,13 @@ The `MobileSecurityObject` MUST have the following attributes, unless otherwise 
       - **Description**
       - **Reference**
     * - **docType**
-      - *(tstr)*. Defines the type of mdoc Digital Credential being issued. If the Credential is:
+      - *(tstr)*. Format-encoded data identifier `credential_type_identifier` as defined in Section :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`.
 
-        - defined by an ISO standard, It MUST be a string of the form ``iso.org.{iso-number}.{part}.{version}.{credential_type}`` (e.g. for an mDL, the value MUST be ``org.iso.18013.5.1.mDL``).
+        - When defined by an ISO standard, It MUST be a string of the form ``iso.org.{iso-number}.{part}.{version}.{credential_type}`` (e.g. for an mDL, the value MUST be ``org.iso.18013.5.1.mDL``).
 
-        - defined at the european level, it MUST be a string of the form ``eu.europa.ec.{credential_type}.{version}`` (e.g., ``eu.europa.ec.loyaltycard.1.0``).
+        - When defined at the european level, it MUST be a string of the form ``eu.europa.ec.{credential_type}.{version}`` (e.g., ``eu.europa.ec.loyaltycard.1.0``).
 
-        - defined at national level, it MUST be a string of the form ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.wallet.trust-registry.pid.1``).
+        - When defined at national level, it MUST be a string of the form ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (e.g., ``it.wallet.trust-registry.pid.1``).
 
       - [ISO 18013-5#9.1.2.4]
     * - **version**
@@ -788,6 +788,7 @@ A non-normative example of a PID in mdoc-CBOR format (diagnostic notation) is sh
 
 mdoc-CBOR Examples
 ^^^^^^^^^^^^^^^^^^
+
 A non-normative example of an mDL encoded in CBOR is shown below in binary encoding.
 
 .. literalinclude:: ../../examples/mDL-cbor-encoded-example.txt
@@ -843,19 +844,6 @@ For SD-JWT-VC, parameters are marked with `(hdr)` if they are located in the JOS
    * - Digital Credential type definition
      - vct (pld)
      - | issuerAuth.doctype
-   * - Digital Credential metadata
-     - | Type_Metadata.name (hdr)
-       | Type_Metadata.description (hdr)
-       | Type_Metadata.extends (hdr)
-       | Type_Metadata.data_source (hdr)
-       | Type_Metadata.display (hdr)
-       | Type_Metadata.claims (hdr)
-     - | -
-       | -
-       | -
-       | -
-       | -
-       | nameSpaces
    * - Issuer
      - | iss (pld)
        | issuing_authority (pld)
@@ -918,11 +906,6 @@ For SD-JWT-VC, parameters are marked with `(hdr)` if they are located in the JOS
      - |
        | nameSpaces
        |
-
-.. note::
-  - `Disclosures`, `_sd`, and `_sd_alg` enable Selective Disclosure of SD-JWT claims. The `_sd` and `_sd_alg` parameters are part of the SD-JWT payload, while `Disclosures` are sent separately in a Combined Format along with the SD-JWT.
-  - The `Type_Metadata.claims` parameter in SD-JWT and the `nameSpaces` structure in mdoc-CBOR are functionally equivalent, as both define the claim names and their structure. SD-JWT `Disclosures` for disclosed attributes directly correspond to `nameSpaces`, including attribute names, values, and salt values.
-  - A domestic namespace accommodates attributes such as `verification` and `sub`, which are not defined in the standard ISO elementIdentifiers for mdoc-CBOR Digital Credentials.
 
 
 

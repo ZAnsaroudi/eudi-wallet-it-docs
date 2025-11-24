@@ -577,10 +577,13 @@ Il `MobileSecurityObject` DEVE avere i seguenti attributi, se non diversamente s
       - **Descrizione**
       - **Riferimento**
     * - **docType**
-      - *(tstr)*. Codifica formato dell'identificatore dati `credential_type_identifier` come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. Definisce il tipo di Attestato Elettronico in formato mdoc. DEVE essere una stringa nella forma:
+      - *(tstr)*. Codifica formato dell'identificatore dati `credential_type_identifier` come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`.
 
-          - definito a livello europeo, DEVE essere una stringa della forma ``eu.europa.ec.{credential_type}.{version}`` (ad es., ``eu.europa.ec.eudi.pid.1``).
-          - definito a livello nazionale, DEVE essere una stringa della forma ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (ad es., ``it-wallet.trust-registry.pid.1``).
+          - Se definito da uno standard ISO, DEVE essere una stringa della forma ``iso.org.{iso-number}.{part}.{version}.{credential_type}`` (per esempio, per una mDL, il valore DEVE essere ``org.iso.18013.5.1.mDL``).
+
+          - Se definito a livello europeo, DEVE essere una stringa della forma ``eu.europa.ec.{credential_type}.{version}`` (ad es., ``eu.europa.ec.eudi.pid.1``).
+
+          - Se definito a livello nazionale, DEVE essere una stringa della forma ``{Trust Anchor reverse domain}.{credential_type}.{version}`` (ad es., ``it-wallet.trust-registry.pid.1``).
 
       - [ISO 18013-5#9.1.2.4]
     * - **version**
@@ -696,7 +699,6 @@ I seguenti **elementIdentifiers** che rappresentano attributi metadata format-en
   Gli attributi specifici dell'Utente per gli Attestati Elettronici in formato mdoc come quelli del PID o mDL sono inclusi facendo riferimento agli corrispettivi `elementIdentifiers` definiti in ISO/IEC 18013-5 o nella specifica `EIDAS-ARF`_.
 
 .. note::
-
   Indipendentemente dal tipo di Attestato Elettronico, il valore di ``sub`` NON DEVE essere mostrato all'Utente, in quanto non è un attributo dello stesso. È utilizzato per scopi di identificazione dagli Emittenti di Credenziali.
 
 Modello Dati PID in formato mdoc-CBOR
@@ -713,23 +715,6 @@ Gli attributi PID DEVONO essere codificati come specificato nella **Sezione 3 de
    **Fase Transitoria:**
 
    Durante la fase transitoria prima della piena operatività EUDIW, le implementazioni nazionali POSSONO utilizzare il **docType** ``{Trust Anchor reverse domain}.pid.1`` con un unico namespace nazionale ``{Trust Anchor reverse domain}.pid.1`` per tutti gli attributi. Una volta raggiunta la piena operatività EUDIW, tutte le implementazioni DEVONO transitare al **docType** e alla struttura di namespace conformi EUDI specificati sopra.
-
-La Sezione 3 dell'ARF PID Rulebook v1.3 definisce:
-
-- Identificatori degli attributi e formati di codifica (Sezione 3.1.1)
-- Regole di codifica specifiche per ``nationality`` (Sezione 3.1.2), ``birth_date`` (Sezione 3.1.4), e ``place_of_birth`` (Sezione 3.1.5)
-- Requisiti di codifica canonica CBOR (:RFC:`8949` Sezione 4.2)
-
-.. note::
-   **Differenze chiave rispetto alla codifica SD-JWT:**
-
-   L'ARF PID Rulebook v1.3 utilizza nomi diversi tra i formati SD-JWT e mdoc-CBOR:
-
-   - mdoc usa ``birth_date`` (non ``birthdate`` come in SD-JWT)
-   - mdoc usa ``expiry_date`` (non ``date_of_expiry`` come in SD-JWT)
-   - mdoc usa ``nationality`` (non ``nationalities`` come in SD-JWT). Nota: entrambi i formati codificano il valore come array di codici paese.
-
-   Vedere Sezione 3.1.1 (codifica mdoc) e Sezione 4.1.1 (codifica SD-JWT) dell'ARF PID Rulebook v1.3 per la mappatura completa.
 
 In base a `EU_2024/2977`_ e alla **Sezione 3 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato mdoc-CBOR include i seguenti Attributi Utente:
 
@@ -859,20 +844,6 @@ Per SD-JWT-VC, i parametri sono contrassegnati con `(hdr)` se si trovano nell'he
    * - Definizione della Tipologia di Attestato Elettronico
      - vct (pld)
      - | issuerAuth.doctype
-       | issuerAuth.version
-   * - Metadata della Credenziale Elettronica
-     - | Type_Metadata.name (hdr)
-       | Type_Metadata.description (hdr)
-       | Type_Metadata.extends (hdr)
-       | Type_Metadata.data_source (hdr)
-       | Type_Metadata.display (hdr)
-       | Type_Metadata.claims (hdr)
-     - | -
-       | -
-       | -
-       | -
-       | -
-       | nameSpaces
    * - Emittente
      - | iss (pld)
        | issuing_authority (pld)
@@ -887,9 +858,11 @@ Per SD-JWT-VC, i parametri sono contrassegnati con `(hdr)` se si trovano nell'he
      - | iat (pld)
        | exp (pld)
        | nbf (pld)
+       | expiry_date (pld)
      - | issuerAuth.validityInfo.signed
        | issuerAuth.validityInfo.validUntil
        | issuerAuth.validityInfo.validFrom
+       | nameSpaces.elementIdentifier.expiry_date
    * - Meccanismo di verifica dello stato
      - | status_assertion (pld)
        | status_list (pld)
@@ -934,8 +907,4 @@ Per SD-JWT-VC, i parametri sono contrassegnati con `(hdr)` se si trovano nell'he
        | nameSpaces
        |
 
-.. note::
-  - Nel formato mdoc-CBOR, la versione dell'Attestato Elettronico non è definita esplicitamente; è disponibile solo per l'IssuerAuth. Al contrario, il formato SD-JWT include informazioni sulla versione tramite l'URN `vct`.
-  - `Disclosures`, `_sd` e `_sd_alg` abilitano la Divulgazione Selettiva dei claim SD-JWT. I parametri `_sd` e `_sd_alg` fanno parte del payload SD-JWT, mentre le `Disclosures` vengono inviate separatamente in un *Combined Format* insieme al SD-JWT.
-  - Il parametro `Type_Metadata.claims` in SD-JWT e la struttura `nameSpaces` in mdoc-CBOR sono funzionalmente equivalenti, poiché entrambi definiscono i nomi dei claim e la loro struttura. Le `Disclosures` SD-JWT per gli attributi divulgati corrispondono esattamente ai `nameSpaces`, inclusi nomi e valori degli attributi, e i valori dei *salt*.
-  - Un namespace domestico accoglie attributi come `verification` e `sub`, che non sono definiti negli elementIdentifiers standard ISO per gli Attestati Elettronici in formato mdoc-CBOR.
+
