@@ -19,12 +19,12 @@ The Credential Issuance flow is based on [`OpenID4VCI`_] and the following main 
 The Credential Issuer MUST use *OAuth 2.0 Authorization Server* based on :rfc:`6749` to authorize the User to obtain a Credential. Credential Issuers MUST support:
 
   * **Authorization Code Flow**: The Credential Issuer requires User authentication and consent at the Authorization Endpoint before collecting User information to create and provide a Credential.
-  * **Wallet Initiated Flow**: The request from the Wallet Instance is sent to the Credential Issuer without any input from the Credential Issuer.
+  * **Wallet Initiated Flow**: The request from the Wallet Instance is sent to the Credential Issuer without any input from the Credential Issuer or a Third Party (i.e. via Credential Offer support).
   * **Immediate Issuance Flow**: The Credential Issuer issues the Credential directly in response to the Credential Request.
 
 In addition, the Credential Issuers MAY support:
 
-  * **Issuer Initiated Flow**: The Wallet Instance sends its request to the Credential Issuer based on the input provided by the Credential Issuer.
+  * **Third-Party Initiated Flow**: The Wallet Instance sends its request to the Credential Issuer based on the input provided by the Credential Issuer or a Third Party (for example an Authentic Source) supporting Credential Offer mechanism as defined in [`OpenID4VCI`_].
 
     * **Same-device Issuance Flow**: The User receives the Credential on the same device used to initiate the flow.
     * **Cross-device Issuance Flow**: The User receives the Credential on another device than the one that initiated the flow.
