@@ -9,7 +9,7 @@
 Endpoint del Credential Issuer
 -------------------------------
 
-Metadata Endpoint
+Endpoint Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 I Credential Issuer DEVONO fornire una Entity Configuration attraverso l'endpoint ``/.well-known/openid-federation``, secondo la Sezione :ref:`trust-infrastructure:Entity Configuration`. I dettagli tecnici sono forniti nella Sezione :ref:`credential-issuer-entity-configuration:Entity Configuration del Fornitore di Attestati Elettronici`.
