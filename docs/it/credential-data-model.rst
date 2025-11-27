@@ -652,15 +652,15 @@ I seguenti **elementIdentifiers** che rappresentano attributi metadata format-en
      - **Riferimento**
 
    * - **issuing_country**
-     - *(tstr, OBBLIGATORIO)*. Identificativo del dato format-encoded `issuing_country` come definito nella Sezione :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. Codice paese Alpha-2 come definito in [ISO 3166-1].
+     - *(tstr, OBBLIGATORIO)*. Identificativo del dato format-encoded `issuing_country` come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. Codice paese Alpha-2 come definito in [ISO 3166-1].
      - [ISO 18013-5#7.2]
 
    * - **issuing_authority**
-     - *(tstr, OBBLIGATORIO)*. Identificativo del dato format-encoded `issuing_authority` come definito nella Sezione :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. Il valore DEVE contenere solo caratteri Latin1b e deve avere una lunghezza massima di 150 caratteri.
+     - *(tstr, OBBLIGATORIO)*. Identificativo del dato format-encoded `issuing_authority` come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. Il valore DEVE contenere solo caratteri Latin1b e deve avere una lunghezza massima di 150 caratteri.
      - [ISO 18013-5#7.2]
 
    * - **expiry_date**
-     - *(tdate o full-date, OPZIONALE)*. Identificativo del dato format-encoded `expiry_date` come definito nella Sezione :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. DEVE essere conforme al formato ISO 8601-1 YYYY-MM-DD.
+     - *(tdate o full-date, OPZIONALE)*. Identificativo del dato format-encoded `expiry_date` come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. DEVE essere conforme al formato ISO 8601-1 YYYY-MM-DD.
      - Sezione 3 dell'ARF PID Rulebook v1.3 [`EIDAS-ARF`_]
 
    * - **sub**
@@ -668,7 +668,7 @@ I seguenti **elementIdentifiers** che rappresentano attributi metadata format-en
      - Estensione domestica.
 
    * - **verification**
-     - *(map, OPZIONALE)*. Identificativo del dato format-encoded `verification` come definito nella Sezione :ref:`credential-data-model:Format-Agnostic Credential Metadata Attributes`. La CBOR map include i seguenti membri:
+     - *(map, OPZIONALE)*. Identificativo del dato format-encoded `verification` come definito nella Sezione :ref:`credential-data-model:Attributi di Metadati Format-Agnostic dell'Attestato Elettronico`. La CBOR map include i seguenti membri:
 
          * ``trust_framework`` *(tstr, OBBLIGATORIO)*: trust framework utilizzato per l'autenticazione dell'Utente.
          * ``assurance_level`` *(tstr, OBBLIGATORIO)*: livello di garanzia dell'identità garantito durante l'autenticazione dell'Utente.
