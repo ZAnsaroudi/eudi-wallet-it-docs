@@ -271,11 +271,6 @@ Digital Credential Type Metadata Document
 
 When provided, the Type Metadata Document MUST be a *JSON object* compliant with Section 6.2 of [`SD-JWT-VC`_].
 
-A non-normative Digital Credential metadata type is provided below.
-
-.. literalinclude:: ../../examples/vc-metadata-type.json
-  :language: JSON
-
 The Credential Type Metadata JSON Document MAY be retrieved through a *well-known* endpoint. See Section 6.3.3 of `SD-JWT-VC`_.
 This endpoint, provided by the Credential Issuer, MUST have the following format: ``https://{Credential Issuer Domain}/.well-known/vct/{vct}``.
 The Endpoint returns a ``200 OK`` status code and supports ``application/json`` and ``application/jwt`` as content type.

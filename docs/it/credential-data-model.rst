@@ -271,11 +271,6 @@ Type Metadata dell'Attestato Elettronico
 
 Il documento di *Type Metadata*, se fornito, DEVE essere un *JSON object* e DEVE contenere i seguenti parametri.
 
-Un esempio non normativo di *Type Metadata* dell'Attestato Elettronico è fornito di seguito.
-
-.. literalinclude:: ../../examples/vc-metadata-type.json
-  :language: JSON
-
 In conformità con la Sezione 6.3.3 di `SD-JWT-VC`_, il documento JSON del *Type Metadata* PUÒ essere recuperato tramite un *well-known* endpoint.
 Questo endpoint, fornito dal Fornitore di Attestati Elettronici, DEVE avere il seguente formato: ``https://{Dominio Credential Issuer}/.well-known/vct/{vct}``.
 L'endpoint restituisce un codice di stato ``200 OK`` e supporta ``application/json`` e ``application/jwt`` come content type.
