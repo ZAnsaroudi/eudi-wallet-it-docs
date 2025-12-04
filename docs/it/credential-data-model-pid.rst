@@ -228,7 +228,7 @@ Oltre agli attributi di metadati obbligatori definiti nella :ref:`Tabella Mobile
     * - **sub**
       - namespace ``eu.europa.ec.eudi.pid.it.1``
     * - **validityInfo.signed**
-      - namespace ``eu.europa.ec.eudi.pid.1``
+      - MobileSecurityObject
     * - **verification**
       - namespace ``eu.europa.ec.eudi.pid.it.1``
     * - **status**

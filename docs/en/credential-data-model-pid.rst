@@ -230,7 +230,7 @@ In addition to the mandatory metadata attributes defined in :ref:`MobileSecurity
     * - **sub**
       - ``eu.europa.ec.eudi.pid.it.1`` namespace
     * - **validityInfo.signed**
-      - ``eu.europa.ec.eudi.pid.1`` namespace
+      - MobileSecurityObject
     * - **verification**
       - ``eu.europa.ec.eudi.pid.it.1`` namespace
     * - **status**
