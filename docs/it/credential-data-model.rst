@@ -13,7 +13,7 @@ Un modello di dati dell'Attestato Elettronico ha la seguente struttura:
 
 - **Attributi dell'Utente**: Informazioni sull'Utente, come identità o qualifiche.
 
-Gli Attestati Elettronici di Attributi (Qualificati) ((Q)EAA) sono rilasciati dai Fornitori di (Q)EAA a un'Istanza del Wallet e DEVONO essere forniti in formato SD-JWT-VC o mdoc-CBOR.
+Gli Attestati Elettronici di Attributi (Qualificati) ((Q)EAA) sono rilasciati dai Fornitori di (Q)EAA a un'Istanza del Wallet e DEVONO essere forniti in formato SD-JWT VC o mdoc-CBOR.
 Mentre il modello dati (Q)EAA è guidato dal caso d'uso e può includere diversi attributi dell'Utente, gli attributi di metadati specifici per ciascun formato dati sono forniti nelle sezioni seguenti.
 
 Attributi di Metadati Format-Agnostic dell'Attestato Elettronico
@@ -46,7 +46,7 @@ La seguente tabella definisce gli attributi di metadati comuni che sono applicab
   * - **verification**
     - OPZIONALE. Oggetto contenente informazioni di Identity proofing e verifica dei dati dell'Utente.
 
-Le sezioni seguenti forniscono gli attributi specifici del formato e una mappatura degli attributi di metadati sopra indicati ai parametri tecnici specifici del formato quando la credenziale è codificata in formato SD-JWT-VC o mdoc-CBOR.
+Le sezioni seguenti forniscono gli attributi specifici del formato e una mappatura degli attributi di metadati sopra indicati ai parametri tecnici specifici del formato quando la credenziale è codificata in formato SD-JWT VC o mdoc-CBOR.
 
 Formato Attestato Elettronico SD-JWT-VC
 ----------------------------------------
@@ -562,7 +562,7 @@ Acronimi CBOR
 Mappatura dei Parametri degli Attestati Elettronici tra i vari Formati
 ----------------------------------------------------------------------
 
-La seguente tabella fornisce una mappatura comparativa tra le strutture dati degli Attestati Elettronici nei formati SD-JWT-VC e mdoc-CBOR.
+La seguente tabella fornisce una mappatura comparativa tra le strutture dati degli Attestati Elettronici nei formati SD-JWT VC e mdoc-CBOR.
 Essa riporta gli elementi e i parametri chiave utilizzati in ciascun formato, evidenziando sia le somiglianze che le differenze.
 In particolare, evidenzia come i concetti fondamentali - come le informazioni sul Fornitore di Attestati Elettronici, la validità, l'Associazione Crittografica e le disclosure - sono rappresentati nei vari formati possibili di un Attestato Elettronico.
 

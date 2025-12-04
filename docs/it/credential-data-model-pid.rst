@@ -3,7 +3,7 @@
 Modello di Dati del PID
 ==============================================
 
-L'Attestato Elettronico di Dati di Identificazione Personale (PID) è rilasciato dal Fornitore di Attestati Elettronici di Dati di Identificazione Personale secondo le leggi nazionali e DEVE essere fornito in formato SD-JWT-VC e mdoc-CBOR. 
+L'Attestato Elettronico di Dati di Identificazione Personale (PID) è rilasciato dal Fornitore di Attestati Elettronici di Dati di Identificazione Personale secondo le leggi nazionali e DEVE essere fornito in formato SD-JWT VC e mdoc-CBOR. 
 
 .. note::
    **Fase Transitoria:**
@@ -34,19 +34,19 @@ Alcuni attributi di dati, come il *codice di identificazione fiscale* e le *info
 - Conformità al livello di garanzia dell'identity proofing durante il processo di enrollment (LoA come definito dal Regolamento eIDAS).
 - Verificabilità dei processi di verifica dell'identità e degli attributi dell'Utente.
 
-Gli attributi che sono **estensioni domestiche** DEVONO essere inclusi nei **namespace domestici** che sono definiti nella Sezione :ref:`credential-data-model-pid:Modello Dati PID in formato SD-JWT-VC` e Sezione :ref:`credential-data-model-pid:Modello Dati PID in formato mdoc-CBOR` per i PID SD-JWT-VC e mdoc-CBOR rispettivamente.
+Gli attributi che sono **estensioni domestiche** DEVONO essere inclusi nei **namespace domestici** che sono definiti nella Sezione :ref:`credential-data-model-pid:Modello Dati PID in formato SD-JWT-VC` e Sezione :ref:`credential-data-model-pid:Modello Dati PID in formato mdoc-CBOR` per i PID SD-JWT VC e mdoc-CBOR rispettivamente.
 
 Modello Dati PID in formato SD-JWT-VC
 ---------------------------------------
 
-Per il PID SD-JWT-VC definito in questa specifica, il valore ``vct`` DEVE essere ``urn:eudi:pid:it:1`` in conformità ai requisiti dell'ARF PID Rulebook v1.3 per le estensioni domestiche PID (requisito **PID_14**, Sezione 4.2, estendendo il tipo base ``urn:eudi:pid:``).
+Per il PID SD-JWT VC definito in questa specifica, il valore ``vct`` DEVE essere ``urn:eudi:pid:it:1`` in conformità ai requisiti dell'ARF PID Rulebook v1.3 per le estensioni domestiche PID (requisito **PID_14**, Sezione 4.2, estendendo il tipo base ``urn:eudi:pid:``).
 
 .. note::
    **Fase Transitoria:**
 
    Durante la fase transitoria prima della piena operatività EUDIW, le implementazioni nazionali POSSONO utilizzare il valore ``vct`` ``urn:it-wallet:pid:1``. Una volta raggiunta la piena interoperabilità EUDIW, tutte le implementazioni DEVONO transitare all'identificatore conforme EUDI ``urn:eudi:pid:it:1`` specificato sopra.
 
-In base a `EU_2024/2977`_ e alla **Sezione 4 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato SD-JWT-VC include i seguenti Attributi Utente:
+In base a `EU_2024/2977`_ e alla **Sezione 4 dell'ARF PID Rulebook v1.3** [`EIDAS-ARF`_], il PID in formato SD-JWT VC include i seguenti Attributi Utente:
 
 .. _table_sd-jwt-vc_pid_parameters:
 .. list-table::

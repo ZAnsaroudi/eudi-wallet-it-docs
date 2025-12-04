@@ -35,19 +35,19 @@ Some attributes, such as the *taxpayer identification number* and the *identity 
 - The level of Assurance compliance of identity proofing during the enrollment process, according to the LoA defined by the eIDAS Regulation.
 - The auditability upon the User attributes verification processes.
 
-Attributes that are **domestic extensions** MUST be included in the **domestic namespaces** that are defined in Section :ref:`credential-data-model-pid:PID Data Model in SD-JWT-VC Format` and Section :ref:`credential-data-model-pid:PID Data Model in mdoc-CBOR Format` for SD-JWT-VC and mdoc-CBOR PIDs respectively.
+Attributes that are **domestic extensions** MUST be included in the **domestic namespaces** that are defined in Section :ref:`credential-data-model-pid:PID Data Model in SD-JWT VC Format` and Section :ref:`credential-data-model-pid:PID Data Model in mdoc-CBOR Format` for SD-JWT VC and mdoc-CBOR PIDs respectively.
 
-PID Data Model in SD-JWT-VC Format
+PID Data Model in SD-JWT VC Format
 -----------------------------------
 
-The SD-JWT-VC PID defined in this specification MUST use the ``vct`` claim value set with ``urn:eudi:pid:it:1``, according to the domestic PID extensions defined in the ARF PID Rulebook v1.3 (see also ARF HLR **PID_14**, Section 4.2, extending the base type ``urn:eudi:pid:``).
+The SD-JWT VC PID defined in this specification MUST use the ``vct`` claim value set with ``urn:eudi:pid:it:1``, according to the domestic PID extensions defined in the ARF PID Rulebook v1.3 (see also ARF HLR **PID_14**, Section 4.2, extending the base type ``urn:eudi:pid:``).
 
 .. note::
    **Transitional Phase:**
 
    During the transitional phase before full EUDIW operability, national implementations MAY use the ``vct`` value ``urn:it-wallet:pid:1``. Upon reaching full EUDIW operability, all implementations MUST transition to the EUDI-compliant identifier ``urn:eudi:pid:it:1`` specified above.
 
-According to `EU_2024/2977`_ and **Section 4 of the ARF PID Rulebook v1.3** [`EIDAS-ARF`_], the PID in SD-JWT-VC format includes the following User Attributes: 
+According to `EU_2024/2977`_ and **Section 4 of the ARF PID Rulebook v1.3** [`EIDAS-ARF`_], the PID in SD-JWT VC format includes the following User Attributes: 
 
 .. _table_sd-jwt-vc_pid_parameters:
 .. list-table::

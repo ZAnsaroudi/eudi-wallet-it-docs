@@ -14,7 +14,7 @@ A Digital Credential data model has the following structure:
 
 - **User attributes**: Information about the User, such as identity or qualifications.
 
-The (Q)EAAs are issued by (Q)EAA Issuers to a Wallet Instance and MUST be provided in SD-JWT-VC or mdoc-CBOR data format.
+The (Q)EAAs are issued by (Q)EAA Issuers to a Wallet Instance and MUST be provided in SD-JWT VC or mdoc-CBOR data format.
 The (Q)EAA data model is use-case driven and may include different User attributes according to its specific purpose. The (Q)EAA metadata attributes are specific for each data format, as described in the following sections.  
 
 Format-Agnostic Credential Metadata Attributes
@@ -47,14 +47,14 @@ The following table defines the common metadata attributes that are applicable t
   * - **verification**
     - OPTIONAL. Object containing Identity proofing and User data verification information.
 
-The following sections provide format-specific attributes and a mapping of the above metadata attributes to format-specific technical parameters when the credential is encoded in SD-JWT-VC or mdoc-CBOR format.
+The following sections provide format-specific attributes and a mapping of the above metadata attributes to format-specific technical parameters when the credential is encoded in SD-JWT VC or mdoc-CBOR format.
 
 SD-JWT-VC Credential Format
 ---------------------------
 
-When Digital Credentials are issued in the SD-JWT-VC format, they MUST be compliant to `SD-JWT`_ and `SD-JWT-VC`_ specifications.
+When Digital Credentials are issued in the SD-JWT VC format, they MUST be compliant to `SD-JWT`_ and `SD-JWT-VC`_ specifications.
 
-SD-JWT-VC Digital Credentials MUST be signed using the Issuer's private key. SD-JWT-VC Digital Credentials MAY be provided along with a Type Metadata Document related to the issued Credential according to Sections 6 and 6.3 of [`SD-JWT-VC`_]. The payload of Digital Credentials MUST contain the **_sd_alg** claim described in Section 4.1.1 `SD-JWT`_ and other claims specified in this section.
+SD-JWT-VC Digital Credentials MUST be signed using the Issuer's private key. SD-JWT VC Digital Credentials MAY be provided along with a Type Metadata Document related to the issued Credential according to Sections 6 and 6.3 of [`SD-JWT-VC`_]. The payload of Digital Credentials MUST contain the **_sd_alg** claim described in Section 4.1.1 `SD-JWT`_ and other claims specified in this section.
 
 The claim **_sd_alg** indicates the hash algorithm used by the Issuer to generate the digests as described in Section 4.1.1 of `SD-JWT`_. **_sd_alg** MUST be set to one of the specified algorithms in Section :ref:`Cryptographic Algorithms <algorithms:Cryptographic Algorithms>`.
 
@@ -563,7 +563,7 @@ CBOR Acronyms
 Cross-Format Credential Parameters Mapping
 ------------------------------------------
 
-The following table provides a comparative mapping between the data structures of SD-JWT-VC and mdoc-CBOR Digital Credentials.
+The following table provides a comparative mapping between the data structures of SD-JWT VC and mdoc-CBOR Digital Credentials.
 It outlines the key data elements and parameters used in each format, highlighting both commonalities and differences.
 In particular, it shows how core concepts - such as Credential Issuer information, validity, Cryptographic Binding, and disclosures - are represented in these Credential formats.
 
