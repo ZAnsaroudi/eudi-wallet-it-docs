@@ -11,7 +11,7 @@ Depending on whether the User is using a mobile device or a workstation, the Rel
 
 To invoke the correct Wallet Instance, the Relying Party needs to know which Wallet Instance is installed on the User's device and the User wishes to use. This information SHOULD be obtained using the Selection Page described in :ref:`functionalities:User Experience Design`. 
 
-- If the Selection Page is supported, the User selects the Wallet, and then the Relying Party retrieve the Wallet metadata as described in :ref:`wallet-metadata-retrieval:Wallet Metadata Retrieval Flow`. The content of the HTML href or QR Code depends on the ``authorization_endpoint`` parameter in the Wallet metadata:
+- If the Selection Page is supported, the User selects the Wallet, and then the Relying Party retrieves the Wallet metadata as described in :ref:`wallet-metadata-retrieval:Wallet Metadata Retrieval Flow`. The content of the HTML href or QR Code depends on the ``authorization_endpoint`` parameter in the Wallet metadata:
 
   - If ``authorization_endpoint`` is available and contains an HTTPS URL (Universal Link), the Relying Party SHOULD use that endpoint.
   - Otherwise, the Relying Party MUST use one of the custom URL schemes: ``openid4vp://`` (as defined in Section 13.1.2 of [`OpenID4VP`_]) or ``haip-vp://`` (as defined in Section 5.1 of [`OPENID4VC-HAIP`_]). The Wallet Instance MUST support both custom URL schemes.

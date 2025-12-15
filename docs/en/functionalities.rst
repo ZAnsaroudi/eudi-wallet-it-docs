@@ -357,7 +357,7 @@ The Relying Party implementing the page:
 
 - MUST present each Wallet Solution in the IT-Wallet System Register through a modular component that displays the logo and name in full retrieved as described in :ref:`wallet-metadata-retrieval:Wallet Metadata Retrieval Flow`; 
 
-- MUST present the Wallet Solutions in a dynamic layout that adapts to the number of Wallet Solutions available: when less than 3 MUST distribute them in a 2-column grid, when less than 2 MUST use a center-column layout; in all cases random sorting MUST be guarantee; 
+- MUST present the Wallet Solutions in a dynamic layout that adapts to the number of Wallet Solutions available: when less than 3 MUST distribute them in a 2-column grid, when less than 2 MUST use a center-column layout; in all cases random sorting MUST be guaranteed; 
 
 - MUST allow the User to search for a Wallet Solution through a filter feature by name, when more than 5 Wallet Solutions are present; 
 

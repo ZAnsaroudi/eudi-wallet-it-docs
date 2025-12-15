@@ -643,7 +643,7 @@ A Credential Issuer or third party (e.g., Authentic Source, Registry, Catalogue)
 
 To invoke the correct Wallet Instance, they need to know which Wallet Instance is installed on the User's device and the User wishes to use. This information SHOULD be obtained using the Selection Page described in :ref:`functionalities:User Experience Design`. 
 
-- If the Selection Page is supported, the User selects the Wallet, and then the Credential Issuer or third party retrieve the Wallet metadata as described in :ref:`wallet-metadata-retrieval:Wallet Metadata Retrieval Flow`. The Wallet Instance invocation mechanism depends on the ``credential_offer_endpoint`` parameter in the Wallet metadata:
+- If the Selection Page is supported, the User selects the Wallet, and then the Credential Issuer or third party retrieves the Wallet metadata as described in :ref:`wallet-metadata-retrieval:Wallet Metadata Retrieval Flow`. The Wallet Instance invocation mechanism depends on the ``credential_offer_endpoint`` parameter in the Wallet metadata:
   
   - If ``credential_offer_endpoint`` is available and contains an HTTPS URL (Universal Link), the Credential Issuer or third party SHOULD use that endpoint.
   - Otherwise, the Credential Issuer or third party MUST use one of the custom URL schemes: ``openid-credential-offer://`` (as defined in Section 4 of [`OpenID4VCI`_]) or ``haip-vci://`` (as defined in Section 4.2 of [`OPENID4VC-HAIP`_]). The Wallet Instance MUST support both custom URL schemes.
