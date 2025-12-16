@@ -521,14 +521,50 @@ The Trust Anchor MUST publish and keep up to date all the information at the Dig
 Digital Credentials Hierarchy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Digital Credentials recognized within the IT-Wallet ecosystem are hierarchically classified and standardized according to the following main domains and purposes. Additional purposes MAY be added as the IT-Wallet ecosystem grows.
+Digital Credentials recognized within the IT-Wallet ecosystem are classified and standardized according to the following multi-level hierarchical model designed to improve semantic clarity, credential discovery, and compatibility with both credential-specific and claim-based verification workflows.
+
+A Digital Credential MUST declare:
+
+- one Domain  
+- one Class  
+- one Credential Type (Subclass)
+
+
+The hierarchy is defined as follows:
+
+**Domain**
+
+A **Domain** represents a high-level thematic area grouping credential families that relate to the same broad context (e.g., Identity, Health, Education, Mobility).  
+Domains provide a top-level organizational layer.
+
+**Class (Credential Family)**
+
+A **Class** represents a family of credentials sharing similar nature, function, or structure (e.g., Identity Documents, Civil Status Certificates, Driving Licenses).  
+Each Class SHOULD define:
+
+- a stable Class identifier (URI),  
+- the expected semantics of the credential family.
+
+Classes enable Relying Parties and Wallets to request or match credentials based on their type category rather than individual credential types.
+
+**Credential Type (Subclass)**
+
+A **Credential Type(Subclass)** represents a specific credential instance within a Class (e.g. Passport, Birth Certificate, Driving License B).  
+Each Credential Type SHALL include:
+
+- a unique identifier (e.g., VCT, schema URI),  
+- the issuing authority,  
+- the set of attributes that MAY be included in presentations.
+
+Credential Types enable precise targeting for compliance-driven or regulation-mandated verification flows.
+
 
 
 .. _it-wallet-dc-domains:
 .. list-table:: Digital Credential Domains and Purposes
    :class: longtable
    :header-rows: 1
-   :widths: 20 30 50
+   :widths: 25 30 50  
 
    * - **Domain**
      - **Purpose**
@@ -791,10 +827,12 @@ The taxonomy provides, in a single resource, the hierarchical classification sys
 
 **Taxonomy Structure:**
 
-The taxonomy maintains a two-level hierarchical structure:
+The taxonomy maintains a three-level hierarchical structure:
 
-- **Domains**: Top-level classification representing broad functional areas (e.g., IDENTITY, AUTHORIZATION, FINANCIAL)
-- **Purposes**: Specific credential use cases within each domain (e.g., PERSON_IDENTIFICATION, DRIVING_LICENSE, BANK_ACCOUNT) for which credentials can be used
+- **Domains**: Top-level classification representing broad functional areas (e.g., IDENTITY, HEALTH, FINANCIAL)
+- **Class(Credential Family)**: Family of credentials sharing similar function, structure, or legal meaning (e.g., Identity Documents, Civil Status Certificates, Professional Licenses)
+- **Credential Type (Subclass)**: Specific credential definition issued by an authority  (e.g., Passport, Birth Certificate, Mobile Driving License).
+ 
 
 **Localization Support:**
 
@@ -804,7 +842,7 @@ The taxonomy supports multilingual environments through the ``_l10n_id`` suffix 
 
 - **Claims Registry**: Individual claims catalog
 - **AS Registry**: Authentic Sources declare capabilities using taxonomy classifications
-- **Digital Credentials Catalog**: Credential types specify domains and supported purposes
+- **Digital Credentials Catalog**: Credential types specify domains, class and subclass
 - **Authorization Policies**: Policy evaluation leverages taxonomy structure for access control decisions
 
 The taxonomy is accessible through the dedicated taxonomy endpoint as defined in the registry discovery mechanism and is maintained by the Supervisory Body to ensure regulatory compliance and semantic consistency.
