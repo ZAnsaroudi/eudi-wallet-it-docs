@@ -306,7 +306,7 @@ Questa sezione fornisce l'insieme dei test progettati per implementatori tecnici
     - Il Credential Issuer verifica che il codice di autorizzazione sia valido e non sia stato precedentemente utilizzato (:rfc:`6749`).
   * - CI_061a
     - Emissione, Sicurezza
-    - Verifica del code_verifier PKCE nella Richiesta di Token
+    - Verifica del ``code_verifier`` PKCE nella Richiesta di Token
     - Il Credential Issuer verifica che il parametro ``code_verifier`` sia presente e corrisponda al ``code_challenge`` associato al codice di autorizzazione (:rfc:`7636`); in caso di mancata corrispondenza, la richiesta viene rifiutata.
   * - CI_062
     - Emissione, Sicurezza
