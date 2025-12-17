@@ -521,57 +521,152 @@ Il Trust Anchor DEVE pubblicare e mantenere aggiornate tutte le informazioni all
 Gerarchia delle Credenziali Digitali
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Le Credenziali Digitali riconosciute all'interno dell'ecosistema IT-Wallet sono classificate e standardizzate gerarchicamente secondo i seguenti domini e scopi principali. Scopi aggiuntivi POSSONO essere aggiunti man mano che l'ecosistema IT-Wallet cresce.
+Le **Credenziali Digitali** riconosciute all’interno dell’ecosistema **IT-Wallet** sono classificate e standardizzate secondo il seguente modello gerarchico multilivello, progettato per migliorare la chiarezza semantica, la scoperta delle credenziali e la compatibilità sia con flussi di verifica basati su credenziali specifiche sia su singole attestazioni (*claim-based*). Domini, classi e sottoclassi aggiuntivi POSSONO essere aggiunti man mano che l'ecosistema IT-Wallet cresce.
 
 
 .. _it-wallet-dc-domains:
 .. list-table:: Domini e Scopi delle Credenziali Digitali
    :class: longtable
    :header-rows: 1
-   :widths: 20 30 50
+   :widths: 25 25 25 25
 
    * - **Dominio**
-     - **Scopo**
+     - **Classe (Famiglia di credenziali)**
+     - **Sottoclasse (Credenziali)**
      - **Descrizione**
    * - *IDENTITY*
-     - * PERSON_IDENTIFICATION
-       * ELECTRONIC_RESIDENCY
-     - Credenziali che stabiliscono o verificano l'identità di una persona, inclusi documenti di identità fisici e digitali legalmente riconosciuti dalle leggi nazionali.
-   * - *AUTHORIZATION*
-     - * DRIVING_LICENSE
-       * PROFESSIONAL_LICENSE
-       * TRAVEL_DOCUMENT
-       * ACCESS_PERMIT
-     - Credenziali che concedono permessi, diritti o autorizzazioni specifici per eseguire determinate attività o accedere ad aree riservate.
+     - * Identification Documents
+       * Civil Registry and Personal Status Certificates
+       * Economic and Legal Status
+       - Electronic Identity Card (CIE)
+       - Passport
+       - Driving License (Italy only)
+       - Tax Code / Health Insurance Card
+       - Age Certification
+       - Birth Certificate
+       - Residence Certificate
+       - Family Status Certificate
+       - Marriage Certificate
+       - Citizenship Certificate
+       - ISEE (Equivalent Economic Situation Indicator)
+       - Residence Permit
+       - Certificate of Pending Charges
+       - Criminal Record Certificate
+     - Credentials that establish or verify the identity of a person, including physical and digital identity documents legally recognized by national laws.
+   * - *HOME AND FAMILY*
+     - * Property and Cadastral Documents
+       * Family Documents
+       * Local Tax Documents
+       - Deed of Sale
+       - Cadastral Survey
+       - Cadastral Floor Plan
+       - Cadastral Certificate
+       - Children’s Tax Code / Health Card
+       - Birth Certificate
+       - Family Status Certificate
+       - IMU (Property Tax)
+       - TARI (Waste Tax)
+     - Credentials that certify family composition, housing ownership or residency, and related legal, fiscal, and administrative relationships.
    * - *EDUCATION*
-     - * ACADEMIC_DEGREE
-       * CERTIFICATE
-       * TRAINING_RECOGNITION
-     - Credenziali relative a risultati educativi, qualifiche e riconoscimento di formazione professionale.
+     - * Educational Qualifications
+       * Professional Certifications
+       - Lower Secondary School Diploma
+       - Upper Secondary School Diploma
+       - Bachelor’s Degree
+       - Master’s Degree
+       - University Master
+       - PhD
+       - Professional Licenses (e.g. architect, lawyer, psychologist)
+       - Vocational Training Certificates (e.g. healthcare assistant)
+       - Language Certifications (e.g. IELTS)
+       - Academic Qualifications (e.g. Europass)
+     - Credentials related to educational achievements, qualifications, and professional training recognition.
    * - *HEALTH*
-     - * INSURANCE_CARD
-       * DISABILITY_CARD
-       * MEDICAL_PRESCRIPTION
-     - Credenziali relative all'accesso sanitario, storia medica, copertura assicurativa e documenti sanitari.
+     - * Certifications and Eligibility
+       * Medical Records
+       - Health Insurance Card (TEAM)
+       - European Health Card (CED)
+       - Disability Certificate
+       - Vaccination Certificate
+       - Sports Fitness Certificate
+       - Work Fitness Certificate
+       - Medical Prescriptions
+       - Digital Medical Report
+     - Credentials related to healthcare access, medical history, insurance coverage, and health-related documents.
    * - *FINANCIAL*
-     - * INCOME_CERTIFICATE
-       * TAX_STATEMENT
-       * FAMILY_ECONOMIC_STATUS
-       * BANK_ACCOUNT
-       * PAYMENT_HISTORY
-     - Credenziali che attestano stato finanziario, livelli di reddito, tassazione, informazioni bancarie o situazione economica di individui o famiglie.
-   * - *MEMBERSHIP*
-     - * ASSOCIATION
-       * LOYALTY_PROGRAM
-       * CLUB_MEMBERSHIP
-     - Credenziali che confermano affiliazione con organizzazioni, partecipazione a programmi o stato di membership.
-   * - *ATTESTATION*
-     - * PUBLIC_STATEMENT
-       * CIVIL_STATUS
-       * CERTIFICATION
-     - Credenziali che forniscono dichiarazioni ufficiali, conferme di stato o certificazioni rilasciate da autorità.
+     - * Payment Instruments
+       * Payment Credentials and Authorisations
+       * Public Payments and Fees
+       * Recurring Payments and Subscriptions
+       - Digital Payment Card (debit / credit / prepaid)
+       - Virtual Card
+       - Bank Account (IBAN)
+       - Strong Customer Authentication (SCA) Credential
+       - PagoPA Payment Receipt
+       - Digital Stamp Duty (Bollo digitale)
+       - Tax and Fee Payment Certificate
+       - Subscription Mandate
+       - Recurring Payment Credential
+     - Credentials that attest to financial status, income levels, taxation, banking information, or economic situation of individuals or families.
+   * - *CULTURE AND LEISURE*
+     - * Cultural Cards and Benefits (associations, loyalty programm, membership)
+       - Culture Card
+       - Annual Museum Passes
+       - Cinema Card
+       - Museum Card
+       - Association Membership Cards
+       - Library Card
+       - City Pass
+       - Credentials that confirm affiliation with organizations, participation in programs, or membership status.
+   * - *EMPLOYMENT*
+     - * Employment Documents
+       * Employment Status
+       - Digital Employment Contract
+       - Curriculum Vitae (CV)
+       - Residence Permit
+       - Employment Status Certificate
+       - INPS Contribution Record
+     - Credentials that provide official statements, confirmations of status, or certifications issued by authorities.
+   * - *MOBILITY AND TRAVEL*
+     - * Licenses and Authorizations
+       * Vehicle Documents
+       * Subscriptions
+       * Travel Documents 
+       * Pet Travel Documents
+       * Travel Insurance
+       * Bookings
+       * Discounts and Benefits
+       - Mobile Driving License
+       - Boating License
+       - Vehicle Registration Certificate
+       - Digital RCA Insurance
+       - Vehicle Inspection Certificate
+       - Green Card / International Insurance
+       - Public Transport Pass
+       - Telepass Subscription
+       - Passport
+       - European Pet Passport
+       - Travel Tickets (air, train, etc.)
+       - Travel Insurance Policy
+       - Hotel Reservation
+       - Discount Cards
+       - Tourist Benefits
+     - Credentials that authorize, enable, or certify the right to move, drive, travel, or access transport services, including personal licenses, vehicle documents, travel         documents, and related insurance or entitlement proofs, as recognized by national or international regulations.
+   * - *BONUSES*
+     - * Economic Benefits and Allowances
+       * Incentives and Vouchers
+       * Health and Wellbeing Bonuses
+       - Family Allowance Credential
+       - Unemployment Benefit Credential
+       - Digital Voucher
+       - Purchase Incentive Credential
+       - Cashback Eligibility Credential
+       - Healthcare Bonus Credential
+       - Mental Health Support Voucher
+       - Sports and Physical Activity Bonus
+     - Credenziali che attestano il diritto o l’idoneità ad accedere a benefici economici e incentivi.
 
-Ogni Credenziale DEVE specificare domini e scopi per abilitare sia **Scenari Credential-Specific** che **Scenari Credential-Agnostic** secondo i requisiti della Relying Party e i pattern di richiesta di presentazione:
+Ogni Credenziale DEVE specificare il proprio dominio e la classe per abilitare sia **Scenari Credential-Specific** che **Scenari Credential-Agnostic** secondo i requisiti della Relying Party e i pattern di richiesta di presentazione:
 
   1. **Scenari Credential-Specific** (Primari per Settori Governativi/Regolamentati): Le RP richiedono tipi di credenziali specifici per requisiti di conformità e audit, includendo ad esempio:
 
@@ -779,7 +874,7 @@ Tassonomia
 
 La **Tassonomia** fornisce le fondamenta semantiche per l'interoperabilità degli Attestati Elettronici mantenendo il vocabolario autorevole per organizzare le credenziali all'interno dell'ecosistema IT-Wallet. La tassonomia è neutrale rispetto al formato delle credenziali e ha l'obiettivo di facilitare le integrazioni degli Attestati Elettronici nelle Soluzioni Tecniche IT-Wallet.
 
-La tassonomia fornisce, in una singola risorsa, il sistema di classificazione gerarchica che organizza domini e scopi che possono essere applicati ai tipi di credenziali, supportando la valutazione delle policy di autorizzazione e la standardizzazione a livello di ecosistema.
+La tassonomia fornisce, in una singola risorsa, il sistema di classificazione gerarchica che organizza domini e classi che possono essere applicati ai tipi di credenziali, supportando la valutazione delle policy di autorizzazione e la standardizzazione a livello di ecosistema.
 
 **Obiettivi della Tassonomia:**
 
@@ -791,10 +886,11 @@ La tassonomia fornisce, in una singola risorsa, il sistema di classificazione ge
 
 **Struttura della Tassonomia:**
 
-La tassonomia mantiene una struttura gerarchica a due livelli:
+La tassonomia mantiene una struttura gerarchica a tre livelli:
 
-- **Domini**: Classificazione di livello superiore che rappresenta aree funzionali ampie (ad esempio, IDENTITY, AUTHORIZATION, FINANCIAL)
-- **Scopi**: Casi d'uso specifici delle credenziali all'interno di ogni dominio (ad esempio, PERSON_IDENTIFICATION, DRIVING_LICENSE, BANK_ACCOUNT) per i quali le credenziali possono essere utilizzate
+- **Dominio**: Classificazione di livello superiore che rappresenta aree funzionali ampie (ad esempio, IDENTITY, HEALTH, FINANCIAL) 
+- **Classe(Famiglia di Credenziali)**: Insieme di credenziali che condividono funzione, struttura o significato giuridico simili (es. Documenti di Identità, Certificati di Stato Civile, Abilitazioni Professionali)
+- ** Sottoclasse (Tipo di credenziale)**: Definizione specifica di una credenziale rilasciata da un’autorità/fonte autentica (es. Passaporto, Certificato di Nascita, Patente di Guida).
 
 **Supporto alla Localizzazione:**
 
@@ -804,7 +900,7 @@ La tassonomia supporta ambienti multilingue attraverso il pattern del suffisso `
 
 - **Registro degli Attributi**: Catalogo degli attributi individuali
 - **Registro AS**: Le Fonti Autentiche dichiarano capacità di fornitura dati utilizzando classificazioni della tassonomia
-- **Catalogo degli Attestati Elettronici**: I tipi di credenziali specificano domini e scopi supportati
+- **Catalogo degli Attestati Elettronici**: I tipi di credenziale specificano dominio, classe
 - **Policy di Autorizzazione**: La valutazione delle policy sfrutta la struttura della tassonomia per decisioni di controllo degli accessi
 
 La tassonomia è accessibile attraverso l'endpoint dedicato della tassonomia come definito nel meccanismo di discovery del registro ed è mantenuta dall'Organismo di Supervisione per garantire conformità normativa e coerenza semantica.
