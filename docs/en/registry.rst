@@ -653,7 +653,7 @@ Credential Types enable precise targeting for compliance-driven or regulation-ma
        - Association Membership Cards
        - Library Card
        - City Pass
-       - Credentials that confirm affiliation with organizations, participation in programs, or membership status.
+     - Credentials that confirm affiliation with organizations, participation in programs, or membership status.
    * - *EMPLOYMENT*
      - * Employment Documents
        * Employment Status
@@ -687,7 +687,7 @@ Credential Types enable precise targeting for compliance-driven or regulation-ma
        - Hotel Reservation
        - Discount Cards
        - Tourist Benefits
-     - Credentials that authorize, enable, or certify the right to move, drive, travel, or access transport services, including personal licenses, vehicle documents, travel documents, and related insurance or entitlement proofs, as recognized by national or international regulations.
+     - Credentials that authorize, enable, or certify the right to move, drive, travel, or access transport services, including personal licenses, vehicle documents, travel         documents, and related insurance or entitlement proofs, as recognized by national or international regulations.
    * - *BONUSES*
      - * Economic Benefits and Allowances
        * Incentives and Vouchers
@@ -700,6 +700,7 @@ Credential Types enable precise targeting for compliance-driven or regulation-ma
        - Healthcare Bonus Credential
        - Mental Health Support Voucher
        - Sports and Physical Activity Bonus
+     - Credentials that attest the right to access or receive economic benefits, subsidies, incentives, or vouchers, including eligibility criteria, allocation status, and          applicable usage constraints, as defined by relevant policies or regulations.
 
 
 Each Credential MUST specify domains and classes to enable both **Credential-Specific Scenarios** and **Credential-Agnostic Scenarios** according to Relying Party's requirements and presentation request patterns:
