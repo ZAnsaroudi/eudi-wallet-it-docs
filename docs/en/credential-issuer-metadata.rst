@@ -159,3 +159,4 @@ The *openid_credential_issuer* metadata MUST contain the following claims.
             - **batch_size**: Integer value specifying the maximum array size for the ``proofs`` parameter in a Credential request.
   * - **status_list_aggregation_endpoint**
     - URL of the Status List Aggregation Endpoint. See `TOKEN-STATUS-LIST`_ Section 9.
+    
