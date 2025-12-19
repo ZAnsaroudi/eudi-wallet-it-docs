@@ -10,7 +10,6 @@
     },
     "name_l10n_id": "taxonomy.claims.name",
     "description_l10n_id": "taxonomy.claims.description",
-    "claims": [
     "domains": [
         {
             "id": "identity",
