@@ -547,7 +547,7 @@ A **Credential Type (Subclass)** represents a specific Credential within a Class
 Each Credential Type SHALL include:
 
 - a unique identifier (e.g., VCT, schema URI),  
-- the issuing authority,  
+- the Credential Issuer identifier,  
 - the set of Attributes that MAY be included in presentations.
 
 Credential Types enable precise targeting for compliance-driven or regulation-mandated verification flows.
