@@ -368,10 +368,10 @@ Il Registro delle Fonti Autentiche DEVE contenere i seguenti parametri per ciasc
      - CONDIZIONALE. Digest crittografico della risorsa immagine del logo per la verifica dell'integrità. RICHIESTO se ``logo_uri`` è presente. Formato: ``{digest_method}-{digest_value}`` (es., ``"sha-256-abc123..."``).
    * - **data_capabilities[].background_image**
      - JSON object
-     - OPZIONALE. Oggetto contiene informazioni sull’immagine di sfondo da visualizzare insieme ai dati forniti. L’oggetto include i parametri ``uri`` e ``uri#integrity``.
+     - OPZIONALE. Oggetto contiene informazioni sull'immagine di sfondo da visualizzare insieme ai dati forniti. L'oggetto include i parametri ``uri`` e ``uri#integrity``.
    * - **data_capabilities[].watermark_image**
      - JSON object
-     - OPZIONALE. Oggetto contiene informazioni sull’immagine di filigrana da visualizzare insieme ai dati forniti. L’oggetto include i parametri ``uri`` e ``uri#integrity``.
+     - OPZIONALE. Oggetto contiene informazioni sull'immagine di filigrana da visualizzare insieme ai dati forniti. L'oggetto include i parametri ``uri`` e ``uri#integrity``.
    * - **data_capabilities[].background_color**
      - string
      - OPZIONALE. Stringa che rappresenta il colore di sfondo da visualizzare insieme ai dati forniti
@@ -400,12 +400,12 @@ Un esempio non normativo di output di un bundle di localizzazione è fornito di 
 .. code-block:: json
 
  {
-    "authentic_source1.name": "Ministry of Infrastructure and Transport",
-    "authentic_source1.dataset1.origin": "MIT -- General Directorate for Motorization",
-    "authentic_source1.dataset1.userinfo": "###### Driving License\nVehicle registration data is available for licenses issued after January 1, 2020. For older licenses, contact the local motorization office.",
-    "authentic_source2.name": "Example Bank S.p.A.",
-    "authentic_source2.dataset1.origin": "Example data origin 1",
-    "authentic_source2.dataset1.userinfo": "###### Information on data availability\nFinancial data access requires customer consent and is subject to PSD2 regulations. Account information is available for active accounts only.",
+    "authentic_source1.name": "Ministero delle Infrastrutture e dei Trasporti",
+    "authentic_source1.dataset1.origin": "MIT -- Direzione Generale per la Motorizzazione",
+    "authentic_source1.dataset1.userinfo": "###### Patente di guida\nI dati di immatricolazione del veicolo sono disponibili per le patenti rilasciate dopo il 1° gennaio 2020. Per patenti più vecchie, contattare l'ufficio locale della motorizzazione.",
+    "authentic_source2.name": "Banca di Esempio S.p.A.",
+    "authentic_source2.dataset1.origin": "Origine dati di esempio 1",
+    "authentic_source2.dataset1.userinfo": "###### Informazioni sulla disponibilità dei dati\nL'accesso ai dati finanziari richiede il consenso del cliente ed è soggetto alle normative PSD2. Le informazioni sul conto sono disponibili solo per conti attivi.",
     "...": "..."
   }
 
@@ -521,19 +521,19 @@ Il Trust Anchor DEVE pubblicare e mantenere aggiornate tutte le informazioni all
 Gerarchia delle Credenziali Digitali
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Le **Credenziali Digitali** riconosciute all’interno dell’ecosistema **IT-Wallet** sono classificate e standardizzate secondo il seguente modello gerarchico multilivello, progettato per migliorare la chiarezza semantica, la scoperta delle credenziali e la compatibilità sia con flussi di verifica basati su credenziali specifiche sia su singole attestazioni (*claim-based*). 
+Le **Credenziali Digitali** riconosciute all'interno dell'ecosistema **IT-Wallet** sono classificate e standardizzate secondo il seguente modello gerarchico multilivello, progettato per migliorare la chiarezza semantica, la scoperta delle credenziali e la compatibilità sia con flussi di verifica basati su credenziali specifiche sia su singole attestazioni (*claim-based*). 
 
 La gerarchia è definita come segue:
 
 **Dominio**
 
-Un **Dominio** rappresenta un’area tematica di alto livello che raggruppa famiglie di credenziali afferenti allo stesso contesto generale (ad es. Identità, Salute, Istruzione, Mobilità). I Domini forniscono il livello organizzativo più alto della tassonomia.
+Un **Dominio** rappresenta un'area tematica di alto livello che raggruppa famiglie di credenziali afferenti allo stesso contesto generale (ad es. Identità, Salute, Istruzione, Mobilità). I Domini forniscono il livello organizzativo più alto della tassonomia.
 
 **Classe (Famiglia di credenziali)**
 
 Una **Classe** rappresenta una famiglia di credenziali che condividono natura, funzione o struttura simili (ad es. Documenti di Identità, Certificati di Stato Civile).
 
-Ogni Classe **SHOULD** definire:
+Ogni Classe **DOVREBBE** definire:
 
 - un identificatore di Classe stabile (URI),  
 - la semantica attesa della famiglia di credenziali.
@@ -542,205 +542,205 @@ Le Classi consentono ai *Relying Party* e ai *Wallet provider* di richiedere o i
 
 **Tipo di credenziale (Sottoclasse)**
 
-Un **Tipo di Credenziale (Sottoclasse)** rappresenta una specifica istanza di credenziale all’interno di una Classe (ad es. Passaporto, Certificato di Nascita, Patente di Guida).
+Un **Tipo di Credenziale (Sottoclasse)** rappresenta una specifica istanza di credenziale all'interno di una Classe (ad es. Passaporto, Certificato di Nascita, Patente di Guida).
 
-Ogni Tipo di Credenziale **SHALL** includere:
+Ogni Tipo di Credenziale **DEVE** includere:
 
 - un identificatore univoco (ad es. VCT, URI di schema),  
-- l’autorità emittente,  
-- l’insieme degli attributi che **MAY** essere inclusi nelle presentazioni.
+- l'autorità emittente,  
+- l'insieme degli attributi che **POSSONO** essere inclusi nelle presentazioni.
 
 I Tipi di Credenziale consentono un targeting preciso nei flussi di verifica guidati da requisiti di conformità o obblighi normativi.
 
 **Finalità (Intento di Verifica)**
 
-Una **Finalità (Intento di Verifica)** descrive *perché* una credenziale può essere richiesta da un *Relying Party* (ad es. Verifica dell’identità, Verifica dell’età, Idoneità all’accesso a servizi specifici). Le Finalità **MUST NOT** rappresentare categorie di credenziali.  
-Le Finalità **SHALL** descrivere gli **esiti della verifica**, non le categorie di credenziali.
-Ogni Tipo di Credenziale **MUST** dichiarare il proprio Dominio, la propria Classe e le Finalità supportate.
+Una **Finalità (Intento di Verifica)** descrive *perché* una credenziale può essere richiesta da un *Relying Party* (ad es. Verifica dell'identità, Verifica dell'età, Idoneità all'accesso a servizi specifici). Le Finalità **NON DEVONO** rappresentare categorie di credenziali.  
+Le Finalità **DEVONO** descrivere gli **esiti della verifica**, non le categorie di credenziali.
+Ogni Tipo di Credenziale **DEVE** dichiarare il proprio Dominio, la propria Classe e le Finalità supportate.
 
 La tabella seguente fornisce esempi non esaustivi che illustrano le relazioni tra Dominio, Classe, Tipo di Credenziale e Finalità.
-Domini, classi, credenziali specifiche e finalità della verifica aggiuntivi **MAY** essere aggiunti nel tempo man mano che l’ecosistema IT-Wallet evolve.
+Domini, classi, credenziali specifiche e finalità della verifica aggiuntivi **POSSONO** essere aggiunti nel tempo man mano che l'ecosistema IT-Wallet evolve.
 
 
 .. _it-wallet-dc-domains:
-.. list-table:: Digital Credential Domains, Classes, Credential Types, Descriptions and Purposes
+.. list-table:: Domini, Classi, Tipi di Credenziali Digitali, Descrizioni e Finalità
    :class: longtable
    :header-rows: 1
    :widths: 20 20 20 20 20  
 
-   * - **Domain**
-     - **Class (Credential Family)**
-     - **Subclass (Credential Type)**
-     - **Description**
-     - **Purpose**
+   * - **Dominio**
+     - **Classe (Famiglia di Credenziali)**
+     - **Sottoclasse (Tipo di Credenziale)**
+     - **Descrizione**
+     - **Finalità**
 
-   * - *IDENTITY*
+   * - *IDENTITÀ*
      -
-       * Identification Documents
-       * Civil Registry and Personal Status Certificates
-       * Economic and Legal Status
+       * Documenti di Identificazione
+       * Certificati di Registro Civile e Stato Personale
+       * Stato Economico e Legale
      -
-       * Electronic Identity Card (CIE)
-       * Passport
-       * Driving License (Italy only)
-       * Tax Code / Health Insurance Card
-       * Age Certification
-       * Birth Certificate
-       * Residence Certificate
-       * Family Status Certificate
-       * Marriage Certificate
-       * Citizenship Certificate
-       * ISEE (Equivalent Economic Situation Indicator)
-       * Residence Permit
-       * Certificate of Pending Charges
-       * Criminal Record Certificate
-     - Credentials that establish or confirm a person’s legal identity and personal, civil or legal status.
-     - Identity and age verification; civil status verification; access to services for minors; eligibility for services or benefits; right of residence.
+       * Carta d'Identità Elettronica (CIE)
+       * Passaporto
+       * Patente di Guida (solo Italia)
+       * Codice Fiscale / Tessera Sanitaria
+       * Certificazione dell'Età
+       * Certificato di Nascita
+       * Certificato di Residenza
+       * Certificato di Stato di Famiglia
+       * Certificato di Matrimonio
+       * Certificato di Cittadinanza
+       * ISEE (Indicatore della Situazione Economica Equivalente)
+       * Permesso di Soggiorno
+       * Certificato di Carichi Pendenti
+       * Certificato del Casellario Giudiziale
+     - Credenziali che stabiliscono o confermano l'identità legale di una persona e lo stato personale, civile o legale.
+     - Verifica dell'identità e dell'età; verifica dello stato civile; accesso a servizi per minori; idoneità a servizi o benefici; diritto di residenza.
 
-   * - *HOME AND FAMILY*
+   * - *CASA E FAMIGLIA*
      -
-       * Property and Cadastral Documents
-       * Family Documents
-       * Local Tax Documents
+       * Documenti di Proprietà e Catastali
+       * Documenti Familiari
+       * Documenti Fiscali Locali
      -
-       * Deed of Sale
-       * Cadastral Survey
-       * Cadastral Floor Plan
-       * Cadastral Certificate
-       * Children’s Tax Code / Health Card
-       * Birth Certificate
-       * Family Status Certificate
-       * IMU (Property Tax)
-       * TARI (Waste Tax)
-     - Credentials that attest household composition, residence, and housing-related legal or fiscal relationships.
-     - Residence and household verification; eligibility for housing, social or education services; compliance with local tax obligations.
+       * Atto di Compravendita
+       * Visura Catastale
+       * Planimetria Catastale
+       * Certificato Catastale
+       * Codice Fiscale / Tessera Sanitaria dei Figli
+       * Certificato di Nascita
+       * Certificato di Stato di Famiglia
+       * IMU (Imposta Municipale Unica)
+       * TARI (Tassa sui Rifiuti)
+     - Credenziali che attestano la composizione del nucleo familiare, la residenza e le relazioni legali o fiscali relative all'abitazione.
+     - Verifica della residenza e del nucleo familiare; idoneità a servizi abitativi, sociali o educativi; conformità agli obblighi fiscali locali.
 
-   * - *EDUCATION*
+   * - *ISTRUZIONE*
      -
-       * Educational Qualifications
-       * Professional Certifications
+       * Qualifiche Educative
+       * Certificazioni Professionali
      -
-       * Lower Secondary School Diploma
-       * Upper Secondary School Diploma
-       * Bachelor’s Degree
-       * Master’s Degree
-       * University Master
-       * PhD
-       * Professional Licenses (e.g. architect, lawyer, psychologist)
-       * Vocational Training Certificates (e.g. healthcare assistant)
-       * Language Certifications (e.g. IELTS)
-       * Academic Qualifications (e.g. Europass)
-     - Credentials that attest educational achievements, academic qualifications, and professional training.
-     - Qualification and degree verification; skills and language assessment; eligibility for education pathways, competitions, licenses, or study and work opportunities.
+       * Diploma di Scuola Secondaria di Primo Grado
+       * Diploma di Scuola Secondaria di Secondo Grado
+       * Laurea Triennale
+       * Laurea Magistrale
+       * Master Universitario
+       * Dottorato di Ricerca
+       * Licenze Professionali (es. architetto, avvocato, psicologo)
+       * Certificati di Formazione Professionale (es. assistente sanitario)
+       * Certificazioni Linguistiche (es. IELTS)
+       * Qualifiche Accademiche (es. Europass)
+     - Credenziali che attestano risultati educativi, qualifiche accademiche e formazione professionale.
+     - Verifica di qualifiche e titoli; valutazione di competenze e lingue; idoneità a percorsi educativi, concorsi, licenze o opportunità di studio e lavoro.
 
-   * - *HEALTH*
+   * - *SALUTE*
      -
-       * Certifications and Eligibility
-       * Medical Records
+       * Certificazioni e Idoneità
+       * Cartelle Cliniche
      -
-       * Health Insurance Card (TEAM)
-       * European Health Card (CED)
-       * Disability Certificate
-       * Vaccination Certificate
-       * Sports Fitness Certificate
-       * Work Fitness Certificate
-       * Medical Prescriptions
-       * Digital Medical Report
-     - Credentials related to healthcare coverage, medical status, and health-related certifications.
-     - Access to healthcare services; identification within health systems; verification of vaccination or fitness status; access to and sharing of medical records.
+       * Tessera Sanitaria (TEAM)
+       * Tessera Europea di Assicurazione Malattia (CED)
+       * Certificato di Invalidità
+       * Certificato di Vaccinazione
+       * Certificato di Idoneità Sportiva
+       * Certificato di Idoneità Lavorativa
+       * Prescrizioni Mediche
+       * Referto Medico Digitale
+     - Credenziali relative alla copertura sanitaria, allo stato medico e alle certificazioni sanitarie.
+     - Accesso ai servizi sanitari; identificazione nei sistemi sanitari; verifica dello stato vaccinale o di idoneità; accesso e condivisione di cartelle cliniche.
 
-   * - *FINANCIAL*
+   * - *FINANZIARIO*
      -
-       * Payment Instruments
-       * Payment Credentials and Authorisations
-       * Public Payments and Fees
-       * Recurring Payments and Subscriptions
+       * Strumenti di Pagamento
+       * Credenziali e Autorizzazioni di Pagamento
+       * Pagamenti Pubblici e Tasse
+       * Pagamenti Ricorrenti e Abbonamenti
      -
-       * Digital Payment Card (debit / credit / prepaid)
-       * Virtual Card
-       * Bank Account (IBAN)
-       * Strong Customer Authentication (SCA) Credential
-       * PagoPA Payment Receipt
-       * Digital Stamp Duty (Bollo digitale)
-       * Tax and Fee Payment Certificate
-       * Subscription Mandate
-       * Recurring Payment Credential
-     - Credentials related to payment instruments, financial authorizations, and proof of payments.
-     - Payment authorization and execution; proof of payment; management of recurring payments; compliance with security or regulatory requirements.
+       * Carta di Pagamento Digitale (debito / credito / prepagata)
+       * Carta Virtuale
+       * Conto Bancario (IBAN)
+       * Credenziale di Autenticazione Forte del Cliente (SCA)
+       * Ricevuta di Pagamento PagoPA
+       * Marca da Bollo Digitale
+       * Certificato di Pagamento Tasse e Imposte
+       * Mandato di Abbonamento
+       * Credenziale di Pagamento Ricorrente
+     - Credenziali relative a strumenti di pagamento, autorizzazioni finanziarie e prova di pagamenti.
+     - Autorizzazione ed esecuzione di pagamenti; prova di pagamento; gestione di pagamenti ricorrenti; conformità a requisiti di sicurezza o normativi.
 
-   * - *CULTURE AND LEISURE*
+   * - *CULTURA E TEMPO LIBERO*
      -
-       * Cultural Cards and Benefits
-       * Membership and Loyalty Programs
+       * Carte e Benefici Culturali
+       * Programmi di Membership e Fedeltà
      -
-       * Culture Card
-       * Annual Museum Passes
-       * Cinema Card
-       * Museum Card
-       * Association Membership Cards
-       * Library Card
+       * Carta della Cultura
+       * Abbonamenti Museali Annuali
+       * Carta Cinema
+       * Carta Musei
+       * Tessere di Associazioni
+       * Tessera Biblioteca
        * City Pass
-     - Credentials that attest membership, affiliation, or participation in cultural or recreational programs.
-     - Access to cultural or leisure services; application of discounts or benefits linked to memberships or programs.
+     - Credenziali che attestano l'appartenenza, l'affiliazione o la partecipazione a programmi culturali o ricreativi.
+     - Accesso a servizi culturali o ricreativi; applicazione di sconti o benefici legati a membership o programmi.
 
-   * - *EMPLOYMENT*
+   * - *LAVORO*
      -
-       * Employment Documents
-       * Employment Status
+       * Documenti di Lavoro
+       * Stato Lavorativo
      -
-       * Digital Employment Contract
+       * Contratto di Lavoro Digitale
        * Curriculum Vitae (CV)
-       * Residence Permit
-       * Employment Status Certificate
-       * INPS Contribution Record
-     - Credentials that attest employment relationships, professional status, and contribution records.
-     - Employment status verification; professional profile validation; verification of contribution records; eligibility for employment-related services or benefits.
+       * Permesso di Soggiorno
+       * Certificato di Stato Lavorativo
+       * Estratto Contributivo INPS
+     - Credenziali che attestano rapporti di lavoro, stato professionale e registri contributivi.
+     - Verifica dello stato lavorativo; validazione del profilo professionale; verifica dei registri contributivi; idoneità a servizi o benefici legati al lavoro.
 
-   * - *MOBILITY AND TRAVEL*
+   * - *MOBILITÀ E VIAGGI*
      -
-       * Licenses and Authorizations
-       * Vehicle Documents
-       * Subscriptions
-       * Travel Documents
-       * Travel Insurance
-       * Bookings
-       * Discounts and Benefits
+       * Licenze e Autorizzazioni
+       * Documenti Veicolari
+       * Abbonamenti
+       * Documenti di Viaggio
+       * Assicurazioni di Viaggio
+       * Prenotazioni
+       * Sconti e Benefici
      -
-       * Mobile Driving License
-       * Boating License
-       * Vehicle Registration Certificate
-       * Digital RCA Insurance
-       * Vehicle Inspection Certificate
-       * Green Card / International Insurance
-       * Public Transport Pass
-       * Telepass Subscription
-       * Passport
-       * Travel Tickets (air, train, etc.)
-       * Travel Insurance Policy
-       * Hotel Reservation
-       * Discount Cards
-       * Tourist Benefits
-     - Credentials that attest mobility rights, vehicle-related status, and travel-related entitlements.
-     - Driving and vehicle verification; right to travel or circulate; access to transport or accommodation services; verification of travel insurance or discounts.
+       * Patente di Guida Mobile
+       * Patente Nautica
+       * Certificato di Immatricolazione Veicolo
+       * Assicurazione RCA Digitale
+       * Certificato di Revisione Veicolo
+       * Carta Verde / Assicurazione Internazionale
+       * Abbonamento Trasporto Pubblico
+       * Abbonamento Telepass
+       * Passaporto
+       * Biglietti di Viaggio (aereo, treno, ecc.)
+       * Polizza Assicurativa di Viaggio
+       * Prenotazione Alberghiera
+       * Carte Sconto
+       * Benefici Turistici
+     - Credenziali che attestano diritti di mobilità, stato relativo ai veicoli e diritti legati ai viaggi.
+     - Verifica di guida e veicolo; diritto a viaggiare o circolare; accesso a servizi di trasporto o alloggio; verifica di assicurazioni o sconti di viaggio.
 
-   * - *BONUSES*
+   * - *BONUS*
      -
-       * Economic Benefits and Allowances
-       * Incentives and Vouchers
-       * Health and Wellbeing Bonuses
+       * Benefici Economici e Indennità
+       * Incentivi e Voucher
+       * Bonus Salute e Benessere
      -
-       * Family Allowance Credential
-       * Unemployment Benefit Credential
-       * Digital Voucher
-       * Purchase Incentive Credential
-       * Cashback Eligibility Credential
-       * Healthcare Bonus Credential
-       * Mental Health Support Voucher
-       * Sports and Physical Activity Bonus
-     - Credentials that attest entitlement to economic benefits, incentives, or vouchers.
-     - Eligibility verification; allocation and use of benefits; application of usage conditions or limits.
+       * Credenziale Assegno Familiare
+       * Credenziale Indennità di Disoccupazione
+       * Voucher Digitale
+       * Credenziale Incentivo all'Acquisto
+       * Credenziale Idoneità Cashback
+       * Credenziale Bonus Sanitario
+       * Voucher Supporto Salute Mentale
+       * Bonus Sport e Attività Fisica
+     - Credenziali che attestano il diritto a benefici economici, incentivi o voucher.
+     - Verifica di idoneità; allocazione e utilizzo di benefici; applicazione di condizioni o limiti di utilizzo.
 
-Ogni Credenziale **MUST** specificare il proprio **Dominio**, la **Classe** e la **Finalità** al fine di abilitare sia **Scenari Specifici per Credenziale (Credential-Specific Scenarios)** sia **Scenari Agnostici rispetto alla Credenziale (Credential-Agnostic Scenarios)**, in base ai requisiti del *Relying Party* e ai pattern di richiesta delle presentazioni.
+Ogni Credenziale **DEVE** specificare il proprio **Dominio**, la **Classe** e la **Finalità** al fine di abilitare sia **Scenari Specifici per Credenziale (Credential-Specific Scenarios)** sia **Scenari Agnostici rispetto alla Credenziale (Credential-Agnostic Scenarios)**, in base ai requisiti del *Relying Party* e ai pattern di richiesta delle presentazioni.
 
   1. **Scenari Credential-Specific** (Primari per Settori Governativi/Regolamentati): Le RP richiedono tipi di credenziali specifici per requisiti di conformità e audit, includendo ad esempio:
 
@@ -757,7 +757,7 @@ Ogni Credenziale **MUST** specificare il proprio **Dominio**, la **Classe** e la
 
 Questo approccio consente:
 
-  - **Autorizzazione basata su policy** mediante l’utilizzo di mappature tra **Dominio / Classe / Sottoclasse (Tipo di Credenziale) / Finalità**.
+  - **Autorizzazione basata su policy** mediante l'utilizzo di mappature tra **Dominio / Classe / Sottoclasse (Tipo di Credenziale) / Finalità**.
   - **Registrazione RP flessibile** supportando sia le esigenze di conformità governativa che i requisiti operativi aziendali.
 
 Struttura del Catalogo delle Credenziali Digitali
@@ -921,8 +921,8 @@ Un esempio non normativo di output di un bundle di localizzazione è fornito di 
 .. code-block:: json
 
   {
-    "mDL.name": "Driving License",
-    "mDL.issuer1.name": "Example of Credential Issuer",
+    "mDL.name": "Patente di Guida",
+    "mDL.issuer1.name": "Esempio di Emittente di Credenziali",
     "...": "..."
   }
 
@@ -964,8 +964,8 @@ La tassonomia mantiene una struttura gerarchica a quattro livelli:
 
 - **Dominio**: Classificazione di livello superiore che rappresenta aree funzionali ampie (ad esempio, IDENTITY, HEALTH, FINANCIAL) 
 - **Classe(Famiglia di Credenziali)**: Insieme di credenziali che condividono funzione, struttura o significato giuridico simili (es. Documenti di Identità, Certificati di Stato Civile, Abilitazioni Professionali)
-- **Sottoclasse (Tipo di credenziale)**: Definizione specifica di una credenziale rilasciata da un’autorità/fonte autentica (es. Passaporto, Certificato di Nascita, Patente di Guida).
-- **Finalità di verifica**: Obiettivi di verifica che una credenziale può soddisfare (ad es. Verifica dell’identità, Verifica dell’età, Idoneità all’accesso a servizi specifici).
+- **Sottoclasse (Tipo di credenziale)**: Definizione specifica di una credenziale rilasciata da un'autorità/fonte autentica (es. Passaporto, Certificato di Nascita, Patente di Guida).
+- **Finalità di verifica**: Obiettivi di verifica che una credenziale può soddisfare (ad es. Verifica dell'identità, Verifica dell'età, Idoneità all'accesso a servizi specifici).
 
 **Supporto alla Localizzazione:**
 
@@ -999,11 +999,11 @@ Un esempio non normativo di output di un bundle di localizzazione è fornito di 
 
 
   {
-    "domain.identity.name": "IDENTITY",
-    "domain.class": "Identification Documents",
-    "domain.subclass": "Passport",
-    "domain.identity.description": "Credentials that establish or confirm a person’s legal identity and personal status",
-    "purpose.person_identification.name": "Identity verification",
+    "domain.identity.name": "IDENTITÀ",
+    "domain.class": "Documenti di Identificazione",
+    "domain.subclass": "Passaporto",
+    "domain.identity.description": "Credenziali che stabiliscono o confermano l'identità legale di una persona e lo stato personale",
+    "purpose.person_identification.name": "Verifica dell'identità",
     "...": "..."
   }
 
@@ -1068,7 +1068,7 @@ Il Registro degli Schema è accessibile tramite l'endpoint di scoperta ``.well-k
    * - **schema_uri#integrity**
      - RICHIESTO. Digest crittografico del documento dello schema per la verifica dell'integrità. Formato: ``{digest_method}-{digest_value}`` (es., ``sha256-c8b708728e4c5756e35c03aeac257ca878d1f717d7b61f621be4d36dbd9b9c16``).
    * - **description**
-     - OPZIONALE. Una descrizione leggibile dall'uomo dello schema, che può essere localizzata (es., "Schema tecnico per la mobile Driving License in formato mdoc.").
+     - OPZIONALE. Una descrizione leggibile dall'uomo dello schema, che può essere localizzata (es., "Schema tecnico per la Patente di Guida mobile in formato mdoc.").
 
 **Esempio del Registro degli Schema:**
 
