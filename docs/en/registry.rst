@@ -563,7 +563,7 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
 
 
 .. _it-wallet-dc-domains:
-.. list-table:: Digital Credential Domains, classes, credential types, descriptions and purposes
+.. list-table:: Digital Credential Domains, Classes, Credential Types, Descriptions and Purposes
    :class: longtable
    :header-rows: 1
    :widths: 20 20 20 20 20  
