@@ -555,7 +555,7 @@ Credential Types enable precise targeting for compliance-driven or regulation-ma
 **Purpose (Verification Intent)**
 
 A **Purpose (Verification Intent)** describes *why* a credential may be requested by a Relying Party (e.g., Identity Verification, Age Verification, Eligibility for specific services).  
-Purposes MUST NOT represent categories of credentials. Purposes SHALL describe **verification outcomes**, not credential categories
+Purposes MUST NOT represent categories of credentials. Purposes SHALL describe **verification outcomes**, not credential categories.
 Each Credential Type MUST declare its Domain, Class, and supported Purposes. 
 
 The following table provides non-exhaustive examples illustrating Domain, Class, Credential Type, and Purpose relationships.
