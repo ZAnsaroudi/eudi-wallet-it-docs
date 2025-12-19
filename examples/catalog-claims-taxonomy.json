@@ -21,12 +21,8 @@
                     "name_l10n_id": "domain.identity.class.identification_documents.name",
                     "credential_types": [
                         {
-                            "id": "electronic_identity_card_cie",
-                            "name_l10n_id": "domain.identity.credential_type.electronic_identity_card_cie.name"
-                        },
-                        {
-                            "id": "passport",
-                            "name_l10n_id": "domain.identity.credential_type.passport.name"
+                            "id": "digital_travel_credential",
+                            "name_l10n_id": "domain.identity.credential_type.digital_travel_credential.name"
                         },
                         {
                             "id": "driving_license_italy",
@@ -615,8 +611,8 @@
                     "name_l10n_id": "domain.mobility_and_travel.class.travel_documents.name",
                     "credential_types": [
                         {
-                            "id": "passport",
-                            "name_l10n_id": "domain.mobility_and_travel.credential_type.passport.name"
+                            "id": "digital_travel_credential",
+                            "name_l10n_id": "domain.mobility_and_travel.credential_type.digital_travel_credential.name"
                         },
                         {
                             "id": "travel_tickets",
