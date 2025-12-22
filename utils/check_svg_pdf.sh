@@ -50,6 +50,8 @@ while IFS=$'\t' read -r fileline ref; do
   rst="$(basename "$file")"
   name="$(basename "$ref")"
 
+  # Clear any previous value of full and search for an exact match by basename
+  full=""
   found=0
   for lang in it en; do
     for kind in svg pdf; do
@@ -66,11 +68,11 @@ while IFS=$'\t' read -r fileline ref; do
     rel="${file#"$DOCS"/}"
     lang="${rel%%/*}"
     ext="${name##*.}"
-    full="$DOCS/$lang/images/$ext/$name"
-    if [ -e "$full" ]; then
+    not_found_path="$DOCS/$lang/images/$ext/$name"
+    if [ -e "$not_found_path" ]; then
       ((found_count++))
     else
-      printf 'NOT-FOUND: %s:%s -> %s\n' "$rst" "$line" "$full"
+      printf 'NOT-FOUND: %s:%s -> %s\n' "$rst" "$line" "$not_found_path"
       ((not_found_count++))
     fi
   else
