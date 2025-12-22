@@ -48,7 +48,6 @@ while IFS=$'\t' read -r fileline ref; do
   fi
   
   rst="$(basename "$file")"
-  name="$(basename "$ref")"
   file_dir="$(dirname "$file")"
 
   # Resolve the exact path specified in the RST file
