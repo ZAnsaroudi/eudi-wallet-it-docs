@@ -157,7 +157,7 @@ Ogni mappa del Journey mostra il processo completo dalla pianificazione iniziale
 Panoramica dell'Ecosistema
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: ./images/svg/onboarding-journey-maps/overview-onboarding-journey.svg
+.. figure:: ./images/svg/overview-onboarding-journey.svg
     :width: 100%
     :alt: Panoramica dell'onboarding dell'ecosistema IT-Wallet
     :name: onboarding-overview

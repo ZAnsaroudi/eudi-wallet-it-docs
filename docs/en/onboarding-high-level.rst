@@ -157,7 +157,7 @@ Each journey map shows the complete process from initial planning to final regis
 Ecosystem Overview
 ^^^^^^^^^^^^^^^^^^
 
-.. figure:: ./images/svg/onboarding-journey-maps/overview-onboarding-journey.svg
+.. figure:: ./images/svg/overview-onboarding-journey.svg
     :width: 100%
     :alt: IT-Wallet ecosystem onboarding overview
     :name: onboarding-overview
