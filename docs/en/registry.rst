@@ -127,7 +127,7 @@ The Claims Registry MUST support the complete ecosystem lifecycle:
 Claims Registry Structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Claims Registry maintains language-neutral, technical definitions for semantic consistency across the ecosystem. User-facing localizations for claim names and descriptions are provided through the Digital Credentials Catalog localization bundles, enabling efficient multilingual support without compromising the registry's structural integrity. 
+The Claims Registry maintains language-neutral, technical definitions for semantic consistency across the ecosystem. User-facing localisations for claim names and descriptions are provided through the Digital Credentials Catalog localization bundles, enabling efficient multilingual support without compromising the registry's structural integrity. 
 
 A non-normative example of Claims Registry structure is given below:
 
@@ -309,9 +309,6 @@ The Authentic Source Registry MUST contain the following parameters for each reg
    * - **data_capabilities[].data_origin**
      - string
      - OPTIONAL. Human-readable name of the specific data origin or department providing the data.
-   * - **data_capabilities[].domains**
-     - String Array
-     - REQUIRED. Taxonomy domain (e.g., ``["AUTHORIZATION"]``, ``["FINANCIAL"]``).
    * - **data_capabilities[].intended_purposes**
      - String Array
      - REQUIRED. Business purposes served (e.g., ``["driving-authorization", "identity-verification"]``).
@@ -530,9 +527,9 @@ The hierarchy is defined as follows:
 A **Domain** represents a high-level thematic area grouping Credential families that relate to the same broad context (e.g., Identity, Health, Education, Mobility).  
 Domains provide a top-level organizational layer.
 
-**Class (Credential Family)**
+**Credential Class**
 
-A **Class** represents a family of Credentials sharing similar nature, function, or structure (e.g., Identification Documents, Civil Status Certificates).  
+A **Credential Class** represents a family of Credentials sharing similar nature, function, or structure (e.g., Identification Documents, Civil Status Certificates).  
 
 Each Class SHOULD define:
 
@@ -541,9 +538,9 @@ Each Class SHOULD define:
 
 Classes enable Relying Parties and Wallet Solutions to request or match Credentials based on their type category.
 
-**Credential Type (Subclass)**
+**Credential Type**
 
-A **Credential Type (Subclass)** represents a specific Credential within a Class (e.g. Digital Travel Credential, Birth Certificate, Mobile Driving License).  
+A **Credential Type** represents a specific Credential within a Class (e.g. Digital Travel Credential, Birth Certificate, Mobile Driving License).  
 Each Credential Type SHALL include:
 
 - a unique identifier,  
@@ -558,28 +555,27 @@ A **Purpose (Verification Intent)** describes *why* a credential may be requeste
 Purposes SHALL describe **verification outcomes**.
 Each Credential Type MUST declare its Domain, Class, and supported Purposes. 
 
-The following table provides non-exhaustive examples illustrating Domain, Class, Credential Type, and Purpose relationships.
+The following tables provide non-exhaustive examples illustrating the relationships between Domains, Credential Classes, and Credential Types, followed by their mapping to verification Purposes.
 Additional Domains, Classes, specific Credentials, and verification Purposes **MAY** be added over time as the IT-Wallet ecosystem evolves.
 
-
-.. _it-wallet-dc-domains:
-.. list-table:: Digital Credential Domains, Classes, Credential Types, Descriptions and Purposes
+.. _it-wallet-dc-taxonomy:
+.. list-table:: Digital Credential Taxonomy: Hierarchy and Classification
    :class: longtable
    :header-rows: 1
-   :widths: 20 20 20 20 20  
+   :widths: 15 25 30 30  
 
    * - **Domain**
-     - **Class (Credential Family)**
-     - **Subclass (Credential Type)**
      - **Description**
-     - **Purpose**
+     - **Credential Class**
+     - **Credential Type**
 
    * - *IDENTITY*
-     -
+     - Credentials that establish or confirm a person's legal identity and personal, civil or legal status.
+     - 
        * Identification Documents
        * Civil Registry and Personal Status Certificates
        * Economic and Legal Status
-     -
+     - 
        * Digital Travel Credential
        * Mobile Driving License (Italy only)
        * Tax Code / Health Insurance Card
@@ -593,15 +589,14 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Residence Permit
        * Certificate of Pending Charges
        * Criminal Record Certificate
-     - Credentials that establish or confirm a person's legal identity and personal, civil or legal status.
-     - Identity and age verification; civil status verification; access to services for minors; eligibility for services or benefits; right of residence.
 
    * - *HOME AND FAMILY*
-     -
+     - Credentials that attest household composition, residence, and housing-related legal or fiscal relationships.
+     - 
        * Property and Cadastral Documents
        * Family Documents
        * Local Tax Documents
-     -
+     - 
        * Deed of Sale
        * Cadastral Survey
        * Cadastral Floor Plan
@@ -611,32 +606,30 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Family Status Certificate
        * IMU (Property Tax)
        * TARI (Waste Tax)
-     - Credentials that attest household composition, residence, and housing-related legal or fiscal relationships.
-     - Residence and household verification; eligibility for housing, social or education services; compliance with local tax obligations.
 
    * - *EDUCATION*
-     -
+     - Credentials that attest educational achievements, academic qualifications, and professional training.
+     - 
        * Educational Qualifications
        * Professional Certifications
-     -
+     - 
        * Lower Secondary School Diploma
        * Upper Secondary School Diploma
        * Bachelor's Degree
        * Master's Degree
        * University Master
        * PhD
-       * Professional Licenses (e.g. architect, lawyer, psychologist)
-       * Vocational Training Certificates (e.g. healthcare assistant)
+       * Professional Licenses (e.g. architect, lawyer)
+       * Vocational Training Certificates
        * Language Certifications (e.g. IELTS)
        * Academic Qualifications (e.g. Europass)
-     - Credentials that attest educational achievements, academic qualifications, and professional training.
-     - Qualification and degree verification; skills and language assessment; eligibility for education pathways, competitions, licenses, or study and work opportunities.
 
    * - *HEALTH*
-     -
+     - Credentials related to healthcare coverage, medical status, and health-related certifications.
+     - 
        * Certifications and Eligibility
        * Medical Records
-     -
+     - 
        * Health Insurance Card (TEAM)
        * European Health Card (CED)
        * Disability Certificate
@@ -645,16 +638,15 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Work Fitness Certificate
        * Medical Prescriptions
        * Digital Medical Report
-     - Credentials related to healthcare coverage, medical status, and health-related certifications.
-     - Access to healthcare services; identification within health systems; verification of vaccination or fitness status; access to and sharing of medical records.
 
    * - *FINANCIAL*
-     -
+     - Credentials related to payment instruments, financial authorizations, and proof of payments.
+     - 
        * Payment Instruments
        * Payment Credentials and Authorisations
        * Public Payments and Fees
        * Recurring Payments and Subscriptions
-     -
+     - 
        * Digital Payment Card (debit / credit / prepaid)
        * Virtual Card
        * Bank Account (IBAN)
@@ -664,14 +656,13 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Tax and Fee Payment Certificate
        * Subscription Mandate
        * Recurring Payment Credential
-     - Credentials related to payment instruments, financial authorizations, and proof of payments.
-     - Payment authorization and execution; proof of payment; management of recurring payments; compliance with security or regulatory requirements.
 
    * - *CULTURE AND LEISURE*
-     -
+     - Credentials that attest membership, affiliation, or participation in cultural or recreational programs.
+     - 
        * Cultural Cards and Benefits
        * Membership and Loyalty Programs
-     -
+     - 
        * Culture Card
        * Annual Museum Passes
        * Cinema Card
@@ -679,24 +670,22 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Association Membership Cards
        * Library Card
        * City Pass
-     - Credentials that attest membership, affiliation, or participation in cultural or recreational programs.
-     - Access to cultural or leisure services; application of discounts or benefits linked to memberships or programs.
 
    * - *EMPLOYMENT*
-     -
+     - Credentials that attest employment relationships, professional status, and contribution records.
+     - 
        * Employment Documents
        * Employment Status
-     -
+     - 
        * Digital Employment Contract
        * Curriculum Vitae (CV)
        * Residence Permit
        * Employment Status Certificate
        * INPS Contribution Record
-     - Credentials that attest employment relationships, professional status, and contribution records.
-     - Employment status verification; professional profile validation; verification of contribution records; eligibility for employment-related services or benefits.
 
    * - *MOBILITY AND TRAVEL*
-     -
+     - Credentials that attest mobility rights, vehicle-related status, and travel-related entitlements.
+     - 
        * Licenses and Authorizations
        * Vehicle Documents
        * Subscriptions
@@ -704,7 +693,7 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Travel Insurance
        * Bookings
        * Discounts and Benefits
-     -
+     - 
        * Mobile Driving License
        * Boating License
        * Vehicle Registration Certificate
@@ -719,15 +708,14 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Hotel Reservation
        * Discount Cards
        * Tourist Benefits
-     - Credentials that attest mobility rights, vehicle-related status, and travel-related entitlements.
-     - Driving and vehicle verification; right to travel or circulate; access to transport or accommodation services; verification of travel insurance or discounts.
 
    * - *BONUSES*
-     -
+     - Credentials that attest entitlement to economic benefits, incentives, or vouchers.
+     - 
        * Economic Benefits and Allowances
        * Incentives and Vouchers
        * Health and Wellbeing Bonuses
-     -
+     - 
        * Family Allowance Credential
        * Unemployment Benefit Credential
        * Digital Voucher
@@ -736,10 +724,138 @@ Additional Domains, Classes, specific Credentials, and verification Purposes **M
        * Healthcare Bonus Credential
        * Mental Health Support Voucher
        * Sports and Physical Activity Bonus
-     - Credentials that attest entitlement to economic benefits, incentives, or vouchers.
-     - Eligibility verification; allocation and use of benefits; application of usage conditions or limits.
 
-Each Credential MUST specify domains, classes and purposes to enable both **Credential-Specific Scenarios** and **Credential-Agnostic Scenarios** according to Relying Party's requirements and presentation request patterns:
+.. _it-wallet-dc-mapping:
+.. list-table:: Table 2: Mapping between Credential Classes and Purposes
+   :class: longtable
+   :header-rows: 1
+   :widths: 40 60
+
+   * - **Credential Class**
+     - **Supported Purposes**
+
+   * - Identification Documents
+     - 
+       * Identity verification
+       * Age verification
+       * Person identification
+   * - Civil Registry and Personal Status Certificates
+     - 
+       * Civil status verification
+       * Right of residence
+       * Household composition verification
+   * - Economic and Legal Status
+     - 
+       * Eligibility for services or benefits
+       * Legal status verification
+       * Criminal record check
+   * - Property and Cadastral Documents
+     - 
+       * Residence and household verification
+       * Property ownership verification
+       * Real estate compliance
+   * - Family Documents
+     - 
+       * Household composition verification
+       * Eligibility for family-based social services
+   * - Local Tax Documents
+     - 
+       * Compliance with local tax obligations
+       * Verification of property tax status
+   * - Educational Qualifications
+     - 
+       * Qualification and degree verification
+       * Eligibility for education pathways
+   * - Professional Certifications
+     - 
+       * Professional license verification
+       * Skills assessment for work
+   * - Certifications and Eligibility
+     - 
+       * Verification of vaccination status
+       * Verification of fitness status
+       * Access to health-restricted areas
+   * - Medical Records
+     - 
+       * Access to healthcare services
+       * Sharing of medical records
+       * Medical history validation
+   * - Payment Instruments
+     - 
+       * Payment authorization
+       * Payment execution
+       * Proof of payment
+   * - Payment Credentials and Authorisations
+     - 
+       * Management of financial authorizations
+       * Strong Customer Authentication (SCA)
+   * - Public Payments and Fees
+     - 
+       * Proof of tax payment
+       * Proof of fee payment
+       * Digital stamp duty validation
+   * - Recurring Payments and Subscriptions
+     - 
+       * Management of recurring payments
+       * Subscription mandate verification
+   * - Cultural Cards and Benefits
+     - 
+       * Access to cultural services
+       * Access to leisure services
+       * Application of member discounts
+   * - Membership and Loyalty Programs
+     - 
+       * Verification of affiliation
+       * Verification of participation
+       * Use of loyalty benefits
+   * - Employment Documents
+     - 
+       * Employment status verification
+       * Professional profile validation
+   * - Employment Status
+     - 
+       * Verification of contribution records
+       * Eligibility for employment-related benefits
+   * - Licenses and Authorizations
+     - 
+       * Driving rights verification
+       * Navigation rights verification
+       * Law enforcement controls
+   * - Vehicle Documents
+     - 
+       * Vehicle registration verification
+       * Vehicle inspection verification
+       * Insurance status check
+   * - Subscriptions
+     - 
+       * Access to transport services
+       * Public transport pass verification
+   * - Travel Documents
+     - 
+       * Right to travel or circulate
+       * Cross-border mobility identity check
+   * - Travel Insurance and Bookings
+     - 
+       * Verification of travel insurance coverage
+       * Accommodation reservation check
+       * Transport reservation check
+   * - Economic Benefits and Allowances
+     - 
+       * Eligibility verification for family benefits
+       * Eligibility verification for unemployment benefits
+       * Allocation of economic support
+   * - Incentives and Vouchers
+     - 
+       * Use of digital vouchers
+       * Use of purchase incentives
+       * Cashback eligibility verification
+   * - Health and Wellbeing Bonuses
+     - 
+       * Access to healthcare bonuses
+       * Use of mental health vouchers
+       * Use of sports vouchers
+
+Each Credential MUST specify domains, classes and purposes to enable both **Credential-Specific Scenarios** and **Credential-Agnostic Scenarios** according to Relying Party's requirements and presentation request patterns, as defined in the mapping tables above.
 
   1. **Credential-Specific Scenarios** (Primary for Government/Regulated Sectors): RPs request specific credential types for compliance and audit requirements, including for example:
 
@@ -756,7 +872,7 @@ Each Credential MUST specify domains, classes and purposes to enable both **Cred
 
 This approach allows:
 
-  - **Policy-based authorization** by using Domain/Class/Subclass/Credential Type/Purpose mappings.
+  - **Policy-based authorization** by using **Domain / Class / Credential Type / Purpose** mappings.
   - **Flexible RP registration** supporting both government compliance needs and business operational requirements.
 
 Digital Credentials Catalog Structure
@@ -856,13 +972,18 @@ Each element of the ``credentials`` array contains at least the following inform
       * **user_auth_required**: REQUIRED. Flag indicating if User authentication is required during the issuance of the Digital Credential.
       * **min_loa**: REQUIRED. Minimum Level of Assurance required for Digital Credential authentication. It MUST include the Level of Assurance of the User authentication and the Wallet Instance requesting the Digital Credential.
       * **supported_eid_schemes**: REQUIRED if ``user_auth_required`` is ``true``. Supported digital identity authentication schemes.
+  * - **domains**
+    - REQUIRED. Array of domains to which Digital Credential belongs, such as:
+
+      * **id**: Unique identifier for the purpose (e.g., "IDENTITY", "MOBILITY_TRAVEL").
+  * - **classes**
+    - REQUIRED. Array of classes to which Digital Credential belongs, such as:
+
+      * **id**: Unique identifier for the class (e.g., "IDENTIFICATION_DOCUMENTS", "LICENSES_AUTHORIZATIONS").
   * - **purposes**
     - REQUIRED. Array of usage purposes for which the Digital Credential can be used, defining specific usage contexts and required claims for each purpose, such as:
 
-      * **id**: Unique identifier for the purpose (e.g., "driving-authorization", "person-identification").
-      * **description**: Human-readable purpose description with a suffix ``_l10n_id`` for content localisation.
-      * **claims_required**: Array of claim identifiers that are required when using the Credential for this purpose.
-      * **claims_recommended**: Array of claim identifiers that are recommended but not mandatory for this purpose.
+      * **id**: Unique identifier for the purpose (e.g., "IDENTITY_VERIFICATION", "AGE_VERIFICATION", "DRIVING_RIGHTS").
   * - **issuers**
     - REQUIRED. Array of relevant information about authorized Credential Issuers, including administrative and technical data such as Organization name, a reference to the API specification document and supported issuance mechanisms (for example the deferred flow support).
   * - **authentic_sources**
@@ -962,10 +1083,9 @@ The Taxonomy provides, in a single resource, the hierarchical classification sys
 The taxonomy maintains a four level hierarchical structure:
 
 - **Domains**: Top-level classification representing broad functional areas (e.g., IDENTITY, HEALTH, FINANCIAL)
-- **Class(Credential Family)**: Family of Credentials sharing similar function, structure, or legal meaning (e.g., Identification Documents, Civil Status Certificates, Professional Licenses)
-- **Credential Type (Subclass)**: Specific Credential definition issued by an authority (e.g., Digital Travel Credential, Birth Certificate, Mobile Driving License).
+- **Class (Credential Family)**: Family of Credentials sharing similar function, structure, or legal meaning (e.g., Identification Documents, Civil Status Certificates, Professional Licenses)
+- **Credential Type**: Specific Credential definition issued by an authority (e.g., Digital Travel Credential, Birth Certificate, Mobile Driving License).
 - **Purpose (Verification Intent)**: Verification objectives that a Credential can satisfy (e.g., Identity Verification, Age Verification, Eligibility for specific services).
-
 
 **Localization Support:**
 
@@ -999,10 +1119,9 @@ A non-normative example of a localisation bundle output is given below:
 
   {
     "domain.identity.name": "IDENTITY",
-    "domain.class": "Identification Documents",
-    "domain.subclass": "Mobile Driving License",
     "domain.identity.description": "Credentials that establish or confirm a person's legal identity and personal status",
-    "purpose.person_identification.name": "Identity verification",
+    "class.id_docs.name": "Identification Documents",
+    "purpose.id_ver.name": "Identity verification",
     "...": "..."
   }
 
@@ -1100,11 +1219,11 @@ Catalog Browsing
 
 This *Catalog Browsing* journey supports Users (both human users via a **Wallet Instance** and automated systems like **Relying Parties** or web portals) in discovering and selecting available Digital Credentials.
 
-1.  **Accessing the Discovery Endpoint**: The entity (e.g., a Wallet Provider or informational portal) accesses the `Registry Discovery Endpoint` (``.well-known/it-wallet-registry``) to obtain the URI of the **Digital Credentials Catalog**.
+1.  **Accessing the Discovery Endpoint**: The entity (e.g., a Wallet Provider or informational portal) accesses the `Registry Discovery Endpoint` (``.well-known/it-wallet-registry``) to obtain the URI of the **Digital Credentials Catalog** ad of the **Taxonomy**.
 
 2.  **Navigation and Selection**:
 
-  * **Credential Discovery**: The entity browses the list of Credentials (``credentials`` field) to identify relevant Credential types (e.g., ``pid``, ``mDL``).
+  * **Credential Discovery**: The entity browses the list of Credentials (``credentials`` field) to identify relevant Credential types (e.g., ``pid``, ``mDL``) and, if needed, uses the information on the **Taxonomy** to navigate their hierarchy and to provide different localisations.
   * **Issuer Metadata**: The entity extracts the **Issuer Identifier** (`entity_id` within the `issuers` field) associated with the desired Credential.
   * **Detail Consultation**: To obtain complete information oand specific technical requirements, the entity accesses the **Entity Configuration** (Issuer Metadata) using the retrieved identifier.
 
@@ -1136,8 +1255,8 @@ This journey describes how a **Wallet Instance** and a **Relying Party (RP)** in
 
 1.  **Wallet Authorization and Selection**:
 
-  * The Wallet receives a Presentation Request from the RP, verifies the validity of the request comparing the requested *claims* with the *Authorization Policies* related to the RP (via the **Taxonomy** definitions).
-  * The Wallet consults the **Digital Credentials Catalog** to verify the *Domains* and *Purposes* associated with the Credential types it holds, evaluating which Credentials are suitable for the request.
+  * The Wallet receives a Presentation Request from the RP, verifies the validity of the request comparing the requested *claims* with the *Authorization Policies* related to the RP .
+  * The Wallet consults the **Digital Credentials Catalog** and the **Taxonomy** to verify the *Domains*, the *Classes* and *Purposes* associated with the Credential types it holds, evaluating which Credentials are suitable for the request.
   * The Wallet verifies if the required attributes (claims) are available and authorized for disclosure based on the request policy (**Credential-Specific** or **Credential-Agnostic** scenarios).
   * The User authorizes the release of the selected, selectively disclosed attributes. The Wallet then packages and presents the Digital Credential to the RP.
 
