@@ -71,12 +71,90 @@ Technical implementation procedures for Authentic Source registration are provid
 Federation Onboarding Process
 -------------------------------
 
-Federation onboarding establishes the trust relationships and compliance frameworks that enable operational entities to participate in secure Credential lifecycle activities.
-Operational entities MUST complete onboarding that includes administrative eligibility verification, technical infrastructure validation, and trust establishment. The onboarding process creates cryptographic trust relationships through certificate issuance, trust chain evaluation, and compliance attestation. These mechanisms enable secure interactions among federation participants and provide the foundation for distributed trust validation across the ecosystem.
+Federation onboarding establishes the trust relationships and compliance checks that enable operational entities (PID Providers, Attestation Providers, Relying Parties, and Wallet Providers) to participate in the Credential lifecycle.
+Operational entities MUST complete onboarding that includes administrative eligibility verification and technical validation. For Wallet Providers, this includes conformity assessment of the Wallet Solution and subsequent Trusted List notification flows.
 
-Successfully onboarded entities are included in the Federation Registry, which maintains the authoritative list of trusted federation participants. This registry enables operational trust validation during Credential lifecycle activities.
+The registration process, managed by National Registrars for PID Providers, Attestation Providers, and Relying Parties, typically includes:
 
-Relying Parties MUST verify Digital Credentials with cryptographic assurance, Wallet Providers MUST provide trusted digital wallet services to citizens, and Credential Issuers MUST issue Digital Credentials using authoritative data sources. All operations MUST occur within established trust relationships that assure security and auditability.
+1. **Entity Registration**: Collection of core data (identification, entitlements, service supply points, and cryptographic public keys and certificates) needed to authorize entities and describe their capabilities.
+2. **Access Certificate Issuance**: Issuance of access certificates that authenticate entities, reference the registry for entitlement verification, and support certificate transparency.
+3. **Registration Certificate Issuance**: Issuance of registration certificates that describe registration status and entitlements for Relying Parties and Credential Issuers.
+4. **Registry Publication**: Publication of all registered entities in the registry, with an online API (see :ref:`trust-infrastructure:Trust Infrastructure and Registry Integration`) that Wallet Units use to verify PID Provider registration, Attestation Provider registration and types, and Relying Party registration and requested attributes.
+
+Responsibilities Matrix
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The following table summarizes the registration requirement and the authority responsible for compiling the Trusted List (TL) for each entity type:
+
+.. list-table:: Federation Onboarding Responsibilities Matrix
+   :class: longtable
+   :widths: 25 25 25 25
+   :header-rows: 1
+
+   * - Entity Type
+     - Registration Process
+     - Trusted List Compilation (EC / MS TLP)
+     - Member State TLP Role
+   * - **PID Provider**
+     - **Register with National Registrar**
+     - **European Commission** (EU-level TL for PID Providers)
+     - None (no national TL for PID Providers)
+   * - **Attestation Provider**
+     - **Register with National Registrar**
+     - **Member State / MS TLP** (national QTSP TL for QEAA Providers; national TL for non-qualified EAA Providers)
+     - Compiles, signs, and publishes national Trusted Lists for QEAA and non-qualified EAA Providers according to the national trust services framework.
+   * - **Relying Party (RP)**
+     - **Register with National Registrar**
+     - N/A (Uses Access Certificates/Registry)
+     - None (not listed in TLs)
+   * - **Wallet Provider**
+     - *Notification only* (to EC)
+     - **European Commission** (EU-level TL for Wallet Providers)
+     - Not applicable in pilot (notification from Member State to EC only)
+   * - **Access CA**
+     - *Notification only* (to EC)
+     - **European Commission** (EU-level TL for Access CAs)
+     - Not applicable in pilot (notification from Member State to EC only)
+   * - **Reg. Cert. Provider**
+     - *Notification only* (to EC)
+     - **European Commission** (EU-level TL for Reg. Cert. Providers)
+     - Not applicable in pilot (notification from Member State to EC only)
+
+.. note::
+  **PID Providers**, **PuB-EAA Providers**, and **Wallet Providers** are registered through the IT-Wallet onboarding system and subsequently notified to the European Commission for Trusted List inclusion. Wallet Providers do not receive access certificates or registration certificates from National Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) according to the national conformity assessment framework.
+
+Member State Notification to European Commission
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Member State SHALL notify all PID Providers, PuB-EAA Providers, Wallet Providers, Access Certificate Authorities, and Providers of Registration Certificates to the European Commission. The information notified varies by entity type:
+
+- **PID Providers**: Identification data, PID Provider public keys/certificates, Access Certificate Authority public keys/certificates for PID Providers, Service Supply Point (URL)
+- **Wallet Providers**: Identification data, Wallet Provider public keys/certificates
+- **PuB-EAA Providers**: Identification data (including conformity assessment report), Service Supply Point (URL)
+- **Access Certificate Authorities and Providers of Registration Certificates**: Identification data, public keys/certificates
+
+The European Commission compiles, signs/seals, and publishes Trusted Lists for Wallet Providers, PID Providers, Access CAs, and Registration Certificate Providers.
+
+Trusted List Publication for Attestation Providers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For **Attestation Providers** (both QEAA and non-qualified EAA Providers), the registration process triggers Trusted List publication:
+
+**QEAA Providers**:
+- After successful registration with the National Registrar, QEAA Providers are included in **Member State QTSP Trusted Lists** published by the Member State per **`EIDAS`_ Article 22**
+- These QTSP Trusted Lists are **notified to the European Commission** per `EIDAS`_ Article 22(3) so that QTSP TL locations and signing keys can be exposed via the **List of Trusted Lists (LoTL)**
+
+**Non-qualified EAA Providers**:
+- After successful registration with the National Registrar, non-qualified EAA Providers are included in **national EAA Provider Trusted Lists** compiled and published by Member State Trusted List Providers (MS TLP)
+- These national Trusted Lists are published using `ETSI TS 119 602`_ Annex H profile (Attestation Provider Trusted Lists), in either JSON format with compact JAdES Baseline B signature OR XML format with XAdES Baseline B signature
+- The MS TLP submits the published non-qualified EAA Provider Trusted List URL to the European Commission for inclusion in the LoTL
+
+The Member State Trusted List Provider (MS TLP):
+- Receives notification of successful registration from the Registrar (or accesses Registry data)
+- Extracts cryptographic public keys, certificates, and relevant data from the Registry
+- Compiles Trusted Lists according to `ETSI TS 119 612`_ or `ETSI TS 119 602`_ specifications
+- Signs/seals and publishes Trusted Lists at publicly accessible URLs
+- Submits the Trusted List URL to the European Commission
 
 Entity Lifecycle Management
 ---------------------------

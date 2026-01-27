@@ -71,12 +71,90 @@ Le procedure di implementazione tecnica per la registrazione della Fonte Autenti
 Processo di Onboarding della Federazione
 -----------------------------------------
 
-L'onboarding della federazione stabilisce le relazioni di trust crittografiche e i framework di conformità che consentono alle entità operative di partecipare ad attività sicure del ciclo di vita delle Credenziali.
-Le entità operative DEVONO completare l'onboarding che include la verifica dell'eleggibilità amministrativa, la validazione dell'infrastruttura tecnica e l'istituzione del trust crittografico. Il processo di onboarding crea relazioni di trust crittografiche attraverso l'emissione di certificati, la configurazione della catena di trust e l'attestazione di conformità. Questi meccanismi abilitano interazioni sicure tra i partecipanti della federazione e forniscono la base per la validazione del trust distribuito attraverso l'ecosistema.
+L'onboarding della federazione stabilisce le relazioni di trust crittografiche e le verifiche di conformità che consentono alle entità operative (PID Provider, Attestation Provider, Relying Party e Fornitori di Wallet) di partecipare ad attività sicure del ciclo di vita delle Credenziali.
+Le entità operative DEVONO completare l'onboarding che include la verifica dell'eleggibilità amministrativa e la validazione tecnica. Per i Fornitori di Wallet, questo include la valutazione di conformità della Soluzione Wallet e i successivi flussi di notifica nelle Trusted Lists.
 
-Le entità registrate con successo sono incluse nel Registro di Federazione, che mantiene l'elenco autorevole dei partecipanti della federazione fidati. Questo registro abilita la validazione del trust operativo durante le attività del ciclo di vita delle Credenziali.
+Il processo di registrazione/onboarding, gestito dai Registrar degli Stati Membri per PID Provider, Attestation Provider e Relying Party, tipicamente include:
 
-Le Relying Party DEVONO verificare gli Attestati Elettronici con garanzia crittografica, i Fornitori di Wallet DEVONO fornire servizi di portafoglio digitale fidati ai cittadini, e i Credential Issuer DEVONO emettere Attestati Elettronici utilizzando fonti di dati autorevoli. Tutte le operazioni DEVONO avvenire all'interno di relazioni di trust stabilite che assicurano sicurezza e auditabilità.
+1. **Registrazione dell'Entità**: Raccolta dei dati principali (identificazione, diritti, punti di fornitura del servizio e chiavi pubbliche crittografiche e certificati) necessari per autorizzare le entità e descriverne le capacità.
+2. **Emissione del Certificato di Accesso**: Emissione di certificati di accesso che autenticano le entità, fanno riferimento al registro per la verifica dei diritti e supportano la Certificate Transparency.
+3. **Emissione del Certificato di Registrazione**: Emissione di certificati di registrazione che descrivono lo stato di registrazione e i diritti per Relying Party e Credential Issuer.
+4. **Pubblicazione del Registro**: Pubblicazione di tutte le entità registrate nel registro, con un'API online (vedi :ref:`trust-infrastructure:Integrazione dell'Infrastruttura di Trust e del Registro`) che le Wallet Unit utilizzano per verificare la registrazione dei PID Provider, la registrazione degli Attestation Provider e i tipi, e la registrazione delle Relying Party e gli attributi richiesti.
+
+.. note::
+  I **PID Provider**, i **PuB-EAA Provider** e i **Wallet Provider** sono registrati attraverso il sistema di onboarding dell'IT-Wallet e successivamente notificati alla Commissione Europea per l'inclusione nelle Trusted Lists. I Wallet Provider non ricevono certificati di accesso o certificati di registrazione dai Registrar nazionali. La Soluzione Wallet fornita dal Wallet Provider deve essere certificata da Organismi di Valutazione della Conformità (CAB) secondo il quadro nazionale di valutazione della conformità.
+
+Matrice delle Responsabilità
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+La seguente tabella riassume il requisito di registrazione e l'autorità responsabile per la compilazione della Trusted List (TL) per ogni tipo di entità:
+
+.. list-table:: Matrice delle Responsabilità dell'Onboarding di Federazione
+   :class: longtable
+   :widths: 25 25 25 25
+   :header-rows: 1
+
+   * - Tipo di Entità
+     - Processo di Registrazione
+     - Compilazione Trusted List (EC / MS TLP)
+     - Ruolo MS TLP
+   * - **PID Provider**
+     - **Registrazione con Registrar nazionale**
+     - **Commissione Europea** (TL a livello UE per PID Provider)
+     - Nessuno (nessuna TL nazionale per PID Provider)
+   * - **Attestation Provider**
+     - **Registrazione con Registrar nazionale**
+     - **Stato Membro / MS TLP** (TL QTSP nazionale per QEAA Provider; TL nazionale per EAA Provider non qualificati)
+     - Compila, firma e pubblica le Trusted Lists nazionali per QEAA Provider ed EAA Provider non qualificati secondo il quadro nazionale dei servizi fiduciari.
+   * - **Relying Party (RP)**
+     - **Registrazione con Registrar nazionale**
+     - N/A (Utilizza Certificati di Accesso/Registro)
+     - Nessuno (non elencati nelle TL)
+   * - **Wallet Provider**
+     - *Solo notifica* (verso EC)
+     - **Commissione Europea** (TL a livello UE per Wallet Provider)
+     - Non applicabile nel pilot (solo notifica da Stato Membro a EC)
+   * - **Access CA**
+     - *Solo notifica* (verso EC)
+     - **Commissione Europea** (TL a livello UE per Access CA)
+     - Non applicabile nel pilot (solo notifica da Stato Membro a EC)
+   * - **Fornitore Cert. Reg.**
+     - *Solo notifica* (verso EC)
+     - **Commissione Europea** (TL a livello UE per Fornitori Cert. Reg.)
+     - Non applicabile nel pilot (solo notifica da Stato Membro a EC)
+
+Notifica dello Stato Membro alla Commissione Europea
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Gli Stati Membri DEVONO notificare tutti i PID Provider, PuB-EAA Provider, Wallet Provider, Autorità Certificatrici di Accesso e Fornitori di Certificati di Registrazione alla Commissione Europea. Le informazioni notificate variano per tipo di entità:
+
+- **PID Provider**: Dati di identificazione, chiavi pubbliche/certificati del PID Provider, chiavi pubbliche/certificati dell'Autorità Certificatrice di Accesso per PID Provider, Punto di Fornitura del Servizio (URL)
+- **Wallet Provider**: Dati di identificazione, chiavi pubbliche/certificati del Wallet Provider
+- **PuB-EAA Provider**: Dati di identificazione (incluso rapporto di valutazione della conformità), Punto di Fornitura del Servizio (URL)
+- **Autorità Certificatrici di Accesso e Fornitori di Certificati di Registrazione**: Dati di identificazione, chiavi pubbliche/certificati
+
+La Commissione Europea compila, firma/sigilla e pubblica le Trusted Lists per Wallet Provider, PID Provider, Access CA e Fornitori di Certificati di Registrazione.
+
+Pubblicazione delle Trusted Lists per Attestation Provider
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Per gli **Attestation Provider** (sia QEAA che EAA non qualificati), il processo di registrazione attiva la pubblicazione delle Trusted Lists:
+
+**QEAA Provider**:
+- Dopo la registrazione riuscita con il Registrar dello Stato Membro, i QEAA Provider sono inclusi nelle **Trusted Lists QTSP degli Stati Membri** pubblicate dagli Stati Membri per **`EIDAS`_ Articolo 22**
+- Queste Trusted Lists QTSP sono **notificate alla Commissione Europea** per `EIDAS`_ Articolo 22(3) in modo che le posizioni delle TL QTSP e le chiavi di firma possano essere esposte tramite la **Lista delle Trusted Lists (LoTL)**
+
+**EAA Provider non qualificati**:
+- Dopo la registrazione riuscita con il Registrar dello Stato Membro, gli EAA Provider non qualificati sono inclusi nelle **Trusted Lists nazionali degli EAA Provider** compilate e pubblicate dai Fornitori di Trusted Lists degli Stati Membri (MS TLP)
+- Queste Trusted Lists nazionali sono pubblicate utilizzando il profilo `ETSI TS 119 602`_ Allegato H (Trusted Lists degli Attestation Provider), in formato JSON con firma compact JAdES Baseline B OPPURE formato XML con firma XAdES Baseline B
+- Il MS TLP invia l'URL della Trusted List pubblicata degli EAA Provider non qualificati alla Commissione Europea per l'inclusione nella LoTL
+
+Il Fornitore di Trusted Lists dello Stato Membro (MS TLP):
+- Riceve la notifica della registrazione riuscita dal Registrar (o accede ai dati del Registro)
+- Estrae le chiavi pubbliche crittografiche, i certificati e i dati rilevanti dal Registro
+- Compila le Trusted Lists secondo le specifiche `ETSI TS 119 612`_ o `ETSI TS 119 602`_
+- Firma/sigilla e pubblica le Trusted Lists agli URL pubblicamente accessibili
+- Invia l'URL della Trusted List alla Commissione Europea
 
 Gestione del Ciclo di Vita delle Entità
 ----------------------------------------

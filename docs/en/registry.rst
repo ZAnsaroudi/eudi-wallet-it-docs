@@ -541,7 +541,7 @@ Classes enable Relying Parties and Wallet Solutions to request or match Credenti
 **Credential Type**
 
 A **Credential Type** represents a specific Credential within a Class (e.g. Digital Travel Credential, Birth Certificate, Mobile Driving License).  
-Each Credential Type SHALL include:
+Each Credential Type MUST include:
 
 - a unique identifier,  
 - the Credential Issuer identifier,  
@@ -552,7 +552,7 @@ Credential Types enable precise targeting for compliance-driven or regulation-ma
 **Purpose (Verification Intent)**
 
 A **Purpose (Verification Intent)** describes *why* a credential may be requested by a Relying Party (e.g., Identity Verification, Age Verification, Eligibility for specific services).  
-Purposes SHALL describe **verification outcomes**.
+Purposes MUST describe **verification outcomes**.
 Each Credential Type MUST declare its Domain, Class, and supported Purposes. 
 
 The following tables provide non-exhaustive examples illustrating the relationships between Domains, Credential Classes, and Credential Types, followed by their mapping to verification Purposes.

@@ -32,6 +32,18 @@ Infrastructure of Trust
       - De Marco, G., Hedberg, R., Jones, M.B., Bradley, J., Dzhuvinov, V., "OpenID Federation Wallet Architectures 1.0", October 2024, Draft 03.
     * - `OID-FED`_
       - Hedberg, R., Jones, M.B., Solberg, A.A., Bradley, J., De Marco, G., Dzhuvinov, V., "OpenID Federation 1.0", December 2025, Draft 46.
+    * - `OID-FED-SUBORDINATE-EVENTS`_
+      - De Marco, G., Jones, M.B., "OpenID Federation Subordinate Events Endpoint 1.0", January 2026, Draft 00.
+    * - `EIDAS`_
+      - Regulation (EU) No 910/2014 of the European Parliament and of the Council of 23 July 2014 on electronic identification and trust services for electronic transactions in the internal market and repealing Directive 1999/93/EC (eIDAS Regulation).
+    * - `ETSI TS 119 612`_
+      - ETSI TS 119 612 v2.4.1 (2025-11) - Electronic Signatures and Infrastructures (ESI); Trusted Lists.
+    * - `ETSI TS 119 602`_
+      - ETSI TS 119 602 v1.1.1 (2025-11) - Electronic Signatures and Infrastructures (ESI); Lists of Trusted Entities; Data model for Lists of Trusted Entities.
+    * - `ETSI EN 319 132-1`_
+      - ETSI EN 319 132-1 v1.3.1 - Electronic Signatures and Infrastructures (ESI); XAdES digital signatures; Part 1: Building blocks and XAdES baseline signatures.
+    * - `ETSI TS 119 182-1`_
+      - ETSI TS 119 182-1 v1.2.1 - Electronic Signatures and Infrastructures (ESI); JAdES digital signatures; Part 1: Building blocks and JAdES baseline signatures.
 
 
 Digital Credential Data Format

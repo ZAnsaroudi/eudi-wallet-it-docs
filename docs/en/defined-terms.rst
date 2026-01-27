@@ -3,9 +3,9 @@
 Defined Terms and Acronyms
 ==========================
 
-This section aligns the IT-Wallet System's terminology with the definitions provided in ARF 2.5 (see `ARF Annex 1 <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-1/annex-1-definitions.md>`_). For each term, the IT-Wallet definition is compared and mapped to the ARF definition, with notes on any differences or clarifications.
+This section aligns the IT-Wallet System's terminology with the definitions provided in ARF 2.7.3 (see `ARF Annex 1 <https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-1/annex-1-definitions.md>`_). For each term, the IT-Wallet definition is compared and mapped to the ARF definition, with notes on any differences or clarifications.
 
-The terms *User*, *Trust Service*, *Trust Model*, *Trusted List*, *Trust Framework*, *Attribute*, *Electronic Attestations of Attributes Provider* or *Trust Service Provider (TSP)*, *Person Identification Data (PID)*, *Revocation List*, *Qualified Electronic Attestations of Attributes Provider* or *Qualified Trust Service Provider (QTSP)*, *Electronic Attestation of Attributes (EAA)*, are defined in the `EIDAS-ARF`_.
+The terms *User*, *Trust Service*, *Trust Model*, *eIDAS Trusted List*, *Trust Framework*, *Attribute*, *Electronic Attestations of Attributes Provider* or *Trust Service Provider (TSP)*, *Person Identification Data (PID)*, *Revocation List*, *Qualified Electronic Attestations of Attributes Provider* or *Qualified Trust Service Provider (QTSP)*, *Electronic Attestation of Attributes (EAA)*, are defined in the `EIDAS-ARF`_.
 
 Below is the description of acronyms and definitions which are useful for further insights into topics that complement the IT-Wallet System and the interacting components.
 
@@ -256,17 +256,42 @@ Below is the description of acronyms and definitions which are useful for furthe
       Certificate authenticating and validating the (Wallet-) Relying Party.
       Aligned with ARF 2.5.
 
+    **Access Certificate Authority**
+    **Access CA**
+      Certificate Authority responsible for issuing Access Certificates to PID Providers, Attestation Providers, and Relying Parties for secure interactions within the IT-Wallet ecosystem.
+      Aligned with ARF 2.5; terminology specialized for IT-Wallet.
+
     **Registration Certificate**
       Data object indicating the attributes the Relying Party has registered to request from Users.
       Aligned with ARF 2.5.
+
+    **Registration Certificate Provider**
+    **Provider of Registration Certificates**
+    **Reg. Cert. Provider**
+      Organizational Entity responsible for issuing Registration Certificates that describe the registration status and entitlements of PID Providers, Attestation Providers, and Relying Parties.
+      Aligned with ARF 2.5; terminology specialized for IT-Wallet.
+
+    **Federation Registry**
+      Registry component of the IT-Wallet Registry Infrastructure that maintains the authoritative list of trusted entities participating in the federation, including their federation metadata, endpoints, and public keys.
+      Not present in ARF 2.5; specific to IT-Wallet.
+
+    **Authentic Source Registry**
+    **AS Registry**
+      Registry containing Authentic Sources, their declared capabilities, and available claims, used by Credential Issuers to discover and integrate authoritative data providers.
+      Not present in ARF 2.5; specific to IT-Wallet.
+
+    **Member State Trusted List Provider**
+    **MS TLP**
+      Organizational Entity designated by a Member State to compile, sign, and publish national eIDAS Trusted Lists (e.g., QTSP Trusted Lists, EAA Provider Trusted Lists) and to notify their locations to the European Commission.
+      Terminology specialized for IT-Wallet.
 
     **Certificate Signing Request**
       Request sent to a CA containing the public key and identifying information for a digital certificate.
       Not present in ARF 2.5.
 
-    **Trusted List**
-      Repository of information about authoritative entities and their status.
-      Aligned with ARF 2.5.
+    **eIDAS Trusted List**
+      Repository of information about authoritative entities and their status used in the eIDAS trust services framework (e.g., QTSP Trusted Lists, EAA Provider Trusted Lists).
+      Terminology specialized for IT-Wallet.
 
     **User**
       Natural or legal person using trust services or electronic identification means.
@@ -324,7 +349,7 @@ Below is the description of acronyms and definitions which are useful for furthe
       Aligned with ARF 2.5.
 
 .. note::
-   For any term not present in ARF 2.5, the IT-Wallet definition is provided as authoritative for the Italian context.
+   For any term not present in ARF 2.7.3, the IT-Wallet definition is provided as authoritative for the Italian context.
 
 Below are the main defined terms and definitions related to User Experience aspects:
 
