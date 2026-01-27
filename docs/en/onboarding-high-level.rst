@@ -4,20 +4,12 @@
 Onboarding System
 ============================
 
-The IT-Wallet ecosystem operates as a federated trust infrastructure where participants establish trust relationships and maintain compliance with common security standards.
-
-The onboarding system MUST enable secure Digital Credential operations. At the same time, it MUST accommodate the diverse operational requirements that different participants require.
-
-Administrative processes for organizational entities are common to all participants and independent of their technical functions within the ecosystem. However, technical registration processes MUST account for distinct operational roles.
-
-Credential Issuers, Relying Parties, and Wallet Instances (registered indirectly through Wallet Providers) participate directly in Credential issuance and verification operations. These entities require cryptographic trust establishment through federation protocols.
-
-Authentic Sources provide authoritative data through direct trust relationships with Credential Issuers. They serve a central role in data discovery and availability, requiring specialized data-focused registration procedures.
+The onboarding system registers operational entities (PID Providers, Attestation Providers, Relying Parties, Wallet Providers, and Authentic Sources) so that they can participate in the IT-Wallet ecosystem with clearly defined authorizations and trust relationships.
 
 Onboarding System Architecture
 ------------------------------
 
-The onboarding framework MUST provide specialized onboarding processes that match the operational characteristics and regulatory obligations of different participant types.
+The onboarding service MUST provide specialized onboarding processes that match the operational characteristics and regulatory obligations of different participant types.
 
 .. plantuml:: plantuml/trust-infrastructure-overview.puml
     :width: 99%
@@ -140,11 +132,11 @@ Trusted List Publication for Attestation Providers
 
 For **Attestation Providers** (both QEAA and non-qualified EAA Providers), the registration process triggers Trusted List publication:
 
-**QEAA Providers**:
+QEAA Providers:
 - After successful registration with the National Registrar, QEAA Providers are included in **Member State QTSP Trusted Lists** published by the Member State per **`EIDAS`_ Article 22**
 - These QTSP Trusted Lists are **notified to the European Commission** per `EIDAS`_ Article 22(3) so that QTSP TL locations and signing keys can be exposed via the **List of Trusted Lists (LoTL)**
 
-**Non-qualified EAA Providers**:
+Non-qualified EAA Providers:
 - After successful registration with the National Registrar, non-qualified EAA Providers are included in **national EAA Provider Trusted Lists** compiled and published by Member State Trusted List Providers (MS TLP)
 - These national Trusted Lists are published using `ETSI TS 119 602`_ Annex H profile (Attestation Provider Trusted Lists), in either JSON format with compact JAdES Baseline B signature OR XML format with XAdES Baseline B signature
 - The MS TLP submits the published non-qualified EAA Provider Trusted List URL to the European Commission for inclusion in the LoTL

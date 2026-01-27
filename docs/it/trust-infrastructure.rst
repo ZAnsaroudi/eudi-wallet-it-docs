@@ -8,7 +8,9 @@ L'Infrastruttura di Trust
 
 L'ecosistema IT-Wallet opera all'interno di un'infrastruttura di trust federata dove le entità partecipanti stabiliscono relazioni di trust crittografiche e mantengono la conformità con standard di sicurezza comuni. Questa infrastruttura fornisce le fondamenta per operazioni sicure di Credenziali Elettroniche tra i partecipanti dell'ecosistema.
 
-Questa sezione delinea l'implementazione del Trust Model in un'infrastruttura che è conforme a OpenID Federation 1.0 `OID-FED`_. OpenID Federation opera a livello nazionale ed è completata dalle Trusted Lists per QEAA ed EAA Provider, come dettagliato in :ref:`trust-infrastructure:Trusted Lists per EAA Provider: Profilo di Implementazione`. Questa infrastruttura coinvolge un'API RESTful per la distribuzione di metadati, policy dei metadati, trust mark, chiavi pubbliche crittografiche e certificati X.509, e lo stato di revoca dei partecipanti, chiamati anche Entità di Federazione.
+Questa sezione definisce l'implementazione del Trust Model in un'infrastruttura che è conforme all'`EIDAS-ARF`_ e a OpenID Federation 1.0 `OID-FED`_. OpenID Federation opera a livello nazionale ed è completata dalle eIDAS Trusted Lists per QEAA ed EAA Provider, come dettagliato in :ref:`trust-infrastructure:Trusted Lists per EAA Provider: Profilo di Implementazione`. La List of Trusted Lists (LoTL), mantenuta dalla Commissione Europea, aggrega i puntatori a tutte le eIDAS Trusted Lists pubblicate, abilitando l'instaurazione del trust transfrontaliero e la scoperta centralizzata delle posizioni delle Trusted Lists e delle relative chiavi di firma.
+
+L'infrastruttura nazionale prevede un'API RESTful per la distribuzione di metadati, policy dei metadati, trust mark, chiavi pubbliche crittografiche e certificati X.509, e lo stato di revoca dei partecipanti, chiamati anche Entità di Federazione.
 
 
 Questa infrastruttura di trust lavora in coordinamento con l'Infrastruttura di Registro (vedi :ref:`registry:Infrastruttura del Registro`) per abilitare i processi di onboarding delle entità dettagliati in :ref:`entity-onboarding:Onboarding delle Entità`. In particolare, abilita l'implementazione tecnica dei processi di onboarding descritti in :ref:`entity-onboarding:Onboarding delle Entità` e supporta gli scenari operativi illustrati in :ref:`onboarding-high-level:Onboarding Journey Maps`.
@@ -22,9 +24,9 @@ Questa infrastruttura di trust lavora in coordinamento con l'Infrastruttura di R
 .. plantuml:: plantuml/trust-roles.puml
    :width: 99%
    :alt: La figura illustra i ruoli di trust.
-   :caption: `I ruoli all'interno della Federazione, dove il Trust Anchor supervisiona i suoi subordinati, che includono uno o più Intermediari e Foglie. <https://www.plantuml.com/plantuml/png/XT1HQy90303Wz_iLcNkMiIAoXo5AtK3OWup17aViPUxmcYkvd29Z_tsjThM2kBSc-P9UCesAegdqviPnuPCbUCn7T_de8m-iw9XaOapSEAvGi8GL5fkrXCGs3pu8g237kaIiFJKJ2RiZMFcwmnYXGf7Ndc3m9YagpBZu2Z80ZA08j_FnqyDpTkOMh2GbMOTA1-TOxplv3ymkZdmXt58y64_u6UjnZPcFhw6iGzTKTwu_3Ty6eDUG2rbYTUXX4MEYu-w5wnvwfj_HUr9OIjWwszfTTTc-ajyxNiCIHVS7AIVvOqpzZs6gXXDGDBkg_MwEQQGNPQOzIQ_UxjypJVeqhKcTeYcnJQN_1G00>`_
+   :caption: `I ruoli all'interno della Federazione, dove il National Trust Anchor supervisiona i suoi subordinati, che includono uno o più Intermediari e Foglie. <https://www.plantuml.com/plantuml/png/XT1HQy90303Wz_iLcNkMiIAoXo5AtK3OWup17aViPUxmcYkvd29Z_tsjThM2kBSc-P9UCesAegdqviPnuPCbUCn7T_de8m-iw9XaOapSEAvGi8GL5fkrXCGs3pu8g237kaIiFJKJ2RiZMFcwmnYXGf7Ndc3m9YagpBZu2Z80ZA08j_FnqyDpTkOMh2GbMOTA1-TOxplv3ymkZdmXt58y64_u6UjnZPcFhw6iGzTKTwu_3Ty6eDUG2rbYTUXX4MEYu-w5wnvwfj_HUr9OIjWwszfTTTc-ajyxNiCIHVS7AIVvOqpzZs6gXXDGDBkg_MwEQQGNPQOzIQ_UxjypJVeqhKcTeYcnJQN_1G00>`_
 
-In questa rappresentazione, sia il Trust Anchor che gli Intermediari assumono il ruolo di Registration Authority.
+In questa rappresentazione, sia il National Trust Anchor che gli Intermediari assumono il ruolo di Registration Authority.
 
 Ruoli di Federazione
 --------------------
@@ -38,7 +40,7 @@ Tutti i partecipanti sono Entità di Federazione che DEVONO essere registrate da
 
 **Ruolo nell'Onboarding**: Durante la registrazione delle entità, il Trust Anchor e gli Intermediari agiscono come Autorità di Federazione. Questo stabilisce la posizione del partecipante nella gerarchia di trust e gli consente di partecipare alle operazioni di credenziali. Le Foglie (Credential Issuer, Relying Party, Fornitori di Wallet) subiscono la registrazione per dimostrare la loro idoneità e ricevere l'autorizzazione per svolgere le loro funzioni designate.
 
-**Ruolo nelle Operazioni**: Durante l'emissione e la presentazione delle credenziali, questi ruoli abilitano la validazione del trust distribuita senza richiedere la verifica centralizzata per ogni transazione. Le Foglie utilizzano il loro stato registrato per emettere credenziali, verificare presentazioni o fornire servizi di wallet agli utenti finali.
+**Ruolo nelle Operazioni**: Durante l'emissione e la presentazione delle Credenziali, questi ruoli abilitano la validazione del trust distribuita senza richiedere la verifica centralizzata per ogni transazione. Le Foglie utilizzano il loro stato registrato per emettere Credenziali, verificare presentazioni o fornire servizi di Wallet agli utenti finali.
 
 Di seguito la tabella con il riepilogo dei ruoli delle Entità di Federazione, mappati sui corrispondenti ruoli EUDI Wallet.
 
@@ -86,7 +88,7 @@ Di seguito la tabella con il riepilogo dei ruoli delle Entità di Federazione, m
 Integrazione dell'Infrastruttura di Trust e del Registro
 --------------------------------------------------------
 
-L'Infrastruttura di Trust implementa il componente Federation Registry dell'Infrastruttura di Registro. Il Federation Registry mantiene l'elenco autorevole delle entità fidate attraverso gli endpoint di federazione definiti in questa sezione, inclusi l'elenco delle entità (/list), le dichiarazioni dei subordinati (/fetch), la validazione dei trust mark (/trust_mark_status) e la gestione delle chiavi storiche (/historical-jwks).
+L'Infrastruttura di Trust implementa il componente Federation Registry dell'Infrastruttura di Registro. Il Federation Registry mantiene l'elenco autorevole delle entità fidate attraverso gli endpoint di federazione definiti in questa sezione, inclusi l'elenco delle entità (/list), le dichiarazioni dei subordinati (/fetch), la validazione dei trust mark (/trust_mark_status), gli eventi sui subordinati (/federation_subordinate_events_endpoint) e la gestione delle chiavi storiche (/historical-jwks).
 
 Questo Federation Registry opera insieme ad altri componenti del registro (Claims Registry, AS Registry, Catalogo degli Attestati Elettronici, Taxonomy) per fornire supporto completo all'ecosistema. Per l'architettura completa del registro e le interazioni dei componenti, vedi :ref:`registry:Infrastruttura del Registro`.
 
@@ -95,9 +97,9 @@ Schema dell'Infrastruttura di Trust: Onboarding e Trusted Lists
 
 L'infrastruttura di trust si basa su tre processi distinti ma complementari:
 
-1. **Registrazione/Onboarding**: Le entità (PID Provider, Attestation Provider, Relying Party, Wallet Provider) si registrano con il Registrar nazionale o tramite il sistema di onboarding dell'IT-Wallet per definire l'autorizzazione operativa e i diritti.
-2. **Notifica**: Gli Stati Membri notificano alla Commissione Europea i **Wallet Provider**, le **Autorità Certificatrici di Accesso (Access CA)**, e i **Fornitori di Certificati di Registrazione** per l'inclusione nelle relative Trusted Lists.
-3. **Pubblicazione di Cataloghi e Liste Nazionali**: Pubblicazione di cataloghi e liste nazionali relative alle entità registrate tramite endpoint RESTful, come descritto in questa sezione.
+1. **Registrazione/Onboarding**: Le entità (PID Provider, QEAA Provider, EAA Provider, Relying Party, Wallet Provider) si registrano con il Registrar nazionale o tramite il sistema di onboarding dell'IT-Wallet per definire l'autorizzazione operativa e i diritti.
+2. **Notifica**: Lo Stato Membro notifica alla Commissione Europea, in qualità di operatore dell'eIDAS Trusted List Provider a livello UE, i **PID Provider**, i **PuB-EAA Provider**, i **Wallet Provider**, le **Autorità Certificatrici di Accesso (Access CA)** e i **Fornitori di Certificati di Registrazione** per l'inclusione nelle relative Trusted Lists.
+3. **Pubblicazione di Cataloghi e Liste Nazionali**: Pubblicazione di cataloghi e liste nazionali relative alle entità registrate tramite endpoint RESTful.
 4. **Pubblicazione delle eIDAS Trusted Lists**: Pubblicazione delle eIDAS Trusted Lists a livello UE da parte della Commissione Europea, basata sulle notifiche dello Stato Membro per Wallet Provider, PID Provider, PuB-EAA Provider, Access CA e Fornitori di Certificati di Registrazione.
 5. **Pubblicazione delle Trusted Lists Nazionali**: Pubblicazione delle Trusted Lists nazionali per i QEAA Provider e per gli EAA Provider non qualificati da parte del Fornitore di Trusted Lists dello Stato Membro (MS TLP), basata sui dati del Registrar nazionale.
 
@@ -128,13 +130,6 @@ I **QEAA Provider** sono Fornitori di Servizi Fiduciari Qualificati (QTSP) ai se
 .. note::
   Il requisito del formato XML per le Trusted Lists QTSP (inclusi i QEAA Provider) è obbligatorio secondo la Decisione di Implementazione della Commissione (UE) 2015/1505, che stabilisce le specifiche tecniche per le Trusted Lists ai sensi dell'`EIDAS`_ Articolo 22(5). Questa decisione richiede agli Stati Membri di pubblicare le Trusted Lists QTSP in formato XML secondo `ETSI TS 119 612`_ con firme XAdES Baseline B.
 
-**Requisiti Chiave**:
-
-- I QEAA Provider DEVONO registrarsi con i Registrar degli Stati Membri.
-- Gli anchor di trust forniti durante la registrazione sono estratti e inclusi nelle Trusted Lists QTSP degli Stati Membri
-- Le Trusted Lists QTSP degli Stati Membri DEVONO essere pubblicate in formato XML secondo `ETSI TS 119 612`_ con firme XAdES Baseline B
-- Le Trusted Lists QTSP degli Stati Membri sono firmate/sigillate dal MS TLP
-- Gli URL delle Trusted Lists sono inviati alla Commissione Europea per l'inclusione nella LoTL
 
 Di seguito è riportato un esempio non normativo di una voce relativa a un QEAA Provider all'interno di una Trusted List QTSP di uno Stato Membro, seguendo il formato XML `ETSI TS 119 612`_ (solo payload, senza firma XAdES):
 
@@ -157,16 +152,8 @@ Gli **EAA Provider non qualificati** sono inclusi nelle **Trusted Lists nazional
 
 Le Trusted Lists in formato JSON DEVONO essere firmate utilizzando firme compact JAdES Baseline B come richiesto da `ETSI TS 119 182-1`_. Le Trusted Lists in formato XML DEVONO essere firmate utilizzando firme XAdES Baseline B come richiesto da `ETSI EN 319 132-1`_. La firma garantisce l'integrità, l'autenticità e il non-ripudio del contenuto della Trusted List.
 
-**Requisiti Chiave**:
-
-- Gli EAA Provider non qualificati DEVONO registrarsi con i Registrar degli Stati Membri.
-- Gli anchor di trust forniti durante la registrazione sono estratti e inclusi nelle Trusted Lists nazionali degli EAA Provider non qualificati
-- Le Trusted Lists nazionali degli EAA Provider non qualificati sono firmate/sigillate dal MS TLP
-- Gli URL delle Trusted Lists sono inviati alla Commissione Europea per l'inclusione nella LoTL
-- Il processo è attivato dalla registrazione riuscita con il Registrar dello Stato Membro
-
-Specifiche Tecniche
-""""""""""""""""""""
+Requisiti ETSI per le Trusted Lists degli EAA Provider
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 **Requisiti del Profilo `ETSI TS 119 602`_ Allegato H** (per TL degli EAA Provider non qualificati):
 
@@ -197,7 +184,7 @@ Di seguito è riportato un esempio non normativo del payload di una Trusted List
 - **Firma**: XAdES Baseline B (formato firma avvolta)
 
 Integrazione con la Lista delle Trusted Lists (LoTL)
-"""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Per la clausola D.5 di `ETSI TS 119 612`_, la Commissione Europea mantiene una Lista delle Trusted Lists (LoTL) che:
 
@@ -215,100 +202,6 @@ La Commissione Europea:
 - Firma/sigilla la LoTL utilizzando la chiave di firma della Commissione
 - Pubblica la LoTL in formati leggibili da macchina e da uomo
 - Pubblica la posizione della LoTL e gli anchor di trust nella Gazzetta Ufficiale dell'Unione Europea (GUUE)
-
-Proprietà Generali
-------------------
-
-L'architettura dell'infrastruttura di trust è costruita sui seguenti principi fondamentali:
-
-.. list-table::
-   :class: longtable
-   :widths: 20 20 80
-   :header-rows: 1
-
-   * - Identificatore
-     - Proprietà
-     - Descrizione
-   * - P1
-     - **Sicurezza**
-     - Incorpora meccanismi per garantire l'integrità, la riservatezza e l'autenticità delle Trust Relationship e delle interazioni all'interno della federazione.
-   * - P2
-     - **Privacy**
-     - Progettata per rispettare e proteggere la privacy delle entità coinvolte, la divulgazione minima fa parte di questo.
-   * - P3
-     - **Interoperabilità**
-     - Supporta l'interazione senza soluzione di continuità e la creazione di trust tra sistemi ed entità diverse all'interno della federazione.
-   * - P4
-     - **Trust Transitivo**
-     - Trust stabilito indirettamente attraverso una catena di relazioni fidate, consentendo alle entità di fidarsi l'una dell'altra basandosi su autorità comuni e intermediari fidati.
-   * - P5
-     - **Delegazione**
-     - Capacità o funzionalità tecnica di delegare autorità o responsabilità ad altre entità, consentendo un meccanismo di trust distribuito.
-   * - P6
-     - **Scalabilità**
-     - Progettata per gestire efficientemente un numero crescente di entità o interazioni senza un aumento significativo della complessità di gestione del trust.
-   * - P7
-     - **Flessibilità**
-     - Adattabile a varie esigenze operative e organizzative, consentendo alle entità di definire e regolare le loro Trust Relationship e policy.
-   * - P8
-     - **Autonomia**
-     - Pur facendo parte di un ecosistema federato, ogni entità mantiene il controllo sulle proprie definizioni e configurazioni.
-   * - P9
-     - **Decentralizzazione**
-     - A differenza dei sistemi centralizzati tradizionali, l'infrastruttura di trust dovrebbe consentire un approccio decentralizzato.
-
-
-Requisiti dell'Infrastruttura di Trust
---------------------------------------
-
-Questa sezione include i requisiti necessari per l'implementazione e il funzionamento di successo dell'infrastruttura di trust.
-
-.. list-table:: Requisiti Funzionali
-   :class: longtable
-   :widths: 20 80
-   :header-rows: 1
-
-   * - ID
-     - Descrizione
-   * - FR1
-     - **Stabilimento del Trust di Federazione**: il sistema deve essere in grado di stabilire trust tra diverse entità (Credential Issuer, Relying Party, ecc.) all'interno di una federazione, utilizzando firme crittografiche per lo scambio sicuro di informazioni sui partecipanti nell'ecosistema.
-   * - FR2
-     - **Autenticazione delle Entità**: il sistema deve implementare meccanismi per autenticare le entità all'interno della federazione, garantendo la conformità alle regole condivise.
-   * - FR3
-     - **Validazione delle Firme**: il sistema deve supportare la creazione, verifica e validazione delle firme elettroniche e fornire meccanismi standard e sicuri per ottenere le chiavi pubbliche crittografiche richieste per la validazione delle firme.
-   * - FR4
-     - **Marcatura Temporale**: gli artefatti firmati devono contenere marcature temporali per garantire l'integrità e il non ripudio delle transazioni nel tempo, grazie alle interfacce, servizi, modello di archiviazione e approcci definiti all'interno della federazione.
-   * - FR5
-     - **Validazione dei Certificati**: il sistema richiede trasmissione riservata, protetta tramite TLS su HTTP, e validazione dei certificati per l'autenticazione del sito web.
-   * - FR6
-     - **Interoperabilità e Conformità agli Standard**: garantire l'interoperabilità tra i membri della federazione aderendo agli standard tecnici, facilitando le transazioni elettroniche transfrontaliere.
-   * - FR7
-     - **Protezione dei Dati e Privacy**: implementare misure di protezione dei dati in conformità alle normative GDPR, garantendo la privacy e la sicurezza dei dati personali elaborati all'interno della federazione.
-   * - FR8
-     - **Risoluzione delle Controversie e Responsabilità**: stabilire procedure chiare per la risoluzione delle controversie e definire la responsabilità tra i membri della federazione.
-   * - FR9
-     - **Servizi di Emergenza e Revoca**: implementare meccanismi per la revoca immediata dei partecipanti in caso di violazioni della sicurezza o altre emergenze.
-   * - FR10
-     - **Infrastruttura di Trust Scalabile**: il sistema deve supportare meccanismi di stabilimento del trust scalabili, sfruttando approcci e soluzioni tecniche che completano gli approcci transitivi di delegazione per gestire efficientemente le Trust Relationship man mano che la federazione cresce, rimuovendo i registri centrali che potrebbero fallire tecnicamente o amministrativamente.
-   * - FR11
-     - **Scalabilità di Archiviazione Efficiente**: implementare una soluzione di archiviazione che si scala orizzontalmente per accogliere volumi di dati crescenti minimizzando i costi di archiviazione centrale e amministrativi. Il sistema dovrebbe consentire ai membri di archiviare e presentare indipendentemente attestazioni di trust storiche e artefatti firmati durante le risoluzioni delle controversie, con l'infrastruttura di federazione che mantiene solo un registro delle chiavi storiche per validare i dati storici, archiviati e forniti dai partecipanti.
-   * - FR12
-     - **Attestazione Verificabile (Trust Mark)**: incorporare un meccanismo per l'emissione e la verifica di attestazioni verificabili che servono come prova di conformità a profili o standard specifici. Questo consente alle entità all'interno della federazione di dimostrare l'aderenza agli standard di sicurezza, privacy e operativi concordati.
-   * - FR13
-     - **Meccanismo di Risoluzione delle Controversie Decentralizzato**: progettare un meccanismo decentralizzato per la risoluzione delle controversie che consenta ai membri della federazione di verificare indipendentemente lo stabilimento del trust storico e gli artefatti firmati, riducendo la dipendenza dalle autorità centrali e semplificando il processo di risoluzione.
-   * - FR14
-     - **Interoperabilità Cross-Federazione**: garantire che il sistema sia capace di interoperare con altre federazioni o Trust Framework, facilitando transazioni cross-federazione e stabilimento del trust senza compromettere sicurezza o conformità.
-   * - FR15
-     - **Registration Body Autonomi**: il sistema deve facilitare l'integrazione di registration body autonomi che operano in conformità alle regole di federazione. Questi enti sono incaricati di valutare e registrare entità all'interno della federazione, secondo le regole prestabilite e la loro conformità che deve essere periodicamente attestata.
-   * - FR16
-     - **Audit Periodico dei Registration Body e delle Entità**: implementare meccanismi per l'audit periodico e il monitoraggio dello stato di conformità sia dei registration body che delle loro entità registrate.
-   * - FR17
-     - **Attestazione di Conformità per Dispositivi Personali**: enti fidati, sotto forma di entità di federazione, dovrebbero emettere attestazioni di conformità e fornire prova firmata di tale conformità per l'hardware dei dispositivi personali utilizzati all'interno della federazione. Queste attestazioni dovrebbero essere attestate e periodicamente rinnovate per garantire che i dispositivi soddisfino gli standard di sicurezza attuali.
-   * - FR18
-     - **Monitoraggio Automatizzato della Conformità**: il sistema dovrebbe includere strumenti automatizzati per monitorare la conformità delle entità agli standard di federazione. Questa automazione aiuta nella rilevazione precoce di potenziali problemi di conformità.
-   * - FR19
-     - **Binding delle Capacità del Protocollo Sicuro**: il protocollo sicuro deve abilitare lo scambio di dati delle capacità specifiche del protocollo come metadati crittograficamente legati associati a un'identità specifica. Questi metadati dovrebbero definire le capacità tecniche associate all'identità, garantendo prova verificabile e associazione a prova di manomissione per un robusto stabilimento del trust e controllo degli accessi.
-
 
 .. _trust-infrastructure-endpoint-delle-api-della-federazione:
 
@@ -358,7 +251,17 @@ Tutti gli endpoint elencati di seguito sono definiti nelle specifiche `OID-FED`_
      - Trust Anchor, Intermediario
 
 
-Tutte le risposte degli endpoint di federazione sono sotto forma di JWT firmato, ad eccezione dell'**endpoint di Elenco Subordinati** e dell'**endpoint di Stato Trust Mark** che sono serviti come JSON semplice per impostazione predefinita. L'**Endpoint Eventi Subordinati della Federazione** restituisce anche JWT firmati con il tipo di contenuto ``application/entity-events-statement+jwt``.
+Tutte le risposte degli endpoint di federazione sono sotto forma di JWT firmato, ad eccezione dell'endpoint di Elenco Subordinati e dell'endpoint di Stato Trust Mark che sono serviti come JSON semplice per impostazione predefinita. L'Endpoint Eventi Subordinati della Federazione restituisce anche JWT firmati con il tipo di contenuto ``application/entity-events-statement+jwt``.
+
+Endpoint delle Trusted Lists Nazionali
+--------------------------------------
+
+In aggiunta agli endpoint di OpenID Federation, l'ecosistema IT-Wallet espone punti di distribuzione HTTPS per le eIDAS Trusted Lists e per le Trusted Lists nazionali degli EAA Provider. Questi endpoint sono operati dal Fornitore di Trusted Lists dello Stato Membro (MS TLP) e pubblicano le Trusted Lists autorevoli e firmate che sono referenziate dalla LoTL e consumate da Wallet Unit, Credential Issuer e Relying Party.
+
+- Le Trusted Lists QTSP per i QEAA Provider DEVONO essere pubblicate dal National Trust Anchor come documenti TSL XML conformi a `ETSI TS 119 612`_, in punti di distribuzione HTTPS sotto il FQDN del National Trust Anchor (ad esempio, ``https://<FQDNNationalTrustAnchor>/tsl/qeaa-tsl.xml``), e firmate con XAdES Baseline B in accordo con `ETSI EN 319 132-1`_.
+- Le Trusted Lists nazionali degli EAA Provider (per EAA Provider non qualificati e, ove applicabile, per i PuB-EAA Provider) DEVONO essere pubblicate come documenti LoTE che seguono il profilo `ETSI TS 119 602`_ Allegato H, in punti di distribuzione HTTPS sotto il FQDN del National Trust Anchor (ad esempio, ``https://<FQDNNationalTrustAnchor>/lote/eaa-providers.json``), in formato JSON (preferibile) o XML, e firmate con firme compact JAdES Baseline B o XAdES Baseline B come previsto da `ETSI TS 119 182-1`_ e `ETSI EN 319 132-1`_.
+
+I client afferenti all'ecosistema EUDI Wallet consumano questi endpoint scaricando periodicamente le liste, validando le firme digitali e applicando le semantiche di stato del servizio e di numero di sequenza definite in `ETSI TS 119 612`_ e `ETSI TS 119 602`_ per costruire e aggiornare i propri trust store locali.
 
 Federation Subordinate Events Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
