@@ -118,7 +118,7 @@ The following table summarizes the registration requirement and the authority re
 Member State Notification to European Commission
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Member State SHALL notify all PID Providers, PuB-EAA Providers, Wallet Providers, Access Certificate Authorities, and Providers of Registration Certificates to the European Commission. The information notified varies by entity type:
+The Member State MUST notify all PID Providers, PuB-EAA Providers, Wallet Providers, Access Certificate Authorities, and Providers of Registration Certificates to the European Commission. The information notified varies by entity type:
 
 - **PID Providers**: Identification data, PID Provider public keys/certificates, Access Certificate Authority public keys/certificates for PID Providers, Service Supply Point (URL)
 - **Wallet Providers**: Identification data, Wallet Provider public keys/certificates
