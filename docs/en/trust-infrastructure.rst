@@ -68,6 +68,9 @@ Below the table with the summary of the Federation Entity roles, mapped on the c
    * - Relying Party
      - Leaf
      -
+   * - Relying Party Access Certificate Authority 
+     - Leaf
+     - Federation-authorized entity that issues Verifier Attestation JWTs (as a JWT analogue of Relying Party Instance access certificates). Authorization to issue MUST be verifiable via the resolved Trust Chain (e.g., ecosystem Trust Marks and/or metadata policies).
    * - Trust Service Provider (TSP)
      - Leaf
      -
@@ -758,6 +761,8 @@ Trust Evaluations are conducted as follows:
 * **Trust Marks Evaluation**: Trust Marks are assessed to ensure ongoing compliance with federation policies. These marks indicate adherence to specific standards and practices required by the federation. Relying Parties MAY include Trust Marks in their Entity Configuration to signal administrative properties and compliance to specific profiles, such as the grants in interacting with under-age users (:ref:`WP_080 <wallet-credential-presentation-testcases>`).
 
 * **Policy Evaluation**: The Wallet Instance MUST verify that the Relying Party is authorized to request the Credential of interest. Metadata, metadata policies, and Trust Marks are used to implement these checks (:ref:`WP_087 <wallet-credential-presentation-testcases>`).
+
+* **Verifier Attestation Issuer Authorization**: When a signed request includes a Verifier Attestation JWT, the Wallet Instance MUST resolve and validate the Trust Chain of Verifier Attestation JWT issuer up to a configured Trust Anchor and MUST verify that the issuer is authorized in the federation to issue Verifier Attestation JWTs (e.g., via ecosystem Trust Marks and/or metadata policies); otherwise, the Wallet Instance MUST reject the attestation.
 
 In the process depicted in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Relying Parties enabled within the federation. The discovery process produces the Trust Chain. When the Trust Chain is provided statically within a signed request, it only needs to be refreshed when an internet connection is available, but it MUST be refreshed if the statically provided Trust Chain is expired.
 
