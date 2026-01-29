@@ -19,7 +19,7 @@ paths:
       responses:
         "200":
           description: OK
-  /v1.3.1/AttributeClaims{dataset_id}:
+  /v1.3.1/AttributeClaims/{dataset_id}:
     post:
       tags:
         - e-Services PDND
