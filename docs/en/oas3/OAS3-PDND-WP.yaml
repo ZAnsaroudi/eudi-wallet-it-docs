@@ -103,7 +103,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json-patch+json:
+          application/json:
             schema:
               $ref: "#/components/schemas/notifyUserDeath"
       responses:
@@ -248,7 +248,7 @@ components:
           description: An absolute URI that identifies the specific occurrence of the problem.
     notifyUserDeath:
       required:
-        - wallet_instance_id
+        - wallet_instance_ids
       type: object
       properties:
         wallet_instance_ids:

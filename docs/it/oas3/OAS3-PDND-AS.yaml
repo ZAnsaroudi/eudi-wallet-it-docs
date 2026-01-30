@@ -69,7 +69,7 @@ paths:
           in: header
           description: >-
             JWT containing the signature of the message headers whose integrity
-            needs to be guaranteed, to comply with the INTEGRITY_REST_02
+            needs to be guaranteed, see the INTEGRITY_REST_02
             security pattern (see <a target="blank"
             href="https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/e-service-pdnd.html">e-Service PDND</a>). <br/><br/>
 
@@ -83,7 +83,7 @@ paths:
         - name: Digest
           in: header
           description: >-
-            Digest of the message payload, to comply with the INTEGRITY_REST_02
+            Digest of the message payload, see the INTEGRITY_REST_02
             security pattern. According to <a target="blank" href="https://www.rfc-editor.org/rfc/rfc3230.html#section-4.2">RFC
             3230 §4.2</a>, the format MUST be the following: digest-algorithm=encoded
             digest output.
@@ -117,12 +117,12 @@ paths:
           description: OK
           headers:
             Agid-JWT-Signature:
-              description: JWT containing the signature of the message headers whose integrity needs to be guaranteed, to comply with the INTEGRITY_REST_02 security pattern (see <a target="blank" href="https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/e-service-pdnd.html">e-Service PDND</a>). <a target="blank" href="https://jwt.io/#debugger-io?token=ew0KICAiYWxnIjogIkVTMjU2IiwNCiAgImtpZCI6ICJhMWY1YzhkMi00YjM3LTRlOTEtYjBkMi03OWUzZjBjNGE4ZWYiLA0KICAidHlwIjogIkpXVCINCn0.ew0KICAiaXNzIjogIjEyMzRhYmNkLWVmNTYtZ2g3OC1pOWowLWtsbW5vcHFyc3R3eCIsDQogICJzdWIiOiAiMTIzNGFiY2QtZWY1Ni1naDc4LWk5ajAta2xtbm9wcXJzdHd4IiwNCiAgImF1ZCI6ICJodHRwczovL2ZydWl0b3JlLmV4YW1wbGUvZW50ZS1leGFtcGxlL3YxIiwNCiAgImlhdCI6IDE3MzMzOTc4NDAsDQogICJuYmYiOiAxNzMzNDAxNjI4LA0KICAiZXhwIjogMTczMzQwMTQ0MCwNCiAgImp0aSI6ICI4ZTEyZjRiNy05YzNhLTRmODMtOWI4ZC01MWEyYzdmNmU5ZDQiLA0KICAic2lnbmVkX2hlYWRlcnMiOiBbDQogICAgew0KICAgICAgImRpZ2VzdCI6ICJTSEEtMjU2PTc5YTIwYTc0NDMzNjQyMDMwMTgzMDYwMGFkOWJkY2E5OTM1OTNmODc2MjA5YTAwNGI1OTliNTgzMDk1YjBhNjEiDQogICAgfSwNCiAgICB7DQogICAgICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iDQogICAgfQ0KICBdDQp9.DpuBNo2UgQhL7WLin4mpdZrbIpQq3tPvCX6HfktkxG7L5mk6a8OK1Hg0mQcZfFi3gelS-aL9kFS-6MoSy4csBg">EXAMPLE
+              description: JWT containing the signature of the message headers whose integrity needs to be guaranteed, see the INTEGRITY_REST_02 security pattern (see <a target="blank" href="https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/e-service-pdnd.html">e-Service PDND</a>). <a target="blank" href="https://jwt.io/#debugger-io?token=ew0KICAiYWxnIjogIkVTMjU2IiwNCiAgImtpZCI6ICJhMWY1YzhkMi00YjM3LTRlOTEtYjBkMi03OWUzZjBjNGE4ZWYiLA0KICAidHlwIjogIkpXVCINCn0.ew0KICAiaXNzIjogIjEyMzRhYmNkLWVmNTYtZ2g3OC1pOWowLWtsbW5vcHFyc3R3eCIsDQogICJzdWIiOiAiMTIzNGFiY2QtZWY1Ni1naDc4LWk5ajAta2xtbm9wcXJzdHd4IiwNCiAgImF1ZCI6ICJodHRwczovL2ZydWl0b3JlLmV4YW1wbGUvZW50ZS1leGFtcGxlL3YxIiwNCiAgImlhdCI6IDE3MzMzOTc4NDAsDQogICJuYmYiOiAxNzMzNDAxNjI4LA0KICAiZXhwIjogMTczMzQwMTQ0MCwNCiAgImp0aSI6ICI4ZTEyZjRiNy05YzNhLTRmODMtOWI4ZC01MWEyYzdmNmU5ZDQiLA0KICAic2lnbmVkX2hlYWRlcnMiOiBbDQogICAgew0KICAgICAgImRpZ2VzdCI6ICJTSEEtMjU2PTc5YTIwYTc0NDMzNjQyMDMwMTgzMDYwMGFkOWJkY2E5OTM1OTNmODc2MjA5YTAwNGI1OTliNTgzMDk1YjBhNjEiDQogICAgfSwNCiAgICB7DQogICAgICAiY29udGVudC10eXBlIjogImFwcGxpY2F0aW9uL2pzb24iDQogICAgfQ0KICBdDQp9.DpuBNo2UgQhL7WLin4mpdZrbIpQq3tPvCX6HfktkxG7L5mk6a8OK1Hg0mQcZfFi3gelS-aL9kFS-6MoSy4csBg">EXAMPLE
               required: true
               schema: 
                 type: string
             Digest:
-              description: Digest of the message payload, to comply with the INTEGRITY_REST_02 security pattern. According to RFC 3230 Section 4.2 <a target="blank" href="https://www.rfc-editor.org/rfc/rfc3230.html#section-4.2">RFC 3230 §4.2</a>, the format MUST be the following digest-algorithm=encoded digest output.
+              description: Digest of the message payload, see the INTEGRITY_REST_02 security pattern. According to RFC 3230 Section 4.2 <a target="blank" href="https://www.rfc-editor.org/rfc/rfc3230.html#section-4.2">RFC 3230 §4.2</a>, the format MUST be the following digest-algorithm=encoded digest output.
               required: true
               schema: 
                 type: string
@@ -223,11 +223,10 @@ components:
                   last_updated:
                     description: Last time the status or attributes of the Dataset have been updated. Its format is `YYYY-MM-DDTHH:MM:SSZ`.
                     type: string
-                    example:
+                    example: "2025-01-15T10:30:00Z"
                 additionalProperties:
                   type: string
                 required: [object_id, status, last_updated]
-                example: '[{"object_id": "6F9619FF-8B86-D011-B42D-00C04FC964FF", "nationality": "IT"}, {...}]'
             metadataClaims:
               description: List of Metadata Claims.
               type: array
@@ -250,8 +249,40 @@ components:
             interval:
               description: Required if claims parameter is not present. This represents the estimated amount of time (in seconds) required before making the request of the attribute claims again.
               type: integer
-              example: "864000"
+              example: 864000
           required: [iss, aud, exp, iat, jti]
+          example:
+            iss: "https://authentic-source.example.it"
+            aud: "82914b3f-60b2-4529-b4d6-3d4e67f0a933"
+            exp: 1736846928
+            iat: 1736846688
+            nbf: 1736846688
+            jti: "c8bd8a2f-e990-44fa-9013-1b353bfc5a0d"
+            interval: 864000
+            userClaims:
+              given_name: "Mario"
+              family_name: "Rossi"
+              birth_date: "1980-01-10"
+              birth_place: "Roma"
+              tax_id_code: "TINIT-RSSMRA80A01H501Z"
+              personal_administrative_number: "12345A123A"
+            attributeClaims:
+              - object_id: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
+                status: "VALID"
+                last_updated: "2025-01-15T10:30:00Z"
+                nationality: "IT"
+                residence_address: "Via Roma 1, 00100 Roma"
+              - object_id: "7A0720AB-9C97-E122-C53E-11D05FD075GG"
+                status: "VALID"
+                last_updated: "2025-01-10T08:00:00Z"
+                driving_license_category: "B"
+            metadataClaims:
+              - object_id: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
+                issuance_date: "2025-01-01"
+                expiry_date: "2025-12-31"
+              - object_id: "7A0720AB-9C97-E122-C53E-11D05FD075GG"
+                issuance_date: "2024-06-15"
+                expiry_date: "2030-06-14"
     CredentialClaimsRequest:
       required:
         - unique_id
