@@ -76,6 +76,13 @@ paths:
             type: string
           required: true
           description: Identifier of the dataset as registered in the Authentic Source Registry
+        - name: DPoP
+          in: header
+          description: Use only if the DPoP voucher has been requested from PDND.
+          schema:
+            type: string
+            format: JWT
+          required: false
         - name: Agid-JWT-Signature
           in: header
           description: >-
@@ -117,6 +124,7 @@ paths:
             example: eyJhbGciOiJFUzI1NiIsImtpZCI6ImQ0YzNiMmExLTk4NzYtNTQzMi0xMGZlLWRjYmE5ODc2NTQzMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4MjkxNGIzZi02MGIyLTQ1MjktYjRkNi0zZDRlNjdmMGE5MzMiLCJhdWQiOiJodHRwczovL2F1dGhlbnRpYy1zb3VyY2UuZXhhbXBsZS5pdCIsImV4cCI6MTczMzA1MjYwMCwibmJmIjoxNzMzMDM2NDUwLCJpYXQiOjE3MzMwMzY0MDAsImp0aSI6ImE0YjVjNmQ3LWU4ZjktYWJjZC1lZjEyLTM0NTY3ODkwMTIzNCIsImRub25jZSI6NjUyODQyNDIxMzY4NSwicHVycG9zZUlkIjoiYjJjM2Q0ZTUtZjZnNy1oOGk5LWowazEtbG1ubzEyMzQ1Njc4IiwidXNlcklEIjoiYThiN2M2ZDUtZTRmMy1nMmgxLWk5ajAta2xtbm9wcXJzdHV2IiwibG9hIjoic3Vic3RhbnRpYWwifQ.y42yfMeW2H9h0b0j0BODUml8yF20stY9q3BwoVU5BB90afBj852Q0QlInncdhjXhUjLS1V76cGBxkutDNvxRNA
       security:
         - BearerAuth: []
+        - DPoPAuth: []
       requestBody:
         required: true
         content:
@@ -266,7 +274,12 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: PDND Token
+      description: PDND Bearer Token
+    DPoPAuth:
+      type: apiKey
+      in: header
+      name: DPoP
+      description: DPoP proof JWT (RFC 9449).
 
   headers:
     CacheControlHeader:
