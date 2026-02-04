@@ -156,7 +156,7 @@ The registration form MUST collect at least the following information as specifi
        - **For non-qualified EAA Providers**: Service provider information
        - **For Relying Parties**: Service supply point(s) and technical endpoint information
 
-The registration form MUST be designed to support both manual data entry and automated registration processes through qualified authoritative registries (see :ref:`entity-onboarding:Industrial-Scale Considerations`). The Registrar MAY import entity information from qualified registries (e.g., business registries, VAT registries, professional qualification registries, GLEIF for LEI records) to reduce duplication and streamline onboarding.
+The registration form MUST be designed to support both manual data entry and automated registration processes through qualified authoritative registries. The Registrar MAY import entity information from qualified registries (e.g., business registries, VAT registries, professional qualification registries, GLEIF for LEI records) to reduce duplication and streamline onboarding.
 
 All information provided in the registration form MUST be:
 - Accurate and current at the time of registration
