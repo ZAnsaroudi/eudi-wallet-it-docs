@@ -186,6 +186,7 @@ Below is the description of acronyms and definitions which are useful for furthe
       Aligned with ARF 2.7.3.
 
     **Relying Party**
+    **Wallet‑Relying Party**
       Entity relying on electronic identification or Trust Service from a Wallet Instance.
       Aligned with ARF 2.7.3.
 
