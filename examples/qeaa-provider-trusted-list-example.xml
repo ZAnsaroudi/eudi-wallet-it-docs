@@ -1,7 +1,7 @@
 <!-- Non-normative example of a QEAA Provider entry in a Member State QTSP Trusted List (ETSI TS 119 612 XML format, payload only, without XAdES signature) -->
 <TrustServiceStatusList xmlns="http://uri.etsi.org/02231/v2#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SchemeInformation>
-    <TSLVersionIdentifier>5</TSLVersionIdentifier>
+    <TSLVersionIdentifier>6</TSLVersionIdentifier>
     <TSLSequenceNumber>1</TSLSequenceNumber>
     <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
     <SchemeOperatorName>
