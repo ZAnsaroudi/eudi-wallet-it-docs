@@ -14,6 +14,9 @@ servers:
     description: Authentic Source API test server
   - url: https://authentic-source.example.it/v0.2.0
     description: Authentic Source API production server
+security:
+  - BearerAuth: []
+  - DPoPAuth: []
 paths:
   /status:
     get:
@@ -122,9 +125,6 @@ paths:
             type: string
             format: JWT
             example: eyJhbGciOiJFUzI1NiIsImtpZCI6ImQ0YzNiMmExLTk4NzYtNTQzMi0xMGZlLWRjYmE5ODc2NTQzMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4MjkxNGIzZi02MGIyLTQ1MjktYjRkNi0zZDRlNjdmMGE5MzMiLCJhdWQiOiJodHRwczovL2F1dGhlbnRpYy1zb3VyY2UuZXhhbXBsZS5pdCIsImV4cCI6MTczMzA1MjYwMCwibmJmIjoxNzMzMDM2NDUwLCJpYXQiOjE3MzMwMzY0MDAsImp0aSI6ImE0YjVjNmQ3LWU4ZjktYWJjZC1lZjEyLTM0NTY3ODkwMTIzNCIsImRub25jZSI6NjUyODQyNDIxMzY4NSwicHVycG9zZUlkIjoiYjJjM2Q0ZTUtZjZnNy1oOGk5LWowazEtbG1ubzEyMzQ1Njc4IiwidXNlcklEIjoiYThiN2M2ZDUtZTRmMy1nMmgxLWk5ajAta2xtbm9wcXJzdHV2IiwibG9hIjoic3Vic3RhbnRpYWwifQ.y42yfMeW2H9h0b0j0BODUml8yF20stY9q3BwoVU5BB90afBj852Q0QlInncdhjXhUjLS1V76cGBxkutDNvxRNA
-      security:
-        - BearerAuth: []
-        - DPoPAuth: []
       requestBody:
         required: true
         content:
@@ -175,7 +175,6 @@ paths:
                     programme_type_name: "Laurea Magistrale"
                     degree_course_name: "Computer Science - Informatica"
                     academic_qualification_date: "2025-06-25"
-                    ...: ""
                   - object_id: "7A0720AB-9C97-E122-C53E-11D05FD075GG"
                     status: "VALID"
                     last_updated: "2025-01-10T08:00:00Z"
@@ -183,8 +182,7 @@ paths:
                     programme_type_name: "Laurea Triennale"
                     degree_course_name: "Informatica"
                     academic_qualification_date: "2022-11-27"
-                    ...: ""
-                    metadataClaims:
+                metadataClaims:
                   - object_id: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
                     issuance_date: "2025-06-25"
                   - object_id: "7A0720AB-9C97-E122-C53E-11D05FD075GG"
@@ -321,84 +319,82 @@ components:
 
   schemas:
     CredentialClaimsResponse:
+      type: object
       properties:
-        CredentialClaimsResponse:
+        userClaims:
+          description: List of User Claims.
           type: object
           properties:
-            userClaims:
-              description: List of User Claims.
-              type: object
-              properties:
-                given_name:
-                  description: Current First Name.
-                  type: string
-                  example: '"Mario"'
-                family_name:
-                  description: Current Family Name.
-                  type: string
-                  example: '"Rossi"'
-                birth_date:
-                  description: Date of Birth.
-                  type: string
-                  example: '"1980-01-10"'
-                birth_place:
-                  description: Place of Birth.
-                  type: string
-                  example: '"Roma"'
-                tax_id_code:
-                  description: National tax identification number. REQUIRED if personal_administrative_number is absent.
-                  type: string
-                  example: '"TINIT-XXXXXXXXXXXXXXXX"'
-                personal_administrative_number:
-                  description: National unique identifier of a natural person. REQUIRED if tax_id_code is absent.
-                  type: string
-                  example: '"XX00000XX"'
-            attributeClaims:
-              description: List of Datasets of Attribute.
-              type: array
-              items:
-                type: object
-                properties:
-                  object_id:
-                    description: Unique identifier of the Dataset.
-                    type: string
-                    example: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
-                  status:
-                    description: Status of the Dataset.
-                    type: string
-                    enum: ["VALID", "INVALID", "SUSPENDED"]
-                    example: "VALID"
-                  last_updated:
-                    description: Last time the status or attributes of the Dataset have been updated. Its format is `YYYY-MM-DDTHH:MM:SSZ`.
-                    type: string
-                    example: "2025-01-15T10:30:00Z"
-                additionalProperties:
-                  type: string
-                required: [object_id, status, last_updated]
-            metadataClaims:
-              description: List of Metadata Claims.
-              type: array
-              items:
-                type: object
-                properties:
-                  object_id:
-                    description: Unique identifier of the Dataset.
-                    type: string
-                    example: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
-                  issuance_date:
-                    description: Administrative validity start date of the Dataset
-                    type: string
-                    example: '"2025-01-01"'
-                  expiry_date:
-                    description: Administrative expiry date of the Dataset.
-                    type: string
-                    example: '"2025-12-31"'
-                required: [object_id]
-            interval:
-              description: Required if claims parameter is not present. This represents the estimated amount of time (in seconds) required before making the request of the attribute claims again.
-              type: integer
-              format: int64
-              example: 864000
+            given_name:
+              description: Current First Name.
+              type: string
+              example: "Mario"
+            family_name:
+              description: Current Family Name.
+              type: string
+              example: "Rossi"
+            birth_date:
+              description: Date of Birth.
+              type: string
+              example: "1980-01-10"
+            birth_place:
+              description: Place of Birth.
+              type: string
+              example: "Roma"
+            tax_id_code:
+              description: National tax identification number. REQUIRED if personal_administrative_number is absent.
+              type: string
+              example: "TINIT-XXXXXXXXXXXXXXXX"
+            personal_administrative_number:
+              description: National unique identifier of a natural person. REQUIRED if tax_id_code is absent.
+              type: string
+              example: "XX00000XX"
+        attributeClaims:
+          description: List of Datasets of Attribute.
+          type: array
+          items:
+            type: object
+            properties:
+              object_id:
+                description: Unique identifier of the Dataset.
+                type: string
+                example: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
+              status:
+                description: Status of the Dataset.
+                type: string
+                enum: ["VALID", "INVALID", "SUSPENDED"]
+                example: "VALID"
+              last_updated:
+                description: Last time the status or attributes of the Dataset have been updated. Its format is `YYYY-MM-DDTHH:MM:SSZ`.
+                type: string
+                example: "2025-01-15T10:30:00Z"
+            additionalProperties:
+              type: string
+            required: [object_id, status, last_updated]
+        metadataClaims:
+          description: List of Metadata Claims.
+          type: array
+          items:
+            type: object
+            properties:
+              object_id:
+                description: Unique identifier of the Dataset.
+                type: string
+                example: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
+              issuance_date:
+                description: Administrative validity start date of the Dataset
+                type: string
+                example: "2025-01-01"
+              expiry_date:
+                description: Administrative expiry date of the Dataset.
+                type: string
+                example: "2025-12-31"
+            required: [object_id]
+        interval:
+          description: Required if claims parameter is not present. This represents the estimated amount of time (in seconds) required before making the request of the attribute claims again.
+          type: integer
+          format: int64
+          example: 864000
     CredentialClaimsRequest:
       required:
         - unique_id
