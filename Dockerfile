@@ -16,7 +16,7 @@ RUN apt-get update \
     texlive-base texlive-binaries \
     texlive-luatex \
     texlive-fonts-extra texlive-science texlive-publishers texlive-formats-extra \
-    ghostscript poppler-utils imagemagick netpbm \
+    ghostscript poppler-utils imagemagick netpbm librsvg2-bin \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
