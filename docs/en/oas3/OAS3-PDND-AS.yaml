@@ -8,7 +8,8 @@ info:
       - <b>ID_AUTH_CHANNEL_01</b>: Direct Trust TLS (HTTPS)
       - <b>ID_AUTH_REST_01</b>: Authorization via PDND token
       - <b>INTEGRITY_REST_02</b>: Requests and responses are signed
-      - <b>AUDIT_REST_02</b>: Additional properties (optional if DPoP token is used, mandatory if Bearer token is used)
+      - <b>AUDIT_REST_02</b>: Additional properties (optional if DPoP Token is used, mandatory if Bearer Token is used)
+      - <b>DPoP Token</b>: Used as an alternative to a Bearer Token (optional)
   termsOfService: "https://authentic-source.example.it/tos/"
   contact:
     name: IT-Wallet <credential_name> <credential_provider>
@@ -31,6 +32,14 @@ paths:
       summary: Get Authentic Source API status.
       description: Health-check endpoint that returns the operational status of the Authentic Source API.
       operationId: authenticSourceStatus
+      parameters:
+        - name: DPoP
+          in: header
+          description: Use only if the DPoP voucher has been requested from PDND.
+          schema:
+            type: string
+            format: JWT
+          required: false
       responses:
         "200":
           description: Service available
@@ -54,12 +63,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           headers:
-            RateLimit-Limit:
-              $ref: "#/components/headers/RateLimitLimitHeader"
-            RateLimit-Remaining:
-              $ref: "#/components/headers/RateLimitRemainingHeader"
-            RateLimit-Reset:
-              $ref: "#/components/headers/RateLimitResetHeader"
+            Retry-After:
+              $ref: "#/components/headers/RetryAfterHeader"
         "503":
           description: Service Unavailable
           content:
@@ -241,12 +246,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           headers:
-            RateLimit-Limit:
-              $ref: "#/components/headers/RateLimitLimitHeader"
-            RateLimit-Remaining:
-              $ref: "#/components/headers/RateLimitRemainingHeader"
-            RateLimit-Reset:
-              $ref: "#/components/headers/RateLimitResetHeader"
+            Retry-After:
+              $ref: "#/components/headers/RetryAfterHeader"
         "500":
           description: Internal Server Error.
           content:

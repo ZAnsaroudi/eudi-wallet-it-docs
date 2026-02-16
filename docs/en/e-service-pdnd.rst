@@ -73,7 +73,7 @@ The following security patterns defined in `PDND`_ and `MODI`_ MUST NOT be used 
     - The following patterns can only be used when the Consumer cannot subscribe to the PDND infrastructure (i.e., the trust between the Participants needs to be established in a direct form), thus not complying with **R1**:
 
       - **[ID_AUTH_CHANNEL_02]** Direct Trust mutual Transport-Level Security (*Annex 2 - Security Patterns* [`MODI`_])
-      - **[ID_AUTH_REST_02]** Direct Trust based on X.509 certificate with REST and token/message uniqueness (*Annex 2 - Security Patterns* [`MODI`_]).
+      - **[ID_AUTH_REST_02]** Direct Trust based on PDND via Platform-issued JWT tokens and token/message uniqueness (*Annex 2 - Security Patterns* [`MODI`_]).
       - **[INTEGRITY_REST_01]** REST Payload Integrity (*Annex 2 - Security Patterns* [`MODI`_]).
 
     - The following pattern does not provide correlation between the tracked data and the Voucher, thus not complying with **R3**:
