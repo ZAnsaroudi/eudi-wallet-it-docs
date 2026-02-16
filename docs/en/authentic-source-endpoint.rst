@@ -44,6 +44,37 @@ Get Attribute Claims
     - the Authentic Source MUST record the datetime value provided within the ``last_updated`` parameter, which indicates the last time the User's attributes were updated in the Authentic Source's database;
     - the Credential Issuer MUST read the ``last_updated`` value received in the response to be able to check if the User's attributes have changed since the last issuance of a Digital Credential.
 
+Credential Lifecycle States Mapping
+"""""""""""""""""""""""""""""""""""
+
+To ensure consistency between the "Electronic Attestation Lifecycle" documented in :ref:`credential-revocation:Digital Credential Lifecycle` and the OpenAPI status Enum, the following mapping MUST be applied for the ``status`` field in the ``attributeClaims``:
+
+.. list-table::
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - **Lifecycle State (Ch. 11.3)**
+     - **OpenAPI status enum**
+     - **Description and Logic**
+   * - **Issued** / **Valid**
+     - ``VALID``
+     - The dataset is administratively active.
+   * - **Expired**
+     - ``VALID``
+     - The dataset is past its expiry. It returns ``VALID``, delegating the check to the Issuer.
+   * - **Suspended**
+     - ``SUSPENDED``
+     - The attestation is temporarily invalid.
+   * - **Revoked**
+     - ``INVALID``
+     - The attestation has been actively revoked or terminated.
+
+**Operational Guidance:**
+
+* **Metadata Verification**: The Credential Issuer MUST verify usability through the ``issuance_date`` and ``expiry_date`` claims.
+* **Irreversibility**: After a transition to ``INVALID``, the Credential cannot return to a ``VALID`` state.
+* **Signal Processing**: Signals MUST be processed sequentially. If a signal invalidates a Credential, subsequent correction signals for the same object are ignored.
+
 Example of Authentic Source response
 """""""""""""""""""""""""""""""""""""
 
