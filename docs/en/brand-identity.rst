@@ -47,7 +47,7 @@ The Logo is the official graphical element that ensures immediate recognition of
 
 .. only:: format_html
 
-  .. figure:: ../../oofficial_resources/IT-Wallet-Logo/IT-Wallet-Logo-Primary-BlueItalia.svg
+  .. figure:: ../../official_resources/IT-Wallet-Logo/IT-Wallet-Logo-Primary-BlueItalia.svg
     :alt: “IT-Wallet" Logo on a light background  
     :width: 100%
     :align: center
