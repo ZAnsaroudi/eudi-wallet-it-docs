@@ -58,21 +58,24 @@ To ensure consistency between the "Electronic Attestation Lifecycle" documented 
      - **Description and Logic**
    * - **Issued** / **Valid**
      - ``VALID``
-     - The dataset is administratively active.
+     - The dataset is administratively active and within its validity period.
    * - **Expired**
      - ``VALID``
-     - The dataset is past its expiry. It returns ``VALID``, delegating the check to the Issuer.
+     - The technical credential (mDL/SD-JWT) has expired, but the underlying dataset remains administratively valid. This allows for credential re-issuance.
    * - **Suspended**
      - ``SUSPENDED``
      - The attestation is temporarily invalid.
    * - **Revoked**
      - ``INVALID``
-     - The attestation has been actively revoked or terminated.
+     - The attestation has been actively revoked or terminated at the source.
 
 **Operational Guidance:**
 
-* **Metadata Verification**: The Credential Issuer MUST verify usability through the ``issuance_date`` and ``expiry_date`` claims.
-* **Irreversibility**: After a transition to ``INVALID``, the Credential cannot return to a ``VALID`` state.
+* **Technical vs Administrative Validity**: Credentials distinguish between a **technical validity** set by the Issuer (claims ``iat`` and ``exp``) and an **administrative validity** determined by the Authentic Source (claims ``issuance_date`` and ``expiry_date``).
+* **Expiry Hierarchy**: The technical expiry (``exp``) MUST NOT be later than the administrative expiry (``expiry_date``). For example, a driver's license may be administratively valid for 10 years, while the issued mDL credential may have a technical expiry of 1 year.
+* **Re-issuance**: If a credential reaches its technical expiry (``exp``) but the dataset is still administratively valid, the OpenAPI status remains ``VALID``, allowing the credential to be re-issued multiple times within the administrative timeframe.
+* **Metadata Verification**: The Credential Issuer MUST verify the effective usability by checking both the technical claims and the administrative dates.
+* **Irreversibility**: After a transition to ``INVALID``, the Credential cannot return to a ``VALID`` state. A new issuance is required for a new dataset.
 * **Signal Processing**: Signals MUST be processed sequentially. If a signal invalidates a Credential, subsequent correction signals for the same object are ignored.
 
 Example of Authentic Source response
