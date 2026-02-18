@@ -58,20 +58,23 @@ Per garantire la coerenza tra il "Ciclo di Vita degli Attestati Elettronici" doc
      - **Descrizione e Logica**
    * - **Issued** / **Valid**
      - ``VALID``
-     - Il dataset è amministrativamente attivo. Lo stato "Issued" è considerato un valore inizialmente valido.
+     - Il dataset è amministrativamente attivo e nel suo periodo di validità.
    * - **Expired**
      - ``VALID``
-     - Il dataset ha superato la data di scadenza (``expiry_date``). Deve restituire ``VALID``, delegando il controllo sull'effettiva usabilità all'Issuer tramite i metadati.
+     - La credenziale tecnica (mDL/SD-JWT) è scaduta, ma il dataset sottostante rimane amministrativamente valido. Ciò permette la riemissione della credenziale.
    * - **Suspended**
      - ``SUSPENDED``
      - L'attestazione è temporaneamente non valida.
    * - **Revoked**
      - ``INVALID``
-     - L'attestazione è stata revocata o terminata permanentemente.
+     - L'attestazione è stata revocata o terminata permanentemente alla fonte.
 
 **Guida Operativa:**
 
-* **Verifica dei Metadati**: Poiché gli stati "Issued" ed "Expired" sono mappati come ``VALID``, il Credential Issuer deve verificare l'effettiva usabilità della credenziale controllando i claim ``issuance_date`` (nbf) ed ``expiry_date`` (exp).
+* **Validità Tecnica vs Amministrativa**: Le credenziali distinguono tra una **scadenza tecnica** stabilita dall'Issuer (claim ``iat`` ed ``exp``) e una **scadenza amministrativa** determinata dalla fonte autentica (claim ``issuance_date`` ed ``expiry_date``).
+* **Gerarchia delle Scadenze**: La scadenza tecnica (``exp``) NON può essere successiva alla scadenza amministrativa (``expiry_date``). Ad esempio, una patente può essere valida amministrativamente per 10 anni, mentre la credenziale tecnica emessa può avere una scadenza di 1 anno.
+* **Riemissione**: Se una credenziale raggiunge la scadenza tecnica (``exp``) ma il dataset è ancora amministrativamente valido, lo stato nelle OpenAPI rimane ``VALID``. Questo consente di riemettere la credenziale più volte all'interno dell'arco temporale di validità amministrativa.
+* **Verifica dei Metadati**: Il Credential Issuer deve verificare l'effettiva usabilità della credenziale controllando sia i claim tecnici di sessione che le date amministrative del dataset.
 * **Irreversibilità**: Una volta che una credenziale transita nello stato ``INVALID``, non può più tornare allo stato ``VALID``. Per un nuovo dataset è necessaria una nuova emissione.
 * **Elaborazione dei Segnali**: I segnali provenienti dal Signal Hub devono essere elaborati sequenzialmente. Se un segnale invalida una credenziale, eventuali segnali di correzione successivi per lo stesso ``object_id`` devono essere ignorati.
 
