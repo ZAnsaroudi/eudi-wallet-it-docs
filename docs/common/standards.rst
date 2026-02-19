@@ -31,7 +31,7 @@ EUDI Wallet Standards and Technical Specifications
     * - `EUDI-TS 10`_
       - Data Portability and Download (Export).
     * - `EUDI-TS 12`_
-      - Specification of Strong Customer Authentication (SCA) Implementation with the Wallet
+      - Specification of Strong Customer Authentication (SCA) Implementation with the Wallet.
 
 
 
