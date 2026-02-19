@@ -638,9 +638,9 @@ To ensure the integrity and security of the re-issuance process, the following s
 .. note::
     During each credential issuance and, where supported, each re-issuance/refresh transaction executed through the flows described in this section, the Wallet Instance MUST create and maintain a corresponding transaction record in the Wallet Instance transaction log (see :ref:`wallet-instance-dashboard:Wallet Instance Dashboard and Transaction Logging`).
 
-    The Wallet Instance MUST create the record when the transaction starts, once sufficient request context is available to populate the required log information (e.g., Issuer identity details, and the requested credential type(s) and quantity).
+     The Wallet Instance MUST create a transaction record for each credential issuance process. The record MUST capture relevant contextual information necessary to ensure traceability and accountability of the transaction.
 
-    The record MUST be updated as the flow progresses to reflect the evolving transaction state and outcome context (e.g., the issued credential type(s) and quantity). In cases where the transaction does not complete successfully, the record SHALL indicate the corresponding reason for non-completion.
+    The record MUST be updated as the flow progresses to reflect the evolving transaction state and outcome context (e.g., the issued credential type(s) and quantity). In cases where the transaction does not complete successfully, the record MUST indicate the corresponding reason for non-completion.
 
 
 Credential Offer Flow
