@@ -640,7 +640,7 @@ To ensure the integrity and security of the re-issuance process, the following s
 
     The Wallet Instance MUST create the record when the transaction starts, once sufficient request context is available to populate the required log information (e.g., Issuer identity details, and the requested credential type(s) and quantity).
 
-    The record MUST be updated as the flow progresses to reflect the evolving transaction state and outcome context (e.g., the issued credential type(s) and quantity). If the transaction is not completed, the record MUST include the corresponding noncompletion reason.
+    The record MUST be updated as the flow progresses to reflect the evolving transaction state and outcome context (e.g., the issued credential type(s) and quantity). In cases where the transaction does not complete successfully, the record SHALL indicate the corresponding reason for non-completion.
 
 
 Credential Offer Flow
