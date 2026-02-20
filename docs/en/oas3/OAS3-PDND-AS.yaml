@@ -181,7 +181,7 @@ paths:
                   personal_administrative_number: "12345A123A"
                 attributeClaims:
                   - object_id: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
-                    status: valid
+                    status: VALID
                     last_updated: "2025-01-15T10:30:00Z"
                     institute_name: "Nome Istituto Universitario"
                     programme_type_name: "Laurea Magistrale"
