@@ -376,7 +376,7 @@ components:
                   - INVALID
                   - SUSPENDED
                 x-enum-description:
-                  - valid - The credential is issued or expired
+                  - VALID - The Dataset is valid.
                   - INVALID - The Dataset is revoked
                   - suspended - The credential is temporarily not available, for example due to a temporary hold or a pending verification process
                 example: valid
