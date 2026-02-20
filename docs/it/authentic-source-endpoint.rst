@@ -72,16 +72,16 @@ La Fonte Autentica gestisce la validità degli Attributi dell'Utente (dataset); 
     - Condizione tipica del dataset
     - Effetto sull'Attestato Elettronico (azione del Fornitore di Attestati Elettronici)
   * - VALID
-    - Entro il periodo di validità, non revocato/sospeso
-    - L'Attestato Elettronico può rimanere Valido
+    - Dataset non revocato/sospeso (include Issued e Expired; scadenza verificata via metadata)
+    - L'Attestato Elettronico può rimanere Valido (scadenza verificata via expiry_date, nbf/exp)
   * - INVALID
-    - Scaduto (oltre expiry_date), revocato o altrimenti non più valido
-    - Stato dell'Attestato Elettronico aggiornato a Revoked/Expired (Status List: INVALID)
+    - Dataset attivamente revocato dalla Fonte Autentica
+    - Stato dell'Attestato Elettronico aggiornato a Revoked (Status List: INVALID)
   * - SUSPENDED
     - Temporaneamente non valido (es. in verifica)
     - Stato dell'Attestato Elettronico aggiornato a Suspended (Status List: SUSPENDED)
 
-Quando il dataset ha superato la data di scadenza amministrativa ``expiry_date``, la Fonte Autentica DEVE impostare ``status`` a INVALID. Per i dettagli completi sul flusso di aggiornamento dello stato, vedere :ref:`credential-revocation:Aggiornamento dello Stato da parte delle Fonti Autentiche`.
+I dataset Issued e Expired ricadono in VALID; il Fornitore di Attestati Elettronici verifica la scadenza tramite metadata claims (es. ``expiry_date``, ``nbf``/``exp``). Per i dettagli completi sul flusso di aggiornamento dello stato, vedere :ref:`credential-revocation:Aggiornamento dello Stato da parte delle Fonti Autentiche`.
 
 La risposta in caso di successo (HTTP 200) restituisce un oggetto ``CredentialClaimsResponse`` formattato come **Payload JSON**.
 

@@ -72,16 +72,16 @@ The Authentic Source manages the validity of the User's attributes (datasets); t
     - Typical dataset condition
     - Effect on Digital Credential (Credential Issuer action)
   * - VALID
-    - Within validity period, not revoked/suspended
-    - Credential may remain Valid
+    - Dataset not revoked/suspended (includes Issued and Expired; expiry verified via metadata)
+    - Credential may remain Valid (expiry checked via expiry_date, nbf/exp)
   * - INVALID
-    - Expired (past expiry_date), revoked, or otherwise no longer valid
-    - Credential status updated to Revoked/Expired (Status List: INVALID)
+    - Dataset actively revoked by the Authentic Source
+    - Credential status updated to Revoked (Status List: INVALID)
   * - SUSPENDED
     - Temporarily invalid (e.g. under review)
     - Credential status updated to Suspended (Status List: SUSPENDED)
 
-When the dataset has passed its administrative ``expiry_date``, the Authentic Source MUST set ``status`` to INVALID. For full details on the status update flow, see :ref:`credential-revocation:Status Update by Authentic Sources`.
+Issued and Expired datasets fall within VALID; the Credential Issuer verifies expiry via metadata claims (e.g. ``expiry_date``, ``nbf``/``exp``). For full details on the status update flow, see :ref:`credential-revocation:Status Update by Authentic Sources`.
 
 The successful response (HTTP 200) returns a ``CredentialClaimsResponse`` object formatted as a **Payload JSON**.
 
