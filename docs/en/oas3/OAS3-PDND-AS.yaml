@@ -63,7 +63,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           headers:
-            # RFC 6585 defines Retry-After. X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset are not requires because redundant with Retry-After.
+            # RFC 6585 defines Retry-After. X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset are not required because redundant along with Retry-After.
             Retry-After:
               $ref: "#/components/headers/RetryAfterHeader"
         "503":
@@ -247,7 +247,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           headers:
-            # RFC 6585 defines Retry-After. X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset are not requires because redundant with Retry-After.
+            # RFC 6585 defines Retry-After. X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset are not required because redundant along with Retry-After.
             Retry-After:
               $ref: "#/components/headers/RetryAfterHeader"
         "500":
