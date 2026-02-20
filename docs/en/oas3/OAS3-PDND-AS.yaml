@@ -188,7 +188,7 @@ paths:
                     degree_course_name: "Computer Science - Informatica"
                     academic_qualification_date: "2025-06-25"
                   - object_id: "7A0720AB-9C97-E122-C53E-11D05FD075GG"
-                    status: valid
+                    status: VALID
                     last_updated: "2025-01-10T08:00:00Z"
                     institute_name: "Nome Istituto Universitario"
                     programme_type_name: "Laurea Triennale"
