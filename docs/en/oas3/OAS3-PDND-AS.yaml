@@ -378,7 +378,7 @@ components:
                 x-enum-description:
                   - VALID - The Dataset is valid.
                   - INVALID - The Dataset is revoked
-                  - suspended - The credential is temporarily not available, for example due to a temporary hold or a pending verification process
+                  - SUSPENDED - The Dataset is suspended
                 example: valid
               last_updated:
                 description: Last time the status or attributes of the Dataset have been updated. Its format is `YYYY-MM-DDTHH:MM:SSZ`.
