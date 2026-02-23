@@ -9,7 +9,7 @@
 
 - [Intro](#intro)
 - [Versioning and preview](#versioning-and-preview)
-- [Branching approach](#branching-approach)
+  - [Branching approach](#branching-approach)
 - [Releases](#releases)
 - [Contributing](#how-to-contribute)
 - [Authors](#authors)

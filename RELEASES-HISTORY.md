@@ -1,6 +1,6 @@
 # IT-Wallet Documentation — Release History
 
-This document contains the full history of released versions. For the current stable release and branching approach, see the [README](README.md#releases).
+This document lists previous released versions of the IT-Wallet documentation. For the current stable release, see the [Releases section in the README](README.md#releases). For details on the branching strategy, see the [Branching approach](README.md#branching-approach).
 
 ---
 
