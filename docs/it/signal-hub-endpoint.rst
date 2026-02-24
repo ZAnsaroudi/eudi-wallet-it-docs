@@ -70,7 +70,7 @@ L'endpoint dell'e-Service di Raccolta Segnali viene utilizzato dalle Fonti Auten
     - OBBLIGATORIO. Il soggetto a cui è legato il Segnale. Se il Segnale ha ``signalType``:
       
       - ``CREATE``, allora DEVE essere impostato sul valore ``deferred_object_id`` che la Fonte Autentica ha utilizzato nel payload della risposta del `get attributes` verso il Credential Issuer per ottenere gli Attributi relativi a un Attestato Elettronico specifico (vedere :ref:`authentic-source-endpoint:Get Attribute Claims`);
-      - ``UPDATE``, allora DEVE essere impostato sull'identificatore univoco del database della Fonte Autentica degli Attributi dell'Attestato Elettronico a cui si riferisce il Segnale (ovvero l'``object_id`` come definito nella sezione :ref:`authentic-source-endpoint:Get Attribute Claims).
+      - ``UPDATE``, allora DEVE essere impostato sull'identificatore univoco del database della Fonte Autentica degli Attributi dell'Attestato Elettronico a cui si riferisce il Segnale (ovvero l'``object_id`` come definito nella sezione :ref:`authentic-source-endpoint:Get Attribute Claims`).
       
   * - **signalType**
     - OBBLIGATORIO. Tipo di Segnale. DEVE essere uno dei seguenti:
