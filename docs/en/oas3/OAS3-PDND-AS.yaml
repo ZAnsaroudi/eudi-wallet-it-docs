@@ -181,14 +181,14 @@ paths:
                   personal_administrative_number: "12345A123A"
                 attributeClaims:
                   - object_id: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
-                    status: VALID
+                    status: "VALID"
                     last_updated: "2025-01-15T10:30:00Z"
                     institute_name: "Nome Istituto Universitario"
                     programme_type_name: "Laurea Magistrale"
                     degree_course_name: "Computer Science - Informatica"
                     academic_qualification_date: "2025-06-25"
                   - object_id: "7A0720AB-9C97-E122-C53E-11D05FD075GG"
-                    status: VALID
+                    status: "VALID"
                     last_updated: "2025-01-10T08:00:00Z"
                     institute_name: "Nome Istituto Universitario"
                     programme_type_name: "Laurea Triennale"
@@ -411,7 +411,12 @@ components:
                 example: "2025-12-31"
             required: [object_id]
         interval:
-          description: Required if claims parameter is not present. This represents the estimated amount of time (in seconds) required before making the request of the attribute claims again.
+          description: Required if userClaims and AttributeClaim parameters are not present. This represents the estimated amount of time (in seconds) required before making the request of the attribute claims again.
+          type: integer
+          format: int64
+          example: 864000
+        deferred_object_id:
+          description: Required if userClaims and AttributeClaim parameters are not present. An opaque identifier related to the request of User and Attribute claims. 
           type: integer
           format: int64
           example: 864000
@@ -425,7 +430,7 @@ components:
           description: ID ANPR or Tax identification number
         object_id:
           type: string
-          description: Unique identifier of the Credential dataset or `jti` of the Agid-JWT-Signature Credential Issuer deferred flow's request. If this parameter is present only the indicated dataset is returned
+          description: Unique identifier of the Credential dataset or `deferred_object_id` obtained in the previous response. If this parameter is present only the indicated dataset is returned.
     ProblemDetails:
       type: object
       description: RFC7807-compliant problem details object for error responses.
