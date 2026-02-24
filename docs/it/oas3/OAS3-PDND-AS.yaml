@@ -417,9 +417,8 @@ components:
           example: 864000
         deferred_object_id:
           description: Required if userClaims and AttributeClaim parameters are not present. An opaque identifier related to the request of User and Attribute claims. 
-          type: integer
-          format: int64
-          example: 864000
+          type: string
+          example: "CF518451-0E54-4E52-B6C4-F1D952BE0505"
     CredentialClaimsRequest:
       required:
         - unique_id
