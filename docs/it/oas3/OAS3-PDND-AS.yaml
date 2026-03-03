@@ -365,12 +365,37 @@ components:
             type: object
             properties:
               object_id:
+                description: Unique identifier of the Dataset. It MUST NOT contain personal data. Required also if additionalProperties are not present. This parameter MUST be used to notify through Signal Hub data updating or availability.
+                type: string
+                example: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
+              issuance_date:
+                description: Administrative validity start date of the Dataset
+                type: string
+                example: "2025-01-01"
+              expiry_date:
+                description: Administrative expiry date of the Dataset.
+                type: string
+                example: "2025-12-31"
+            additionalProperties:
+              type: string
+            required: [object_id]
+        metadataClaims:
+          description: List of Metadata of Attribute.
+          type: array
+          items:
+            type: object
+            properties:
+              object_id:
                 description: Unique identifier of the Dataset. It MUST NOT contain personal data.
                 type: string
                 example: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
+              description:
+                description: Human-Readable description of the Dataset.
+                type: string
+                example: "Example: Master's Degree in Computer Science"
               status:
                 description: |
-                  Stato del Dataset. I dataset Issued e Expired ricadono in VALID; la scadenza è verificata
+                  Stato del Dataset. OBBILIGATORIO se additionalProperties di attributeClaims sono presenti. I dataset Issued e Expired ricadono in VALID; la scadenza è verificata
                   tramite metadata claims (es. expiry_date, nbf/exp). INVALID indica revoca attiva da parte dell'AS.
                   Per come questo stato influenza il ciclo di vita dell'Attestato Elettronico gestito dal
                   Fornitore di Attestati Elettronici, vedere la sezione <a target="blank" href="https://italia.github.io/eid-wallet-it-docs/versione-corrente/it/credential-revocation.html#aggiornamento-dello-stato-da-parte-delle-fonti-autentiche">Aggiornamento dello Stato da parte delle Fonti Autentiche</a>.
@@ -384,41 +409,21 @@ components:
                   - INVALID - Il dataset è stato attivamente revocato dalla Fonte Autentica.
                   - SUSPENDED - Il dataset è temporaneamente non valido (tipicamente reversibile).
                 example: "VALID"
+              status_description:
+                description: Human-Readable description of the Status.
+                type: string
+                example: "Example: Master's Degree in Computer Science"
               last_updated:
-                description: Last time the status or attributes of the Dataset have been updated. Its format is `YYYY-MM-DDTHH:MM:SSZ`.
+                description: OBBILIGATORIO se additionalProperties di attributeClaims sono presenti. Last time the status or attributes of the Dataset have been updated. Its format is `YYYY-MM-DDTHH:MM:SSZ`.
                 type: string
                 example: "2025-01-15T10:30:00Z"
-            additionalProperties:
-              type: string
-            required: [object_id, status, last_updated]
-        metadataClaims:
-          description: List of Metadata Claims.
-          type: array
-          items:
-            type: object
-            properties:
-              object_id:
-                description: Unique identifier of the Dataset. It MUST NOT contain personal data.
-                type: string
-                example: "6F9619FF-8B86-D011-B42D-00C04FC964FF"
-              issuance_date:
-                description: Administrative validity start date of the Dataset
-                type: string
-                example: "2025-01-01"
-              expiry_date:
-                description: Administrative expiry date of the Dataset.
-                type: string
-                example: "2025-12-31"
-            required: [object_id]
-        interval:
-          description: Required if userClaims and AttributeClaim parameters are not present. This represents the estimated amount of time (in seconds) required before making the request of the attribute claims again.
-          type: integer
-          format: int64
-          example: 864000
-        deferred_object_id:
-          description: Required if userClaims and AttributeClaim parameters are not present. A unique opaque identifier related to the request of User and Attribute claims. It MUST NOT contain personal data.
-          type: string
-          example: "CF518451-0E54-4E52-B6C4-F1D952BE0505"
+              interval:
+                description: Required if userClaims and additionalProperties of AttributeClaim parameters are not present. This represents the estimated amount of time (in seconds) required before making the request of the attribute claims again.
+                type: integer
+                format: int64
+                example: 864000
+            required: [object_id, description]
+      required: [userClaims, attributeClaims, metadataClaims]
     CredentialClaimsRequest:
       required:
         - unique_id
@@ -429,7 +434,7 @@ components:
           description: ID ANPR or Tax identification number
         object_id:
           type: string
-          description: Unique identifier of the Credential dataset or `deferred_object_id` obtained in the previous response. If this parameter is present only the indicated dataset is returned.
+          description: Unique identifier of the Credential dataset. If this parameter is present only the indicated dataset is returned.
     ProblemDetails:
       type: object
       description: RFC7807-compliant problem details object for error responses.
