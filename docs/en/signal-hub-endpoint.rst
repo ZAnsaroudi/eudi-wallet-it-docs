@@ -67,8 +67,7 @@ The Signal Collection e-Service endpoint is used by Authentic Sources to deposit
   * - **objectType**
     - REQUIRED. Using this field the Authentic Source MAY use to further specify the Signal.
   * - **objectId**
-    - REQUIRED. The subject to which the Signal is bound. It MUST be set to the ``object_id`` that the Authentic Source used in the `get attributes` payload response to the the Credential Issuer and that corresponds to the Authentic Source's unique database identifier of the dataset of Attribute (see :ref:`authentic-source-endpoint:Get Attribute Claims`).
-    The Signal ``signalType`` MUST be valued with one of the following:
+    - REQUIRED. The subject to which the Signal is bound. It MUST be set to the ``object_id`` that the Authentic Source used in the `get attributes` payload response to the the Credential Issuer and that corresponds to the Authentic Source's unique database identifier of the dataset of Attribute (see :ref:`authentic-source-endpoint:Get Attribute Claims`). The Signal ``signalType`` MUST be valued with one of the following:
       
       - ``CREATE``, in order to notify the availability of the attributes related to a specific Digital Credential.
       - ``UPDATE``, in order to notify the updating of the attributes related to a specific Digital Credential.
