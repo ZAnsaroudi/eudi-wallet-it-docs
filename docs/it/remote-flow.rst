@@ -300,7 +300,7 @@ I dettagli di ogni passaggio mostrato nell'immagine precedente sono descritti di
       }
     }
 
-  .. code-block:: json
+.. code-block:: json
 
       {
         "state": "3be39b69-6ac1-41aa-921b-3e6c07ddcb03",
@@ -613,8 +613,8 @@ Nella Authorization Response vengono utilizzati i seguenti parametri (:ref:`WP_0
 
   * - **Nome**
     - **Descrizione**
-   * - **vp_token**
-     - Questo oggetto DEVE contenere gli Attestati Elettronici presentati, indicizzati in base ai valori ``id`` delle Credenziali presenti nella ``dcql_query`` della Authorization Request.
+  * - **vp_token**
+    - Questo oggetto DEVE contenere gli Attestati Elettronici presentati, indicizzati in base ai valori ``id`` delle Credenziali presenti nella ``dcql_query`` della Authorization Request.
 
       Il ``vp_token`` DEVE essere un oggetto JSON in cui ogni chiave corrisponde all'identificativo di una Credenziale richiesta e ogni valore è una singola presentazione oppure un array contenente una o più presentazioni relative a quella Credenziale. La codifica di ciascuna presentazione dipende dal formato della Credenziale, ad esempio:
 
